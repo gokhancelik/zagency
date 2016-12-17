@@ -21,10 +21,10 @@ import {
 @NgModule({
     imports: [
         routing, RouterModule, ModalModule, CommonModule, FormsModule, CarouselModule,
-        FileUploadModule,DynamicFormsCoreModule,DynamicFormsBootstrapUIModule,
+        FileUploadModule, DynamicFormsCoreModule, DynamicFormsBootstrapUIModule,
         ProgressbarModule, DatepickerModule, Ng2SmartTableModule, NgaModule],
     exports: [TourScheduleAddComponent, TourScheduleEditComponent, TourScheduleListComponent],
     declarations: [TourScheduleAddComponent, TourScheduleEditComponent, TourScheduleListComponent],
-    providers: [DynamicFormService,DynamicFormRelationService],
+    providers: [DynamicFormService, DynamicFormRelationService],
 })
 export default class TourScheduleModule { }
