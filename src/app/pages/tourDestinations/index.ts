@@ -1,0 +1,5 @@
+export * from './tourDestination.add.component'
+export * from './tourDestination.edit.component'
+export * from './tourDestination.list.component'
+export * from './tourDestination.routing'
+export * from './tourDestination.component'

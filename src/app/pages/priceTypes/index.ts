@@ -1,0 +1,5 @@
+export * from './priceType.add.component'
+export * from './priceType.edit.component'
+export * from './priceType.list.component'
+export * from './priceType.routing'
+export * from './priceType.component'

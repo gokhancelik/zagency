@@ -1,0 +1,8 @@
+<div baCardBlur class="animated fadeIn card {{cardType}} {{baCardClass || ''}}" zoom-in>
+  <div *ngIf="title" class="card-header clearfix">
+    <h3 class="card-title">{{title}} <i *ngIf="loading" class="fa fa-spinner fa-pulse fa-fw"></i></h3>
+  </div>
+  <div class="card-body">
+    <ng-content></ng-content>
+  </div>
+</div>

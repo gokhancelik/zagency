@@ -1,0 +1,43 @@
+<div class="widgets" *ngIf="model">
+  <div class="row">
+    <div class="col-sm-12">
+      <div>
+        <ba-card title="Tour Info" baCardClass="with-scroll">
+          <form (ngSubmit)="saveTour()" #tourForm="ngForm">
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text" name="name" [(ngModel)]="model.name" class="form-control" id="name" placeholder="Enter tour name">
+            </div>
+            <div class="form-group">
+              <ckeditor-component [(ckeditorContent)]="model.description" [title]="'General Information About Tour'"></ckeditor-component>
+            </div>
+            <div class="form-group">
+              <label for="tourType">Tour Type</label>
+              <select name="tourType" class="form-control" id="tourType" [(ngModel)]="model.tourTypeId">
+                                <option *ngFor="let tourType of tourTypes" [value]="tourType.tourTypeId">{{tourType.name}}</option>
+                            </select>
+            </div>
+            <button type="submit" class="btn btn-default" *ngIf="tourForm.form.dirty" [disabled]="!tourForm.form.valid || submitted">Save Changes</button>
+          </form>
+        </ba-card>
+      </div>
+      <div>
+        <tourPhoto-list [tourId]="model.tourId" *ngIf="model && model.tourId"></tourPhoto-list>
+      </div>
+      <div>
+        <tourSchedule-list [tourId]="model.tourId" (onRowSelectionChanged)="onTsRowSelectionChanged($event)" *ngIf="model && model.tourId"></tourSchedule-list>
+      </div>
+      <div>
+        <tourSchedulePrice-list [tourScheduleId]="selectedTourScheduleId" *ngIf="selectedTourScheduleId"></tourSchedulePrice-list>
+      </div>
+      <div>
+        <tourDestination-list [tourId]="model.tourId" *ngIf="model && model.tourId"></tourDestination-list>
+      </div>
+      <div>
+        <tourProgram-list [tourId]="model.tourId" *ngIf="model && model.tourId"></tourProgram-list>
+      </div>
+    </div>
+  </div>
+</div>
+<tourSchedulePrice-add #tourSchedulePriceAddModal></tourSchedulePrice-add>
+<tourSchedulePrice-edit #tourSchedulePriceEditModal (onSaved)="onSaved_tourSchedulePriceEditModal($event)"></tourSchedulePrice-edit>

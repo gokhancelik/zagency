@@ -1,0 +1,21 @@
+<div bsModal #formModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" *ngIf="model">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button class="close" (click)="close()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">{{title}}</h4>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="myForm">
+          <dynamic-form-bootstrap-control *ngFor="let controlModel of myDynamicFormModel" [controlGroup]="myForm" [model]="controlModel"></dynamic-form-bootstrap-control>
+        </form>
+        <button (click)="save()" class="btn btn-default" *ngIf="myForm.dirty" [disabled]="!myForm.valid || submitted">Save Changes</button>
+      </div>
+      <div class="modal-footer">
+        <!--<button class="btn btn-primary confirm-btn" (click)="close()">Save changes</button>-->
+      </div>
+    </div>
+  </div>
+</div>
