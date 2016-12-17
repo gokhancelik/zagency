@@ -12,13 +12,24 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { NgaModule } from '../../theme/nga.module';
 import * as moment from 'moment';
 import { DropdownModule, ModalModule } from 'ng2-bootstrap/ng2-bootstrap';
+import {
+    DynamicFormsCoreModule, DynamicFormService, DynamicFormRelationService
+} from '@ng2-dynamic-forms/core';
+import {
+    DynamicFormsBootstrapUIModule
+} from '@ng2-dynamic-forms/ui-bootstrap';
 @NgModule({
     imports: [
+<<<<<<< HEAD
         routing, RouterModule, ModalModule, ReactiveFormsModule,CommonModule, FormsModule, CarouselModule,
         FileUploadModule,
+=======
+        routing, RouterModule, ModalModule, CommonModule, FormsModule, CarouselModule,
+        FileUploadModule, DynamicFormsCoreModule, DynamicFormsBootstrapUIModule,
+>>>>>>> 12faa10e5ce2d8e38ba77d581fc5435f4f580406
         ProgressbarModule, DatepickerModule, Ng2SmartTableModule, NgaModule],
     exports: [TourScheduleAddComponent, TourScheduleEditComponent, TourScheduleListComponent],
     declarations: [TourScheduleAddComponent, TourScheduleEditComponent, TourScheduleListComponent],
-    providers: [],
+    providers: [DynamicFormService, DynamicFormRelationService],
 })
 export default class TourScheduleModule { }
