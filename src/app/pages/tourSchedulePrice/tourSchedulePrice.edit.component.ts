@@ -9,53 +9,35 @@ import {
     CurrencyTypeService
 } from '../../shared/services/index';
 import { PriceType, CurrencyType } from '../../shared/models';
+import { DynamicFormControlModel, DynamicFormService } from '@ng2-dynamic-forms/core';
+import { EditComponent } from '../../core/index';
+import { TOURSCHEDULEPRICE_FORM_MODEL } from './tourSchedulePrice-form.model';
 
 @Component({
     selector: 'tourSchedulePrice-edit',
     encapsulation: ViewEncapsulation.None,
     templateUrl: 'tourSchedulePrice.form.component.html'
 })
-export class TourSchedulePriceEditComponent implements OnInit {
-
+export class TourSchedulePriceEditComponent extends EditComponent<TourSchedulePrice>  {
     model: TourSchedulePrice;
-    errorMessage: any;
-    tourSchedulePriceId: number;
-    priceTypes: Array<PriceType> = new Array<PriceType>();
-    currencyTypes: Array<CurrencyType> = new Array<CurrencyType>();
+    tourScheduleId: number;
+    currencyTypes: Array<CurrencyType>;
+    priceTypes: Array<PriceType>;
     @ViewChild('formModal') formModal: ModalDirective;
     @Output() onSaved: EventEmitter<any> = new EventEmitter();
-    constructor(
-        private tourSchedulePriceService: TourSchedulePriceService,
-        private priceTypeService: PriceTypeService,
-        private currencyTypeService: CurrencyTypeService
-    ) { }
+    myDynamicFormModel: Array<DynamicFormControlModel> = TOURSCHEDULEPRICE_FORM_MODEL;
+    constructor(service: TourSchedulePriceService, dynamicFormService: DynamicFormService,
+        private currencyTypeService: CurrencyTypeService,
+        private priceTypeService: PriceTypeService) {
+        super(service, dynamicFormService, TOURSCHEDULEPRICE_FORM_MODEL);
+    }
     ngOnInit() {
-        this.priceTypeService.get().subscribe(data => this.priceTypes = data);
-        this.currencyTypeService.getList().subscribe(data => this.currencyTypes = data);
-    }
-    open(): void {
-        this.tourSchedulePriceService.getById(this.tourSchedulePriceId).subscribe(
-            data => {
-                this.model = data;
-            }
+        this.currencyTypeService.getList().subscribe(
+            data => this.currencyTypes = data
         );
-        this.formModal.show();
-    }
-    setTourSchedulePriceId(tourSchedulePriceId: number): void {
-        this.tourSchedulePriceId = tourSchedulePriceId;
-    }
-    close(): void {
-        this.formModal.hide();
-    }
-    save() {
-        this.tourSchedulePriceService.update(this.model, this.model.tourSchedulePriceId).subscribe(
-            data => {
-                this.onSaved.emit(data);
-                this.formModal.hide();
-            },
-            error => {
-                this.errorMessage = <any>error;
-            }
+        this.priceTypeService.getList().subscribe(
+            data => this.priceTypes = data
         );
+        super.ngOnInit();
     }
 }

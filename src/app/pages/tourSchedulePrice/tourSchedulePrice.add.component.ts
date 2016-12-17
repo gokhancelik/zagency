@@ -9,30 +9,29 @@ import {
     CurrencyTypeService
 } from '../../shared/services';
 import { PriceType, CurrencyType } from '../../shared/models';
+import { AddComponent } from '../../core/add.component';
+import { DynamicFormControlModel, DynamicFormService } from '@ng2-dynamic-forms/core';
+import { TOURSCHEDULEPRICE_FORM_MODEL } from './tourSchedulePrice-form.model';
 
 @Component({
     selector: 'tourSchedulePrice-add',
     encapsulation: ViewEncapsulation.None,
     templateUrl: 'tourSchedulePrice.form.component.html'
 })
-export class TourSchedulePriceAddComponent implements OnInit {
-    model: TourSchedulePrice;
-    tourScheduleId: number;
-    errorMessage: any;
-    priceTypes: Array<PriceType> = new Array<PriceType>();
-    currencyTypes: Array<CurrencyType> = new Array<CurrencyType>();
+export class TourSchedulePriceAddComponent extends AddComponent<TourSchedulePrice> {
     @ViewChild('formModal') formModal: ModalDirective;
     @Output() onSaved: EventEmitter<any> = new EventEmitter();
-
-    constructor(private tourScheduleService: TourSchedulePriceService,
-        private priceTypeService: PriceTypeService,
-        private currencyTypeService: CurrencyTypeService
-    ) { }
-    ngOnInit() {
-        this.currencyTypeService.getList().subscribe(data => this.currencyTypes = data);
-        this.priceTypeService.get().subscribe(data => this.priceTypes = data);
+    model: TourSchedulePrice;
+    tourScheduleId: number;
+    currencyTypes: Array<CurrencyType>;
+    priceTypes: Array<PriceType>;
+    private _service: TourSchedulePriceService;
+    constructor(service: TourSchedulePriceService, dynamicFormService: DynamicFormService,
+        private currencyTypeService: CurrencyTypeService,
+        private priceTypeService: PriceTypeService) {
+        super(service, TourSchedulePrice, dynamicFormService, TOURSCHEDULEPRICE_FORM_MODEL);
+        this._service = service;
     }
-
     open(): void {
         this.model = new TourSchedulePrice();
         this.model.tourScheduleId = this.tourScheduleId;
@@ -44,15 +43,13 @@ export class TourSchedulePriceAddComponent implements OnInit {
     close(): void {
         this.formModal.hide();
     }
-    save() {
-        this.tourScheduleService.add(this.model).subscribe(
-            data => {
-                this.onSaved.emit(data);
-                this.formModal.hide();
-            },
-            error => {
-                this.errorMessage = <any>error;
-            }
+    ngOnInit() {
+        this.currencyTypeService.getList().subscribe(
+            data => this.currencyTypes = data
         );
+        this.priceTypeService.getList().subscribe(
+            data => this.priceTypes = data
+        );
+        super.ngOnInit();
     }
 }

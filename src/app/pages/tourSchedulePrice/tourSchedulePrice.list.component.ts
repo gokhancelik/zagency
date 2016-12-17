@@ -1,14 +1,24 @@
-import { Component, OnInit, OnChanges, ViewChild, Input, Output, EventEmitter } from '@angular/core';
+import {
+    Component, OnInit, OnChanges, ViewChild, Input,
+    Output, EventEmitter
+} from '@angular/core';
 import { DatePipe } from '@angular/common';
-import { TourSchedulePrice, TourSchedulePriceAddComponent, TourSchedulePriceEditComponent } from './index';
+import {
+    TourSchedulePrice, TourSchedulePriceAddComponent,
+    TourSchedulePriceEditComponent
+} from './index';
 import { TourScheduleService, TourSchedulePriceService } from '../../shared/services/index';
 import { LocalDataSource } from 'ng2-smart-table';
 import { NgProgressService } from "ng2-progressbar";
+import { ListComponent } from '../../core/index';
+
 @Component({
     selector: 'tourSchedulePrice-list',
     templateUrl: 'tourSchedulePrice.list.component.html'
 })
-export class TourSchedulePriceListComponent implements OnInit, OnChanges {
+export class TourSchedulePriceListComponent
+    extends ListComponent<TourSchedulePrice>
+    implements OnChanges {
     @ViewChild('addModal') addModal: TourSchedulePriceAddComponent;
     @ViewChild('editModal') editModal: TourSchedulePriceEditComponent;
     @Input() tourScheduleId: number = 0;
@@ -19,19 +29,9 @@ export class TourSchedulePriceListComponent implements OnInit, OnChanges {
         private tourScheduleService: TourScheduleService,
         private tourSchedulePriceService: TourSchedulePriceService,
         private pService: NgProgressService
-    ) { }
-    settings = {
-        add: {
-            confirmCreate: true,
-        },
-        edit: {
-            confirmSave: true,
-
-        },
-        delete: {
-            confirmDelete: true
-        },
-        columns: {
+    ) {
+        super(tourSchedulePriceService);
+        this.setColumns({
             price: {
                 title: 'Price',
                 type: 'number'
@@ -48,12 +48,8 @@ export class TourSchedulePriceListComponent implements OnInit, OnChanges {
                 title: 'Currency',
                 type: 'string'
             },
-        },
-        mode: 'external'
-
-    };
-    source: LocalDataSource = new LocalDataSource();
-
+        });
+    }
     ngOnInit() {
         this.getList();
     }
@@ -72,16 +68,16 @@ export class TourSchedulePriceListComponent implements OnInit, OnChanges {
                 });
         }
         else {
-            this.tourSchedulePriceService.get().subscribe(schedules => {
+            this.tourSchedulePriceService.getList().subscribe(schedules => {
                 this.source.load(schedules);
                 this.loading = false;
                 this.pService.done();
             });
         }
     }
-    openFormModal(id: number) {
+      openModal(id: number) {
         if (id) {
-            this.editModal.setTourSchedulePriceId(id);
+            this.editModal.setId(id);
             this.editModal.open();
         }
         else {
@@ -90,27 +86,11 @@ export class TourSchedulePriceListComponent implements OnInit, OnChanges {
         }
     }
     onCreate(event): void {
-        this.openFormModal(null);
-    }
-    onSaved(event) {
-        this.getList();
+        this.openModal(null);
+
     }
     onEdit(event): void {
         let tt: TourSchedulePrice = event.data as TourSchedulePrice;
-        this.openFormModal(tt.tourSchedulePriceId);
-    }
-    onDeleteConfirm(event): void {
-        if (window.confirm('Are you sure you want to delete?')) {
-            let tt: TourSchedulePrice = event.data as TourSchedulePrice;
-            this.tourSchedulePriceService.delete(tt.tourSchedulePriceId).subscribe(
-                data => this.getList(),
-                error => alert(error));
-        } else {
-
-        }
-    }
-    onRowSelect(event): void {
-        let tt: TourSchedulePrice = event.data as TourSchedulePrice;
-        this.onRowSelectionChanged.emit(tt);
+        this.openModal(tt.tourScheduleId);
     }
 }

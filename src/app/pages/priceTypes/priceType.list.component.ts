@@ -43,7 +43,7 @@ export class PriceTypeListComponent implements OnInit {
     }
     getList() {
         this.loading = true;
-        this.service.get().subscribe(data => {
+        this.service.getList().subscribe(data => {
             this.source.load(data);
             this.loading = false;
         });

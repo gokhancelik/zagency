@@ -19,7 +19,7 @@ export class CompanyService extends BaseService<Company> {
      * @constructor
      */
     constructor(http: Http) {
-        super(http, 'http://zagency.azurewebsites.net/api/v0.1/Companies')
+        super(http, 'http://zagency.azurewebsites.net/api/v0.1/Companies');
     }
 }
 
