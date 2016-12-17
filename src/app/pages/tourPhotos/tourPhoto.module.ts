@@ -7,7 +7,6 @@ import {
 } from './index';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CarouselModule, ProgressbarModule } from 'ng2-bootstrap/ng2-bootstrap';
-import { FormsModule } from '@angular/forms';
 import { FileUploadModule } from 'ng2-file-upload/ng2-file-upload';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { NgaModule } from '../../theme/nga.module';
@@ -22,7 +21,7 @@ import {
 @NgModule({
     imports: [routing,DynamicFormsBootstrapUIModule, DynamicFormsCoreModule,RouterModule, ModalModule, CommonModule, FormsModule,
         CarouselModule, FileUploadModule, ProgressbarModule,
-        Ng2SmartTableModule, NgaModule],
+        Ng2SmartTableModule, NgaModule,ReactiveFormsModule],
     exports: [TourPhotoAddComponent, TourPhotoEditComponent, TourPhotoListComponent],
     declarations: [TourPhotoAddComponent, TourPhotoEditComponent, TourPhotoListComponent],
     providers: [DynamicFormService,DynamicFormRelationService],
