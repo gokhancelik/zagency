@@ -7,7 +7,7 @@ import { TourProgram } from '../../shared/models/tourProgram.model';
 import { TourProgramService } from '../../shared/services/index';
 import { EditComponent } from '../../core/index';
 import { DynamicFormControlModel, DynamicFormService } from '@ng2-dynamic-forms/core';
-import {TOURPROGRAM_FORM_MODEL} from './tour-form.model'
+import { TOURPROGRAM_FORM_MODEL } from './tourProgram-form.model';
 
 @Component({
     selector: 'tourProgram-edit',
