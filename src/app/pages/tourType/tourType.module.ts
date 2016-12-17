@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import {
-    routing,TourTypeListComponent
+    routing, TourTypeListComponent, TourTypeComponent, TourTypeAddComponent
 } from './index';
 import { CarouselModule, ProgressbarModule, DatepickerModule } from 'ng2-bootstrap/ng2-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -14,9 +14,9 @@ import { DropdownModule, ModalModule } from 'ng2-bootstrap/ng2-bootstrap';
 @NgModule({
     imports: [routing, RouterModule, ModalModule, CommonModule, FormsModule,
         CarouselModule, FileUploadModule, ProgressbarModule, DatepickerModule,
-        Ng2SmartTableModule, NgaModule,ReactiveFormsModule,FormsModule],
-    exports: [ TourTypeListComponent],
-    declarations: [TourTypeListComponent],
+        Ng2SmartTableModule, NgaModule, ReactiveFormsModule, FormsModule],
+    exports: [TourTypeListComponent],
+    declarations: [TourTypeListComponent, TourTypeComponent, TourTypeAddComponent],
     providers: [],
 })
 export default class TourTypeModule { }

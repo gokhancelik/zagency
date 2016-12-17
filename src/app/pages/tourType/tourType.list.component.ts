@@ -32,31 +32,4 @@ export class TourTypeListComponent extends ListComponent<TourType> {
         });
         this._service = service;
     }
-
-    getList() {
-       
-            this._service.getList().subscribe(schedules => {
-                this.source.load(schedules);
-            
-        });
-    }
-    // openModal(id: number) {
-    //     if (id) {
-    //         this.editModal.setId(id);
-    //         this.editModal.open();
-    //     }
-    //     else {
-    //         this.addModal.setTourId(this.tourId);
-    //         this.addModal.open();
-    //     }
-    // }
-    // onCreate(event): void {
-    //     this.openModal(null);
-
-    // }
-    // onSaved(event) {
-    //     this.getList();
-    // }
-
-
 }
