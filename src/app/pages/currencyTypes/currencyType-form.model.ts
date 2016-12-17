@@ -5,7 +5,7 @@ import {
     DynamicRadioGroupModel
 } from '@ng2-dynamic-forms/core';
 
-export const TOURPROGRAM_FORM_MODEL: Array<DynamicFormControlModel> = [
+export const CURRENCY_FORM_MODEL: Array<DynamicFormControlModel> = [
 
     new DynamicInputModel({
         id: 'name',
@@ -16,18 +16,10 @@ export const TOURPROGRAM_FORM_MODEL: Array<DynamicFormControlModel> = [
     }),
     new DynamicInputModel({
 
-        id: 'latitude',
-        label: 'Location',
-        maxLength: 150,
-        placeholder: 'Latitude',
-        required: true
-    }),
-    new DynamicInputModel({
-
-        id: 'longitude',
-        label: 'Longitude',
-        maxLength: 12,
-        placeholder: 'Longitude',
+        id: 'symbol',
+        label: 'Symbol',
+        maxLength: 5,
+        placeholder: 'Symbol',
         required: true
     })
 ];

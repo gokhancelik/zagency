@@ -6,18 +6,23 @@ import { ModalDirective } from 'ng2-bootstrap';
 import { AddComponent } from '../../core/index';
 import { CurrencyType } from '../../shared/models/currencyType.model';
 import { CurrencyTypeService } from '../../shared/services/index';
+import { CURRENCY_FORM_MODEL } from './currencyType-form.model';
+import { DynamicFormControlModel, DynamicFormService } from '@ng2-dynamic-forms/core';
 
 @Component({
     selector: 'currencyType-add',
     encapsulation: ViewEncapsulation.None,
-    templateUrl: 'currencyType.form.component.html'
+    templateUrl: '../../core/form.component.html'
 })
-export class CurrencyTypeAddComponent extends AddComponent<CurrencyType> {
+
+export class CurrencyTypeAddComponent extends AddComponent<CurrencyType>  {
     _service: CurrencyTypeService;
+    tourId: number;
+    myDynamicFormModel: Array<DynamicFormControlModel> = CURRENCY_FORM_MODEL;
+    @ViewChild('formModal') formModal: ModalDirective;
     @Output() onSaved: EventEmitter<any> = new EventEmitter();
-    @ViewChild('formModal') formModal;
-    constructor(service: CurrencyTypeService) {
-        super(service, CurrencyType);
+    constructor(service: CurrencyTypeService, dynamicFormService: DynamicFormService) {
+        super(service, CurrencyType, dynamicFormService, CURRENCY_FORM_MODEL);
         this._service = service;
     }
 }

@@ -6,22 +6,22 @@ import { ModalDirective } from 'ng2-bootstrap';
 import { TourSchedule } from '../../shared/models';
 import { TourScheduleService } from '../../shared/services/index';
 import { AddComponent } from '../../core/add.component';
-
+import { DynamicFormControlModel, DynamicFormService } from '@ng2-dynamic-forms/core';
+import { TOURSCHEDULE_FORM_MODEL } from './tourSchedule-form.model';
 @Component({
     selector: 'tourSchedule-add',
     encapsulation: ViewEncapsulation.None,
-    templateUrl: 'tourSchedule.form.component.html'
+    templateUrl: '../../core/form.component.html'
 })
 export class TourScheduleAddComponent extends AddComponent<TourSchedule> {
-    model: TourSchedule;
-    tourId: number;
-    errorMessage: any;
     @ViewChild('formModal') formModal: ModalDirective;
     @Output() onSaved: EventEmitter<any> = new EventEmitter();
-    constructor(private tourScheduleService: TourScheduleService) {
-        super(tourScheduleService, TourSchedule)
-    }
-    ngOnInit() {
+    model: TourSchedule;
+    tourId: number;
+    private _service: TourScheduleService;
+    constructor(service: TourScheduleService, dynamicFormService: DynamicFormService) {
+        super(service, TourSchedule, dynamicFormService, TOURSCHEDULE_FORM_MODEL);
+        this._service = service;
     }
     open(): void {
         this.model = new TourSchedule();
@@ -33,16 +33,5 @@ export class TourScheduleAddComponent extends AddComponent<TourSchedule> {
     }
     close(): void {
         this.formModal.hide();
-    }
-    save() {
-        this.tourScheduleService.add(this.model).subscribe(
-            data => {
-                this.onSaved.emit(data);
-                this.formModal.hide();
-            },
-            error => {
-                this.errorMessage = <any>error;
-            }
-        );
     }
 }

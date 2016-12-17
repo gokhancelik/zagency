@@ -16,7 +16,6 @@ import {TOURPROGRAM_FORM_MODEL} from './tour-form.model'
     templateUrl: '../../core/form.component.html'
 })
 export class TourProgramAddComponent extends AddComponent<TourProgram>  {
-   
     _service: TourProgramService;
     tourId: number;
     myDynamicFormModel: Array<DynamicFormControlModel> = TOURPROGRAM_FORM_MODEL;

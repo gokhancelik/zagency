@@ -6,17 +6,27 @@ import {
 } from '@ng2-dynamic-forms/core';
 
 export const TOURDESTINATION_FORM_MODEL: Array<DynamicFormControlModel> = [
-
-    new DynamicInputModel({
-        id: 'day',
-        label: 'Day',
+ new DynamicInputModel({
+        id: 'name',
+        label: 'Name',
         maxLength: 20,
-        placeholder: 'Day',
+        placeholder: 'Name',
         required: true
     }),
     new DynamicInputModel({
 
-        id: 'description',
-        label: 'Description'
+        id: 'latitude',
+        label: 'Location',
+        maxLength: 150,
+        placeholder: 'Latitude',
+        required: true
+    }),
+    new DynamicInputModel({
+
+        id: 'longitude',
+        label: 'Longitude',
+        maxLength: 12,
+        placeholder: 'Longitude',
+        required: true
     })
 ];
