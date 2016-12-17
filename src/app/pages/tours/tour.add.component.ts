@@ -32,7 +32,7 @@ export class TourAddComponent implements OnInit {
     ) {
     }
     ngOnInit() {
-        this.tourTypeService.get().subscribe(
+        this.tourTypeService.getList().subscribe(
             data => this.tourTypes = data,
             error => this.errorMessage = <any>error);
     }

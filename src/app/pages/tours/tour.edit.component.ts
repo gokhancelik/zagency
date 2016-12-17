@@ -47,7 +47,7 @@ export class TourEditComponent implements OnInit {
                     this.errorMessage = err;
                 });
         });
-        this.tourTypeService.get().subscribe(
+        this.tourTypeService.getList().subscribe(
             data => this.tourTypes = data,
             error => this.errorMessage = <any>error);
     }
