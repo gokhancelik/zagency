@@ -1,14 +1,13 @@
 import { Component, OnInit, Input, ViewEncapsulation, ViewChild } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import { Tour, TourSchedule } from '../../shared/models';
+import { Tour, TourSchedule ,TourType} from '../../shared/models';
 import { TourPhoto } from '../tourPhoto/tourPhoto.model';
 import {
     TourSchedulePrice,
     TourSchedulePriceAddComponent,
     TourSchedulePriceEditComponent
 } from '../tourSchedulePrice/index';
-import { TourType } from '../tourType/tourType.model';
 import { ModalDirective } from 'ng2-bootstrap';
 import {
     TourTypeService,

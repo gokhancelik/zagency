@@ -1,9 +1,6 @@
-<div class="widgets">
-
-  <div class="row">
-    <ba-card title="Tour Types" baCardClass="with-scroll" [loading]="loading">
-      <ng2-smart-table [settings]="settings" (createConfirm)="onCreateConfirm($event)" (editConfirm)="onSaveConfirm($event)" [source]="source" (deleteConfirm)="onDeleteConfirm($event)"></ng2-smart-table>
-    </ba-card>
-  </div>
-
-</div>
+<ba-card title="{{title}}" [loading]="loading" baCardClass="with-scroll">
+  <ng2-smart-table [settings]="settings" (create)="onCreate($event)" (edit)="onEdit($event)" [source]="source" (delete)="onDeleteConfirm($event)"
+    (rowSelect)="onRowSelect($event)"></ng2-smart-table>
+</ba-card>
+<tourType-add #addModal (onSaved)="onSaved($event)"></tourType-add>
+<tourType-edit #editModal (onSaved)="onSaved($event)"></tourType-edit>

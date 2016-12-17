@@ -3,7 +3,7 @@ import { Http, Response, RequestOptions, Headers } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import { Injectable } from '@angular/core';
-import { TourType } from '../models/tourType.model';
+import { TourType } from '../models';
 import { BaseService } from '../../../app/core/index';
 @Injectable()
 export class TourTypeService extends BaseService<TourType> {

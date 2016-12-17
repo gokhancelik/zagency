@@ -1,7 +1,0 @@
-<form *ngIf="active" (ngSubmit)="onSubmit()" #tourTypeForm="ngForm">
-  <div class="form-group">
-    <label for="name">Name</label>
-    <input type="text" name="name" [(ngModel)]="model.name" class="form-control" id="name" placeholder="Enter tour type name">
-  </div>
-  <button type="submit" class="btn btn-default" [disabled]="!tourTypeForm.form.valid || submitted">Submit</button>
-</form>
