@@ -6,7 +6,7 @@ import {
     TourAddComponent, TourComponent, TourEditComponent
 } from './index';
 import { CarouselModule, ProgressbarModule, DatepickerModule } from 'ng2-bootstrap/ng2-bootstrap';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import TourScheduleModule from '../tourSchedule/tourSchedule.module';
 import TourProgramModule from '../tourPrograms/tourProgram.module';
 import TourPhotoModule from '../tourPhotos/tourPhoto.module';
@@ -24,7 +24,7 @@ import {
     DynamicFormsBootstrapUIModule
 } from '@ng2-dynamic-forms/ui-bootstrap';
 @NgModule({
-    imports: [routing,DynamicFormsCoreModule,DynamicFormsBootstrapUIModule, RouterModule, TourScheduleModule, TourSchedulePriceModule,
+    imports: [routing,DynamicFormsCoreModule,ReactiveFormsModule,DynamicFormsBootstrapUIModule, RouterModule, TourScheduleModule, TourSchedulePriceModule,
         TourProgramModule, TourPhotoModule, TourDestinationModule,
         CommonModule, EditorsModule,
         FormsModule, CarouselModule, FileUploadModule,
