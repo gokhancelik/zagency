@@ -17,8 +17,14 @@ import { FileUploadModule } from 'ng2-file-upload/ng2-file-upload';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { NgaModule } from '../../theme/nga.module';
 import * as moment from 'moment';
+import {
+    DynamicFormsCoreModule, DynamicFormService, DynamicFormRelationService
+} from '@ng2-dynamic-forms/core';
+import {
+    DynamicFormsBootstrapUIModule
+} from '@ng2-dynamic-forms/ui-bootstrap';
 @NgModule({
-    imports: [routing, RouterModule, TourScheduleModule, TourSchedulePriceModule,
+    imports: [routing,DynamicFormsCoreModule,DynamicFormsBootstrapUIModule, RouterModule, TourScheduleModule, TourSchedulePriceModule,
         TourProgramModule, TourPhotoModule, TourDestinationModule,
         CommonModule, EditorsModule,
         FormsModule, CarouselModule, FileUploadModule,
@@ -26,6 +32,6 @@ import * as moment from 'moment';
     exports: [],
     declarations: [TourListComponent, DraftsComponent,
         TourComponent, TourEditComponent, TourAddComponent],
-    providers: [DatePipe],
+    providers: [DatePipe,DynamicFormService,DynamicFormRelationService],
 })
 export default class TourModule { }
