@@ -1,18 +1,18 @@
 import { Routes, RouterModule } from '@angular/router';
 
 import {
-	CurrencyTypeEditComponent, CurrencyTypeComponent, CurrencyTypeAddComponent
-	, CurrencyTypeListComponent
+	SpecTypeEditComponent, SpecTypeComponent, SpecTypeAddComponent
+	, SpecTypeListComponent
 } from './index';
 
-const CurrencyTypeRoutes: Routes = [
+const SpecTypeRoutes: Routes = [
 	{
 		path: '',
-		component: CurrencyTypeComponent,
+		component: SpecTypeComponent,
 		children: [
 			{
 				path: 'list',
-				component: CurrencyTypeListComponent
+				component: SpecTypeListComponent
 			},
 			// {
 			// 	path: 'edit/:id',
@@ -25,5 +25,5 @@ const CurrencyTypeRoutes: Routes = [
 		]
 	}
 ];
-export const routing = RouterModule.forChild(CurrencyTypeRoutes);
+export const routing = RouterModule.forChild(SpecTypeRoutes);
 

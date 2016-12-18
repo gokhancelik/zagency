@@ -1,6 +1,7 @@
 export * from './tour.service';
 export * from './tourType.service';
 export * from './priceType.service';
+export * from './specType.service';
 export * from './currencyType.service';
 export * from './tourPhoto.service';
 export * from './tourSchedule.service';

@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import {
-    routing, CurrencyTypeAddComponent,
-    CurrencyTypeEditComponent, CurrencyTypeComponent, CurrencyTypeListComponent
+    routing, SpecTypeAddComponent,
+    SpecTypeEditComponent, SpecTypeComponent, SpecTypeListComponent
 } from './index';
 import { CarouselModule, ProgressbarModule, DatepickerModule } from 'ng2-bootstrap/ng2-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -24,8 +24,8 @@ import {
         CarouselModule, ReactiveFormsModule, DynamicFormsBootstrapUIModule,
         FileUploadModule, ProgressbarModule, DatepickerModule, DynamicFormsCoreModule,
         Ng2SmartTableModule, NgProgressModule, NgaModule],
-    exports: [CurrencyTypeAddComponent, CurrencyTypeEditComponent, CurrencyTypeListComponent],
-    declarations: [CurrencyTypeAddComponent, CurrencyTypeEditComponent, CurrencyTypeListComponent],
+    exports: [SpecTypeAddComponent, SpecTypeEditComponent, SpecTypeListComponent],
+    declarations: [SpecTypeAddComponent, SpecTypeEditComponent, SpecTypeListComponent],
     providers: [DynamicFormService, DynamicFormRelationService],
 })
-export default class CurrencyTypeModule { }
+export default class SpecTypeModule { }

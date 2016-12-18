@@ -1,0 +1,5 @@
+export * from './specType.add.component'
+export * from './specType.edit.component'
+export * from './specType.list.component'
+export * from './specType.routing'
+export * from './specType.component'

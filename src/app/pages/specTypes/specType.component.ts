@@ -5,7 +5,7 @@ import { Component, OnInit } from '@angular/core';
     selector: 'currencyType-cmp',
     template: '<router-outlet></router-outlet>'
 })
-export class CurrencyTypeComponent implements OnInit {
+export class SpecTypeComponent implements OnInit {
     constructor() { }
 
     ngOnInit() { }
