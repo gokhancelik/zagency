@@ -1,25 +1,25 @@
 import { IModel } from '../../core/index';
 export class TourScheduleSpec implements IModel {
     id: number;
+    tourScheduleSpecId: number;
     description: string;
-    companyName: string;
-    companyId: number;
+    tourScheduleId: number;
     specTypeId: number;
     specTypeName: string;
     constructor(data: any = null) {
         if (data) {
             this.id = data.id;
+            this.tourScheduleSpecId = data.tourScheduleSpecId;
             this.description = data.description;
-            this.companyName = data.companyName;
-            this.companyId = data.companyId;
+            this.tourScheduleId = data.tourScheduleId;
             this.specTypeName = data.specTypeName;
             this.specTypeId = data.specTypeId;
         }
         else {
             this.id = 0;
+            this.tourScheduleSpecId = 0;
             this.description = '';
-            this.companyName = '';
-            this.companyId = 0;
+            this.tourScheduleId = 0;
             this.specTypeName = '';
             this.specTypeId = 0;
         }

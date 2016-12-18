@@ -26,12 +26,8 @@ export class TourListComponent implements OnInit {
             confirmDelete: true
         },
         columns: {
-            id: {
-                title: 'ID',
-                type: 'number'
-            },
             name: {
-                title: 'First Name',
+                title: 'Name',
                 type: 'string'
             }
         },

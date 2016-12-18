@@ -56,5 +56,13 @@ export class TourScheduleService extends BaseService<TourSchedule> {
             return ts || new TourSchedule();
         });
     }
+    getTourScheduleSpecs(tsId: number): Observable<TourSchedulePrice[]> {
+        return this._http.get(this.API_URL + '/' + tsId + '/TourScheduleSpecs')
+            .map(res => {
+                let data = res.json();
+                return data || {};
+            })
+            .catch(this.handleError);
+    }
 }
 

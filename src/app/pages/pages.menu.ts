@@ -138,7 +138,7 @@ export const PAGES_MENU = [
         path: 'companies',
         data: {
           menu: {
-            title: 'Companies ',
+            title: 'Companies',
             icon: 'fa fa-building',
             selected: false,
             expanded: false,

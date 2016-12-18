@@ -13,7 +13,7 @@ import { CompanySpecEditComponent, CompanySpecAddComponent } from './index';
 export class CompanySpecListComponent extends ListComponent<CompanySpec> {
     @ViewChild('addModal') addModal: CompanySpecAddComponent;
     @ViewChild('editModal') editModal: CompanySpecEditComponent;
-    title: string = 'Tour Destinations';
+    title: string = 'Company Specifications';
     _service: CompanySpecService;
     constructor(service: CompanySpecService) {
         super(service);

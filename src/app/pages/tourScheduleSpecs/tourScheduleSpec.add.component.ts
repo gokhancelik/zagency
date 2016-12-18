@@ -18,11 +18,23 @@ import { FormGroup } from '@angular/forms';
 export class TourScheduleSpecAddComponent extends AddComponent<TourScheduleSpec>  {
     _service: TourScheduleSpecService;
     tourId: number;
+    tourScheduleId: number;
     myDynamicFormModel: Array<DynamicFormControlModel> = TOURSCHEDULESPEC_FORM_MODEL;
     @ViewChild('formModal') formModal: ModalDirective;
     @Output() onSaved: EventEmitter<any> = new EventEmitter();
     constructor(service: TourScheduleSpecService, dynamicFormService: DynamicFormService) {
         super(service, TourScheduleSpec, dynamicFormService, TOURSCHEDULESPEC_FORM_MODEL);
         this._service = service;
+    }
+    open(): void {
+        this.model = new TourScheduleSpec();
+        this.model.tourScheduleId = this.tourScheduleId;
+        super.open();
+    }
+    setTourScheduleId(tourScheduleId: number): void {
+        this.tourScheduleId = tourScheduleId;
+    }
+    ngOnInit() {
+        super.ngOnInit();
     }
 }

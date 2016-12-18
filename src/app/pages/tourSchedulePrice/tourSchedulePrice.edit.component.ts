@@ -20,7 +20,6 @@ import { TOURSCHEDULEPRICE_FORM_MODEL } from './tourSchedulePrice-form.model';
 })
 export class TourSchedulePriceEditComponent extends EditComponent<TourSchedulePrice>  {
     model: TourSchedulePrice;
-    tourScheduleId: number;
     currencyTypes: Array<CurrencyType>;
     priceTypes: Array<PriceType>;
     @ViewChild('formModal') formModal: ModalDirective;
