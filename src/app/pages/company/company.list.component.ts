@@ -45,6 +45,10 @@ export class CompanyListComponent extends ListComponent<Company> {
             webSiteUrl: {
                 title: 'webSiteUrl',
                 type: 'string'
+            },
+            email: {
+                title: 'email',
+                type: 'string'
             }
 
 

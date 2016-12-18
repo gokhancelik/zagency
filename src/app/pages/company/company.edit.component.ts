@@ -18,7 +18,6 @@ import { COMPANY_FORM_MODEL } from './company-form.model';
 export class CompanyEditComponent extends EditComponent<Company> {
     @ViewChild('formModal') formModal: ModalDirective;
     @Output() onSaved: EventEmitter<any> = new EventEmitter();
-    myDynamicFormModel: Array<DynamicFormControlModel> = COMPANY_FORM_MODEL;
     constructor(service: CompanyService, dynamicFormService: DynamicFormService) {
         super(service, dynamicFormService, COMPANY_FORM_MODEL);
     }

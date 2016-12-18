@@ -24,9 +24,9 @@ export const COMPANY_FORM_MODEL: Array<DynamicFormControlModel> = [
     }),
     new DynamicInputModel({
 
-        id: 'phone',
-        label: 'Phone',
-        maxLength: 12,
+        id: 'phone1',
+        label: 'Phone1',
+        maxLength: 15,
         placeholder: 'Phone',
         required: true
     }),
@@ -42,6 +42,13 @@ export const COMPANY_FORM_MODEL: Array<DynamicFormControlModel> = [
         id: 'webSiteUrl',
         label: 'Web Site',
         placeholder: 'Web Site',
+        required: true
+    }),
+     new DynamicInputModel({
+
+        id: 'email',
+        label: 'Email ',
+        placeholder: 'Email Site',
         required: true
     }),
 ];
