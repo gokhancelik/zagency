@@ -13,22 +13,27 @@ import { TourTypeEditComponent, TourTypeAddComponent } from './index';
 export class TourTypeListComponent extends ListComponent<TourType> {
     @ViewChild('addModal') addModal: TourTypeAddComponent;
     @ViewChild('editModal') editModal: TourTypeEditComponent;
-    title: string = 'Tour Type';
+    title: string = 'Tour Destinations';
     _service: TourTypeService;
     constructor(service: TourTypeService) {
         super(service);
         this.setColumns({
-           
+            tourTypeId: {
+                title: 'tourTypeId',
+                type: 'number'
+            },
             name: {
                 title: 'name',
                 type: 'string'
             },
-            longName: {
+            companyName: {
+                title: 'companyName',
+                type: 'string'
+            },
+            companyId: {
                 title: 'companyId',
                 type: 'number'
             }
-           
-
         });
         this._service = service;
     }

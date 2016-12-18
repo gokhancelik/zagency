@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-    selector: 'tour-type-cmp',
+    selector: 'tourType-cmp',
     templateUrl: 'tourType.component.html'
 })
 export class TourTypeComponent implements OnInit {
