@@ -10,10 +10,8 @@ import { LocalDataSource } from 'ng2-smart-table';
 export class TourListComponent implements OnInit {
     list: Array<Tour>;
     errorMessage: string;
-    loadDrafts: boolean;
     loading: boolean;
     source: LocalDataSource = new LocalDataSource();
-    query: string = '';
     settings = {
         add: {
             confirmCreate: true,

@@ -6,13 +6,7 @@ export const TourScheduleSpecRoutes: Route[] = [
 	{
 		path: '',
 		component: TourScheduleSpecComponent,
-		children: [
-			{
-				path: 'list',
-				component: TourScheduleSpecListComponent
-			}
-			
-		]
+		
 	}
 ];
 export const routing = RouterModule.forChild(TourScheduleSpecRoutes);
