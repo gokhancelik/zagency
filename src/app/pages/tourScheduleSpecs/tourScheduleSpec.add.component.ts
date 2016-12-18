@@ -2,27 +2,27 @@ import {
     Component, OnInit, ViewEncapsulation,
     ViewChild, Output, EventEmitter
 } from '@angular/core';
-import { COMPANYSPEC_FORM_MODEL } from './companySpec-form.model';
+import { TOURSCHEDULESPEC_FORM_MODEL } from './tourScheduleSpec-form.model';
 import { ModalDirective } from 'ng2-bootstrap';
 import { AddComponent } from '../../core/add.component';
-import { CompanySpec } from '../../shared/models/';
-import { CompanySpecService } from '../../shared/services';
+import { TourScheduleSpec } from '../../shared/models/';
+import { TourScheduleSpecService } from '../../shared/services';
 import { DynamicFormControlModel, DynamicFormService } from '@ng2-dynamic-forms/core';
 import { FormGroup } from '@angular/forms';
 @Component({
-    selector: 'companySpec-add',
+    selector: 'tourScheduleSpec-add',
     encapsulation: ViewEncapsulation.None,
     templateUrl: '../../core/form.component.html'
 
 })
-export class CompanySpecAddComponent extends AddComponent<CompanySpec>  {
-    _service: CompanySpecService;
+export class TourScheduleSpecAddComponent extends AddComponent<TourScheduleSpec>  {
+    _service: TourScheduleSpecService;
     tourId: number;
-    myDynamicFormModel: Array<DynamicFormControlModel> = COMPANYSPEC_FORM_MODEL;
+    myDynamicFormModel: Array<DynamicFormControlModel> = TOURSCHEDULESPEC_FORM_MODEL;
     @ViewChild('formModal') formModal: ModalDirective;
     @Output() onSaved: EventEmitter<any> = new EventEmitter();
-    constructor(service: CompanySpecService, dynamicFormService: DynamicFormService) {
-        super(service, CompanySpec, dynamicFormService, COMPANYSPEC_FORM_MODEL);
+    constructor(service: TourScheduleSpecService, dynamicFormService: DynamicFormService) {
+        super(service, TourScheduleSpec, dynamicFormService, TOURSCHEDULESPEC_FORM_MODEL);
         this._service = service;
     }
 }

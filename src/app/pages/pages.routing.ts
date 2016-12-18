@@ -43,6 +43,10 @@ const routes: Routes = [
         loadChildren: () => System.import('./specTypes/specType.module')
       },
       {
+        path: 'companySpecs',
+        loadChildren: () => System.import('./companySpecs/companySpec.module')
+      },
+      {
         path: 'currencyTypes',
         loadChildren: () => System.import('./currencyTypes/currencyType.module')
       }

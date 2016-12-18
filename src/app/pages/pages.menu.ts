@@ -89,6 +89,28 @@ export const PAGES_MENU = [
             }
           }
         ]
+      }, 
+      {
+        path: 'companySpecs',
+        data: {
+          menu: {
+            title: 'Company Specs',
+            icon: 'fa fa-info',
+            selected: false,
+            expanded: false,
+            order: 1
+          }
+        },
+        children: [
+          {
+            path: 'list',
+            data: {
+              menu: {
+                title: 'List',
+              }
+            }
+          }
+        ]
       },
       {
         path: 'currencyTypes',
@@ -117,7 +139,7 @@ export const PAGES_MENU = [
         data: {
           menu: {
             title: 'Companies ',
-            icon: 'fa fa-map-signs',
+            icon: 'fa fa-building',
             selected: false,
             expanded: false,
             order: 1

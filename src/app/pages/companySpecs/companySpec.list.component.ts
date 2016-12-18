@@ -22,36 +22,14 @@ export class CompanySpecListComponent extends ListComponent<CompanySpec> {
                 title: 'companySpecId',
                 type: 'number'
             },
-            name: {
-                title: 'name',
+            description: {
+                title: 'Description',
                 type: 'string'
             },
-            longName: {
-                title: 'longName',
+            companyName: {
+                title: 'Company',
                 type: 'string'
             },
-            phone1: {
-                title: 'phone1',
-                type: 'string'
-            },
-            phone2: {
-                title: 'phone2',
-                type: 'string'
-            },
-            fax: {
-                title: 'fax',
-                type: 'string'
-            },
-            webSiteUrl: {
-                title: 'webSiteUrl',
-                type: 'string'
-            },
-            email: {
-                title: 'email',
-                type: 'string'
-            }
-
-
         });
         this._service = service;
     }

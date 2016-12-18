@@ -5,7 +5,7 @@ import {
     DynamicRadioGroupModel
 } from '@ng2-dynamic-forms/core';
 
-export const COMPANYSPEC_FORM_MODEL: Array<DynamicFormControlModel> = [
+export const TOURSCHEDULESPEC_FORM_MODEL: Array<DynamicFormControlModel> = [
 
     new DynamicInputModel({
         id: 'description',

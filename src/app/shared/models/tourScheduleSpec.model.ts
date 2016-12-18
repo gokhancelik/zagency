@@ -1,5 +1,5 @@
 import { IModel } from '../../core/index';
-export class CompanySpec implements IModel {
+export class TourScheduleSpec implements IModel {
     id: number;
     description: string;
     companyName: string;
