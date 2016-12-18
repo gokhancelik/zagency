@@ -13,7 +13,7 @@ import { TourTypeEditComponent, TourTypeAddComponent } from './index';
 export class TourTypeListComponent extends ListComponent<TourType> {
     @ViewChild('addModal') addModal: TourTypeAddComponent;
     @ViewChild('editModal') editModal: TourTypeEditComponent;
-    title: string = 'Tour Destinations';
+    title: string = 'Tour Type List';
     _service: TourTypeService;
     constructor(service: TourTypeService) {
         super(service);
