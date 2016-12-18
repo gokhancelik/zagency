@@ -35,13 +35,10 @@ export class TourSchedulePriceAddComponent extends AddComponent<TourSchedulePric
     open(): void {
         this.model = new TourSchedulePrice();
         this.model.tourScheduleId = this.tourScheduleId;
-        this.formModal.show();
+        super.open();
     }
     setTourScheduleId(tourScheduleId: number): void {
         this.tourScheduleId = tourScheduleId;
-    }
-    close(): void {
-        this.formModal.hide();
     }
     ngOnInit() {
         this.currencyTypeService.getList().subscribe(

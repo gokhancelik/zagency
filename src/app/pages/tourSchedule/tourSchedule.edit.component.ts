@@ -11,7 +11,7 @@ import { TOURSCHEDULE_FORM_MODEL } from './tourSchedule-form.model';
 @Component({
     selector: 'tourSchedule-edit',
     encapsulation: ViewEncapsulation.None,
-    templateUrl: '../../core/form.component.html'
+    templateUrl: 'tourSchedule.form.component.html'
 
 })
 export class TourScheduleEditComponent extends EditComponent<TourSchedule> {

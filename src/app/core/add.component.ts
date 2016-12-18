@@ -8,30 +8,40 @@ import { DynamicFormService, DynamicFormControlModel } from '@ng2-dynamic-forms/
 import { FormGroup } from '@angular/forms';
 
 export class AddComponent<T extends IModel> implements OnInit {
+    protected errorMessage: any;
+    protected formModal: ModalDirective;
+    protected myForm: FormGroup;
+    protected formCreator: FormCreator;
     protected model: T;
-    errorMessage: any;
-    formModal: ModalDirective;
-    myForm: FormGroup;
-    formCreator: FormCreator;
+    dynamicFormModel: Array<DynamicFormControlModel>;
     @Output() onSaved: EventEmitter<any>;
     constructor(
         private service: IService<T>, private modelType,
         private dynamicFormService: DynamicFormService,
         private formProperties: Array<DynamicFormControlModel>) {
         this.formCreator = new FormCreator(dynamicFormService);
+        if (this.formProperties) {
+            this.myForm = this.formCreator.createForm(this.formProperties);
+            this.dynamicFormModel = this.formCreator.createFormModel(this.formProperties);
+        }
     }
     ngOnInit() {
 
     }
     open(): void {
-        this.model = new this.modelType();
-        this.myForm = this.formCreator.createForm(this.formProperties);
+        if (!this.model)
+            this.model = new this.modelType();
+        if (this.myForm)
+            this.myForm.patchValue(this.model, true);
         this.formModal.show();
     }
     close(): void {
         this.formModal.hide();
     }
-    save() {
+    save({ value, valid }: { value: T, valid: boolean }) {
+        Object.keys(value).forEach(name => {
+            this.model[name] = value[name];
+        });
         this.service.add(this.model).subscribe(
             data => {
                 this.onSaved.emit(data);

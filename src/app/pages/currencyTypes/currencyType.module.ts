@@ -16,10 +16,12 @@ import { NgProgressModule } from 'ng2-progressbar';
 import {
     DynamicFormsCoreModule, DynamicFormService, DynamicFormRelationService
 } from '@ng2-dynamic-forms/core';
-//import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {
+    DynamicFormsBootstrapUIModule
+} from '@ng2-dynamic-forms/ui-bootstrap';
 @NgModule({
     imports: [routing, RouterModule, ModalModule, CommonModule, FormsModule,
-        CarouselModule, ReactiveFormsModule,
+        CarouselModule, ReactiveFormsModule, DynamicFormsBootstrapUIModule,
         FileUploadModule, ProgressbarModule, DatepickerModule, DynamicFormsCoreModule,
         Ng2SmartTableModule, NgProgressModule, NgaModule],
     exports: [CurrencyTypeAddComponent, CurrencyTypeEditComponent, CurrencyTypeListComponent],

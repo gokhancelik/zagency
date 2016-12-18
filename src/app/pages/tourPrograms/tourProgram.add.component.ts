@@ -28,7 +28,8 @@ export class TourProgramAddComponent extends AddComponent<TourProgram>  {
     open(): void {
         this.model = new TourProgram();
         this.model.tourId = this.tourId;
-        this.formModal.show();
+        super.open();
+
     }
     setTourId(tourId: number): void {
         this.tourId = tourId;

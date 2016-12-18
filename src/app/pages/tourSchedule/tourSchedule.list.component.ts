@@ -29,7 +29,6 @@ export class TourScheduleListComponent extends ListComponent<TourSchedule> {
                 type: 'Date',
                 valuePrepareFunction: (value) => {
                     var raw = new Date(value);
-
                     var formatted = this.datePipe.transform(raw, 'dd.MM.yyyy');
                     return formatted;
                 }
@@ -39,7 +38,6 @@ export class TourScheduleListComponent extends ListComponent<TourSchedule> {
                 type: 'Date',
                 valuePrepareFunction: (value) => {
                     var raw = new Date(value);
-
                     var formatted = this.datePipe.transform(raw, 'dd.MM.yyyy');
                     return formatted;
                 }

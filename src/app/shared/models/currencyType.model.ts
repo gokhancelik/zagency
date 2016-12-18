@@ -4,6 +4,18 @@ export class CurrencyType implements IModel {
     name: string;
     symbol: string;
     currencyTypeId: number;
-    constructor() {
+    constructor(data: any = null) {
+        if (data) {
+            this.id = data.id;
+            this.name = data.name;
+            this.symbol = data.symbol;
+            this.currencyTypeId = data.currencyTypeId;
+        }
+        else {
+            this.id = 0;
+            this.name = '';
+            this.symbol = '';
+            this.currencyTypeId = 0;
+        }
     }
 }

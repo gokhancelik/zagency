@@ -27,7 +27,7 @@ export class TourDestinationAddComponent extends AddComponent<TourDestination>  
     open(): void {
         this.model = new TourDestination();
         this.model.tourId = this.tourId;
-        this.formModal.show();
+        super.open();
     }
     setTourId(tourId: number): void {
         this.tourId = tourId;

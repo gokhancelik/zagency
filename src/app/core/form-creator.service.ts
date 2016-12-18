@@ -8,13 +8,14 @@ export class FormCreator {
     constructor(private dynamicFormService: DynamicFormService) {
     }
     createForm(properties: Array<DynamicFormControlModel>): FormGroup {
-        let myDynamicFormModel: Array<DynamicFormControlModel> = this.createFormModel(properties);
-        let form = this.dynamicFormService.createFormGroup(myDynamicFormModel);
+        let dynamicFormModel: Array<DynamicFormControlModel> = this.createFormModel(properties);
+        let form = this.dynamicFormService.createFormGroup(dynamicFormModel);
         return form;
     }
     createFormModel(properties: Array<DynamicFormControlModel>): Array<DynamicFormControlModel> {
         let inputArray = new Array<DynamicFormControlModel>();
         for (let i = 0; i < properties.length; i++) {
+            let p = properties[i];
             inputArray.push(properties[i]);
         }
         return inputArray;

@@ -7,11 +7,12 @@ import { FormGroup } from '@angular/forms';
 import { FormCreator } from './form-creator.service';
 import { DynamicFormService, DynamicFormControlModel } from '@ng2-dynamic-forms/core';
 export abstract class EditComponent<T extends IModel> implements OnInit {
-    model: T;
     public errorMessage: any;
     myForm: FormGroup;
     formCreator: FormCreator;
     id: number;
+    protected model: T;
+    dynamicFormModel: Array<DynamicFormControlModel>;
     @ViewChild('formModal') formModal: ModalDirective;
     @Output() abstract onSaved: EventEmitter<any>;
     constructor(private service: IService<T>,
@@ -23,14 +24,17 @@ export abstract class EditComponent<T extends IModel> implements OnInit {
     ngOnInit() {
     }
     open(): void {
-        this.model = null;
+        if (this.formProperties) {
+            this.myForm = this.formCreator.createForm(this.formProperties);
+            this.dynamicFormModel = this.formCreator.createFormModel(this.formProperties);
+        }
         this.service.getById(this.id).subscribe(
             data => {
                 this.model = data;
+                if (this.myForm)
+                    this.myForm.patchValue(data, true);
             }
         );
-        if (this.formProperties)
-            this.myForm = this.formCreator.createForm(this.formProperties);
         this.formModal.show();
     }
     setId(id: number): void {
@@ -39,10 +43,13 @@ export abstract class EditComponent<T extends IModel> implements OnInit {
     close(): void {
         this.formModal.hide();
     }
-    save() {
+    save({ value, valid }: { value: T, valid: boolean }) {
+        Object.keys(value).forEach(name => {
+            this.model[name] = value[name];
+        });
         this.service.update(this.model, this.model.id).subscribe(
             data => {
-                this.onSaved.emit(this.model);
+                this.onSaved.emit(data);
                 this.formModal.hide();
             },
             error => {

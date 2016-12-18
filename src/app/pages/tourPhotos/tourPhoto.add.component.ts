@@ -32,7 +32,6 @@ export class TourPhotoAddComponent extends AddComponent<TourPhoto>  {
     open(): void {
         this.model = new TourPhoto();
         this.model.tourId = this.tourId;
-        this.formModal.show();
         let _url: string = this.API_URL + '/File/';
         // let header = [{ name: 'Authorization', value: '' },
         // {name:'Access-Control-Allow-Credentials', value:'true'}]
@@ -64,6 +63,7 @@ export class TourPhotoAddComponent extends AddComponent<TourPhoto>  {
                 });
             }
         };
+        super.open();
     }
     setTourId(tourId: number): void {
         this.tourId = tourId;

@@ -11,7 +11,7 @@ import { TOURSCHEDULE_FORM_MODEL } from './tourSchedule-form.model';
 @Component({
     selector: 'tourSchedule-add',
     encapsulation: ViewEncapsulation.None,
-    templateUrl: '../../core/form.component.html'
+    templateUrl: 'tourSchedule.form.component.html'
 })
 export class TourScheduleAddComponent extends AddComponent<TourSchedule> {
     @ViewChild('formModal') formModal: ModalDirective;
@@ -26,12 +26,9 @@ export class TourScheduleAddComponent extends AddComponent<TourSchedule> {
     open(): void {
         this.model = new TourSchedule();
         this.model.tourId = this.tourId;
-        this.formModal.show();
+        super.open();
     }
     setTourId(tourId: number): void {
         this.tourId = tourId;
-    }
-    close(): void {
-        this.formModal.hide();
     }
 }

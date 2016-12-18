@@ -8,19 +8,19 @@ import {
 export const TOURSCHEDULE_FORM_MODEL: Array<DynamicFormControlModel> = [
     new DynamicInputModel({
         id: 'quota',
-        inputType: 'number',
+        inputType: 'text',
         label: 'Available Seats',
         placeholder: 'Available Seats',
         required: true
     }),
     new DynamicInputModel({
-        inputType: 'datetime',
+        inputType: 'text',
         id: 'start',
         label: 'Start',
         required: true
     }),
     new DynamicInputModel({
-        inputType: 'datetime',
+        inputType: 'text',
         id: 'end',
         label: 'End',
         required: true
