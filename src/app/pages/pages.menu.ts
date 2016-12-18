@@ -69,6 +69,28 @@ export const PAGES_MENU = [
         ]
       },
       {
+        path: 'specTypes',
+        data: {
+          menu: {
+            title: 'Spec Types',
+            icon: 'fa fa-wrench',
+            selected: false,
+            expanded: false,
+            order: 1
+          }
+        },
+        children: [
+          {
+            path: 'list',
+            data: {
+              menu: {
+                title: 'List',
+              }
+            }
+          }
+        ]
+      },
+      {
         path: 'currencyTypes',
         data: {
           menu: {

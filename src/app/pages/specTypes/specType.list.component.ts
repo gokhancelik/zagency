@@ -17,13 +17,13 @@ export class SpecTypeListComponent extends ListComponent<SpecType> {
                 title: 'Name',
                 type: 'string'
             },
-            symbol: {
-                title: 'Symbol',
+            code: {
+                title: 'Code',
                 type: 'string'
             },
-            lastValue: {
-                title: 'Last Value',
-                type: 'number'
+            group: {
+                title: 'Group',
+                type: 'string'
             }
         });
     }
