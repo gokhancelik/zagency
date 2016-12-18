@@ -5,7 +5,7 @@ import { RouterModule } from '@angular/router';
 import {
     TourTypeService, TourService, TourPhotoService, TourScheduleService,
     CompanyService, TourSchedulePriceService, PriceTypeService, CurrencyTypeService,
-    TourProgramService, TourDestinationService
+    TourProgramService, TourDestinationService, GoogleGeoCodingService
 } from './services/index';
 
 @NgModule({
@@ -20,7 +20,8 @@ export class SharedModule {
             ngModule: SharedModule,
             providers: [TourTypeService, TourService, TourPhotoService,
                 TourScheduleService, CompanyService, TourSchedulePriceService,
-                PriceTypeService, CurrencyTypeService, TourProgramService, TourDestinationService]
+                PriceTypeService, CurrencyTypeService,
+                TourProgramService, TourDestinationService, GoogleGeoCodingService]
         };
     }
 }

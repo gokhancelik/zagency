@@ -18,17 +18,14 @@ export class TourTypeListComponent extends ListComponent<TourType> {
     constructor(service: TourTypeService) {
         super(service);
         this.setColumns({
-           
             name: {
                 title: 'name',
                 type: 'string'
             },
-            longName: {
+            companyId: {
                 title: 'companyId',
                 type: 'number'
             }
-           
-
         });
         this._service = service;
     }

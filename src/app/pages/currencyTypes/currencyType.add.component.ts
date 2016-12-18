@@ -8,7 +8,6 @@ import { CurrencyType } from '../../shared/models/currencyType.model';
 import { CurrencyTypeService } from '../../shared/services/index';
 import { CURRENCY_FORM_MODEL } from './currencyType-form.model';
 import { DynamicFormControlModel, DynamicFormService } from '@ng2-dynamic-forms/core';
-
 @Component({
     selector: 'currencyType-add',
     encapsulation: ViewEncapsulation.None,

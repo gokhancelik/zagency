@@ -8,7 +8,6 @@ import { AddComponent } from '../../core/add.component';
 import { TourType } from '../../shared/models/';
 import { TourTypeService } from '../../shared/services';
 import { DynamicFormControlModel, DynamicFormService } from '@ng2-dynamic-forms/core';
-import { FormGroup } from '@angular/forms';
 @Component({
     selector: 'tourType-add',
     encapsulation: ViewEncapsulation.None,

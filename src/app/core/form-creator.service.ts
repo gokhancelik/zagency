@@ -1,4 +1,7 @@
-import { DynamicFormControlModel, DynamicFormService, DynamicInputModel } from '@ng2-dynamic-forms/core';
+import {
+    DynamicFormControlModel,
+    DynamicFormService, DynamicInputModel
+} from '@ng2-dynamic-forms/core';
 import { FormGroup } from '@angular/forms';
 
 export class FormCreator {

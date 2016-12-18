@@ -1,39 +1,23 @@
-import { Component, OnInit, ViewEncapsulation, ViewChild, Output, EventEmitter } from '@angular/core';
+import {
+    Component, OnInit, ViewEncapsulation,
+    ViewChild, Output, EventEmitter
+} from '@angular/core';
 import { ModalDirective } from 'ng2-bootstrap';
 import { PriceType } from '../../shared/models';
 import { PriceTypeService } from '../../shared/services/index';
+import { AddComponent } from '../../core/add.component';
+import { DynamicFormControlModel, DynamicFormService } from '@ng2-dynamic-forms/core';
+import { PRICETYPE_FORM_MODEL } from './priceType-form.model';
 
 @Component({
     selector: 'priceType-add',
     encapsulation: ViewEncapsulation.None,
-    templateUrl: 'priceType.form.component.html'
+    templateUrl: '../../core/form.component.html'
 })
-export class PriceTypeAddComponent implements OnInit {
-    constructor(private service: PriceTypeService) { }
-    model: PriceType;
-    tourScheduleId: number;
-    errorMessage: any;
-    ngOnInit() {
-    }
+export class PriceTypeAddComponent extends AddComponent<PriceType> {
     @ViewChild('formModal') formModal: ModalDirective;
     @Output() onSaved: EventEmitter<any> = new EventEmitter();
-
-    open(): void {
-        this.model = new PriceType();
-        this.formModal.show();
-    }
-    close(): void {
-        this.formModal.hide();
-    }
-    save() {
-        this.service.add(this.model).subscribe(
-            data => {
-                this.onSaved.emit(this.model);
-                this.formModal.hide();
-            },
-            error => {
-                this.errorMessage = <any>error;
-            }
-        );
+    constructor(service: PriceTypeService, dynamicFormService: DynamicFormService) {
+        super(service, PriceType, dynamicFormService, PRICETYPE_FORM_MODEL);
     }
 }

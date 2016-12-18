@@ -7,7 +7,6 @@ import { TourType } from '../../shared/models';
 import { TourTypeService } from '../../shared/services/index';
 import { EditComponent } from '../../core/index';
 import { DynamicFormControlModel, DynamicFormService } from '@ng2-dynamic-forms/core';
-import { FormGroup } from '@angular/forms';
 import { TOURTYPE_FORM_MODEL } from './tourType-form.model';
 
 @Component({

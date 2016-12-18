@@ -13,24 +13,11 @@
         <button type="button" (click)="search(locationSearchText)" class="btn btn-default">Search Address</button>
         <ul>
           <li *ngFor="let l of locations">
-            <pre>{{l}}</pre>
+            <p>{{l.formatted_address}}</p>
+            <p>{{l.geometry.location.lat}}</p>
+            <p>{{l.geometry.location.lng}}</p>
           </li>
         </ul>
-        <form (ngSubmit)="save()" #form="ngForm">
-          <div class="form-group">
-            <label for="start">Start</label>
-            <datepicker [(ngModel)]="model.start" name="start" [showWeeks]="false"></datepicker>
-          </div>
-          <div class="form-group">
-            <label for="end">End</label>
-            <datepicker [(ngModel)]="model.end" name="end" [minDate]="model.start" [showWeeks]="false"></datepicker>
-          </div>
-          <div class="form-group">
-            <label for="quota">Available Seats</label>
-            <input type="number" name="quota" [(ngModel)]="model.quota" class="form-control" id="quota" placeholder="Enter tour Available Seats">
-          </div>
-          <button type="submit" class="btn btn-default" *ngIf="form.form.dirty" [disabled]="!form.form.valid || submitted">Save Changes</button>
-        </form>
       </div>
       <div class="modal-footer">
         <!--<button class="btn btn-primary confirm-btn" (click)="close()">Save changes</button>-->

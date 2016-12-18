@@ -35,7 +35,7 @@ export abstract class EditComponent<T extends IModel> implements OnInit {
             data => {
                 this.model = data;
                 if (this.myForm)
-                    this.myForm.patchValue(data, true);
+                    this.myForm.patchValue(data);
             }
         );
         this.formModal.show();

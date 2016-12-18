@@ -32,7 +32,7 @@ export class AddComponent<T extends IModel> implements OnInit {
         if (!this.model)
             this.model = new this.modelType();
         if (this.myForm)
-            this.myForm.patchValue(this.model, true);
+            this.myForm.patchValue(this.model);
         this.formModal.show();
     }
     close(): void {

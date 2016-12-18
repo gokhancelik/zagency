@@ -19,7 +19,8 @@ import {
     DynamicFormsBootstrapUIModule
 } from '@ng2-dynamic-forms/ui-bootstrap';
 @NgModule({
-    imports: [routing, RouterModule, DynamicFormsCoreModule, DynamicFormsBootstrapUIModule, ModalModule, CommonModule, FormsModule,
+    imports: [routing, RouterModule, DynamicFormsCoreModule, DynamicFormsBootstrapUIModule,
+        ModalModule, CommonModule, FormsModule,
         CarouselModule, FileUploadModule, ProgressbarModule, DatepickerModule,
         Ng2SmartTableModule, NgaModule, ReactiveFormsModule, FormsModule],
     exports: [TourTypeListComponent],

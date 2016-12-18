@@ -13,15 +13,21 @@ import { NgaModule } from '../../theme/nga.module';
 import * as moment from 'moment';
 import { DropdownModule, ModalModule } from 'ng2-bootstrap/ng2-bootstrap';
 import { NgProgressModule } from 'ng2-progressbar';
-
+import {
+    DynamicFormsCoreModule, DynamicFormService, DynamicFormRelationService
+} from '@ng2-dynamic-forms/core';
+import {
+    DynamicFormsBootstrapUIModule
+} from '@ng2-dynamic-forms/ui-bootstrap';
 //import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
     imports: [routing, FormsModule, ReactiveFormsModule, RouterModule,
         ModalModule, CommonModule, CarouselModule,
+        DynamicFormsCoreModule, DynamicFormsBootstrapUIModule,
         FileUploadModule, ProgressbarModule, DatepickerModule,
         Ng2SmartTableModule, NgProgressModule, NgaModule],
     exports: [PriceTypeAddComponent, PriceTypeEditComponent, PriceTypeListComponent],
     declarations: [PriceTypeAddComponent, PriceTypeEditComponent, PriceTypeListComponent],
-    providers: [],
+    providers: [DynamicFormService, DynamicFormRelationService],
 })
 export default class PriceTypeModule { }

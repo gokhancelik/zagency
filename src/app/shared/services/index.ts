@@ -8,4 +8,5 @@ export * from './tourProgram.service';
 export * from './tourDestination.service';
 export * from './tourSchedulePrice.service';
 export * from './company.service';
+export * from './google.geoCoding.service';
 
