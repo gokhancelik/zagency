@@ -1,8 +1,7 @@
 import { Component, OnInit, Input, ViewEncapsulation, ViewChild } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import { Tour, TourSchedule ,TourType} from '../../shared/models';
-import { TourPhoto } from '../tourPhoto/tourPhoto.model';
+import { Tour, TourSchedule, TourType } from '../../shared/models';
 import {
     TourSchedulePrice,
     TourSchedulePriceAddComponent,
@@ -11,7 +10,7 @@ import {
 import { ModalDirective } from 'ng2-bootstrap';
 import {
     TourTypeService,
-    TourService, TourPhotoService, TourScheduleService, TourSchedulePriceService
+    TourService
 } from '../../shared/services/index';
 
 @Component({
@@ -30,7 +29,6 @@ export class TourEditComponent implements OnInit {
     constructor(
         private tourTypeService: TourTypeService,
         private tourService: TourService,
-        private tourPhotoService: TourPhotoService,
         private router: Router,
         private activetedRoute: ActivatedRoute) {
     }

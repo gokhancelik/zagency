@@ -9,7 +9,6 @@ import {
 } from './index';
 import { TourScheduleService, TourSchedulePriceService } from '../../shared/services/index';
 import { LocalDataSource } from 'ng2-smart-table';
-import { NgProgressService } from "ng2-progressbar";
 import { ListComponent } from '../../core/index';
 
 @Component({
@@ -27,8 +26,7 @@ export class TourSchedulePriceListComponent
     constructor(
         private datePipe: DatePipe,
         private tourScheduleService: TourScheduleService,
-        private tourSchedulePriceService: TourSchedulePriceService,
-        private pService: NgProgressService
+        private tourSchedulePriceService: TourSchedulePriceService
     ) {
         super(tourSchedulePriceService);
         this.setColumns({
@@ -58,24 +56,21 @@ export class TourSchedulePriceListComponent
     }
     getList() {
         this.loading = true;
-        this.pService.start();
         if (this.tourScheduleId) {
             this.tourScheduleService.getTourSchedulePrices(this.tourScheduleId)
                 .subscribe(schedulePrices => {
                     this.source.load(schedulePrices);
                     this.loading = false;
-                    this.pService.done();
                 });
         }
         else {
             this.tourSchedulePriceService.getList().subscribe(schedules => {
                 this.source.load(schedules);
                 this.loading = false;
-                this.pService.done();
             });
         }
     }
-      openModal(id: number) {
+    openModal(id: number) {
         if (id) {
             this.editModal.setId(id);
             this.editModal.open();
@@ -91,6 +86,6 @@ export class TourSchedulePriceListComponent
     }
     onEdit(event): void {
         let tt: TourSchedulePrice = event.data as TourSchedulePrice;
-        this.openModal(tt.tourScheduleId);
+        this.openModal(tt.tourSchedulePriceId);
     }
 }

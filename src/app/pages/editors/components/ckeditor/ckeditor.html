@@ -1,7 +1,4 @@
-<div class="row">
-  <div class="col-md-12">
-    <ba-card title="{{title}}" baCardClass="with-scroll">
-      <ckeditor [(ngModel)]="ckeditorContent" [config]="config"></ckeditor>
-    </ba-card>
-  </div>
+<div class="form-group">
+  <label>{{title}}</label>
+  <ckeditor [(ngModel)]="ckeditorContent" [config]="config"></ckeditor>
 </div>

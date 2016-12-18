@@ -28,8 +28,8 @@ export class TourScheduleListComponent extends ListComponent<TourSchedule> {
                 title: 'Start',
                 type: 'Date',
                 valuePrepareFunction: (value) => {
-                    var raw = new Date(value);
-                    var formatted = this.datePipe.transform(raw, 'dd.MM.yyyy');
+                    let raw = new Date(value);
+                    let formatted = this.datePipe.transform(raw, 'dd.MM.yyyy');
                     return formatted;
                 }
             },
@@ -37,8 +37,8 @@ export class TourScheduleListComponent extends ListComponent<TourSchedule> {
                 title: 'End',
                 type: 'Date',
                 valuePrepareFunction: (value) => {
-                    var raw = new Date(value);
-                    var formatted = this.datePipe.transform(raw, 'dd.MM.yyyy');
+                    let raw = new Date(value);
+                    let formatted = this.datePipe.transform(raw, 'dd.MM.yyyy');
                     return formatted;
                 }
             },

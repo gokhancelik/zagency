@@ -24,6 +24,9 @@ export abstract class EditComponent<T extends IModel> implements OnInit {
     ngOnInit() {
     }
     open(): void {
+        if (this.myForm) {
+            this.myForm.reset();
+        }
         if (this.formProperties) {
             this.myForm = this.formCreator.createForm(this.formProperties);
             this.dynamicFormModel = this.formCreator.createFormModel(this.formProperties);
@@ -43,10 +46,17 @@ export abstract class EditComponent<T extends IModel> implements OnInit {
     close(): void {
         this.formModal.hide();
     }
-    save({ value, valid }: { value: T, valid: boolean }) {
-        Object.keys(value).forEach(name => {
-            this.model[name] = value[name];
-        });
+    save(form) {
+        if (form) {
+            if (form.value) {
+                if (!form.valid) {
+                    return;
+                }
+                Object.keys(form.value).forEach(name => {
+                    this.model[name] = form.value[name];
+                });
+            }
+        }
         this.service.update(this.model, this.model.id).subscribe(
             data => {
                 this.onSaved.emit(data);
