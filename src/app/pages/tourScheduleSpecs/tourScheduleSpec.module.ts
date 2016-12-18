@@ -21,7 +21,8 @@ import {
         DynamicFormsBootstrapUIModule, FormsModule,
         ReactiveFormsModule,
         Ng2SmartTableModule, NgaModule, ModalModule, DropdownModule],
-    exports: [],
+    exports: [TourScheduleSpecListComponent, 
+        TourScheduleSpecEditComponent, TourScheduleSpecAddComponent],
     declarations: [TourScheduleSpecListComponent, TourScheduleSpecComponent,
         TourScheduleSpecEditComponent, TourScheduleSpecAddComponent
     ],

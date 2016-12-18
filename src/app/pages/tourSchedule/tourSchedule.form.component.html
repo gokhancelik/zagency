@@ -8,14 +8,6 @@
         <h4 class="modal-title">{{title}}</h4>
       </div>
       <div class="modal-body">
-        <input type="text" name="locationSearch" [(ngModel)]="locationSearchText" id="locationSearch" class="form-control" value=""
-          required="required" pattern="" title="">
-        <button type="button" (click)="search(locationSearchText)" class="btn btn-default">Search Address</button>
-        <ul>
-          <li *ngFor="let l of locations">
-            <pre>{{l}}</pre>
-          </li>
-        </ul>
         <form (ngSubmit)="save()" #form="ngForm">
           <div class="form-group">
             <label for="start">Start</label>

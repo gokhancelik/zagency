@@ -1,7 +1,8 @@
+import { IModel } from '../../core/IModel';
 /**
  export * TourSchedule
  */
-export class TourSchedule {
+export class TourSchedule implements IModel {
     id: number;
     tourScheduleId: number;
     start: Date;

@@ -6,7 +6,7 @@ import {
     TourTypeService, TourService, TourPhotoService, TourScheduleService,
     CompanyService, TourSchedulePriceService, PriceTypeService, CurrencyTypeService,
     TourProgramService, TourDestinationService, GoogleGeoCodingService,
-    CompanySpecService, TourScheduleSpecService, SpecTypeService
+    CompanySpecService, TourScheduleSpecService, SpecTypeService, PhotoLocationService
 } from './services/index';
 
 @NgModule({
@@ -19,7 +19,7 @@ export class SharedModule {
     static forRoot(): ModuleWithProviders {
         return {
             ngModule: SharedModule,
-            providers: [TourTypeService, TourService, TourPhotoService,
+            providers: [TourTypeService, TourService, TourPhotoService, PhotoLocationService,
                 TourScheduleService, CompanyService, TourSchedulePriceService, SpecTypeService,
                 PriceTypeService, CurrencyTypeService, CompanySpecService, TourScheduleSpecService,
                 TourProgramService, TourDestinationService, GoogleGeoCodingService]

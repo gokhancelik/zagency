@@ -1,7 +1,5 @@
-/**
- export * TourSchedule
- */
-export class SpecType {
+import { IModel } from '../../core/IModel';
+export class SpecType implements IModel {
     id: number;
     name: string;
     code: string;

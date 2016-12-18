@@ -11,6 +11,7 @@ import TourScheduleModule from '../tourSchedule/tourSchedule.module';
 import TourProgramModule from '../tourPrograms/tourProgram.module';
 import TourPhotoModule from '../tourPhotos/tourPhoto.module';
 import TourSchedulePriceModule from '../tourSchedulePrice/tourSchedulePrice.module';
+import TourScheduleSpecModule from '../tourScheduleSpecs/tourScheduleSpec.module';
 import TourDestinationModule from '../tourDestinations/tourDestination.module';
 import EditorsModule from '../editors/editors.module';
 import { FileUploadModule } from 'ng2-file-upload/ng2-file-upload';
@@ -24,14 +25,15 @@ import {
     DynamicFormsBootstrapUIModule
 } from '@ng2-dynamic-forms/ui-bootstrap';
 @NgModule({
-    imports: [routing,DynamicFormsCoreModule,ReactiveFormsModule,DynamicFormsBootstrapUIModule, RouterModule, TourScheduleModule, TourSchedulePriceModule,
+    imports: [routing, DynamicFormsCoreModule, ReactiveFormsModule,
+        DynamicFormsBootstrapUIModule, RouterModule, TourScheduleModule, TourSchedulePriceModule,
         TourProgramModule, TourPhotoModule, TourDestinationModule,
-        CommonModule, EditorsModule,
+        CommonModule, EditorsModule, TourScheduleSpecModule,
         FormsModule, CarouselModule, FileUploadModule,
         ProgressbarModule, DatepickerModule, Ng2SmartTableModule, NgaModule],
     exports: [],
     declarations: [TourListComponent, DraftsComponent,
         TourComponent, TourEditComponent, TourAddComponent],
-    providers: [DatePipe,DynamicFormService,DynamicFormRelationService],
+    providers: [DatePipe, DynamicFormService, DynamicFormRelationService],
 })
 export default class TourModule { }

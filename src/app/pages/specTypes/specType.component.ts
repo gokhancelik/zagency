@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
     moduleId: module.id,
-    selector: 'currencyType-cmp',
+    selector: 'specType-cmp',
     template: '<router-outlet></router-outlet>'
 })
 export class SpecTypeComponent implements OnInit {

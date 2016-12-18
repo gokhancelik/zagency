@@ -38,10 +38,17 @@ export class AddComponent<T extends IModel> implements OnInit {
     close(): void {
         this.formModal.hide();
     }
-    save({ value, valid }: { value: T, valid: boolean }) {
-        Object.keys(value).forEach(name => {
-            this.model[name] = value[name];
-        });
+    save(form) {
+        if (form) {
+            if (form.value) {
+                if (!form.valid) {
+                    return;
+                }
+                Object.keys(form.value).forEach(name => {
+                    this.model[name] = form.value[name];
+                });
+            }
+        }
         this.service.add(this.model).subscribe(
             data => {
                 this.onSaved.emit(data);

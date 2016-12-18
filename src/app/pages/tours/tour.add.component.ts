@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, ViewEncapsulation, ViewChild } from '@angular/core';
 import { DatePipe } from '@angular/common';
-import { Tour, TourSchedule,TourType } from '../../shared/models';
+import { Tour, TourSchedule, TourType } from '../../shared/models';
 import { TourPhoto } from '../tourPhoto/tourPhoto.model';
 import {
     TourSchedulePrice,

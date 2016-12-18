@@ -89,12 +89,56 @@ export const PAGES_MENU = [
             }
           }
         ]
-      }, 
+      },
+      {
+        path: 'photoLocationTypes',
+        data: {
+          menu: {
+            title: 'Photo Locations',
+            icon: 'fa fa-img',
+            selected: false,
+            expanded: false,
+            order: 1
+          }
+        },
+        children: [
+          {
+            path: 'list',
+            data: {
+              menu: {
+                title: 'List',
+              }
+            }
+          }
+        ]
+      },
       {
         path: 'companySpecs',
         data: {
           menu: {
             title: 'Company Specs',
+            icon: 'fa fa-info',
+            selected: false,
+            expanded: false,
+            order: 1
+          }
+        },
+        children: [
+          {
+            path: 'list',
+            data: {
+              menu: {
+                title: 'List',
+              }
+            }
+          }
+        ]
+      },
+      {
+        path: 'tourScheduleSpecs',
+        data: {
+          menu: {
+            title: 'Tour Schedule Specs',
             icon: 'fa fa-info',
             selected: false,
             expanded: false,

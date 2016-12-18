@@ -31,5 +31,4 @@ export class TourScheduleAddComponent extends AddComponent<TourSchedule> {
     setTourId(tourId: number): void {
         this.tourId = tourId;
     }
-    
 }

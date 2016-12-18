@@ -52,7 +52,7 @@ export class TourPhotoAddComponent extends AddComponent<TourPhoto>  {
                 tp.photoPath = r.photos[i].url;
                 tp.name = r.photos[i].name;
                 tp.tourId = this.model.tourId;
-                tp.photoLocationTypeId = 3; // TODO: dynamic yap
+                tp.photoLocationTypeId = 1; // TODO: dynamic yap
                 this._service.add(tp).subscribe(data => {
                     savedCount++;
                     tpList.push(data);

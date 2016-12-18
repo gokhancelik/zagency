@@ -47,8 +47,16 @@ const routes: Routes = [
         loadChildren: () => System.import('./companySpecs/companySpec.module')
       },
       {
+        path: 'tourScheduleSpecs',
+        loadChildren: () => System.import('./tourScheduleSpecs/tourScheduleSpec.module')
+      },
+      {
         path: 'currencyTypes',
         loadChildren: () => System.import('./currencyTypes/currencyType.module')
+      },
+      {
+        path: 'photoLocationTypes',
+        loadChildren: () => System.import('./photoLocationTypes/photoLocation.module')
       }
     ]
   }
