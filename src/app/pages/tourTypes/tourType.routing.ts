@@ -1,6 +1,6 @@
 import { Route, RouterModule } from '@angular/router';
 
-import { TourTypeListComponent, TourTypeComponent, TourTypeAddComponent } from './index';
+import { TourTypeListComponent, TourTypeComponent } from './index';
 
 export const TourTypeRoutes: Route[] = [
 	{
@@ -10,11 +10,8 @@ export const TourTypeRoutes: Route[] = [
 			{
 				path: 'list',
 				component: TourTypeListComponent
-			},
-			{
-				path: 'new',
-				component: TourTypeAddComponent
 			}
+			
 		]
 	}
 ];

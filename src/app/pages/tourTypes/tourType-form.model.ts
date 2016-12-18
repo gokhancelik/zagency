@@ -16,10 +16,11 @@ export const TOURTYPE_FORM_MODEL: Array<DynamicFormControlModel> = [
     }),
     new DynamicInputModel({
 
-        id: 'companyid',
-        label: 'Company Id ',
+        id: 'companyName',
+        label: 'Company Name',
         maxLength: 150,
-        placeholder: 'Company Id',
+        placeholder: 'Company Name',
         required: true
     }),
 ];
+
