@@ -10,7 +10,7 @@ export class TourSchedule {
             this.end = new Date(ts.end);
             this.quota = ts.quota;
             this.isdeleted = ts.isdeleted;
-            this.tourId = ts.tourId;
+            this.productBaseId = ts.productBaseId;
         }
     }
     id: number;
@@ -18,6 +18,6 @@ export class TourSchedule {
     start: Date;
     end: Date;
     isdeleted: boolean;
-    tourId: number;
+    productBaseId: number;
     quota:number;
 }

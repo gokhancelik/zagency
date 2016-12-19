@@ -27,8 +27,12 @@ const routes: Routes = [
         loadChildren: () => System.import('./tours/tour.module')
       },
       {
-        path: 'tourTypes',
-        loadChildren: () => System.import('./tourTypes/tourType.module')
+        path: 'productTypes',
+        loadChildren: () => System.import('./productTypes/productType.module')
+      },
+      {
+        path: 'productTypeCategories',
+        loadChildren: () => System.import('./productTypeCategories/productTypeCategory.module')
       },
        {
         path: 'companies',

@@ -17,7 +17,7 @@ import { TOURPROGRAM_FORM_MODEL } from './tourProgram-form.model';
 })
 export class TourProgramAddComponent extends AddComponent<TourProgram>  {
     _service: TourProgramService;
-    tourId: number;
+    productBaseId: number;
     myDynamicFormModel: Array<DynamicFormControlModel> = TOURPROGRAM_FORM_MODEL;
     @ViewChild('formModal') formModal: ModalDirective;
     @Output() onSaved: EventEmitter<any> = new EventEmitter();
@@ -27,11 +27,11 @@ export class TourProgramAddComponent extends AddComponent<TourProgram>  {
     }
     open(): void {
         this.model = new TourProgram();
-        this.model.tourId = this.tourId;
+        this.model.productBaseId = this.productBaseId;
         super.open();
 
     }
-    setTourId(tourId: number): void {
-        this.tourId = tourId;
+    setproductBaseId(productBaseId: number): void {
+        this.productBaseId = productBaseId;
     }
 }

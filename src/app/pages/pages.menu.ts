@@ -25,14 +25,36 @@ export const PAGES_MENU = [
         ]
       },
       {
-        path: 'tourTypes',
+        path: 'productTypes',
         data: {
           menu: {
             title: 'Tour Types',
             icon: 'fa fa-map-signs',
             selected: false,
             expanded: false,
-            order: 1
+            order: 2
+          }
+        },
+        children: [
+          {
+            path: 'list',
+            data: {
+              menu: {
+                title: 'List',
+              }
+            }
+          }
+        ]
+      },
+      {
+        path: 'productTypeCategories',
+        data: {
+          menu: {
+            title: 'Prod. Type Catgs',
+            icon: 'fa fa-map-wrench',
+            selected: false,
+            expanded: false,
+            order: 3
           }
         },
         children: [
@@ -54,7 +76,7 @@ export const PAGES_MENU = [
             icon: 'fa fa-try',
             selected: false,
             expanded: false,
-            order: 1
+            order: 4
           }
         },
         children: [
@@ -76,7 +98,7 @@ export const PAGES_MENU = [
             icon: 'fa fa-wrench',
             selected: false,
             expanded: false,
-            order: 1
+            order: 5
           }
         },
         children: [
@@ -98,7 +120,7 @@ export const PAGES_MENU = [
             icon: 'fa fa-img',
             selected: false,
             expanded: false,
-            order: 1
+            order: 6
           }
         },
         children: [
@@ -120,7 +142,7 @@ export const PAGES_MENU = [
             icon: 'fa fa-info',
             selected: false,
             expanded: false,
-            order: 1
+            order: 7
           }
         },
         children: [
@@ -142,7 +164,7 @@ export const PAGES_MENU = [
             icon: 'fa fa-info',
             selected: false,
             expanded: false,
-            order: 1
+            order: 8
           }
         },
         children: [
@@ -164,7 +186,7 @@ export const PAGES_MENU = [
             icon: 'fa fa-try',
             selected: false,
             expanded: false,
-            order: 1
+            order: 9
           }
         },
         children: [
@@ -186,7 +208,7 @@ export const PAGES_MENU = [
             icon: 'fa fa-building',
             selected: false,
             expanded: false,
-            order: 1
+            order: 10
           }
         },
         children: [
@@ -208,7 +230,7 @@ export const PAGES_MENU = [
             icon: 'ion-android-home',
             selected: false,
             expanded: false,
-            order: 2
+            order: 11
           }
         }
       },

@@ -3,10 +3,11 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import {
-    TourTypeService, TourService, TourPhotoService, TourScheduleService,
+    ProductTypeService, TourService, ProductPhotoService, TourScheduleService,
     CompanyService, TourSchedulePriceService, PriceTypeService, CurrencyTypeService,
     TourProgramService, TourDestinationService, GoogleGeoCodingService,
-    CompanySpecService, TourScheduleSpecService, SpecTypeService, PhotoLocationService
+    CompanySpecService, TourScheduleSpecService, SpecTypeService, PhotoLocationService,
+    ProductTypeCategoryService, ProductService
 } from './services/index';
 
 @NgModule({
@@ -19,10 +20,11 @@ export class SharedModule {
     static forRoot(): ModuleWithProviders {
         return {
             ngModule: SharedModule,
-            providers: [TourTypeService, TourService, TourPhotoService, PhotoLocationService,
+            providers: [ProductTypeService, TourService, ProductPhotoService, PhotoLocationService,
                 TourScheduleService, CompanyService, TourSchedulePriceService, SpecTypeService,
                 PriceTypeService, CurrencyTypeService, CompanySpecService, TourScheduleSpecService,
-                TourProgramService, TourDestinationService, GoogleGeoCodingService]
+                TourProgramService, TourDestinationService, GoogleGeoCodingService,
+                ProductTypeCategoryService, ProductService]
         };
     }
 }

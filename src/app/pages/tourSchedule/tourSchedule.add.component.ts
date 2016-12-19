@@ -17,7 +17,7 @@ export class TourScheduleAddComponent extends AddComponent<TourSchedule> {
     @ViewChild('formModal') formModal: ModalDirective;
     @Output() onSaved: EventEmitter<any> = new EventEmitter();
     model: TourSchedule;
-    tourId: number;
+    productBaseId: number;
     private _service: TourScheduleService;
     constructor(service: TourScheduleService, dynamicFormService: DynamicFormService) {
         super(service, TourSchedule, dynamicFormService, TOURSCHEDULE_FORM_MODEL);
@@ -25,10 +25,10 @@ export class TourScheduleAddComponent extends AddComponent<TourSchedule> {
     }
     open(): void {
         this.model = new TourSchedule();
-        this.model.tourId = this.tourId;
+        this.model.productBaseId = this.productBaseId;
         super.open();
     }
-    setTourId(tourId: number): void {
-        this.tourId = tourId;
+    setproductBaseId(productBaseId: number): void {
+        this.productBaseId = productBaseId;
     }
 }

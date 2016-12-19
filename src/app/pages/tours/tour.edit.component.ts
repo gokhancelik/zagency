@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, ViewEncapsulation, ViewChild } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import { Tour, TourSchedule, TourType } from '../../shared/models';
+import { Tour, TourSchedule, ProductType } from '../../shared/models';
 import {
     TourSchedulePrice,
     TourSchedulePriceAddComponent,
@@ -9,7 +9,7 @@ import {
 } from '../tourSchedulePrice/index';
 import { ModalDirective } from 'ng2-bootstrap';
 import {
-    TourTypeService,
+    ProductTypeService,
     TourService
 } from '../../shared/services/index';
 
@@ -21,21 +21,27 @@ import {
 export class TourEditComponent implements OnInit {
 
     @Input() model: Tour;
-    tourTypes: TourType[];
+    productTypes: ProductType[];
     submitted: boolean;
     errorMessage: string;
     isNew: boolean = true;
     selectedTourScheduleId: number = 0;
     constructor(
-        private tourTypeService: TourTypeService,
+        private productTypeService: ProductTypeService,
         private tourService: TourService,
         private router: Router,
         private activetedRoute: ActivatedRoute) {
     }
     ngOnInit() {
+        this.getTour();
+        this.productTypeService.getList().subscribe(
+            data => this.productTypes = data,
+            error => this.errorMessage = <any>error);
+    }
+    getTour() {
         this.activetedRoute.params.forEach((params: Params) => {
-            let tourId = params['id'];
-            this.tourService.getById(tourId)
+            let productBaseId = params['id'];
+            this.tourService.getById(productBaseId)
                 .subscribe(
                 editTour => {
                     this.model = editTour;
@@ -44,9 +50,6 @@ export class TourEditComponent implements OnInit {
                     this.errorMessage = err;
                 });
         });
-        this.tourTypeService.getList().subscribe(
-            data => this.tourTypes = data,
-            error => this.errorMessage = <any>error);
     }
     saveTour() {
         this.submitted = true;
@@ -65,5 +68,10 @@ export class TourEditComponent implements OnInit {
         let tt: TourSchedule = data as TourSchedule;
         if (tt)
             this.selectedTourScheduleId = tt.tourScheduleId;
+    }
+    publish(): void {
+        this.tourService.publish(this.model, this.model.productBaseId).subscribe(data => {
+            this.getTour();
+        });
     }
 }

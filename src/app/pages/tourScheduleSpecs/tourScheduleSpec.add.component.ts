@@ -17,7 +17,7 @@ import { FormGroup } from '@angular/forms';
 })
 export class TourScheduleSpecAddComponent extends AddComponent<TourScheduleSpec>  {
     _service: TourScheduleSpecService;
-    tourId: number;
+    productBaseId: number;
     tourScheduleId: number;
     myDynamicFormModel: Array<DynamicFormControlModel> = TOURSCHEDULESPEC_FORM_MODEL;
     @ViewChild('formModal') formModal: ModalDirective;

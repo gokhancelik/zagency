@@ -16,7 +16,7 @@ import { DynamicFormControlModel, DynamicFormService } from '@ng2-dynamic-forms/
 
 export class SpecTypeAddComponent extends AddComponent<SpecType>  {
     _service: SpecTypeService;
-    tourId: number;
+    productBaseId: number;
     myDynamicFormModel: Array<DynamicFormControlModel> = SPECTYPE_FORM_MODEL;
     @ViewChild('formModal') formModal: ModalDirective;
     @Output() onSaved: EventEmitter<any> = new EventEmitter();

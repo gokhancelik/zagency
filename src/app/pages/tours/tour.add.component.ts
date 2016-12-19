@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, ViewEncapsulation, ViewChild } from '@angular/core';
 import { DatePipe } from '@angular/common';
-import { Tour, TourSchedule, TourType } from '../../shared/models';
-import { TourPhoto } from '../tourPhoto/tourPhoto.model';
+import { Tour, TourSchedule, ProductType } from '../../shared/models';
+import { ProductPhoto } from '../productPhoto/productPhoto.model';
 import {
     TourSchedulePrice,
     TourSchedulePriceAddComponent,
@@ -9,7 +9,7 @@ import {
 } from '../tourSchedulePrice/index';
 import { ModalDirective } from 'ng2-bootstrap';
 import {
-    TourTypeService,
+    ProductTypeService,
     TourService
 } from '../../shared/services';
 
@@ -20,19 +20,19 @@ import {
 })
 export class TourAddComponent implements OnInit {
     model: Tour = new Tour();
-    tourTypes: TourType[];
+    productTypes: ProductType[];
     submitted: boolean;
     errorMessage: string;
     isNew: boolean = true;
     selectedTourScheduleId: number = 0;
     constructor(
-        private tourTypeService: TourTypeService,
+        private productTypeService: ProductTypeService,
         private tourService: TourService
     ) {
     }
     ngOnInit() {
-        this.tourTypeService.getList().subscribe(
-            data => this.tourTypes = data,
+        this.productTypeService.getList().subscribe(
+            data => this.productTypes = data,
             error => this.errorMessage = <any>error);
     }
     saveTour() {

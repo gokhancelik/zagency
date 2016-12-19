@@ -4,6 +4,7 @@
       <div class="row">
         <div class="col-sm-12">
           <ba-card title="Tour Info" baCardClass="with-scroll">
+            <button type="button" class="btn btn-success" (click)="publish(model)" [ngClass]="{'btn-success': model.isTemp, 'btn-danger': !model.isTemp}">{{model.isTemp?'Publish':'Remove'}}</button>
             <form (ngSubmit)="saveTour()" #tourForm="ngForm">
               <div class="form-group">
                 <label for="name">Name</label>
@@ -13,9 +14,9 @@
                 <ckeditor-component [(ckeditorContent)]="model.description" [title]="'General Information About Tour'"></ckeditor-component>
               </div>
               <div class="form-group">
-                <label for="tourType">Tour Type</label>
-                <select name="tourType" class="form-control" id="tourType" [(ngModel)]="model.tourTypeId">
-                                <option *ngFor="let tourType of tourTypes" [value]="tourType.tourTypeId">{{tourType.name}}</option>
+                <label for="productType">Tour Type</label>
+                <select name="productType" class="form-control" id="productType" [(ngModel)]="model.productTypeId">
+                                <option *ngFor="let productType of productTypes" [value]="productType.productTypeId">{{productType.name}}</option>
                             </select>
               </div>
               <button type="submit" class="btn btn-default" *ngIf="tourForm.form.dirty" [disabled]="!tourForm.form.valid || submitted">Save Changes</button>
@@ -25,12 +26,12 @@
       </div>
       <div class="row">
         <div class="col-sm-12">
-          <tourPhoto-list [tourId]="model.tourId" *ngIf="model && model.tourId"></tourPhoto-list>
+          <productPhoto-list [productBaseId]="model.productBaseId" *ngIf="model && model.productBaseId"></productPhoto-list>
         </div>
       </div>
       <div class="row">
         <div class="col-sm-12 col-md-6">
-          <tourSchedule-list [tourId]="model.tourId" (onRowSelectionChanged)="onTsRowSelectionChanged($event)" *ngIf="model && model.tourId"></tourSchedule-list>
+          <tourSchedule-list [productBaseId]="model.productBaseId" (onRowSelectionChanged)="onTsRowSelectionChanged($event)" *ngIf="model && model.productBaseId"></tourSchedule-list>
         </div>
         <div class="col-sm-12 col-md-6">
           <tourSchedulePrice-list [tourScheduleId]="selectedTourScheduleId" *ngIf="selectedTourScheduleId"></tourSchedulePrice-list>
@@ -43,12 +44,12 @@
       </div>
       <div class="row">
         <div class="col-sm-12">
-          <tourDestination-list [tourId]="model.tourId" *ngIf="model && model.tourId"></tourDestination-list>
+          <tourDestination-list [productBaseId]="model.productBaseId" *ngIf="model && model.productBaseId"></tourDestination-list>
         </div>
       </div>
       <div class="row">
         <div class="col-sm-12">
-          <tourProgram-list [tourId]="model.tourId" *ngIf="model && model.tourId"></tourProgram-list>
+          <tourProgram-list [productBaseId]="model.productBaseId" *ngIf="model && model.productBaseId"></tourProgram-list>
         </div>
       </div>
     </div>

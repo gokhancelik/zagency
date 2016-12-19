@@ -1,0 +1,5 @@
+export * from './productTypeCategory.add.component'
+export * from './productTypeCategory.edit.component'
+export * from './productTypeCategory.list.component'
+export * from './productTypeCategory.routing'
+export * from './productTypeCategory.component'

@@ -17,7 +17,7 @@ import { FormGroup } from '@angular/forms';
 })
 export class CompanySpecAddComponent extends AddComponent<CompanySpec>  {
     _service: CompanySpecService;
-    tourId: number;
+    productBaseId: number;
     myDynamicFormModel: Array<DynamicFormControlModel> = COMPANYSPEC_FORM_MODEL;
     @ViewChild('formModal') formModal: ModalDirective;
     @Output() onSaved: EventEmitter<any> = new EventEmitter();

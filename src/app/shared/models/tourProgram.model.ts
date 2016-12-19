@@ -5,5 +5,5 @@ export class TourProgram implements IModel {
     description: string;
     day: string;
     isdeleted: boolean;
-    tourId: number;
+    productBaseId: number;
 }

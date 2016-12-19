@@ -13,7 +13,7 @@ import { TourDestination } from '../../shared/models/tourDestination.model';
 export class TourDestinationListComponent extends ListComponent<TourDestination> {
     @ViewChild('addModal') addModal: TourDestinationAddComponent;
     @ViewChild('editModal') editModal: TourDestinationEditComponent;
-    @Input() tourId: number = 0;
+    @Input() productBaseId: number = 0;
     title: string = 'Tour Destinations';
     _service: TourDestinationService;
     constructor(
@@ -39,8 +39,8 @@ export class TourDestinationListComponent extends ListComponent<TourDestination>
     }
 
     getList() {
-        if (this.tourId) {
-            this.tourService.getTourDestinations(this.tourId).subscribe(schedules => {
+        if (this.productBaseId) {
+            this.tourService.getTourDestinations(this.productBaseId).subscribe(schedules => {
                 this.source.load(schedules);
             });
         }
@@ -56,7 +56,7 @@ export class TourDestinationListComponent extends ListComponent<TourDestination>
             this.editModal.open();
         }
         else {
-            this.addModal.setTourId(this.tourId);
+            this.addModal.setproductBaseId(this.productBaseId);
             this.addModal.open();
         }
     }

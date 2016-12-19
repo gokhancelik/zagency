@@ -13,7 +13,7 @@ import { TourProgram } from '../../shared/models/tourProgram.model';
 export class TourProgramListComponent extends ListComponent<TourProgram> {
     @ViewChild('addModal') addModal: TourProgramAddComponent;
     @ViewChild('editModal') editModal: TourProgramEditComponent;
-    @Input() tourId: number = 0;
+    @Input() productBaseId: number = 0;
     title: string = 'Tour Programs';
     _service: TourProgramService;
     constructor(
@@ -35,8 +35,8 @@ export class TourProgramListComponent extends ListComponent<TourProgram> {
     }
 
     getList() {
-        if (this.tourId) {
-            this.tourService.getTourPrograms(this.tourId).subscribe(schedules => {
+        if (this.productBaseId) {
+            this.tourService.getTourPrograms(this.productBaseId).subscribe(schedules => {
                 this.source.load(schedules);
             });
         }
@@ -52,7 +52,7 @@ export class TourProgramListComponent extends ListComponent<TourProgram> {
             this.editModal.open();
         }
         else {
-            this.addModal.setTourId(this.tourId);
+            this.addModal.setproductBaseId(this.productBaseId);
             this.addModal.open();
         }
     }

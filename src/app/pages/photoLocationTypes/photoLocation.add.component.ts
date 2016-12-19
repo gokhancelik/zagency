@@ -16,7 +16,7 @@ import { DynamicFormControlModel, DynamicFormService } from '@ng2-dynamic-forms/
 
 export class PhotoLocationAddComponent extends AddComponent<PhotoLocation>  {
     _service: PhotoLocationService;
-    tourId: number;
+    productBaseId: number;
     myDynamicFormModel: Array<DynamicFormControlModel> = PHOTOLOCATION_FORM_MODEL;
     @ViewChild('formModal') formModal: ModalDirective;
     @Output() onSaved: EventEmitter<any> = new EventEmitter();

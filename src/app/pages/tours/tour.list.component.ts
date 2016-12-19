@@ -49,7 +49,7 @@ export class TourListComponent implements OnInit {
     onDelete(event): void {
         if (window.confirm('Are you sure you want to delete?')) {
             let tt: Tour = event.data as Tour;
-            this.tourService.delete(tt.tourId).subscribe(
+            this.tourService.delete(tt.productBaseId).subscribe(
                 data => this.getList(),
                 error => alert(error));
         } else {
@@ -62,6 +62,6 @@ export class TourListComponent implements OnInit {
     }
     onEdit(event): void {
         let tt: Tour = event.data as Tour;
-        this.router.navigate(['pages/tours/edit/' + tt.tourId]);
+        this.router.navigate(['pages/tours/edit/' + tt.productBaseId]);
     }
 }

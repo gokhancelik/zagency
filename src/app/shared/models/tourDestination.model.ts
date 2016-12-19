@@ -6,7 +6,7 @@ export class TourDestination implements IModel {
     latitude: number;
     longitude: number;
     isDeleted: boolean;
-    tourId: number;
+    productBaseId: number;
     constructor(data: any = null) {
         if (data) {
             this.id = data.id;
@@ -15,7 +15,7 @@ export class TourDestination implements IModel {
             this.latitude = data.latitude;
             this.longitude = data.longitude;
             this.isDeleted = data.isDeleted;
-            this.tourId = data.tourId;
+            this.productBaseId = data.productBaseId;
         }
         else {
             this.id = 0;
@@ -24,7 +24,7 @@ export class TourDestination implements IModel {
             this.latitude = 0;
             this.longitude = 0;
             this.isDeleted = false;
-            this.tourId = 0;
+            this.productBaseId = 0;
         }
     }
 }

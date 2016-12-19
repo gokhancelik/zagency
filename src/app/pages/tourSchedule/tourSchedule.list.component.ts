@@ -13,7 +13,7 @@ import { ListComponent } from '../../core/index';
 export class TourScheduleListComponent extends ListComponent<TourSchedule> {
     @ViewChild('addModal') addModal: TourScheduleAddComponent;
     @ViewChild('editModal') editModal: TourScheduleEditComponent;
-    @Input() tourId: number = 0;
+    @Input() productBaseId: number = 0;
     @Output() onRowSelectionChanged: EventEmitter<any> = new EventEmitter();
     source: LocalDataSource = new LocalDataSource();
 
@@ -49,8 +49,8 @@ export class TourScheduleListComponent extends ListComponent<TourSchedule> {
         });
     }
     getList() {
-        if (this.tourId) {
-            this.tourService.getTourSchedules(this.tourId).subscribe(schedules => {
+        if (this.productBaseId) {
+            this.tourService.getTourSchedules(this.productBaseId).subscribe(schedules => {
                 this.source.load(schedules);
             });
         }
@@ -66,7 +66,7 @@ export class TourScheduleListComponent extends ListComponent<TourSchedule> {
             this.editModal.open();
         }
         else {
-            this.addModal.setTourId(this.tourId);
+            this.addModal.setproductBaseId(this.productBaseId);
             this.addModal.open();
         }
     }

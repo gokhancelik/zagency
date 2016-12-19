@@ -3,7 +3,7 @@ import { Http, Response, RequestOptions, Headers } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import { Injectable } from '@angular/core';
-import { TourProgram, TourPhoto, Tour, TourSchedule, TourDestination } from '../models';
+import { TourProgram, ProductPhoto, Tour, TourSchedule, TourDestination } from '../models';
 import { IService } from './IService.service';
 import { BaseService } from '../../../app/core/index';
 
@@ -15,8 +15,8 @@ export class TourService extends BaseService<Tour> {
         super(http, 'http://zagency.azurewebsites.net/api/v0.1/Tours');
         this._http = http;
     }
-    getTourSchedules(tourId: number): Observable<TourSchedule[]> {
-        return this._http.get(this.API_URL + '/' + tourId + '/tourschedules')
+    getTourSchedules(productBaseId: number): Observable<TourSchedule[]> {
+        return this._http.get(this.API_URL + '/' + productBaseId + '/tourschedules')
             .map(res => {
                 let data = res.json();
                 let list: Array<TourSchedule> = new Array<TourSchedule>();
@@ -33,28 +33,28 @@ export class TourService extends BaseService<Tour> {
     publish(data: Tour, id: number): Observable<Tour> {
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
-        return this._http.put(this.API_URL + '/publish/' + id, data, options)
+        return this._http.post(this.API_URL + '/publish/' + id, data, options)
             .map(this.extractData)
             .catch(this.handleError);
     }
-    getTourPrograms(tourId: number): Observable<TourProgram[]> {
-        return this._http.get(this.API_URL + '/' + tourId + '/TourPrograms')
+    getTourPrograms(productBaseId: number): Observable<TourProgram[]> {
+        return this._http.get(this.API_URL + '/' + productBaseId + '/TourPrograms')
             .map(res => {
                 let data = res.json();
                 return data || {};
             })
             .catch(this.handleError);
     }
-    getTourPhotos(tourId: number): Observable<TourPhoto[]> {
-        return this._http.get(this.API_URL + '/' + tourId + '/TourPhotos')
+    getProductPhotos(productBaseId: number): Observable<ProductPhoto[]> {
+        return this._http.get(this.API_URL + '/' + productBaseId + '/ProductPhotos')
             .map(res => {
                 let data = res.json();
                 return data || {};
             })
             .catch(this.handleError);
     }
-    getTourDestinations(tourId: number): Observable<TourDestination[]> {
-        return this._http.get(this.API_URL + '/' + tourId + '/TourDestinations')
+    getTourDestinations(productBaseId: number): Observable<TourDestination[]> {
+        return this._http.get(this.API_URL + '/' + productBaseId + '/TourDestinations')
             .map(res => {
                 let data = res.json();
                 return data || {};

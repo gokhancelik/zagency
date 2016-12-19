@@ -8,7 +8,7 @@ export class TourSchedule implements IModel {
     start: Date;
     end: Date;
     isdeleted: boolean;
-    tourId: number;
+    productBaseId: number;
     quota: number;
     constructor(ts: any = null) {
         if (ts) {
@@ -18,7 +18,7 @@ export class TourSchedule implements IModel {
             this.end = new Date(ts.end);
             this.quota = ts.quota;
             this.isdeleted = ts.isdeleted;
-            this.tourId = ts.tourId;
+            this.productBaseId = ts.productBaseId;
         }
     }
 }

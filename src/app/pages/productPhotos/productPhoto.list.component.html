@@ -1,0 +1,6 @@
+<ba-card title="{{title}}" baCardClass="with-scroll" [loading]="loading">
+    <ng2-smart-table [settings]="settings" (create)="onCreate($event)" (edit)="onEdit($event)"
+        [source]="source" (delete)="onDeleteConfirm($event)" (rowSelect)="onRowSelect($event)"></ng2-smart-table>
+</ba-card>
+<productPhoto-add #addModal  (onSaved)="onSaved($event)"></productPhoto-add>
+<productPhoto-edit #editModal (onSaved)="onSaved($event)"></productPhoto-edit>

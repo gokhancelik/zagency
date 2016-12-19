@@ -16,7 +16,7 @@ import { TOURDESTINATION_FORM_MODEL } from './tourDestination-form.model';
 })
 export class TourDestinationAddComponent extends AddComponent<TourDestination>  {
     _service: TourDestinationService;
-    tourId: number;
+    productBaseId: number;
     locations: any;
     destinations: Array<TourDestination> = Array<TourDestination>();
     @ViewChild('formModal') formModal: ModalDirective;
@@ -28,11 +28,11 @@ export class TourDestinationAddComponent extends AddComponent<TourDestination>  
     }
     open(): void {
         this.model = new TourDestination();
-        this.model.tourId = this.tourId;
+        this.model.productBaseId = this.productBaseId;
         super.open();
     }
-    setTourId(tourId: number): void {
-        this.tourId = tourId;
+    setproductBaseId(productBaseId: number): void {
+        this.productBaseId = productBaseId;
     }
     search(address) {
         this.geoService.search(address).subscribe(data => {
@@ -41,7 +41,7 @@ export class TourDestinationAddComponent extends AddComponent<TourDestination>  
     }
     addDestination(l) {
         let d = new TourDestination();
-        d.tourId = this.tourId;
+        d.productBaseId = this.productBaseId;
         d.id = 0;
         d.name = l.formatted_address;
         d.latitude = l.geometry.location.lat;

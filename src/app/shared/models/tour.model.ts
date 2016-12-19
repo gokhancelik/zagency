@@ -1,12 +1,17 @@
-import { IModel } from '../../core/IModel';
-export class Tour implements IModel {
-    tourId: number;
-    name: string;
-    tourTypeId: number;
-    tourTypeName: string;
-    description: string;
-    companyId: number;
-    companyName: string;
-    id: number;
-    isDeleted: boolean;
+import { ProductBase } from './productBase.model';
+export class Tour extends ProductBase {
+    isTemp: boolean;
+    /**
+     *
+     */
+    constructor(data: any = null) {
+        if (data) {
+            super(data);
+            this.isTemp = data.isTemp;
+        }
+        else {
+            super();
+            this.isTemp = true;
+        }
+    }
 }

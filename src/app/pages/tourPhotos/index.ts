@@ -1,5 +1,0 @@
-export * from './tourPhoto.add.component'
-export * from './tourPhoto.edit.component'
-export * from './tourPhoto.list.component'
-export * from './tourPhoto.routing'
-export * from './tourPhoto.component'
