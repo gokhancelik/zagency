@@ -3,7 +3,7 @@ import { Http, Response, RequestOptions, Headers } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import { Injectable } from '@angular/core';
-import { Product, Photo } from '../models';
+import { Product, ProductPhoto } from '../models';
 import { IService } from './IService.service';
 import { BaseService } from '../../../app/core/index';
 
@@ -15,7 +15,7 @@ export class ProductService extends BaseService<Product> {
         super(http, 'http://zagency.azurewebsites.net/api/v0.1/Products');
         this._http = http;
     }
-    getPhotos(productBaseId: number): Observable<Photo[]> {
+    getPhotos(productBaseId: number): Observable<ProductPhoto[]> {
         return this._http.get(this.API_URL + '/' + productBaseId + '/Photos')
             .map(res => {
                 let data = res.json();
