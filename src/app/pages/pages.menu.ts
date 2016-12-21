@@ -10,7 +10,29 @@ export const PAGES_MENU = [
             icon: 'fa fa-bus',
             selected: false,
             expanded: false,
-            order: 1
+            order: 10
+          }
+        },
+        children: [
+          {
+            path: 'list',
+            data: {
+              menu: {
+                title: 'List',
+              }
+            }
+          }
+        ]
+      },
+      {
+        path: 'products',
+        data: {
+          menu: {
+            title: 'Products',
+            icon: 'fa fa-cubes',
+            selected: false,
+            expanded: false,
+            order: 20
           }
         },
         children: [
@@ -28,11 +50,11 @@ export const PAGES_MENU = [
         path: 'productTypes',
         data: {
           menu: {
-            title: 'Tour Types',
+            title: 'Product Types',
             icon: 'fa fa-map-signs',
             selected: false,
             expanded: false,
-            order: 2
+            order: 30
           }
         },
         children: [
@@ -54,7 +76,7 @@ export const PAGES_MENU = [
             icon: 'fa fa-map-wrench',
             selected: false,
             expanded: false,
-            order: 3
+            order: 40
           }
         },
         children: [
@@ -76,7 +98,7 @@ export const PAGES_MENU = [
             icon: 'fa fa-try',
             selected: false,
             expanded: false,
-            order: 4
+            order: 50
           }
         },
         children: [
@@ -98,7 +120,7 @@ export const PAGES_MENU = [
             icon: 'fa fa-wrench',
             selected: false,
             expanded: false,
-            order: 5
+            order: 60
           }
         },
         children: [
@@ -120,7 +142,7 @@ export const PAGES_MENU = [
             icon: 'fa fa-img',
             selected: false,
             expanded: false,
-            order: 6
+            order: 70
           }
         },
         children: [
@@ -142,7 +164,7 @@ export const PAGES_MENU = [
             icon: 'fa fa-info',
             selected: false,
             expanded: false,
-            order: 7
+            order: 80
           }
         },
         children: [
@@ -164,7 +186,7 @@ export const PAGES_MENU = [
             icon: 'fa fa-info',
             selected: false,
             expanded: false,
-            order: 8
+            order: 90
           }
         },
         children: [
@@ -186,7 +208,7 @@ export const PAGES_MENU = [
             icon: 'fa fa-try',
             selected: false,
             expanded: false,
-            order: 9
+            order: 100
           }
         },
         children: [
@@ -208,7 +230,7 @@ export const PAGES_MENU = [
             icon: 'fa fa-building',
             selected: false,
             expanded: false,
-            order: 10
+            order: 110
           }
         },
         children: [
@@ -222,275 +244,6 @@ export const PAGES_MENU = [
           }
         ]
       },
-      {
-        path: 'dashboard',
-        data: {
-          menu: {
-            title: 'Dashboard',
-            icon: 'ion-android-home',
-            selected: false,
-            expanded: false,
-            order: 11
-          }
-        }
-      },
-      {
-        path: 'editors',
-        data: {
-          menu: {
-            title: 'Editors',
-            icon: 'ion-edit',
-            selected: false,
-            expanded: false,
-            order: 100,
-          }
-        },
-        children: [
-          {
-            path: 'ckeditor',
-            data: {
-              menu: {
-                title: 'CKEditor',
-              }
-            }
-          }
-        ]
-      },
-      //{
-      //  path: 'components',
-      //  data: {
-      //    menu: {
-      //      title: 'Components',
-      //      icon: 'ion-gear-a',
-      //      selected: false,
-      //      expanded: false,
-      //      order: 250,
-      //    }
-      //  },
-      //  children: [
-      //    {
-      //      path: 'treeview',
-      //      data: {
-      //        menu: {
-      //          title: 'Tree View',
-      //        }
-      //      }
-      //    }
-      //  ]
-      //},
-      {
-        path: 'charts',
-        data: {
-          menu: {
-            title: 'Charts',
-            icon: 'ion-stats-bars',
-            selected: false,
-            expanded: false,
-            order: 200,
-          }
-        },
-        children: [
-          {
-            path: 'chartist-js',
-            data: {
-              menu: {
-                title: 'Chartist.Js',
-              }
-            }
-          }
-        ]
-      },
-      {
-        path: 'forms',
-        data: {
-          menu: {
-            title: 'Form Elements',
-            icon: 'ion-compose',
-            selected: false,
-            expanded: false,
-            order: 400,
-          }
-        },
-        children: [
-          {
-            path: 'inputs',
-            data: {
-              menu: {
-                title: 'Form Inputs',
-              }
-            }
-          },
-          {
-            path: 'layouts',
-            data: {
-              menu: {
-                title: 'Form Layouts',
-              }
-            }
-          }
-        ]
-      },
-      {
-        path: 'tables',
-        data: {
-          menu: {
-            title: 'Tables',
-            icon: 'ion-grid',
-            selected: false,
-            expanded: false,
-            order: 500,
-          }
-        },
-        children: [
-          {
-            path: 'basictables',
-            data: {
-              menu: {
-                title: 'Basic Tables',
-              }
-            }
-          },
-          {
-            path: 'smarttables',
-            data: {
-              menu: {
-                title: 'Smart Tables',
-              }
-            }
-          }
-        ]
-      },
-      {
-        path: 'maps',
-        data: {
-          menu: {
-            title: 'Maps',
-            icon: 'ion-ios-location-outline',
-            selected: false,
-            expanded: false,
-            order: 600,
-          }
-        },
-        children: [
-          {
-            path: 'googlemaps',
-            data: {
-              menu: {
-                title: 'Google Maps',
-              }
-            }
-          },
-          {
-            path: 'leafletmaps',
-            data: {
-              menu: {
-                title: 'Leaflet Maps',
-              }
-            }
-          },
-          {
-            path: 'bubblemaps',
-            data: {
-              menu: {
-                title: 'Bubble Maps',
-              }
-            }
-          },
-          {
-            path: 'linemaps',
-            data: {
-              menu: {
-                title: 'Line Maps',
-              }
-            }
-          }
-        ]
-      },
-      {
-        path: '',
-        data: {
-          menu: {
-            title: 'Pages',
-            icon: 'ion-document',
-            selected: false,
-            expanded: false,
-            order: 650,
-          }
-        },
-        children: [
-          {
-            path: ['/login'],
-            data: {
-              menu: {
-                title: 'Login'
-              }
-            }
-          },
-          {
-            path: ['/register'],
-            data: {
-              menu: {
-                title: 'Register'
-              }
-            }
-          }
-        ]
-      },
-      {
-        path: '',
-        data: {
-          menu: {
-            title: 'Menu Level 1',
-            icon: 'ion-ios-more',
-            selected: false,
-            expanded: false,
-            order: 700,
-          }
-        },
-        children: [
-          {
-            path: '',
-            data: {
-              menu: {
-                title: 'Menu Level 1.1',
-                url: '#'
-              }
-            }
-          },
-          {
-            path: '',
-            data: {
-              menu: {
-                title: 'Menu Level 1.2',
-                url: '#'
-              }
-            },
-            children: [
-              {
-                path: '',
-                data: {
-                  menu: {
-                    title: 'Menu Level 1.2.1',
-                    url: '#'
-                  }
-                }
-              }
-            ]
-          }
-        ]
-      },
-      {
-        path: '',
-        data: {
-          menu: {
-            title: 'External Link',
-            url: 'http://akveo.com',
-            icon: 'ion-android-exit',
-            order: 800,
-            target: '_blank'
-          }
-        }
-      }
     ]
   }
 ];
