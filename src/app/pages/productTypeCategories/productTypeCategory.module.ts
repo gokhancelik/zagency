@@ -19,7 +19,6 @@ import {
 import {
     DynamicFormsBootstrapUIModule
 } from '@ng2-dynamic-forms/ui-bootstrap';
-//import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
     imports: [routing, FormsModule, ReactiveFormsModule, RouterModule,
         ModalModule, CommonModule, CarouselModule,
@@ -27,9 +26,9 @@ import {
         FileUploadModule, ProgressbarModule, DatepickerModule,
         Ng2SmartTableModule, NgProgressModule, NgaModule],
     exports: [ProductTypeCategoryAddComponent,
-     ProductTypeCategoryEditComponent, ProductTypeCategoryListComponent],
-    declarations: [ProductTypeCategoryAddComponent, 
-    ProductTypeCategoryEditComponent, ProductTypeCategoryListComponent],
+        ProductTypeCategoryEditComponent, ProductTypeCategoryListComponent],
+    declarations: [ProductTypeCategoryAddComponent,
+        ProductTypeCategoryEditComponent, ProductTypeCategoryListComponent],
     providers: [DynamicFormService, DynamicFormRelationService],
 })
 export default class ProductTypeCategoryModule { }

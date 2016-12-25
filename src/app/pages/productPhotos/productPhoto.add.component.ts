@@ -38,6 +38,7 @@ export class ProductPhotoAddComponent extends AddComponent<ProductPhoto>  {
         this.uploader = new FileUploader({
             url: _url,
             isHTML5: true,
+            headers: [{ name: 'Content-Disposition', value: 'form-data; name="name"' }],
             allowedMimeType: ['image/png', 'image/jpg', 'image/jpeg', 'image/gif']
         });
         this.uploader.onCompleteItem = (item: any, response: any, status: any, headers: any) => {

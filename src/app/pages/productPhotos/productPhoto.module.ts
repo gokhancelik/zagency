@@ -19,11 +19,11 @@ import {
     DynamicFormsBootstrapUIModule
 } from '@ng2-dynamic-forms/ui-bootstrap';
 @NgModule({
-    imports: [routing, RouterModule, ModalModule, CommonModule, FormsModule,ReactiveFormsModule,
+    imports: [routing, RouterModule, ModalModule, CommonModule, FormsModule, ReactiveFormsModule,
         CarouselModule, FileUploadModule, ProgressbarModule,
-        Ng2SmartTableModule, NgaModule,ReactiveFormsModule],
+        Ng2SmartTableModule, NgaModule, ReactiveFormsModule],
     exports: [ProductPhotoAddComponent, ProductPhotoEditComponent, ProductPhotoListComponent],
     declarations: [ProductPhotoAddComponent, ProductPhotoEditComponent, ProductPhotoListComponent],
-    providers: [DynamicFormService,DynamicFormRelationService],
+    providers: [DynamicFormService, DynamicFormRelationService],
 })
 export default class ProductPhotoModule { }

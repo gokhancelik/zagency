@@ -2,12 +2,12 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { ProductPhotoAddComponent, ProductPhotoComponent } from './index';
 
-const ProductPhotoRoutes: Routes = [
-	{
-		path: '',
-		component: ProductPhotoComponent,
-		children: [
-			// {
+const PRODUCT_PHOTO_ROUTES: Routes = [
+{
+path: '',
+component: ProductPhotoComponent,
+children: [
+		// {
 			// 	path: 'list',
 			// 	component: TourScheduleListComponent
 			// },
@@ -15,12 +15,12 @@ const ProductPhotoRoutes: Routes = [
 			// 	path: 'edit/:id',
 			// 	component: TourScheduleEditComponent
 			// },
-			{
-				path: 'new',
-				component: ProductPhotoAddComponent
-			}
-		]
-	}
+{
+path: 'new',
+component: ProductPhotoAddComponent
+}
+]
+}
 ];
-export const routing = RouterModule.forChild(ProductPhotoRoutes);
+export const routing = RouterModule.forChild(PRODUCT_PHOTO_ROUTES);
 

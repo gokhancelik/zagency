@@ -22,6 +22,7 @@ export abstract class ProductBase implements IModel {
             this.companyName = data.companyName;
             this.id = data.id;
             this.isDeleted = data.isDeleted;
+            this.description = data.description;
         }
         else {
             this.companyId = 0;
@@ -32,6 +33,7 @@ export abstract class ProductBase implements IModel {
             this.companyName = '';
             this.id = 0;
             this.isDeleted = false;
+            this.description = '';
         }
     }
 }

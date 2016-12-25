@@ -21,6 +21,7 @@
               </div>
               <button type="submit" class="btn btn-default" *ngIf="tourForm.form.dirty" [disabled]="!tourForm.form.valid || submitted">Save Changes</button>
             </form>
+            <pre>{{model|json}}</pre>
           </ba-card>
         </div>
       </div>
@@ -39,7 +40,7 @@
       </div>
       <div class="row">
         <div class="col-sm-12">
-          <!--<tourScheduleSpec-list [tourScheduleId]="selectedTourScheduleId" *ngIf="selectedTourScheduleId"></tourScheduleSpec-list>-->
+          <tourScheduleSpec-list [tourScheduleId]="selectedTourScheduleId" *ngIf="selectedTourScheduleId"></tourScheduleSpec-list>
         </div>
       </div>
       <div class="row">
