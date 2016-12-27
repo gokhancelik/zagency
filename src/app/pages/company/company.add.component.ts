@@ -9,6 +9,7 @@ import { Company } from '../../shared/models/';
 import { CompanyService } from '../../shared/services';
 import { DynamicFormControlModel, DynamicFormService } from '@ng2-dynamic-forms/core';
 import { FormGroup } from '@angular/forms';
+import { AngularFire, FirebaseListObservable } from 'angularfire2';
 @Component({
     selector: 'company-add',
     encapsulation: ViewEncapsulation.None,
@@ -18,11 +19,15 @@ import { FormGroup } from '@angular/forms';
 export class CompanyAddComponent extends AddComponent<Company>  {
     _service: CompanyService;
     productBaseId: number;
+    _af: AngularFire;
     myDynamicFormModel: Array<DynamicFormControlModel> = COMPANY_FORM_MODEL;
     @ViewChild('formModal') formModal: ModalDirective;
     @Output() onSaved: EventEmitter<any> = new EventEmitter();
-    constructor(service: CompanyService, dynamicFormService: DynamicFormService) {
-        super(service, Company, dynamicFormService, COMPANY_FORM_MODEL);
+    constructor(service: CompanyService, dynamicFormService: DynamicFormService,
+        af: AngularFire) {
+        super(service, Company, dynamicFormService, af, 'companies/', COMPANY_FORM_MODEL);
         this._service = service;
+        this._af = af;
     }
+    
 }

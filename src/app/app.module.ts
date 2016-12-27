@@ -19,12 +19,20 @@ import { NgaModule } from './theme/nga.module';
 import { PagesModule } from './pages/pages.module';
 import { SharedModule } from './shared/shared.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AngularFireModule } from 'angularfire2';
+
 // Application wide providers
 const APP_PROVIDERS = [
   AppState,
   GlobalState
 ];
-
+export const FIREBASE_CONFIG = {
+  apiKey: 'AIzaSyByQM2VHGOKLJdCF5fM9FJLE4NZMatHQGQ',
+  authDomain: 'zagency-9f4fe.firebaseapp.com',
+  databaseURL: 'https://zagency-9f4fe.firebaseio.com',
+  storageBucket: 'zagency-9f4fe.appspot.com',
+  messagingSenderId: '318138626852'
+};
 type StoreType = {
   state: InternalStateType,
   restoreInputValues: () => void,
@@ -49,6 +57,7 @@ type StoreType = {
     PagesModule,
     SharedModule.forRoot(),
     NgbModule.forRoot(),
+    AngularFireModule.initializeApp(FIREBASE_CONFIG),
     routing
   ],
   providers: [ // expose our Services and Providers into Angular's dependency injection

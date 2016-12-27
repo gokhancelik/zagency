@@ -4,6 +4,7 @@ import { Company } from '../../shared/models';
 import { LocalDataSource } from 'ng2-smart-table';
 import { ListComponent } from '../../core/index';
 import { CompanyEditComponent, CompanyAddComponent } from './index';
+import { AngularFire, FirebaseListObservable } from 'angularfire2';
 
 @Component({
     encapsulation: ViewEncapsulation.None,
@@ -15,8 +16,8 @@ export class CompanyListComponent extends ListComponent<Company> {
     @ViewChild('editModal') editModal: CompanyEditComponent;
     title: string = 'Companies';
     _service: CompanyService;
-    constructor(service: CompanyService) {
-        super(service);
+    constructor(service: CompanyService, af: AngularFire) {
+        super(service, af.database.list('/companies'));
         this.setColumns({
             companyId: {
                 title: 'companyId',
@@ -56,3 +57,4 @@ export class CompanyListComponent extends ListComponent<Company> {
         this._service = service;
     }
 }
+

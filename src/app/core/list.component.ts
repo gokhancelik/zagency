@@ -7,6 +7,8 @@ import { LocalDataSource } from 'ng2-smart-table';
 import { AddComponent, EditComponent } from './index';
 import { IModel } from './IModel';
 import { IService } from './IService.service';
+import { AngularFire, FirebaseListObservable } from 'angularfire2';
+
 export class ListComponent<T extends IModel> implements OnInit {
     addModal: AddComponent<T>;
     editModal: EditComponent<T>;
@@ -26,18 +28,34 @@ export class ListComponent<T extends IModel> implements OnInit {
         mode: 'external'
 
     };
+    items: any;
     source: LocalDataSource = new LocalDataSource();
-    constructor(private service: IService<T>
-    ) { }
+    constructor(private service: IService<T>, private itemsSource: any
+    ) {
+        this.items = itemsSource;
+    }
     ngOnInit() {
         this.getList();
     }
+    // getList() {
+    //     this.loading = true;
+    //     this.service.getList().subscribe(data => {
+    //         this.source.load(data);
+    //         this.loading = false;
+    //     });
+    // }
     getList() {
         this.loading = true;
-        this.service.getList().subscribe(data => {
-            this.source.load(data);
-            this.loading = false;
-        });
+        this.items
+            .subscribe(snapshots => {
+                this.source.load(snapshots);
+                this.loading = false;
+                console.log(snapshots);
+            });
+        // let list = itemObservable.map(data => {
+        //     return data;
+        // });
+        // list.subscribe(data => { this.source.load(data); });
     }
     openFormModal(id: number) {
         if (id) {
