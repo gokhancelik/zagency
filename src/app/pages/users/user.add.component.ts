@@ -6,6 +6,7 @@ import { USER_FORM_MODEL } from './user-form.model';
 import { ModalDirective } from 'ng2-bootstrap';
 import { AddComponent } from '../../core/add.component';
 import { User } from '../../shared/models/';
+import { UserService } from '../../shared/services/';
 import { DynamicFormControlModel, DynamicFormService } from '@ng2-dynamic-forms/core';
 import { FormGroup } from '@angular/forms';
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
@@ -21,10 +22,7 @@ export class UserAddComponent extends AddComponent<User>  {
     myDynamicFormModel: Array<DynamicFormControlModel> = USER_FORM_MODEL;
     @ViewChild('formModal') formModal: ModalDirective;
     @Output() onSaved: EventEmitter<any> = new EventEmitter();
-    constructor(dynamicFormService: DynamicFormService,
-        af: AngularFire) {
-        super(User, dynamicFormService, 
-        af.database.list('/users'), USER_FORM_MODEL);
-        this._af = af;
+    constructor(dynamicFormService: DynamicFormService, private _service: UserService) {
+        super(User, dynamicFormService, _service, USER_FORM_MODEL);
     }
 }

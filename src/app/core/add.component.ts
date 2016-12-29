@@ -1,14 +1,14 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ViewChild, Output, EventEmitter } from '@angular/core';
 import { ModalDirective } from 'ng2-bootstrap';
-import { IModel } from './IModel';
 import { IService } from './IService.service';
 import { FormCreator } from './form-creator.service';
 import { DynamicFormService, DynamicFormControlModel } from '@ng2-dynamic-forms/core';
 import { FormGroup } from '@angular/forms';
-import { AngularFire, FirebaseListObservable } from 'angularfire2';
+import { BaseModel } from '../shared/models/base.model';
+import { BaseFirebaseService } from '../shared/services/base.firebase.service';
 
-export class AddComponent<T extends IModel> implements OnInit {
+export class AddComponent<T extends BaseModel> implements OnInit {
     protected errorMessage: any;
     protected formModal: ModalDirective;
     protected myForm: FormGroup;
@@ -18,7 +18,7 @@ export class AddComponent<T extends IModel> implements OnInit {
     @Output() onSaved: EventEmitter<any>;
     constructor(private modelType,
         private dynamicFormService: DynamicFormService,
-        private resource: FirebaseListObservable<any[]>,
+        private service: BaseFirebaseService<T>,
         private formProperties: Array<DynamicFormControlModel>) {
         this.formCreator = new FormCreator(dynamicFormService);
         if (this.formProperties) {
@@ -45,11 +45,10 @@ export class AddComponent<T extends IModel> implements OnInit {
                 if (!form.valid) {
                     return;
                 }
-                this.model = new this.modelType(form.value);
+                this.service.add(form.value);
+                this.onSaved.emit();
+                this.formModal.hide();
             }
         }
-        this.resource.push(this.model);
-        this.onSaved.emit(this.model);
-        this.formModal.hide();
     }
 }

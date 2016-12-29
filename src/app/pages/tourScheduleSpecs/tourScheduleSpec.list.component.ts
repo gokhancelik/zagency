@@ -25,7 +25,7 @@ export class TourScheduleSpecListComponent extends ListComponent<TourScheduleSpe
     constructor(service: TourScheduleSpecService,
         private tourScheduleService: TourScheduleService) {
         super(service.getAll());
-        this.setColumns();
+        this.setColumns(TourScheduleSpec.getColumns());
         this._service = service;
     }
     ngOnInit() {

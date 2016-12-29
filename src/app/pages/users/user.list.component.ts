@@ -15,8 +15,8 @@ export class UserListComponent extends ListComponent<User> {
     @ViewChild('addModal') addModal: UserAddComponent;
     @ViewChild('editModal') editModal: UserEditComponent;
     title: string = 'Users';
-    constructor(service: UserService) {
-        super(service.getAll());
+    constructor(private _service: UserService) {
+        super(_service);
         this.setColumns(User.getColumns());
     }
 }
