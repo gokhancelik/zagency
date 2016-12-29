@@ -9,6 +9,7 @@ import { DynamicFormControlModel, DynamicFormService } from '@ng2-dynamic-forms/
 import { FormGroup } from '@angular/forms';
 import { USER_FORM_MODEL } from './user-form.model';
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
+import { UserService } from '../../shared/services/';
 
 @Component({
     selector: 'user-edit',
@@ -18,26 +19,24 @@ import { AngularFire, FirebaseListObservable } from 'angularfire2';
 export class UserEditComponent extends EditComponent<User> {
     @ViewChild('formModal') formModal: ModalDirective;
     @Output() onSaved: EventEmitter<any> = new EventEmitter();
-    _af: AngularFire
-    constructor(dynamicFormService: DynamicFormService, af: AngularFire) {
-        super(User, af, '/users/', dynamicFormService, USER_FORM_MODEL);
-        this._af = af;
+    constructor(dynamicFormService: DynamicFormService, private _service: UserService) {
+        super(User, _service, dynamicFormService, USER_FORM_MODEL);
     }
-
-    save(form: FormGroup) {
-        if (form) {
-            if (form.value) {
-                if (!form.valid) {
-                    return;
-                }
-                Object.keys(this.model).forEach(key => {
-                    this.model[key] = form.value[key] || this.model[key];
-                });
-                this.model.company = 'Z-Elektronik';
-                this._af.database.object('/users/' + this.data.$key).set(this.model);
-                this._af.database.object('/companies/' + this.model.company + '/users/'+this.data.$key).set(true);
-            }
-        }
-        this.close();
-    }
+    
+    // save(form: FormGroup) {
+    //     if (form) {
+    //         if (form.value) {
+    //             if (!form.valid) {
+    //                 return;
+    //             }
+    //             Object.keys(this.model).forEach(key => {
+    //                 this.model[key] = form.value[key] || this.model[key];
+    //             });
+    //             this.model.company = 'Z-Elektronik';
+    //             this._af.database.object('/users/' + this.data.$key).set(this.model);
+    //             this._af.database.object('/companies/' + this.model.company + '/users/' + this.data.$key).set(true);
+    //         }
+    //     }
+    //     this.close();
+    // }
 }

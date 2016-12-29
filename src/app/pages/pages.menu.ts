@@ -245,7 +245,7 @@ export const PAGES_MENU = [
         ]
       },
       {
-        path: 'users',
+        path: 'users/list',
         data: {
           menu: {
             title: 'Users',
@@ -254,17 +254,7 @@ export const PAGES_MENU = [
             expanded: false,
             order: 110
           }
-        },
-        children: [
-          {
-            path: 'list',
-            data: {
-              menu: {
-                title: 'List',
-              }
-            }
-          }
-        ]
+        }
       }
     ]
   }

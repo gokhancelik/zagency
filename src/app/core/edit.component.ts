@@ -1,14 +1,14 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ViewChild, Output, EventEmitter } from '@angular/core';
 import { ModalDirective } from 'ng2-bootstrap';
-import { IModel } from './IModel';
-import { IService } from './IService.service';
+import { BaseModel } from '../shared/models/base.model';
+import { BaseFirebaseService } from '../shared/services/base.firebase.service';
 import { FormGroup } from '@angular/forms';
 import { FormCreator } from './form-creator.service';
 import { DynamicFormService, DynamicFormControlModel } from '@ng2-dynamic-forms/core';
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
 
-export abstract class EditComponent<T extends IModel> implements OnInit {
+export abstract class EditComponent<T extends BaseModel> implements OnInit {
     public errorMessage: any;
     myForm: FormGroup;
     formCreator: FormCreator;
@@ -19,8 +19,7 @@ export abstract class EditComponent<T extends IModel> implements OnInit {
     @Output() abstract onSaved: EventEmitter<any>;
     constructor(
         private modelType,
-        private af: AngularFire,
-        private sourceName: string,
+        private service: BaseFirebaseService<T>,
         private dynamicFormService: DynamicFormService,
         private formProperties: Array<DynamicFormControlModel>) {
         if (dynamicFormService)
@@ -36,13 +35,14 @@ export abstract class EditComponent<T extends IModel> implements OnInit {
             this.myForm = this.formCreator.createForm(this.formProperties);
             this.dynamicFormModel = this.formCreator.createFormModel(this.formProperties);
         }
-        this.model = new this.modelType(this.data);
         if (this.myForm)
             this.myForm.patchValue(this.model);
         this.formModal.show();
     }
-    setData(data: any): void {
-        this.data = data;
+    setKey(data: any): void {
+        this.service.getByKey(data).subscribe(data => {
+            this.model = data;
+        });
     }
     close(): void {
         this.formModal.hide();
@@ -53,10 +53,7 @@ export abstract class EditComponent<T extends IModel> implements OnInit {
                 if (!form.valid) {
                     return;
                 }
-                Object.keys(this.model).forEach(key => {
-                    this.model[key] = form.value[key] || this.model[key];
-                })
-                this.af.database.object(this.sourceName + this.data.$key).set(this.model);
+                this.service.update(this.model.id, form.value);
             }
         }
         this.close();
