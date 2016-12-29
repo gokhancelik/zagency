@@ -24,17 +24,8 @@ export class TourScheduleSpecListComponent extends ListComponent<TourScheduleSpe
     loading: boolean = false;
     constructor(service: TourScheduleSpecService,
         private tourScheduleService: TourScheduleService) {
-        super(service);
-        this.setColumns({
-            tourScheduleSpecId: {
-                title: 'tourScheduleSpecId',
-                type: 'number'
-            },
-            description: {
-                title: 'Description',
-                type: 'string'
-            }
-        });
+        super(service.getAll());
+        this.setColumns();
         this._service = service;
     }
     ngOnInit() {
@@ -53,15 +44,15 @@ export class TourScheduleSpecListComponent extends ListComponent<TourScheduleSpe
                 });
         }
         else {
-            this._service.getList().subscribe(schedules => {
+            this._service.getAll().subscribe(schedules => {
                 this.source.load(schedules);
                 this.loading = false;
             });
         }
     }
-    openModal(id: number) {
-        if (id) {
-            this.editModal.setId(id);
+    openModal(data: TourScheduleSpec) {
+        if (data) {
+            this.editModal.setData(data);
             this.editModal.open();
         }
         else {
@@ -75,6 +66,6 @@ export class TourScheduleSpecListComponent extends ListComponent<TourScheduleSpe
     }
     onEdit(event): void {
         let tt: TourScheduleSpec = event.data as TourScheduleSpec;
-        this.openModal(tt.id);
+        this.openModal(tt);
     }
 }

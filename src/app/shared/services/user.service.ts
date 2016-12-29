@@ -1,15 +1,17 @@
 import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs/Rx';
-import { AngularFireDatabase, FirebaseRef } from 'angularfire2';
+import { Observable } from 'rxjs/Rx';
+import { AngularFireDatabase } from 'angularfire2';
 import { User } from '../models';
+import { BaseFirebaseService } from './base.firebase.service';
 @Injectable()
-export class UserService {
-
-    constructor(private af: AngularFireDatabase) {
+export class UserService extends BaseFirebaseService<User> {
+    constructor(private _af: AngularFireDatabase) {
+        super(_af, 'users');
     }
-    getAll(): Observable<User[]> {
-        return this.af.list('users')
-            .map(User.fromJsonList);
+    fromJson(obj) {
+        return User.fromJson(obj);
     }
-
+    fromJsonList(array) {
+        return User.fromJsonList(array);
+    }
 }

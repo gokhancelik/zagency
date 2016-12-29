@@ -24,7 +24,7 @@ export abstract class BaseService<IModel> implements IService<IModel>{
      * Returns an Observable for the HTTP GET request for the JSON resource.
      * @return {TourSchedule[]} The Observable for the HTTP request.
      */
-    getList(): Observable<IModel[]> {
+    getAll(): Observable<IModel[]> {
         return this.http.get(this.API_URL)
             .map(res => {
                 let data = res.json();
@@ -32,29 +32,29 @@ export abstract class BaseService<IModel> implements IService<IModel>{
             })
             .catch(this.handleError);
     }
-    getById(id: number): Observable<IModel> {
+    getByKey(id: number): Observable<IModel> {
         return this.http.get(this.API_URL + '/' + id).map(res => {
             let data = res.json();
             return data;
         });
     }
-    add(data: IModel): Observable<IModel> {
+    add(data: IModel) {
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
         return this.http.post(this.API_URL, data, options)
             .map(this.extractData)
             .catch(this.handleError);
     }
-    delete(id: number): Observable<IModel> {
+    delete(id: number) {
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
-        return this.http.delete(this.API_URL + '/' + id, options)
+        this.http.delete(this.API_URL + '/' + id, options)
             .catch(this.handleError);
     }
-    update(data: IModel, id: number): Observable<IModel> {
+    update(id: number, data: IModel) {
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
-        return this.http.put(this.API_URL + '/' + id, data, options)
+        this.http.put(this.API_URL + '/' + id, data, options)
             .map(this.extractData)
             .catch(this.handleError);
     }

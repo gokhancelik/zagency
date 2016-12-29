@@ -1,5 +1,5 @@
-import { IModel } from '../../core/index';
-export class User implements IModel {
+import { BaseModel } from './base.model';
+export class User extends BaseModel {
     static fromJsonList(array): User[] {
         return array.map(User.fromJson);
     }
@@ -45,6 +45,7 @@ export class User implements IModel {
         public userName: string,
         public email: string,
         public company: string) {
+        super();
     }
 
 }

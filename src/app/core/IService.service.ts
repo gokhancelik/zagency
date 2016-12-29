@@ -5,10 +5,10 @@ import { IModel } from './IModel';
  */
 export interface IService<IModel> {
 
-    getList(): Observable<IModel[]>;
-    getById(id: number): Observable<IModel>;
-    add(data: IModel): Observable<IModel>;
-    delete(id: number): Observable<IModel>;
-    update(data: IModel, id: number): Observable<IModel>;
+    getAll(): Observable<IModel[]>;
+    getByKey(key: any): Observable<IModel>;
+    add(data: IModel);
+    delete(key: any);
+    update(key: any, data: IModel);
 }
 
