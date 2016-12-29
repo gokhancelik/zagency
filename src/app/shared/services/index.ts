@@ -13,6 +13,7 @@ export * from './tourSchedulePrice.service';
 export * from './tourScheduleSpec.service';
 export * from './photoLocation.service';
 export * from './company.service';
+export * from './user.service';
 export * from './companySpec.service';
 export * from './google.geoCoding.service';
 

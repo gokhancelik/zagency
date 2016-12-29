@@ -15,13 +15,12 @@ export class CompanyListComponent extends ListComponent<Company> {
     @ViewChild('addModal') addModal: CompanyAddComponent;
     @ViewChild('editModal') editModal: CompanyEditComponent;
     title: string = 'Companies';
-    _service: CompanyService;
-    constructor(service: CompanyService, af: AngularFire) {
-        super(service, af.database.list('/companies'));
+    constructor(af: AngularFire) {
+        super(af.database.list('/companies'));
         this.setColumns({
-            companyId: {
-                title: 'companyId',
-                type: 'number'
+            id: {
+                title: 'id',
+                type: 'string'
             },
             name: {
                 title: 'name',
@@ -54,7 +53,6 @@ export class CompanyListComponent extends ListComponent<Company> {
 
 
         });
-        this._service = service;
     }
 }
 

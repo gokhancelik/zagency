@@ -2,24 +2,29 @@ import {
     Component, OnInit, ViewEncapsulation,
     ViewChild, Output, EventEmitter
 } from '@angular/core';
+import { USER_FORM_MODEL } from './user-form.model';
 import { ModalDirective } from 'ng2-bootstrap';
-import { Company } from '../../shared/models';
-import { CompanyService } from '../../shared/services/index';
-import { EditComponent } from '../../core/index';
+import { AddComponent } from '../../core/add.component';
+import { User } from '../../shared/models/';
 import { DynamicFormControlModel, DynamicFormService } from '@ng2-dynamic-forms/core';
 import { FormGroup } from '@angular/forms';
-import { COMPANY_FORM_MODEL } from './company-form.model';
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
-
 @Component({
-    selector: 'company-edit',
+    selector: 'user-add',
     encapsulation: ViewEncapsulation.None,
     templateUrl: '../../core/form.component.html'
+
 })
-export class CompanyEditComponent extends EditComponent<Company> {
+export class UserAddComponent extends AddComponent<User>  {
+    productBaseId: number;
+    _af: AngularFire;
+    myDynamicFormModel: Array<DynamicFormControlModel> = USER_FORM_MODEL;
     @ViewChild('formModal') formModal: ModalDirective;
     @Output() onSaved: EventEmitter<any> = new EventEmitter();
-    constructor(dynamicFormService: DynamicFormService, af: AngularFire) {
-        super(Company, af, '/companies/', dynamicFormService, COMPANY_FORM_MODEL);
+    constructor(dynamicFormService: DynamicFormService,
+        af: AngularFire) {
+        super(User, dynamicFormService, 
+        af.database.list('/users'), USER_FORM_MODEL);
+        this._af = af;
     }
 }

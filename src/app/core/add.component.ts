@@ -6,6 +6,7 @@ import { IService } from './IService.service';
 import { FormCreator } from './form-creator.service';
 import { DynamicFormService, DynamicFormControlModel } from '@ng2-dynamic-forms/core';
 import { FormGroup } from '@angular/forms';
+import { AngularFire, FirebaseListObservable } from 'angularfire2';
 
 export class AddComponent<T extends IModel> implements OnInit {
     protected errorMessage: any;
@@ -15,11 +16,9 @@ export class AddComponent<T extends IModel> implements OnInit {
     protected model: T;
     dynamicFormModel: Array<DynamicFormControlModel>;
     @Output() onSaved: EventEmitter<any>;
-    constructor(
-        private service: IService<T>, private modelType,
+    constructor(private modelType,
         private dynamicFormService: DynamicFormService,
-        private af: any,
-        private sourceName: string,
+        private resource: FirebaseListObservable<any[]>,
         private formProperties: Array<DynamicFormControlModel>) {
         this.formCreator = new FormCreator(dynamicFormService);
         if (this.formProperties) {
@@ -40,27 +39,6 @@ export class AddComponent<T extends IModel> implements OnInit {
     close(): void {
         this.formModal.hide();
     }
-    // save(form) {
-    //     if (form) {
-    //         if (form.value) {
-    //             if (!form.valid) {
-    //                 return;
-    //             }
-    //             Object.keys(form.value).forEach(name => {
-    //                 this.model[name] = form.value[name];
-    //             });
-    //         }
-    //     }
-    //     this.service.add(this.model).subscribe(
-    //         data => {
-    //             this.onSaved.emit(data);
-    //             this.formModal.hide();
-    //         },
-    //         error => {
-    //             this.errorMessage = <any>error;
-    //         }
-    //     );
-    // }
     save(form) {
         if (form) {
             if (form.value) {
@@ -70,24 +48,8 @@ export class AddComponent<T extends IModel> implements OnInit {
                 this.model = new this.modelType(form.value);
             }
         }
-        let itemObservable = this.af.database.object('companies/' + this.model.id);
-        let that = this;
-        itemObservable.subscribe(data => {
-            if (data.$exists()) {
-                alert('zaten var');
-            }
-            else {
-                itemObservable.set(that.model).then(
-                    d => {
-                        that.onSaved.emit(d);
-                        that.formModal.hide();
-                    }).catch(
-                    error => {
-                        that.errorMessage = <any>error;
-                    }
-                    );
-            }
-        });
-
+        this.resource.push(this.model);
+        this.onSaved.emit(this.model);
+        this.formModal.hide();
     }
 }

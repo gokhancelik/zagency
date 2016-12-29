@@ -244,6 +244,28 @@ export const PAGES_MENU = [
           }
         ]
       },
+      {
+        path: 'users',
+        data: {
+          menu: {
+            title: 'Users',
+            icon: 'fa fa-user',
+            selected: false,
+            expanded: false,
+            order: 110
+          }
+        },
+        children: [
+          {
+            path: 'list',
+            data: {
+              menu: {
+                title: 'List',
+              }
+            }
+          }
+        ]
+      }
     ]
   }
 ];

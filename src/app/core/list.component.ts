@@ -1,6 +1,6 @@
 import {
     Component, OnInit, ViewChild, Input, Output,
-    EventEmitter, ViewEncapsulation
+    EventEmitter, ViewEncapsulation,
 } from '@angular/core';
 import { CurrencyTypeService } from '../../shared/services/index';
 import { LocalDataSource } from 'ng2-smart-table';
@@ -8,6 +8,7 @@ import { AddComponent, EditComponent } from './index';
 import { IModel } from './IModel';
 import { IService } from './IService.service';
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
+import { Observable } from 'rxjs/Rx';
 
 export class ListComponent<T extends IModel> implements OnInit {
     addModal: AddComponent<T>;
@@ -28,38 +29,24 @@ export class ListComponent<T extends IModel> implements OnInit {
         mode: 'external'
 
     };
-    items: any;
     source: LocalDataSource = new LocalDataSource();
-    constructor(private service: IService<T>, private itemsSource: any
+    constructor(private items$: Observable<IModel[]>
     ) {
-        this.items = itemsSource;
     }
     ngOnInit() {
         this.getList();
     }
-    // getList() {
-    //     this.loading = true;
-    //     this.service.getList().subscribe(data => {
-    //         this.source.load(data);
-    //         this.loading = false;
-    //     });
-    // }
     getList() {
         this.loading = true;
-        this.items
+        this.items$
             .subscribe(snapshots => {
                 this.source.load(snapshots);
                 this.loading = false;
-                console.log(snapshots);
             });
-        // let list = itemObservable.map(data => {
-        //     return data;
-        // });
-        // list.subscribe(data => { this.source.load(data); });
     }
-    openFormModal(id: number) {
-        if (id) {
-            this.editModal.setId(id);
+    openFormModal(data: any) {
+        if (data) {
+            this.editModal.setData(data);
             this.editModal.open();
         }
         else {
@@ -68,23 +55,16 @@ export class ListComponent<T extends IModel> implements OnInit {
     }
     onCreate(event): void {
         this.openFormModal(null);
-
     }
     onSaved(event) {
-        this.getList();
     }
     onEdit(event): void {
-        let tt: T = event.data as T;
-        this.openFormModal(tt.id);
+        this.openFormModal(event.data);
     }
     onDeleteConfirm(event): void {
         if (window.confirm('Are you sure you want to delete?')) {
             let tt: T = event.data as T;
-            this.service.delete(tt.id).subscribe(
-                data => this.getList(),
-                error => alert(error));
-        } else {
-
+            //this.items.remove(event.data.$key);
         }
     }
     onRowSelect(event): void {

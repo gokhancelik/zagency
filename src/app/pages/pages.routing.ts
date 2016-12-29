@@ -1,5 +1,7 @@
 import { Routes, RouterModule } from '@angular/router';
 import { Pages } from './pages.component';
+import { LoggedInGuard } from '../guards/loggedin.guard';
+
 // noinspection TypeScriptValidateTypes
 const routes: Routes = [
   {
@@ -13,6 +15,7 @@ const routes: Routes = [
   },
 
   {
+    canActivate: [LoggedInGuard],
     path: 'pages',
     component: Pages,
     children: [
@@ -38,9 +41,13 @@ const routes: Routes = [
         path: 'productTypeCategories',
         loadChildren: () => System.import('./productTypeCategories/productTypeCategory.module')
       },
-       {
+      {
         path: 'companies',
         loadChildren: () => System.import('./company/company.module')
+      },
+      {
+        path: 'users',
+        loadChildren: () => System.import('./users/user.module')
       },
       {
         path: 'priceTypes',

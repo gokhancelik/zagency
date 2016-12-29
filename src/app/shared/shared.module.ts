@@ -7,7 +7,7 @@ import {
     CompanyService, TourSchedulePriceService, PriceTypeService, CurrencyTypeService,
     TourProgramService, TourDestinationService, GoogleGeoCodingService,
     CompanySpecService, TourScheduleSpecService, SpecTypeService, PhotoLocationService,
-    ProductTypeCategoryService, ProductService
+    ProductTypeCategoryService, ProductService, UserService
 } from './services/index';
 
 @NgModule({
@@ -24,7 +24,7 @@ export class SharedModule {
                 TourScheduleService, CompanyService, TourSchedulePriceService, SpecTypeService,
                 PriceTypeService, CurrencyTypeService, CompanySpecService, TourScheduleSpecService,
                 TourProgramService, TourDestinationService, GoogleGeoCodingService,
-                ProductTypeCategoryService, ProductService]
+                ProductTypeCategoryService, ProductService, UserService]
         };
     }
 }

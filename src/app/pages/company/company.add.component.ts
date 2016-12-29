@@ -23,11 +23,10 @@ export class CompanyAddComponent extends AddComponent<Company>  {
     myDynamicFormModel: Array<DynamicFormControlModel> = COMPANY_FORM_MODEL;
     @ViewChild('formModal') formModal: ModalDirective;
     @Output() onSaved: EventEmitter<any> = new EventEmitter();
-    constructor(service: CompanyService, dynamicFormService: DynamicFormService,
+    constructor(dynamicFormService: DynamicFormService,
         af: AngularFire) {
-        super(service, Company, dynamicFormService, af, 'companies/', COMPANY_FORM_MODEL);
-        this._service = service;
+        super(Company, dynamicFormService, 
+        af.database.list('/companies'), COMPANY_FORM_MODEL);
         this._af = af;
     }
-    
 }

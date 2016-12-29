@@ -4,6 +4,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { removeNgStyles, createNewHosts, createInputTransfer } from '@angularclass/hmr';
+import { LoggedInGuard } from './guards/loggedin.guard';
+import LoginModule from './pages/login/login.module';
 
 /*
  * Platform and Environment providers/directives/pipes
@@ -19,13 +21,17 @@ import { NgaModule } from './theme/nga.module';
 import { PagesModule } from './pages/pages.module';
 import { SharedModule } from './shared/shared.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { AngularFireModule } from 'angularfire2';
-
+import { AngularFireModule, AuthProviders, AuthMethods } from 'angularfire2';
 // Application wide providers
 const APP_PROVIDERS = [
   AppState,
-  GlobalState
+  GlobalState,
+  LoggedInGuard
 ];
+const myFirebaseAuthConfig = {
+  provider: AuthProviders.Google,
+  method: AuthMethods.Redirect
+}
 export const FIREBASE_CONFIG = {
   apiKey: 'AIzaSyByQM2VHGOKLJdCF5fM9FJLE4NZMatHQGQ',
   authDomain: 'zagency-9f4fe.firebaseapp.com',
@@ -57,7 +63,8 @@ type StoreType = {
     PagesModule,
     SharedModule.forRoot(),
     NgbModule.forRoot(),
-    AngularFireModule.initializeApp(FIREBASE_CONFIG),
+    LoginModule,
+    AngularFireModule.initializeApp(FIREBASE_CONFIG, myFirebaseAuthConfig),
     routing
   ],
   providers: [ // expose our Services and Providers into Angular's dependency injection

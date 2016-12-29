@@ -6,16 +6,21 @@ import { IService } from './IService.service';
 import { FormGroup } from '@angular/forms';
 import { FormCreator } from './form-creator.service';
 import { DynamicFormService, DynamicFormControlModel } from '@ng2-dynamic-forms/core';
+import { AngularFire, FirebaseListObservable } from 'angularfire2';
+
 export abstract class EditComponent<T extends IModel> implements OnInit {
     public errorMessage: any;
     myForm: FormGroup;
     formCreator: FormCreator;
-    id: number;
+    data: any;
     protected model: T;
     dynamicFormModel: Array<DynamicFormControlModel>;
     @ViewChild('formModal') formModal: ModalDirective;
     @Output() abstract onSaved: EventEmitter<any>;
-    constructor(private service: IService<T>,
+    constructor(
+        private modelType,
+        private af: AngularFire,
+        private sourceName: string,
         private dynamicFormService: DynamicFormService,
         private formProperties: Array<DynamicFormControlModel>) {
         if (dynamicFormService)
@@ -31,40 +36,29 @@ export abstract class EditComponent<T extends IModel> implements OnInit {
             this.myForm = this.formCreator.createForm(this.formProperties);
             this.dynamicFormModel = this.formCreator.createFormModel(this.formProperties);
         }
-        this.service.getById(this.id).subscribe(
-            data => {
-                this.model = data;
-                if (this.myForm)
-                    this.myForm.patchValue(data);
-            }
-        );
+        this.model = new this.modelType(this.data);
+        if (this.myForm)
+            this.myForm.patchValue(this.model);
         this.formModal.show();
     }
-    setId(id: number): void {
-        this.id = id;
+    setData(data: any): void {
+        this.data = data;
     }
     close(): void {
         this.formModal.hide();
     }
-    save(form) {
+    save(form: FormGroup) {
         if (form) {
             if (form.value) {
                 if (!form.valid) {
                     return;
                 }
-                Object.keys(form.value).forEach(name => {
-                    this.model[name] = form.value[name];
-                });
+                Object.keys(this.model).forEach(key => {
+                    this.model[key] = form.value[key] || this.model[key];
+                })
+                this.af.database.object(this.sourceName + this.data.$key).set(this.model);
             }
         }
-        this.service.update(this.model, this.model.id).subscribe(
-            data => {
-                this.onSaved.emit(data);
-                this.formModal.hide();
-            },
-            error => {
-                this.errorMessage = <any>error;
-            }
-        );
+        this.close();
     }
 }
