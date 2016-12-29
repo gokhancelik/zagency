@@ -1,33 +1,63 @@
-import { IModel } from '../../core/index';
-export class Company implements IModel {
-    id: string;
-    name: string;
-    longName: string;
-    webSiteUrl: string;
-    phone1: string;
-    phone2: string;
-    fax: string;
-    email: string;
-    constructor(data) {
-        if (data) {
-            this.name = data.name;
-            this.longName = data.longName;
-            this.webSiteUrl = data.webSiteUrl;
-            this.phone1 = data.phone1;
-            this.phone2 = data.phone2;
-            this.fax = data.fax || '';
-            this.email = data.email;
-            this.id = data.name.replace(' ', '-');
-        }
-        else {
-            this.name = '';
-            this.longName = '';
-            this.webSiteUrl = '';
-            this.phone1 = '';
-            this.phone2 = '';
-            this.fax = '';
-            this.email = '';
-        }
-
+import { BaseModel } from './base.model';
+export class Company extends BaseModel {
+    static fromJsonList(array): Company[] {
+        return array.map(Company.fromJson);
     }
+    static getColumns(): any {
+        return {
+            id: {
+                title: 'id',
+                type: 'string'
+            },
+            name: {
+                title: 'name',
+                type: 'string'
+            },
+            longName: {
+                title: 'longName',
+                type: 'string'
+            },
+            webSiteUrl: {
+                title: 'webSiteUrl',
+                type: 'string'
+            },
+            phone1: {
+                title: 'phone1',
+                type: 'string'
+            },
+            phone2: {
+                title: 'phone2',
+                type: 'string'
+            },
+            fax: {
+                title: 'fax',
+                type: 'string'
+            },
+            email: {
+                title: 'email',
+                type: 'string'
+            }
+        };
+    }
+
+    get id() {
+        return this.$key;
+    }
+    static fromJson({ $key, name, longName, webSiteUrl, phone1, phone2, fax, email }): Company {
+        return new Company(
+            $key, name, longName, webSiteUrl, phone1, phone2, fax, email);
+    }
+    constructor(
+        public $key: string,
+        public name: string,
+        public phone1: string,
+        public phone2: string,
+        public fax: string,
+        public email: string,
+        public longName: string,
+        public webSiteUrl: string
+    ) {
+        super();
+    }
+
 }
