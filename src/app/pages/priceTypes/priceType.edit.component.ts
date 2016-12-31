@@ -19,6 +19,6 @@ export class PriceTypeEditComponent extends EditComponent<PriceType>{
     @ViewChild('formModal') formModal: ModalDirective;
     @Output() onSaved: EventEmitter<any> = new EventEmitter();
     constructor(service: PriceTypeService, dynamicFormService: DynamicFormService) {
-        super(service, dynamicFormService, PRICETYPE_FORM_MODEL);
+        super(PriceType, service, dynamicFormService, PRICETYPE_FORM_MODEL);
     }
 }

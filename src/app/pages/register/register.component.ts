@@ -1,6 +1,7 @@
-import {Component, ViewEncapsulation} from '@angular/core';
-import {FormGroup, AbstractControl, FormBuilder, Validators} from '@angular/forms';
-import {EmailValidator, EqualPasswordsValidator} from '../../theme/validators';
+import { Component, ViewEncapsulation } from '@angular/core';
+import { FormGroup, AbstractControl, FormBuilder, Validators } from '@angular/forms';
+import { EmailValidator, EqualPasswordsValidator } from '../../theme/validators';
+import { AuthService } from '../../security/auth.service';
 
 @Component({
   selector: 'register',
@@ -10,16 +11,16 @@ import {EmailValidator, EqualPasswordsValidator} from '../../theme/validators';
 })
 export class Register {
 
-  public form:FormGroup;
-  public name:AbstractControl;
-  public email:AbstractControl;
-  public password:AbstractControl;
-  public repeatPassword:AbstractControl;
-  public passwords:FormGroup;
+  public form: FormGroup;
+  public name: AbstractControl;
+  public email: AbstractControl;
+  public password: AbstractControl;
+  public repeatPassword: AbstractControl;
+  public passwords: FormGroup;
 
-  public submitted:boolean = false;
+  public submitted: boolean = false;
 
-  constructor(fb:FormBuilder) {
+  constructor(fb: FormBuilder, private authService: AuthService) {
 
     this.form = fb.group({
       'name': ['', Validators.compose([Validators.required, Validators.minLength(4)])],
@@ -27,19 +28,23 @@ export class Register {
       'passwords': fb.group({
         'password': ['', Validators.compose([Validators.required, Validators.minLength(4)])],
         'repeatPassword': ['', Validators.compose([Validators.required, Validators.minLength(4)])]
-      }, {validator: EqualPasswordsValidator.validate('password', 'repeatPassword')})
+      }, { validator: EqualPasswordsValidator.validate('password', 'repeatPassword') })
     });
 
     this.name = this.form.controls['name'];
     this.email = this.form.controls['email'];
-    this.passwords = <FormGroup> this.form.controls['passwords'];
+    this.passwords = <FormGroup>this.form.controls['passwords'];
     this.password = this.passwords.controls['password'];
     this.repeatPassword = this.passwords.controls['repeatPassword'];
   }
 
-  public onSubmit(values:Object):void {
+  public onSubmit(values: any): void {
     this.submitted = true;
     if (this.form.valid) {
+      this.authService.register(values.email,
+        values.passwords.password
+      )
+
       // your code goes here
       // console.log(values);
     }

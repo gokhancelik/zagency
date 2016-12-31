@@ -3,7 +3,7 @@ import { FormGroup, AbstractControl, FormBuilder, Validators } from '@angular/fo
 import { AngularFire, AuthProviders, AuthMethods, FirebaseAuthState } from 'angularfire2';
 import { Router } from '@angular/router';
 import { User } from '../../shared/models';
-
+import { AuthService } from '../../security/auth.service';
 @Component({
   selector: 'login',
   encapsulation: ViewEncapsulation.None,
@@ -17,7 +17,7 @@ export class Login {
   public password: AbstractControl;
   public submitted: boolean = false;
 
-  constructor(fb: FormBuilder, public af: AngularFire, private router: Router) {
+  constructor(fb: FormBuilder, public authService: AuthService, private router: Router) {
     this.form = fb.group({
       'email': ['', Validators.compose([Validators.required, Validators.minLength(4)])],
       'password': ['', Validators.compose([Validators.required, Validators.minLength(4)])]
@@ -27,11 +27,11 @@ export class Login {
     this.password = this.form.controls['password'];
   }
 
-  public onSubmit(values: Object): void {
+  public onSubmit(values: any): void {
     this.submitted = true;
     if (this.form.valid) {
       let _that = this;
-      this.af.auth.login().then(data => {
+      this.authService.login(values.email, values.password).subscribe(data => {
         _that.loginSuccess(data, _that);
       });
       // your code goes here
@@ -40,32 +40,23 @@ export class Login {
   }
   public googleLogin(): void {
     let _that = this;
-    this.af.auth.login({
-      provider: AuthProviders.Google,
-      method: AuthMethods.Popup,
-    }).then(data => {
+    this.authService.loginWithGoogle().subscribe(data => {
       _that.loginSuccess(data, _that);
     });
   }
   public facebookLogin(): void {
     let _that = this;
-    this.af.auth.login({
-      provider: AuthProviders.Facebook,
-      method: AuthMethods.Popup,
-    }).then(data => {
+    this.authService.loginWthFacebook().subscribe(data => {
+      _that.loginSuccess(data, _that);
+    });
+  }
+  public tweeterLogin(): void {
+    let _that = this;
+    this.authService.loginWithTwitter().subscribe(data => {
       _that.loginSuccess(data, _that);
     });
   }
   loginSuccess(d: FirebaseAuthState, that: Login) {
-    let userRef = that.af.database.object('/users/' + d.uid).$ref;
-    if (!userRef.child('email'))
-      userRef.update({ email: d.auth.email });
-    // .set({
-    //   provider: d.provider,
-    //   name: d.auth.displayName,
-    //   email: d.auth.email,
-    //   company: ''
-    // });
-    that.router.navigate(['/tours']);
+    that.router.navigate(['/users/list']);
   }
 }

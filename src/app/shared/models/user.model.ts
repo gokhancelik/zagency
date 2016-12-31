@@ -5,12 +5,12 @@ export class User extends BaseModel {
     }
     static getColumns(): any {
         return {
-            id: {
-                title: 'id',
-                type: 'string'
-            },
             name: {
                 title: 'name',
+                type: 'string'
+            },
+            role: {
+                title: 'role',
                 type: 'string'
             },
             email: {
@@ -34,17 +34,18 @@ export class User extends BaseModel {
     get id() {
         return this.$key;
     }
-    static fromJson({ $key, name, phone, userName, email, company }): User {
+    static fromJson({ $key, name, phone, userName, email, company, role }): User {
         return new User(
-            $key, name, phone, userName, email, company);
+            $key, name, phone, userName, email, company, role);
     }
     constructor(
         public $key: string,
-        public name: string,
-        public phone: string,
-        public userName: string,
-        public email: string,
-        public company: string) {
+        public name: string = '',
+        public phone: string = '',
+        public userName: string = '',
+        public email: string = '',
+        public company: string = '',
+        public role: string = '') {
         super();
     }
 

@@ -10,6 +10,9 @@ export abstract class BaseFirebaseService<BaseModel> implements IService<BaseMod
         return this.af.list(this._route)
             .map(this.fromJsonList);
     }
+    protected getRoute(): string {
+        return this._route;
+    }
     getByKey(key: string): Observable<BaseModel> {
         return this.af.object(this._route + '/' + key)
             .map(this.fromJson);

@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewEncapsulation, ViewChild } from '@angular/core';
 import { User } from '../../shared/models';
-import { UserService } from '../../shared/services';
+import { UserService, CompanyService } from '../../shared/services';
 import { LocalDataSource } from 'ng2-smart-table';
 import { ListComponent } from '../../core/index';
 import { UserEditComponent, UserAddComponent } from './index';
@@ -15,7 +15,7 @@ export class UserListComponent extends ListComponent<User> {
     @ViewChild('addModal') addModal: UserAddComponent;
     @ViewChild('editModal') editModal: UserEditComponent;
     title: string = 'Users';
-    constructor(private _service: UserService) {
+    constructor(private _service: UserService, private compService: CompanyService) {
         super(_service);
         this.setColumns(User.getColumns());
     }

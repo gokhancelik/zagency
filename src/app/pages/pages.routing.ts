@@ -1,6 +1,6 @@
 import { Routes, RouterModule } from '@angular/router';
 import { Pages } from './pages.component';
-import { LoggedInGuard } from '../guards/loggedin.guard';
+import { LoggedInGuard } from '../security/guards/loggedin.guard';
 
 // noinspection TypeScriptValidateTypes
 const routes: Routes = [
@@ -30,16 +30,8 @@ const routes: Routes = [
         loadChildren: () => System.import('./tours/tour.module')
       },
       {
-        path: 'products',
-        loadChildren: () => System.import('./products/product.module')
-      },
-      {
-        path: 'productTypes',
-        loadChildren: () => System.import('./productTypes/productType.module')
-      },
-      {
-        path: 'productTypeCategories',
-        loadChildren: () => System.import('./productTypeCategories/productTypeCategory.module')
+        path: 'tourCategories',
+        loadChildren: () => System.import('./tourCategories/tourCategory.module')
       },
       {
         path: 'companies',
@@ -72,6 +64,10 @@ const routes: Routes = [
       {
         path: 'photoLocationTypes',
         loadChildren: () => System.import('./photoLocationTypes/photoLocation.module')
+      },
+      {
+        path: 'roles',
+        loadChildren: () => System.import('./roles/role.module')
       }
     ]
   }

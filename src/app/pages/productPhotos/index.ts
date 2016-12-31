@@ -1,5 +1,0 @@
-export * from './productPhoto.add.component'
-export * from './productPhoto.edit.component'
-export * from './productPhoto.list.component'
-export * from './productPhoto.routing'
-export * from './productPhoto.component'

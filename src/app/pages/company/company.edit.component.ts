@@ -19,7 +19,7 @@ import { AngularFire, FirebaseListObservable } from 'angularfire2';
 export class CompanyEditComponent extends EditComponent<Company> {
     @ViewChild('formModal') formModal: ModalDirective;
     @Output() onSaved: EventEmitter<any> = new EventEmitter();
-    constructor(dynamicFormService: DynamicFormService, af: AngularFire) {
-        super(Company, af, '/companies/', dynamicFormService, COMPANY_FORM_MODEL);
+    constructor(dynamicFormService: DynamicFormService, private _service: CompanyService) {
+        super(Company, _service, dynamicFormService, COMPANY_FORM_MODEL);
     }
 }

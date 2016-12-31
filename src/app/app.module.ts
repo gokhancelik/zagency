@@ -4,7 +4,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { removeNgStyles, createNewHosts, createInputTransfer } from '@angularclass/hmr';
-import { LoggedInGuard } from './guards/loggedin.guard';
+import { LoggedInGuard } from './security/guards/loggedin.guard';
+import { AuthService } from './security/auth.service';
 import LoginModule from './pages/login/login.module';
 
 /*
@@ -26,7 +27,8 @@ import { AngularFireModule, AuthProviders, AuthMethods } from 'angularfire2';
 const APP_PROVIDERS = [
   AppState,
   GlobalState,
-  LoggedInGuard
+  LoggedInGuard,
+  AuthService
 ];
 const myFirebaseAuthConfig = {
   provider: AuthProviders.Google,

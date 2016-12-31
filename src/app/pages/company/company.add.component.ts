@@ -17,16 +17,11 @@ import { AngularFire, FirebaseListObservable } from 'angularfire2';
 
 })
 export class CompanyAddComponent extends AddComponent<Company>  {
-    _service: CompanyService;
-    productBaseId: number;
-    _af: AngularFire;
     myDynamicFormModel: Array<DynamicFormControlModel> = COMPANY_FORM_MODEL;
     @ViewChild('formModal') formModal: ModalDirective;
     @Output() onSaved: EventEmitter<any> = new EventEmitter();
     constructor(dynamicFormService: DynamicFormService,
-        af: AngularFire) {
-        super(Company, dynamicFormService, 
-        af.database.list('/companies'), COMPANY_FORM_MODEL);
-        this._af = af;
+        private _service: CompanyService) {
+        super(Company, dynamicFormService, _service, COMPANY_FORM_MODEL);
     }
 }

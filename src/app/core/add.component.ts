@@ -11,7 +11,7 @@ import { BaseFirebaseService } from '../shared/services/base.firebase.service';
 export class AddComponent<T extends BaseModel> implements OnInit {
     protected errorMessage: any;
     protected formModal: ModalDirective;
-    protected myForm: FormGroup;
+    protected formGroup: FormGroup;
     protected formCreator: FormCreator;
     protected model: T;
     dynamicFormModel: Array<DynamicFormControlModel>;
@@ -22,7 +22,7 @@ export class AddComponent<T extends BaseModel> implements OnInit {
         private formProperties: Array<DynamicFormControlModel>) {
         this.formCreator = new FormCreator(dynamicFormService);
         if (this.formProperties) {
-            this.myForm = this.formCreator.createForm(this.formProperties);
+            this.formGroup = this.formCreator.createForm(this.formProperties);
             this.dynamicFormModel = this.formCreator.createFormModel(this.formProperties);
         }
     }
@@ -32,8 +32,8 @@ export class AddComponent<T extends BaseModel> implements OnInit {
     open(): void {
         if (!this.model)
             this.model = new this.modelType();
-        if (this.myForm)
-            this.myForm.patchValue(this.model);
+        if (this.formGroup)
+            this.formGroup.patchValue(this.model);
         this.formModal.show();
     }
     close(): void {

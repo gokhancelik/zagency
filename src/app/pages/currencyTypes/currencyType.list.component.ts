@@ -12,19 +12,6 @@ export class CurrencyTypeListComponent extends ListComponent<CurrencyType> {
     @ViewChild('editModal') editModal: CurrencyTypeEditComponent;
     constructor(service: CurrencyTypeService) {
         super(service);
-        this.setColumns({
-            name: {
-                title: 'Name',
-                type: 'string'
-            },
-            symbol: {
-                title: 'Symbol',
-                type: 'string'
-            },
-            lastValue: {
-                title: 'Last Value',
-                type: 'number'
-            }
-        });
+        this.setColumns(CurrencyType.getColumns());
     }
 }

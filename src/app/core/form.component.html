@@ -1,5 +1,5 @@
 <div bsModal #formModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" *ngIf="model">
+  <div class="modal-dialog modal-lg" >
     <div class="modal-content">
       <div class="modal-header">
         <button class="close" (click)="close()" aria-label="Close">
@@ -8,9 +8,10 @@
         <h4 class="modal-title">{{title}}</h4>
       </div>
       <div class="modal-body">
-        <form [formGroup]="myForm" (ngSubmit)="save(myForm)">
-          <dynamic-form-bootstrap-control *ngFor="let controlModel of dynamicFormModel" [controlGroup]="myForm" [model]="controlModel"></dynamic-form-bootstrap-control>
-          <button class="btn btn-default" *ngIf="myForm.dirty" [disabled]="!myForm.valid || submitted">Save Changes</button>
+        <form [formGroup]="formGroup" (ngSubmit)="save(formGroup)" *ngIf="dynamicFormModel">
+          <dynamic-form-bootstrap-control *ngFor="let controlModel of dynamicFormModel" [controlGroup]="formGroup" [model]="controlModel"
+            [hasErrorMessaging]="controlModel.hasErrorMessages"></dynamic-form-bootstrap-control>
+          <button class="btn btn-default" *ngIf="formGroup.dirty" [disabled]="!formGroup.valid || submitted">Save Changes</button>
         </form>
       </div>
       <div class="modal-footer">

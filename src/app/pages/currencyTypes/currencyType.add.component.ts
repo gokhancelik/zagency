@@ -16,12 +16,10 @@ import { DynamicFormControlModel, DynamicFormService } from '@ng2-dynamic-forms/
 
 export class CurrencyTypeAddComponent extends AddComponent<CurrencyType>  {
     _service: CurrencyTypeService;
-    productBaseId: number;
-    myDynamicFormModel: Array<DynamicFormControlModel> = CURRENCY_FORM_MODEL;
     @ViewChild('formModal') formModal: ModalDirective;
     @Output() onSaved: EventEmitter<any> = new EventEmitter();
     constructor(service: CurrencyTypeService, dynamicFormService: DynamicFormService) {
-        super(service, CurrencyType, dynamicFormService, CURRENCY_FORM_MODEL);
+        super(CurrencyType, dynamicFormService, service, CURRENCY_FORM_MODEL);
         this._service = service;
     }
 }

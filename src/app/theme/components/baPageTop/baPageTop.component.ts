@@ -21,14 +21,6 @@ export class BaPageTop implements OnInit {
   }
 
   public ngOnInit() {
-    this.af.auth.subscribe(auth => {
-      if (auth) {
-        this.auth = auth;
-      } else {
-
-      }
-
-    });
   }
 
   public toggleMenu() {

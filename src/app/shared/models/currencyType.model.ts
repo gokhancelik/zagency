@@ -1,21 +1,32 @@
-import { IModel } from '../../core/index';
-export class CurrencyType implements IModel {
-    id: number;
-    name: string;
-    symbol: string;
-    currencyTypeId: number;
-    constructor(data: any = null) {
-        if (data) {
-            this.id = data.id;
-            this.name = data.name;
-            this.symbol = data.symbol;
-            this.currencyTypeId = data.currencyTypeId;
-        }
-        else {
-            this.id = 0;
-            this.name = '';
-            this.symbol = '';
-            this.currencyTypeId = 0;
-        }
+import { BaseModel } from './base.model';
+export class CurrencyType extends BaseModel {
+    static fromJsonList(array): CurrencyType[] {
+        return array.map(CurrencyType.fromJson);
     }
+    static getColumns(): any {
+        return {
+            name: {
+                title: 'name',
+                type: 'string'
+            },
+            symbol: {
+                title: 'symbol',
+                type: 'string'
+            }
+        };
+    }
+    get id() {
+        return this.$key;
+    }
+    static fromJson({ $key, name, symbol}): CurrencyType {
+        return new CurrencyType(
+            $key, name, symbol);
+    }
+    constructor(
+        public $key: string,
+        public name: string,
+        public symbol: string) {
+        super();
+    }
+
 }

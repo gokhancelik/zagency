@@ -11,17 +11,9 @@ const PriceTypeRoutes: Routes = [
 		component: PriceTypeComponent,
 		children: [
 			{
-				path: 'list',
+				path: '',
 				component: PriceTypeListComponent
 			},
-			// {
-			// 	path: 'edit/:id',
-			// 	component: TourScheduleEditComponent
-			// },
-			// {
-			// 	path: 'new',
-			// 	component: PriceTypeAddComponent
-			// }
 		]
 	}
 ];

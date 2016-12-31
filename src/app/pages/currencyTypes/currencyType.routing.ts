@@ -11,17 +11,9 @@ const CurrencyTypeRoutes: Routes = [
 		component: CurrencyTypeComponent,
 		children: [
 			{
-				path: 'list',
+				path: '',
 				component: CurrencyTypeListComponent
 			},
-			// {
-			// 	path: 'edit/:id',
-			// 	component: TourScheduleEditComponent
-			// },
-			// {
-			// 	path: 'new',
-			// 	component: PriceTypeAddComponent
-			// }
 		]
 	}
 ];

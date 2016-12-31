@@ -1,3 +1,4 @@
+import { IconsService } from './../pages/ui/components/icons/icons.service';
 import {
     Component, OnInit, ViewChild, Input, Output,
     EventEmitter, ViewEncapsulation,
@@ -17,12 +18,15 @@ export class ListComponent<T extends IModel> implements OnInit {
     public loading: boolean = false;
     settings = {
         add: {
+            addButtonContent: '<i class="ion-ios-plus-outline"></i>',
             confirmCreate: true,
         },
         edit: {
+            editButtonContent: '<i class="ion-edit"></i>',
             confirmSave: true,
         },
         delete: {
+            deleteButtonContent: '<i class="ion-trash-a"></i>',
             confirmDelete: true
         },
         columns: {},
@@ -38,7 +42,7 @@ export class ListComponent<T extends IModel> implements OnInit {
     }
     getList() {
         this.loading = true;
-        this.service.getAll()
+        this.service.getAll().cache()
             .subscribe(snapshots => {
                 this.source.load(snapshots);
                 this.loading = false;

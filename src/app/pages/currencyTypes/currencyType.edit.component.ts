@@ -19,6 +19,6 @@ export class CurrencyTypeEditComponent extends EditComponent<CurrencyType> {
     @Output() onSaved: EventEmitter<any> = new EventEmitter();
     myDynamicFormModel: Array<DynamicFormControlModel> = CURRENCY_FORM_MODEL;
     constructor(service: CurrencyTypeService, dynamicFormService: DynamicFormService) {
-        super(service, dynamicFormService, CURRENCY_FORM_MODEL);
+        super(CurrencyType, service, dynamicFormService, CURRENCY_FORM_MODEL);
     }
 }

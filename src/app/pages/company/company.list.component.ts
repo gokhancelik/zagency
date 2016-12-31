@@ -15,8 +15,8 @@ export class CompanyListComponent extends ListComponent<Company> {
     @ViewChild('addModal') addModal: CompanyAddComponent;
     @ViewChild('editModal') editModal: CompanyEditComponent;
     title: string = 'Companies';
-    constructor(af: AngularFire) {
-        super(af.database.list('/companies'));
+    constructor(private _service: CompanyService) {
+        super(_service);
         this.setColumns({
             id: {
                 title: 'id',

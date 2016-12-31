@@ -2,7 +2,7 @@ import {
     DynamicFormControlModel,
     DynamicCheckboxModel,
     DynamicInputModel,
-    DynamicRadioGroupModel
+    DynamicRadioGroupModel,DYNAMIC_FORM_CONTROL_INPUT_TYPE_EMAIL
 } from '@ng2-dynamic-forms/core';
 
 export const COMPANY_FORM_MODEL: Array<DynamicFormControlModel> = [

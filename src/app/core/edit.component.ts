@@ -10,9 +10,9 @@ import { AngularFire, FirebaseListObservable } from 'angularfire2';
 
 export abstract class EditComponent<T extends BaseModel> implements OnInit {
     public errorMessage: any;
-    myForm: FormGroup;
+    formGroup: FormGroup;
     formCreator: FormCreator;
-    data: any;
+    objectKey: any;
     protected model: T;
     dynamicFormModel: Array<DynamicFormControlModel>;
     @ViewChild('formModal') formModal: ModalDirective;
@@ -24,25 +24,29 @@ export abstract class EditComponent<T extends BaseModel> implements OnInit {
         private formProperties: Array<DynamicFormControlModel>) {
         if (dynamicFormService)
             this.formCreator = new FormCreator(dynamicFormService);
-    }
-    ngOnInit() {
-    }
-    open(): void {
-        if (this.myForm) {
-            this.myForm.reset();
-        }
         if (this.formProperties) {
-            this.myForm = this.formCreator.createForm(this.formProperties);
+            this.formGroup = this.formCreator.createForm(this.formProperties);
             this.dynamicFormModel = this.formCreator.createFormModel(this.formProperties);
         }
-        if (this.myForm)
-            this.myForm.patchValue(this.model);
-        this.formModal.show();
     }
-    setKey(data: any): void {
-        this.service.getByKey(data).subscribe(data => {
+    ngOnInit() {
+
+    }
+    open(): void {
+        this.service.getByKey(this.objectKey).subscribe(data => {
             this.model = data;
+            // if (this.formGroup) {
+            //     this.formGroup.reset();
+            // }
+            Object.keys(this.model).forEach(prop => {
+                if (this.formGroup.controls[prop])
+                    this.formGroup.controls[prop].setValue(this.model[prop]);
+            });
+            this.formModal.show();
         });
+    }
+    setKey(key: any): void {
+        this.objectKey = key;
     }
     close(): void {
         this.formModal.hide();

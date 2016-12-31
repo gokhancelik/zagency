@@ -16,11 +16,6 @@ export class PriceTypeListComponent extends ListComponent<PriceType> {
     @Output() onRowSelectionChanged: EventEmitter<any> = new EventEmitter();
      constructor(service: PriceTypeService) {
         super(service);
-        this.setColumns({
-            name: {
-                title: 'name',
-                type: 'string'
-            }
-        });
+        this.setColumns(PriceType.getColumns());
     }
 }

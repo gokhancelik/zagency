@@ -47,26 +47,16 @@ export const PAGES_MENU = [
         ]
       },
       {
-        path: 'productTypes',
+        path: 'tourCategories',
         data: {
           menu: {
-            title: 'Product Types',
+            title: 'Tour Category',
             icon: 'fa fa-map-signs',
             selected: false,
             expanded: false,
             order: 30
           }
-        },
-        children: [
-          {
-            path: 'list',
-            data: {
-              menu: {
-                title: 'List',
-              }
-            }
-          }
-        ]
+        }
       },
       {
         path: 'productTypeCategories',
@@ -100,17 +90,7 @@ export const PAGES_MENU = [
             expanded: false,
             order: 50
           }
-        },
-        children: [
-          {
-            path: 'list',
-            data: {
-              menu: {
-                title: 'List',
-              }
-            }
-          }
-        ]
+        }
       },
       {
         path: 'specTypes',
@@ -210,19 +190,9 @@ export const PAGES_MENU = [
             expanded: false,
             order: 100
           }
-        },
-        children: [
-          {
-            path: 'list',
-            data: {
-              menu: {
-                title: 'List',
-              }
-            }
-          }
-        ]
+        }
       },
-       {
+      {
         path: 'companies',
         data: {
           menu: {
@@ -245,11 +215,23 @@ export const PAGES_MENU = [
         ]
       },
       {
-        path: 'users/list',
+        path: 'users',
         data: {
           menu: {
             title: 'Users',
             icon: 'fa fa-user',
+            selected: false,
+            expanded: false,
+            order: 110
+          }
+        }
+      },
+      {
+        path: 'roles',
+        data: {
+          menu: {
+            title: 'Roles',
+            icon: 'fa fa-users',
             selected: false,
             expanded: false,
             order: 110

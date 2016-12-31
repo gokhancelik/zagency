@@ -18,6 +18,6 @@ export class PriceTypeAddComponent extends AddComponent<PriceType> {
     @ViewChild('formModal') formModal: ModalDirective;
     @Output() onSaved: EventEmitter<any> = new EventEmitter();
     constructor(service: PriceTypeService, dynamicFormService: DynamicFormService) {
-        super(service, PriceType, dynamicFormService, PRICETYPE_FORM_MODEL);
+        super(PriceType, dynamicFormService, service, PRICETYPE_FORM_MODEL);
     }
 }

@@ -1,4 +1,5 @@
-import { NgModule } from '@angular/core';
+import { emailValidator } from './../../theme/validators/email.validator';
+import { NgModule, forwardRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { NgaModule } from '../../theme/nga.module';
@@ -6,12 +7,13 @@ import {
     routing, UserListComponent, UserComponent,
     UserEditComponent, UserAddComponent
 } from './index';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, NG_VALIDATORS } from '@angular/forms';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import * as moment from 'moment';
 import { DropdownModule, ModalModule } from 'ng2-bootstrap/ng2-bootstrap';
 import {
-    DynamicFormsCoreModule, DynamicFormService, DynamicFormRelationService
+    DynamicFormsCoreModule, DynamicFormService, DynamicFormRelationService,
+
 } from '@ng2-dynamic-forms/core';
 import {
     DynamicFormsBootstrapUIModule
@@ -25,6 +27,12 @@ import {
     declarations: [UserListComponent, UserComponent,
         UserEditComponent, UserAddComponent
     ],
-    providers: [DynamicFormService, DynamicFormRelationService],
+    providers: [DynamicFormService, DynamicFormRelationService,
+
+        {
+            provide: NG_VALIDATORS,
+            useValue: emailValidator,
+            multi: true
+        ],
 })
 export default class UserModule { }
