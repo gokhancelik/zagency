@@ -31,20 +31,21 @@ export class TourSchedulePrice extends BaseModel {
         };
     }
     static fromJson({ $key, price, discount, priceType, priceTypeName,
-        currency, currencyName, currencySymbol}): TourSchedulePrice {
+        currency, currencyName, currencySymbol,tourSchedule}): TourSchedulePrice {
         return new TourSchedulePrice(
             $key, price, discount, priceType, priceTypeName,
-            currency, currencyName, currencySymbol);
+            currency, currencyName, currencySymbol,tourSchedule);
     }
     constructor(
-        id: string,
-        public price: number,
-        public discount: number,
-        public priceType: string,
-        public priceTypeName: string,
-        public currency: string,
-        public currencyName: string,
-        public currencySymbol: string,
+        id: string=null,
+        public price: number=0,
+        public discount: number=0,
+        public priceType: string=null,
+        public priceTypeName: string=null,
+        public currency: string=null,
+        public currencyName: string=null,
+        public currencySymbol: string=null,
+        public tourSchedule:string=null
     ) {
         super();
         this.id = id;

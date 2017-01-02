@@ -17,5 +17,26 @@ export class TourSchedulePriceService extends BaseFirebaseService<TourSchedulePr
     fromJsonList(array) {
         return Tour.fromJsonList(array);
     }
+
+    add(value: TourSchedulePrice) {
+        this.authService.getUserInfo().take(1).subscribe(user => {
+            if (user[0]) {
+                let newPostKey = this._af.list(this.getRoute()).push(null).key;
+                let updates = {};
+                updates[this.getRoute() + '/' + newPostKey] = value;
+                updates['tourschedules/' + value.tourSchedule + '/prices/' + newPostKey] = true;
+                super.firebaseUpdate(updates);
+            }
+        });
 }
+  delete(key: string): void {
+        this.getByKey(key).take(1).subscribe(
+            data => {
+                let updates = {};
+                updates[this.getRoute() + key] = null;
+                updates['/tourschedules/' + data.tourSchedule + '/prices/' + data.id] = null;
+                super.firebaseUpdate(updates);
+            }
+        );
+    }
 
