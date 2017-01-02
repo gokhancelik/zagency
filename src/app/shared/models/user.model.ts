@@ -31,22 +31,21 @@ export class User extends BaseModel {
             }
         };
     }
-    get id() {
-        return this.$key;
-    }
     static fromJson({ $key, name, phone, userName, email, company, role }): User {
         return new User(
             $key, name, phone, userName, email, company, role);
     }
     constructor(
-        public $key: string,
-        public name: string = '',
-        public phone: string = '',
-        public userName: string = '',
-        public email: string = '',
-        public company: string = '',
-        public role: string = '') {
+        id: string = null,
+        public name: string = null,
+        public phone: string = null,
+        public userName: string = null,
+        public email: string = null,
+        public company: string = null,
+        public role: string = null) {
         super();
+        this.id = id;
+
     }
 
 }

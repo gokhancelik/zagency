@@ -44,11 +44,11 @@ export class AuthService {
         return this.fromFirebaseAuthPromise(this.auth.createUser({ email, password }));
     }
     getUserInfo(): Observable<User> {
-        return this.auth.cache().switchMap(value =>
+        return this.auth.take(1).switchMap(value =>
             this.fDb.list('users', {
                 query: { orderByChild: 'email', equalTo: value.auth.email, limitToFirst: 1 }
             })
-        ).cache();
+        );
     }
     /*
      *

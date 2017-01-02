@@ -46,7 +46,7 @@ export class AddComponent<T extends BaseModel> implements OnInit {
                     return;
                 }
                 Object.keys(form.value).forEach(fv => {
-                    this.model[fv] = form.value[fv]
+                    this.model[fv] = form.value[fv];
                 });
                 this.service.add(this.model);
                 if (this.onSaved) this.onSaved.emit(this.model);

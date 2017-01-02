@@ -62,41 +62,14 @@ export class TourEditComponent extends EditComponent<Tour> {
             super.setKey(params['id']);
         });
         super.open();
-        // this.formGroup.controls['name'].valueChanges.subscribe(data => {
-        //     console.log('Form changes', data);
-        //     if (data) {
-        //         let d = <string>data;
-        //         this.formGroup.controls['urlPath'].setValue(d.toLowerCase()
-        //             .replace(/[^a-zA-Z0-9-_]/g, ''));
-        //     }
-        // });
         this.prepareImgCropper();
         super.ngOnInit();
     }
-
-    // saveTour() {
-    //     this.submitted = true;
-    //     this.tourService.update(this.model, this.model.id).subscribe(
-    //         data => {
-    //             this.submitted = false;
-    //             // this.router.navigate(['/tours/list']);
-    //         },
-    //         error => {
-    //             this.errorMessage = <any>error;
-    //             this.submitted = false;
-    //         }
-    //     );
-    // }
     onTsRowSelectionChanged(data): void {
         let tt: TourSchedule = data as TourSchedule;
         if (tt)
             this.selectedTourSchedule = tt;
     }
-    // publish(): void {
-    //     this.tourService.publish(this.model, this.model.productBaseId).subscribe(data => {
-    //         this.getTour();
-    //     });
-    // }
     prepareImgCropper() {
         let _that = this;
         this.imageSizeService.getAll().subscribe(data => {
@@ -135,6 +108,7 @@ export class TourEditComponent extends EditComponent<Tour> {
         };
         myReader.readAsDataURL(file);
     }
+    allImagesUploaded: boolean;
     uploadMainPhotos() {
         let that = this;
         that.uploaderContainer.forEach(uc => {
@@ -160,16 +134,16 @@ export class TourEditComponent extends EditComponent<Tour> {
                 }, e => {
                     console.log(e);
                 }, () => {
-                    let allCompleted = true;
+                    that.allImagesUploaded = true;
                     if (that.uploaderContainer)
                         that.uploaderContainer.forEach(
                             uc => {
                                 if (!uc.progress || uc.progress < 100) {
-                                    allCompleted = false;
+                                    that.allImagesUploaded = false;
                                 }
                             }
                         );
-                    if (allCompleted) {
+                    if (that.allImagesUploaded) {
                         that.formGroup.controls['imageUrl'].setValue(uc.fileName);
                         that.save(that.formGroup);
                         console.log("all completed");

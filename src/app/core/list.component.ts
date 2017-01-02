@@ -68,7 +68,7 @@ export class ListComponent<T extends IModel> implements OnInit {
     onDeleteConfirm(event): void {
         if (window.confirm('Are you sure you want to delete?')) {
             let tt: T = event.data as T;
-            this.service.delete(event.data.id);
+            this.service.delete(tt.id);
         }
     }
     onRowSelect(event): void {
