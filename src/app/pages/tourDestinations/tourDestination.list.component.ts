@@ -1,10 +1,10 @@
 import { Component, OnInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { TourDestinationAddComponent, TourDestinationEditComponent } from './index';
+import { TourDestination, Tour } from '../../shared/models';
 import { TourDestinationService, TourService } from '../../shared/services/index';
 import { LocalDataSource } from 'ng2-smart-table';
 import { ListComponent } from '../../core/index';
-import { TourDestination } from '../../shared/models/tourDestination.model';
 
 @Component({
     selector: 'tourDestination-list',
@@ -13,60 +13,45 @@ import { TourDestination } from '../../shared/models/tourDestination.model';
 export class TourDestinationListComponent extends ListComponent<TourDestination> {
     @ViewChild('addModal') addModal: TourDestinationAddComponent;
     @ViewChild('editModal') editModal: TourDestinationEditComponent;
-    @Input() productBaseId: number = 0;
-    title: string = 'Tour Destinations';
-    _service: TourDestinationService;
+    @Input() tour: Tour;
+    @Output() onRowSelectionChanged: EventEmitter<any> = new EventEmitter();
+    source: LocalDataSource = new LocalDataSource();
+
     constructor(
-        service: TourDestinationService,
+        private datePipe: DatePipe,
+        private tourDestinationService: TourDestinationService,
         private tourService: TourService
     ) {
-        super(service);
-        this.setColumns({
-            name: {
-                title: 'Name',
-                type: 'string'
-            },
-            latitude: {
-                title: 'Latitude',
-                type: 'number'
-            },
-            longitude: {
-                title: 'Longitude',
-                type: 'number'
-            }
-        });
-        this._service = service;
+        super(tourDestinationService);
+        this.setColumns(TourDestination.getColumns(this.datePipe));
     }
-
     getList() {
-        if (this.productBaseId) {
-            this.tourService.getTourDestinations(this.productBaseId).subscribe(schedules => {
-                this.source.load(schedules);
-            });
-        }
-        else {
-            this._service.getList().subscribe(schedules => {
-                this.source.load(schedules);
-            });
+        if (this.tour) {
+            this.tourService.getTourPrograms(this.tour.id).subscribe(
+                data => this.source.load(data)
+            );
         }
     }
-    openModal(id: number) {
-        if (id) {
-            this.editModal.setId(id);
+    openModal(key: string) {
+        if (key) {
+            this.editModal.setTour(this.tour);
+            this.editModal.setKey(key);
             this.editModal.open();
         }
         else {
-            this.addModal.setproductBaseId(this.productBaseId);
+            this.addModal.setTour(this.tour);
             this.addModal.open();
         }
     }
     onCreate(event): void {
         this.openModal(null);
-
     }
-    onSaved(event) {
-        this.getList();
+    onEdit(event): void {
+        let ts: TourDestination = event.data as TourDestination;
+        this.openModal(ts.id);
     }
-
-
+    onRowSelect(event): void {
+        let ts: TourDestination = event.data as TourDestination;
+        this.onRowSelectionChanged.emit(ts);
+    }
 }

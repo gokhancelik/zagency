@@ -37,11 +37,11 @@ export class TourSchedule extends BaseModel {
             $key, new Date(start), new Date(end), quota, tour);
     }
     constructor(
-        id: string,
-        public start: Date,
-        public end: Date,
-        public quota: number,
-        public tour: string,
+        id: string=null,
+        public start: Date=new Date(),
+        public end: Date=new Date(),
+        public quota: number=0,
+        public tour: string=null,
     ) {
         super();
         this.id = id;

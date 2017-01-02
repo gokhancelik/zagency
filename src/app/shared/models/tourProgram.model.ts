@@ -24,10 +24,10 @@ export class TourProgram extends BaseModel {
             $key, description, day, tour);
     }
     constructor(
-        id: string,
-        public description: string,
-        public day: string,
-        public tour: string,
+        id: string=null,
+        public description: string=null,
+        public day: string=null,
+        public tour: string=null,
     ) {
         super();
         this.id = id;

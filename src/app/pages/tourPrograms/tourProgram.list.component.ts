@@ -19,10 +19,10 @@ export class TourProgramListComponent extends ListComponent<TourProgram> {
 
     constructor(
         private datePipe: DatePipe,
-        private tourScheduleService: TourProgramService,
+        private touProgramService: TourProgramService,
         private tourService: TourService
     ) {
-        super(tourScheduleService);
+        super(touProgramService);
         this.setColumns(TourProgram.getColumns(this.datePipe));
     }
     getList() {

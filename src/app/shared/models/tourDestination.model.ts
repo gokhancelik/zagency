@@ -1,30 +1,41 @@
-import { IModel } from '../../core/IModel';
-export class TourDestination implements IModel {
-    id: number;
-    tourDestinationId: number;
-    name: string;
-    latitude: number;
-    longitude: number;
-    isDeleted: boolean;
-    productBaseId: number;
-    constructor(data: any = null) {
-        if (data) {
-            this.id = data.id;
-            this.tourDestinationId = data.tourDestinationId;
-            this.name = data.name;
-            this.latitude = data.latitude;
-            this.longitude = data.longitude;
-            this.isDeleted = data.isDeleted;
-            this.productBaseId = data.productBaseId;
-        }
-        else {
-            this.id = 0;
-            this.tourDestinationId = 0;
-            this.name = '';
-            this.latitude = 0;
-            this.longitude = 0;
-            this.isDeleted = false;
-            this.productBaseId = 0;
-        }
+
+import { BaseModel } from './base.model';
+import { DatePipe } from '@angular/common';
+import { Injectable, Inject } from '@angular/core';
+
+export class TourDestination extends BaseModel {
+    static fromJsonList(array): TourDestination[] {
+        return array.map(TourDestination.fromJson);
+    }
+    static getColumns(datePipe): any {
+        return {
+            name: {
+                title: 'name',
+                type: 'string'
+            },
+              latitude: {
+                title: 'latitude',
+                type: 'number'
+            },
+              longitude: {
+                title: 'longitude',
+                type: 'number'
+              }
+        };
+    }
+    static fromJson({ $key, name,latitude,longitude, tour}): TourDestination {
+        return new TourDestination(
+            $key, name, latitude, longitude,tour);
+    }
+    constructor(
+        id: string=null,
+        public name: string=null,
+        public latitude: number=0,
+        public longitude: number=0,
+        public tour: string=null,
+    ) {
+        super();
+        this.id = id;
     }
 }
+
