@@ -1,10 +1,10 @@
 import { Component, OnInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { TourProgramAddComponent, TourProgramEditComponent } from './index';
+import { TourProgram, Tour } from '../../shared/models';
 import { TourProgramService, TourService } from '../../shared/services/index';
 import { LocalDataSource } from 'ng2-smart-table';
 import { ListComponent } from '../../core/index';
-import { TourProgram } from '../../shared/models/tourProgram.model';
 
 @Component({
     selector: 'tourProgram-list',
@@ -13,56 +13,45 @@ import { TourProgram } from '../../shared/models/tourProgram.model';
 export class TourProgramListComponent extends ListComponent<TourProgram> {
     @ViewChild('addModal') addModal: TourProgramAddComponent;
     @ViewChild('editModal') editModal: TourProgramEditComponent;
-    @Input() productBaseId: number = 0;
-    title: string = 'Tour Programs';
-    _service: TourProgramService;
+    @Input() tour: Tour;
+    @Output() onRowSelectionChanged: EventEmitter<any> = new EventEmitter();
+    source: LocalDataSource = new LocalDataSource();
+
     constructor(
-        service: TourProgramService,
+        private datePipe: DatePipe,
+        private tourScheduleService: TourProgramService,
         private tourService: TourService
     ) {
-        super(service);
-        this.setColumns({
-            day: {
-                title: 'Day',
-                type: 'string'
-            },
-            description: {
-                title: 'Description',
-                type: 'string'
-            }
-        });
-        this._service = service;
+        super(tourScheduleService);
+        this.setColumns(TourProgram.getColumns(this.datePipe));
     }
-
     getList() {
-        if (this.productBaseId) {
-            this.tourService.getTourPrograms(this.productBaseId).subscribe(schedules => {
-                this.source.load(schedules);
-            });
-        }
-        else {
-            this._service.getList().subscribe(schedules => {
-                this.source.load(schedules);
-            });
+        if (this.tour) {
+            this.tourService.getTourPrograms(this.tour.id).subscribe(
+                data => this.source.load(data)
+            );
         }
     }
-    openModal(id: number) {
-        if (id) {
-            this.editModal.setId(id);
+    openModal(key: string) {
+        if (key) {
+            this.editModal.setTour(this.tour);
+            this.editModal.setKey(key);
             this.editModal.open();
         }
         else {
-            this.addModal.setproductBaseId(this.productBaseId);
+            this.addModal.setTour(this.tour);
             this.addModal.open();
         }
     }
     onCreate(event): void {
         this.openModal(null);
-
     }
-    onSaved(event) {
-        this.getList();
+    onEdit(event): void {
+        let ts: TourProgram = event.data as TourProgram;
+        this.openModal(ts.id);
     }
-
-
+    onRowSelect(event): void {
+        let ts: TourProgram = event.data as TourProgram;
+        this.onRowSelectionChanged.emit(ts);
+    }
 }
