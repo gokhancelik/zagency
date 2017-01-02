@@ -7,4 +7,4 @@ import { NgModule } from '@angular/core';
     declarations: [TourMainImageUploaderComponent],
     providers: [],
 })
-export class TourImagesModule { }
+export default class TourImagesModule { }

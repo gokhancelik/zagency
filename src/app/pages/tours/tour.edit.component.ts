@@ -1,3 +1,4 @@
+import { UploaderContainerList } from './../tourImages/uploaderContainer';
 import { ZAImageCropperComponent }
     from './../components/components/imageCropper/imageCropper.component';
 import { EditComponent } from './../../core/edit.component';
@@ -152,7 +153,9 @@ export class TourEditComponent extends EditComponent<Tour> {
                 );
         });
     }
-    completed() {
+    onMainUploadCompleted(data: UploaderContainerList) {
+        this.formGroup.controls['imageUrl'].setValue(data.containers[0].fileName);
+        this.save(this.formGroup);
         console.log('completed');
     }
 }

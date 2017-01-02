@@ -43,7 +43,7 @@
       </div>-->
       <div class="row">
         <div class="col-sm-12">
-          <ba-card title="Tour Photo" baCardClass="with-scroll">
+          <!--<ba-card title="Tour Photo" baCardClass="with-scroll">
             <div class="alert alert-info">
               <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
               <strong>Bilgi!</strong> Bu resimler uygulamanın çeşitli yerlerinde kullanılmak üzere kaydedilecek. Herbirinin
@@ -62,7 +62,8 @@
               </div>
             </div>
             <button class="btn btn-default" (click)="uploadMainPhotos()" [disabled]="!uploaderContainer?.length">Upload</button>
-          </ba-card>
+          </ba-card>-->
+          <tour-main-image-uploader [tour]="model" (onCompleted)="onMainUploadCompleted($event)"></tour-main-image-uploader>
         </div>
       </div>
     </div>
