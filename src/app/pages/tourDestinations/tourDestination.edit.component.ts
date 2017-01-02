@@ -8,7 +8,7 @@ import { TourDestination, Tour } from '../../shared/models';
 import { TourDestinationService } from '../../shared/services/index';
 import { EditComponent } from '../../core/index';
 import { DynamicFormControlModel, DynamicFormService } from '@ng2-dynamic-forms/core';
-import { TOURDESTINATION_FORM_MODEL } from './tourProgram-form.model';
+import { TOURDESTINATION_FORM_MODEL } from './tourDestination-form.model';
 @Component({
     selector: 'tourDestination-edit',
     encapsulation: ViewEncapsulation.None,

@@ -22,12 +22,12 @@ export class TourDestinationAddComponent extends AddComponent<TourDestination> {
         super(TourDestination, dynamicFormService, _service, TOURDESTINATION_FORM_MODEL);
     }
     open(): void {
-        this.model = new TourDestination(null,null,
-            null,null ,this.tour.id);
+        this.model = new TourDestination();
+        this.model.tour = this.tour.id;
         super.open();
     }
     setTour(tour: Tour): void {
         this.tour = tour;
     }
-   
+
 }

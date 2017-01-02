@@ -26,12 +26,13 @@ import {
               (change)="imageChangeListener($event)">
             </div>
             <div class="row">
+            <pre>{{container|json}}</pre>
               <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3" 
-              *ngFor="let cs of container; let i=index;">
-                <span>File: {{cs.fileName}} Size:{{cs.size}} 
+              *ngFor="let cs of container?.containers; let i=index;">
+                <span>File: {{cs.fileName}} Size:{{cs.imageSize.name}} 
                 Upload Progress: {{cs.progress}} %</span>
-                <za-image-cropper #cropper [cropperSettings]="cs.cropperSettings" 
-                [ngStyle]="{display:i===(uploaderContainer.length-1)?'block':'none'}" 
+                <za-image-cropper #cropper [cropperSettings]="cs.cropperSetting" 
+                [ngStyle]="{display:i===(container?.containers.length-1)?'block':'none'}" 
                 [data]="cs.data">
                 </za-image-cropper>
               </div>
@@ -45,9 +46,10 @@ import {
 export class TourMainImageUploaderComponent implements OnInit {
     container: UploaderContainerList;
     @Input() tour: Tour;
-    @Output() onCompleted: EventEmitter<any>;
+    @Output() onCompleted: EventEmitter<any> = new EventEmitter<any>();
     @ViewChildren('cropper') cropperChildren: QueryList<ZAImageCropperComponent>;
-    constructor(private imageSizeService: ImageSizeService, private storageService: StorageService) { }
+    constructor(private imageSizeService: ImageSizeService,
+        private storageService: StorageService) { }
     ngOnInit() {
         this.container = new UploaderContainerList();
         this.prepareImgCropper();

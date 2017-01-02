@@ -22,8 +22,8 @@ export class TourProgramAddComponent extends AddComponent<TourProgram> {
         super(TourProgram, dynamicFormService, _service, TOURPROGRAM_FORM_MODEL);
     }
     open(): void {
-        this.model = new TourProgram(null,null,
-            null ,this.tour.id);
+        this.model = new TourProgram();
+        this.model.tour = this.tour.id;
         super.open();
     }
     setTour(tour: Tour): void {
