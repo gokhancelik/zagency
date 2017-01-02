@@ -1,4 +1,5 @@
-import { ZAImageCropperComponent } from './../components/components/imageCropper/imageCropper.component';
+import { ZAImageCropperComponent }
+    from './../components/components/imageCropper/imageCropper.component';
 import { EditComponent } from './../../core/edit.component';
 import { CropperSettings } from 'ng2-img-cropper';
 import { TOUR_FORM_MODEL } from './tour-form.model';
@@ -113,7 +114,11 @@ export class TourEditComponent extends EditComponent<Tour> {
                 cropperSettings1.cropperDrawSettings.strokeColor = 'rgba(255,255,255,1)';
                 cropperSettings1.cropperDrawSettings.strokeWidth = 2;
                 cropperSettings1.noFileInput = true;
-                _that.uploaderContainer.push({ cropperSettings: cropperSettings1, data: {}, imageSize: iSize });
+                _that.uploaderContainer.push({
+                    cropperSettings: cropperSettings1,
+                    data: {},
+                    imageSize: iSize
+                });
             });
         });
     }
@@ -145,7 +150,8 @@ export class TourEditComponent extends EditComponent<Tour> {
             let blob = new Blob([ab], { type: fullType });
             let shortType = fullType.split('/')[1];
             let file = new File([blob], `${this.model.urlPath}.${shortType}`, { type: fullType });
-            this.storageService.upload(this.model.company, this.model.id, width, height, file).take(1)
+            this.storageService.upload(this.model.company,
+                this.model.id, width, height, file).take(1)
                 .subscribe(r => {
                     console.log(r);
                 });

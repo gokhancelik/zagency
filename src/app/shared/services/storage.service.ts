@@ -11,8 +11,9 @@ export class StorageService {
     upload(companyKey: string, tourKey: string, width: number, height: number, file: File) {
         let metadata = {
             contentType: 'image/jpeg'
-        }
-        let tourImagesRef = this.storageRef.child(`${companyKey}/${tourKey}/${width}x${height}/${file.name}`);
+        };
+        let tourImagesRef = this.storageRef
+            .child(`${companyKey}/${tourKey}/${width}x${height}/${file.name}`);
         const subject = new Subject();
         tourImagesRef.put(file, metadata)
             .then(

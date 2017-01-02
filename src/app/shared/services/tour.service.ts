@@ -42,13 +42,12 @@ export class TourService extends BaseFirebaseService<Tour> {
                     tss => {
                         tss.forEach(ts => {
                             updates['/tourSchedules/' + ts.id] = null;
-
-                        })
+                        });
                         super.firebaseUpdate(updates);
                     }
-                )
+                );
             }
-        )
+        );
     }
     getTourSchedules(key): Observable<TourSchedule[]> {
         const ts$ = this._af.list(`tourSchedules/`,

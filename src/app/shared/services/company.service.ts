@@ -16,7 +16,7 @@ export class CompanyService extends BaseFirebaseService<Company> {
         return Company.fromJsonList(array);
     }
     addTour(key: string, value: Tour) {
-        this._af.object('companies/' + key + '/tours/' + value.$key).set(true);
+        this._af.object('companies/' + key + '/tours/' + value.id).set(true);
     }
     addUser(key: string, childKey: string) {
         this._af.object('companies/' + key + '/users/' + childKey).set(true);

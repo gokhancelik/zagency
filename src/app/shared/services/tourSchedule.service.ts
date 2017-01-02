@@ -23,7 +23,7 @@ export class TourScheduleService extends BaseFirebaseService<TourSchedule> {
             end: value.end.getTime(),
             tour: value.tour,
             quota: value.quota,
-        }
+        };
         this._af.object(this.getRoute() + '/' + key).update(updData);
     }
 
@@ -36,7 +36,7 @@ export class TourScheduleService extends BaseFirebaseService<TourSchedule> {
                     tour: value.tour,
                     quota: value.quota,
                     company: user[0].company,
-                }
+                };
                 let newPostKey = this._af.list(this.getRoute()).push(null).key;
                 let updates = {};
                 updates[this.getRoute() + '/' + newPostKey] = newData;
@@ -53,7 +53,7 @@ export class TourScheduleService extends BaseFirebaseService<TourSchedule> {
                 updates['/tours/' + data.tour + '/schedules/' + data.id] = null;
                 super.firebaseUpdate(updates);
             }
-        )
+        );
     }
     // getTourSchedulePrices(tsId: number): Observable<TourSchedulePrice[]> {
     //     return this._af.list('tourSchedules')
