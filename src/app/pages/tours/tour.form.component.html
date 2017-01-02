@@ -35,12 +35,12 @@
         <div class="col-sm-12">
           <tourDestination-list [productBaseId]="model.productBaseId" *ngIf="model && model.productBaseId"></tourDestination-list>
         </div>
-      </div>
+      </div>-->
       <div class="row">
         <div class="col-sm-12">
-          <tourProgram-list [productBaseId]="model.productBaseId" *ngIf="model && model.productBaseId"></tourProgram-list>
+          <tourProgram-list [tour]="model" (onRowSelectionChanged)="onTsRowSelectionChanged($event)" *ngIf="model && model.id"></tourProgram-list>
         </div>
-      </div>-->
+      </div>
       <div class="row">
         <div class="col-sm-12">
           <ba-card title="Tour Photo" baCardClass="with-scroll">
