@@ -19,7 +19,7 @@ export const TOUR_FORM_MODEL: Array<DynamicFormControlModel> = [
             required: '{{label}} is required.',
         }
     }),
-     new DynamicInputModel({
+    new DynamicInputModel({
         id: 'urlPath',
         label: 'Url Path',
         maxLength: 40,
@@ -28,6 +28,13 @@ export const TOUR_FORM_MODEL: Array<DynamicFormControlModel> = [
         errorMessages: {
             required: '{{label}} is required.',
         }
+    }),
+    new DynamicInputModel({
+        id: 'imageUrl',
+        label: 'image Url',
+        maxLength: 100,
+        readOnly: true,
+        placeholder: 'image Url',
     }),
     new DynamicSelectModel(
         {

@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import {
-    routing, TourListComponent, DraftsComponent,
+    routing, TourListComponent,
     TourAddComponent, TourComponent, TourEditComponent
 } from './index';
 import { CarouselModule, ProgressbarModule, DatepickerModule } from 'ng2-bootstrap/ng2-bootstrap';
@@ -32,7 +32,7 @@ import {
         FormsModule, CarouselModule, FileUploadModule, ComponentsModule,
         ProgressbarModule, DatepickerModule, Ng2SmartTableModule, NgaModule],
     exports: [],
-    declarations: [TourListComponent, DraftsComponent,
+    declarations: [TourListComponent,
         TourComponent, TourEditComponent, TourAddComponent],
     providers: [DatePipe, DynamicFormService, DynamicFormRelationService],
 })

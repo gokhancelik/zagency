@@ -14,6 +14,10 @@ export class Tour extends BaseModel {
                 title: 'url Path',
                 type: 'string'
             },
+            imageUrl: {
+                title: 'image Url',
+                type: 'string'
+            },
             tourCategory: {
                 title: 'tour Category',
                 type: 'string'
@@ -25,14 +29,15 @@ export class Tour extends BaseModel {
 
         };
     }
-    static fromJson({ $key, name, urlPath, tourCategory, company}): Tour {
+    static fromJson({ $key, name, urlPath, imageUrl, tourCategory, company}): Tour {
         return new Tour(
-            $key, name, urlPath, tourCategory, company);
+            $key, name, urlPath, imageUrl, tourCategory, company);
     }
     constructor(
         key: string,
         public name: string,
         public urlPath: string,
+        public imageUrl: string,
         public tourCategory: string,
         public company: string
     ) {

@@ -5,6 +5,7 @@ export * from './product.model';
 export * from './productPhoto.model';
 export * from './tourProgram.model';
 export * from './tourSchedule.model';
+export * from './tourSchedulePrice.model';
 export * from './tourDestination.model';
 export * from './company.model';
 export * from './companySpec.model';

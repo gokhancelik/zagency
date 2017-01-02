@@ -54,14 +54,14 @@
               <input type="file" accept="image/jpg,image/jpeg" (change)="mainImageChangeListener($event)">
             </div>
             <div class="row">
-              <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3" *ngFor="let cs of uploaderContainer; let i=index; "  [ngStyle]="{display:i===(uploaderContainer.length-1)?'block':'none'}">
+              <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3" *ngFor="let cs of uploaderContainer; let i=index; "  >
                
-                <span>Size: {{cs.imageSize.name}}</span>
-                <za-image-cropper #cropper [cropperSettings]="cs.cropperSettings" [data]="cs.data">
+                <span>Size: {{cs.imageSize.name}} {{cs.progress}} %</span>
+                <za-image-cropper #cropper [cropperSettings]="cs.cropperSettings" [ngStyle]="{display:i===(uploaderContainer.length-1)?'block':'none'}" [data]="cs.data">
                 </za-image-cropper>
               </div>
             </div>
-            <button class="btn btn-default" (click)="uploadMainPhotos()">Upload</button>
+            <button class="btn btn-default" (click)="uploadMainPhotos()" [disabled]="!uploaderContainer?.length">Upload</button>
           </ba-card>
         </div>
       </div>

@@ -136,7 +136,8 @@ export class TourEditComponent extends EditComponent<Tour> {
         myReader.readAsDataURL(file);
     }
     uploadMainPhotos() {
-        this.uploaderContainer.forEach(uc => {
+        let that = this;
+        that.uploaderContainer.forEach(uc => {
             let width = uc.imageSize.width;
             let height = uc.imageSize.height;
             let image = uc.data.image.split(',')[1];
@@ -149,12 +150,35 @@ export class TourEditComponent extends EditComponent<Tour> {
             }
             let blob = new Blob([ab], { type: fullType });
             let shortType = fullType.split('/')[1];
-            let file = new File([blob], `${this.model.urlPath}.${shortType}`, { type: fullType });
-            this.storageService.upload(this.model.company,
-                this.model.id, width, height, file).take(1)
-                .subscribe(r => {
-                    console.log(r);
-                });
+            uc.fileName = `${that.model.urlPath}.${shortType}`;
+            let file = new File([blob], uc.fileName, { type: fullType });
+            that.storageService.upload(that.model.company,
+                that.model.id, width, height, file)
+                .on('state_changed', r => {
+                    uc.progress = (r.bytesTransferred / r.totalBytes) * 100;
+                    console.log(`${uc.progress} => ${uc.fileName} ${uc.imageSize.name}`);
+                }, e => {
+                    console.log(e);
+                }, () => {
+                    let allCompleted = true;
+                    if (that.uploaderContainer)
+                        that.uploaderContainer.forEach(
+                            uc => {
+                                if (!uc.progress || uc.progress < 100) {
+                                    allCompleted = false;
+                                }
+                            }
+                        );
+                    if (allCompleted) {
+                        that.formGroup.controls['imageUrl'].setValue(uc.fileName);
+                        that.save(that.formGroup);
+                        console.log("all completed");
+                    }
+                }
+                );
         });
+    }
+    completed() {
+        console.log('completed');
     }
 }

@@ -1,6 +1,6 @@
 import { Routes, RouterModule } from '@angular/router';
 import {
-	TourListComponent, TourComponent, DraftsComponent,
+	TourListComponent, TourComponent,
 	TourEditComponent, TourAddComponent
 } from './index';
 const TourRoutes: Routes = [
@@ -11,10 +11,6 @@ const TourRoutes: Routes = [
 			{
 				path: 'list',
 				component: TourListComponent
-			},
-			{
-				path: 'drafts',
-				component: DraftsComponent
 			},
 			{
 				path: 'edit/:id',

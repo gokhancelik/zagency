@@ -14,20 +14,20 @@ export class StorageService {
         };
         let tourImagesRef = this.storageRef
             .child(`${companyKey}/${tourKey}/${width}x${height}/${file.name}`);
-        const subject = new Subject();
-        tourImagesRef.put(file, metadata)
-            .then(
-            val => {
-                subject.next(val);
-                subject.complete();
+        //const subject = new Subject();
+        return tourImagesRef.put(file, metadata);
+            // .then(
+            // val => {
+            //     subject.next(val);
+            //     subject.complete();
 
-            },
-            err => {
-                subject.error(err);
-                subject.complete();
-            }
-            );
-        return subject.asObservable();
+            // },
+            // err => {
+            //     subject.error(err);
+            //     subject.complete();
+            // }
+            // );
+        //return subject.asObservable();
     }
 
 }

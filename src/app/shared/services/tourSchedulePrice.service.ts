@@ -1,27 +1,21 @@
-import { Injectable } from '@angular/core';
-import { Http, Response, Headers, RequestOptions } from '@angular/http';
-import { Observable } from 'rxjs/Observable';
-import { TourSchedulePrice } from '../../pages/tourSchedulePrice/tourSchedulePrice.model';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
-import { BaseService } from '../../../app/core/index';
-
-/**
- * This class provides the NameList service with methods to read names and add names.
- */
+import { AuthService } from './../../security/auth.service';
+import { Tour, TourSchedule, TourSchedulePrice } from '../models';
+import { CompanyService } from './';
+import { Injectable, Inject } from '@angular/core';
+import { Observable } from 'rxjs/Rx';
+import { AngularFireDatabase, FirebaseRef } from 'angularfire2';
+import { BaseFirebaseService } from './base.firebase.service';
 @Injectable()
-export class TourSchedulePriceService extends BaseService<TourSchedulePrice> {
-
-    API_URL: string = 'http://zagency.azurewebsites.net/api/v0.1/TourSchedulePrices';
-    _http: Http;
-    /**
-     * Creates a new NameListService with the injected Http.
-     * @param {Http} http - The injected Http.
-     * @constructor
-     */
-    constructor(http: Http) {
-        super(http, 'http://zagency.azurewebsites.net/api/v0.1/TourSchedulePrices');
-        this._http = http;
+export class TourSchedulePriceService extends BaseFirebaseService<TourSchedulePrice> {
+    constructor(private _af: AngularFireDatabase, private authService: AuthService,
+        @Inject(FirebaseRef) fb) {
+        super(_af, 'tours', fb);
+    }
+    fromJson(obj) {
+        return Tour.fromJson(obj);
+    }
+    fromJsonList(array) {
+        return Tour.fromJsonList(array);
     }
 }
 
