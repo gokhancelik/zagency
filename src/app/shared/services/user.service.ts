@@ -31,7 +31,7 @@ export class UserService extends BaseFirebaseService<User> {
         return users$;
     }
     add(value: User): void {
-        this.authService.getUserInfo().take(1).subscribe(
+        this.authService.getUserInfo().subscribe(
             user => {
                 if (user[0]) {
                     value.company = user[0].company;
