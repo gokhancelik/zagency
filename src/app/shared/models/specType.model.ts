@@ -1,24 +1,39 @@
-import { IModel } from '../../core/IModel';
-export class SpecType implements IModel {
-    id: number;
-    name: string;
-    code: string;
-    group: string;
-    specTypeId: number;
-    constructor(data = null) {
-        if (data) {
-            this.id = data.id;
-            this.name = data.name;
-            this.group = data.group;
-            this.code = data.code;
-            this.specTypeId = data.specTypeId;
-        }
-        else {
-            this.id = 0;
-            this.name = '';
-            this.group = '';
-            this.code = '';
-            this.specTypeId = 0;
-        }
+import { BaseModel } from './base.model';
+export class SpecType extends BaseModel {
+    static fromJsonList(array): SpecType[] {
+        return array.map(SpecType.fromJson);
     }
+    static getColumns(): any {
+        return {
+            name: {
+                title: 'name',
+                type: 'string'
+            },
+             group: {
+                title: 'group',
+                type: 'string'
+            },
+             code: {
+                title: 'code',
+                type: 'string'
+            }
+        };
+    }
+    get id() {
+        return this.$key;
+    }
+    static fromJson({ $key, name,group,code}): SpecType {
+        return new SpecType(
+            $key, name,group,code);
+    }
+    constructor(
+        public $key: string=null,
+        public name: string=null,
+        public group: string=null,
+        public code: string=null) 
+        {
+        super();
+    }
+
 }
+

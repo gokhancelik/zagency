@@ -33,6 +33,7 @@ import {
             provide: NG_VALIDATORS,
             useValue: emailValidator,
             multi: true
+        }
         ],
 })
 export default class UserModule { }
