@@ -29,30 +29,30 @@ export class TourProgramService extends BaseFirebaseService<TourProgram> {
     add(value: TourProgram) {
         // this.authService.getUserInfo().take(1).subscribe(user => {
         //     if (user[0]) {
-                // let newData = {
-                //     description: value.description,
-                //     day: value.day,
-                //     tour: value.tour,
-                //     company: user[0].company,
-                // };
-                let newPostKey = this._af.list(this.getRoute()).push(null).key;
-                let updates = {};
-                updates[this.getRoute() + '/' + newPostKey] = value;
-                updates['tours/' + value.tour + '/programs/' + newPostKey] = true;
-                super.firebaseUpdate(updates);
+        // let newData = {
+        //     description: value.description,
+        //     day: value.day,
+        //     tour: value.tour,
+        //     company: user[0].company,
+        // };
+        let newPostKey = this._af.list(this.getRoute()).push(null).key;
+        let updates = {};
+        updates[this.getRoute() + '/' + newPostKey] = value;
+        updates['tours/' + value.tour + '/programs/' + newPostKey] = true;
+        super.firebaseUpdate(updates);
 
     }
     delete(key: string): void {
         this.getByKey(key).take(1).subscribe(
             data => {
                 let updates = {};
-                updates[this.getRoute() + key] = null;
+                updates[this.getRoute() + '/' + key] = null;
                 updates['/tours/' + data.tour + '/programs/' + data.id] = null;
                 super.firebaseUpdate(updates);
             }
         );
     }
-   
-   
+
+
 }
 

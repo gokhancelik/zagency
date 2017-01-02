@@ -49,7 +49,7 @@ export class TourScheduleService extends BaseFirebaseService<TourSchedule> {
         this.getByKey(key).take(1).subscribe(
             data => {
                 let updates = {};
-                updates[this.getRoute() + key] = null;
+                updates[this.getRoute() + '/' + key] = null;
                 updates['/tours/' + data.tour + '/schedules/' + data.id] = null;
                 super.firebaseUpdate(updates);
             }

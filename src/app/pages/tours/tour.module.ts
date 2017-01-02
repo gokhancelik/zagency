@@ -14,7 +14,6 @@ import TourSchedulePriceModule from '../tourSchedulePrice/tourSchedulePrice.modu
 import TourScheduleSpecModule from '../tourScheduleSpecs/tourScheduleSpec.module';
 import TourDestinationModule from '../tourDestinations/tourDestination.module';
 import EditorsModule from '../editors/editors.module';
-import ComponentsModule from '../components/components.module';
 import { FileUploadModule } from 'ng2-file-upload/ng2-file-upload';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { NgaModule } from '../../theme/nga.module';
@@ -30,7 +29,7 @@ import {
         DynamicFormsBootstrapUIModule, RouterModule, TourScheduleModule, TourSchedulePriceModule,
         TourProgramModule, TourDestinationModule, TourImagesModule,
         CommonModule, EditorsModule, TourScheduleSpecModule,
-        FormsModule, CarouselModule, FileUploadModule, ComponentsModule,
+        FormsModule, CarouselModule, FileUploadModule,
         ProgressbarModule, DatepickerModule, Ng2SmartTableModule, NgaModule],
     exports: [],
     declarations: [TourListComponent,
