@@ -23,9 +23,9 @@ export class CurrencyType extends BaseModel {
             $key, name, symbol);
     }
     constructor(
-        public $key: string,
-        public name: string,
-        public symbol: string) {
+        public $key: string=null,
+        public name: string=null,
+        public symbol: string=null) {
         super();
     }
 

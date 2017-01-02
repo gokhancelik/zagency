@@ -19,8 +19,8 @@ export class PriceType extends BaseModel {
             $key, name);
     }
     constructor(
-        public $key: string,
-        public name: string) {
+        public $key: string=null,
+        public name: string=null) {
         super();
     }
 
