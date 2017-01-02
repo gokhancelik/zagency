@@ -14,10 +14,10 @@ export const COMPANYSPEC_FORM_MODEL: Array<DynamicFormControlModel> = [
         required: true
     }),
     new DynamicInputModel({
-        id: 'specTypeId',
-        label: 'Spec Type',
-        placeholder: 'Spec Type',
-        inputType: 'number',
+        id: 'name',
+        label: 'name',
+        placeholder: 'name',
+        inputType: 'string',
         required: true
     }),
 ];
