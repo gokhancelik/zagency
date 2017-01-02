@@ -8,6 +8,7 @@ import {
 import { CarouselModule, ProgressbarModule, DatepickerModule } from 'ng2-bootstrap/ng2-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import TourScheduleModule from '../tourSchedule/tourSchedule.module';
+import TourImagesModule from '../tourImages/tourImages.module';
 import TourProgramModule from '../tourPrograms/tourProgram.module';
 import TourSchedulePriceModule from '../tourSchedulePrice/tourSchedulePrice.module';
 import TourScheduleSpecModule from '../tourScheduleSpecs/tourScheduleSpec.module';
@@ -27,7 +28,7 @@ import {
 @NgModule({
     imports: [routing, DynamicFormsCoreModule, ReactiveFormsModule,
         DynamicFormsBootstrapUIModule, RouterModule, TourScheduleModule, TourSchedulePriceModule,
-        TourProgramModule, TourDestinationModule,
+        TourProgramModule, TourDestinationModule, TourImagesModule,
         CommonModule, EditorsModule, TourScheduleSpecModule,
         FormsModule, CarouselModule, FileUploadModule, ComponentsModule,
         ProgressbarModule, DatepickerModule, Ng2SmartTableModule, NgaModule],

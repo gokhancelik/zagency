@@ -17,7 +17,7 @@ export class UploaderContainer {
         public data: any = null,
         public fileName: string = '',
         public progress: number = 0,
-        public size: string = null,
+        public imageSize: any = null,
     ) {
     }
 }
@@ -46,7 +46,7 @@ export class UploaderContainerList {
     constructor(
         public containers: Array<UploaderContainer> = new Array<UploaderContainer>()
     ) {
-
+        
     }
 }
 export enum UploaderStatus {
