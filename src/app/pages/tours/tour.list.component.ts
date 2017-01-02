@@ -10,32 +10,11 @@ import { ListComponent } from '../../core/index';
     templateUrl: 'tour.list.component.html'
 })
 export class TourListComponent extends ListComponent<Tour> {
-    // list: Array<Tour>;
-    // errorMessage: string;
-    // loading: boolean;
-    // source: LocalDataSource = new LocalDataSource();
-    // settings = {
-    //     add: {
-    //         confirmCreate: true,
-    //     },
-    //     edit: {
-    //         confirmSave: true,
+    title: string = 'Tours';
 
-    //     },
-    //     delete: {
-    //         confirmDelete: true
-    //     },
-    //     columns: {
-    //         name: {
-    //             title: 'Name',
-    //             type: 'string'
-    //         }
-    //     },
-    //     mode: 'external'
-
-    // };
     constructor(private tourService: TourService, private router: Router) {
         super(tourService);
+        this.setColumns(Tour.getColumns());
     }
     // ngOnInit() {
     //     this.getList();
@@ -60,12 +39,11 @@ export class TourListComponent extends ListComponent<Tour> {
 
     //     }
     // };
-    // onCreate(event): void {
-    //     this.router.navigate(['pages/tours/new']);
-
-    // }
-    // onEdit(event): void {
-    //     let tt: Tour = event.data as Tour;
-    //     this.router.navigate(['pages/tours/edit/' + tt.productBaseId]);
-    // }
+    onCreate(event): void {
+        this.router.navigate(['pages/tours/newTour']);
+    }
+    onEdit(event): void {
+        let tt: Tour = event.data as Tour;
+        this.router.navigate(['pages/tours/edit/' + tt.id]);
+    }
 }

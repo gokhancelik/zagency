@@ -115,26 +115,16 @@ export const PAGES_MENU = [
         ]
       },
       {
-        path: 'photoLocationTypes',
+        path: 'imageSizes',
         data: {
           menu: {
-            title: 'Photo Locations',
-            icon: 'fa fa-img',
+            title: 'Image Sizes',
+            icon: 'fa fa-picture-o',
             selected: false,
             expanded: false,
             order: 70
           }
-        },
-        children: [
-          {
-            path: 'list',
-            data: {
-              menu: {
-                title: 'List',
-              }
-            }
-          }
-        ]
+        }
       },
       {
         path: 'companySpecs',

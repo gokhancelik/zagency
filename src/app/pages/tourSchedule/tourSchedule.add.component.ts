@@ -3,7 +3,7 @@ import {
     ViewChild, Output, EventEmitter
 } from '@angular/core';
 import { ModalDirective } from 'ng2-bootstrap';
-import { TourSchedule } from '../../shared/models';
+import { TourSchedule, Tour } from '../../shared/models';
 import { TourScheduleService } from '../../shared/services/index';
 import { AddComponent } from '../../core/add.component';
 import { DynamicFormControlModel, DynamicFormService } from '@ng2-dynamic-forms/core';
@@ -17,18 +17,23 @@ export class TourScheduleAddComponent extends AddComponent<TourSchedule> {
     @ViewChild('formModal') formModal: ModalDirective;
     @Output() onSaved: EventEmitter<any> = new EventEmitter();
     model: TourSchedule;
-    productBaseId: number;
-    private _service: TourScheduleService;
-    constructor(service: TourScheduleService, dynamicFormService: DynamicFormService) {
-        super(service, TourSchedule, dynamicFormService, TOURSCHEDULE_FORM_MODEL);
-        this._service = service;
+    tour: Tour;
+    constructor(private _service: TourScheduleService, dynamicFormService: DynamicFormService) {
+        super(TourSchedule, dynamicFormService, _service, TOURSCHEDULE_FORM_MODEL);
     }
     open(): void {
-        this.model = new TourSchedule();
-        this.model.productBaseId = this.productBaseId;
+        this.model = new TourSchedule(null, new Date(),
+            new Date(), 0, this.tour.id);
         super.open();
     }
-    setproductBaseId(productBaseId: number): void {
-        this.productBaseId = productBaseId;
+    setTour(tour: Tour): void {
+        this.tour = tour;
+    }
+    save(model: TourSchedule) {
+        if (model) {
+            this._service.add(model);
+            if (this.onSaved) this.onSaved.emit();
+            if (this.formModal) this.formModal.hide();
+        }
     }
 }

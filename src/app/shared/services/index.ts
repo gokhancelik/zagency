@@ -10,10 +10,11 @@ export * from './tourProgram.service';
 export * from './tourDestination.service';
 export * from './tourSchedulePrice.service';
 export * from './tourScheduleSpec.service';
-export * from './photoLocation.service';
+export * from './imageSize.service';
 export * from './company.service';
 export * from './user.service';
 export * from './role.service';
 export * from './companySpec.service';
+export * from './storage.service';
 export * from './google.geoCoding.service';
 

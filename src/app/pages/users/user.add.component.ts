@@ -9,13 +9,11 @@ import { User, Role } from '../../shared/models/';
 import { UserService, RoleService } from '../../shared/services/';
 import {
     DynamicFormControlModel, DynamicFormService,
-    DynamicFormOption, DynamicFormOptionConfig
+    DynamicFormOption, DynamicFormOptionConfig, DynamicSelectModel
 } from '@ng2-dynamic-forms/core';
 import { FormGroup } from '@angular/forms';
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
-import {
-    DynamicSelectModel,
-} from '@ng2-dynamic-forms/core';
+
 @Component({
     selector: 'user-add',
     encapsulation: ViewEncapsulation.None,
@@ -25,7 +23,6 @@ import {
 export class UserAddComponent extends AddComponent<User>  {
     productBaseId: number;
     _af: AngularFire;
-    myDynamicFormModel: Array<DynamicFormControlModel> = USER_FORM_MODEL;
     @ViewChild('formModal') formModal: ModalDirective;
     @Output() onSaved: EventEmitter<any> = new EventEmitter();
     constructor(dynamicFormService: DynamicFormService, private _service: UserService,
@@ -37,10 +34,10 @@ export class UserAddComponent extends AddComponent<User>  {
                 _roleService.getAll().subscribe(data => {
                     data.forEach(r => {
                         // if (r.name !== 'superadmin') {
-                            let s = new DynamicFormOption<any>(
-                                { value: r.$key, label: r.name, disabled: r.name === 'superadmin' }
-                            );
-                            select.options.push(s);
+                        let s = new DynamicFormOption<any>(
+                            { value: r.$key, label: r.name, disabled: r.name === 'superadmin' }
+                        );
+                        select.options.push(s);
                         // }
                     });
                 });

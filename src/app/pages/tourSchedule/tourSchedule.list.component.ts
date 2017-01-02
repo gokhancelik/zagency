@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { TourScheduleAddComponent, TourScheduleEditComponent } from './index';
-import { TourSchedule } from '../../shared/models';
+import { TourSchedule, Tour } from '../../shared/models';
 import { TourScheduleService, TourService } from '../../shared/services/index';
 import { LocalDataSource } from 'ng2-smart-table';
 import { ListComponent } from '../../core/index';
@@ -13,7 +13,7 @@ import { ListComponent } from '../../core/index';
 export class TourScheduleListComponent extends ListComponent<TourSchedule> {
     @ViewChild('addModal') addModal: TourScheduleAddComponent;
     @ViewChild('editModal') editModal: TourScheduleEditComponent;
-    @Input() productBaseId: number = 0;
+    @Input() tour: Tour;
     @Output() onRowSelectionChanged: EventEmitter<any> = new EventEmitter();
     source: LocalDataSource = new LocalDataSource();
 
@@ -23,63 +23,35 @@ export class TourScheduleListComponent extends ListComponent<TourSchedule> {
         private tourService: TourService
     ) {
         super(tourScheduleService);
-        this.setColumns({
-            start: {
-                title: 'Start',
-                type: 'Date',
-                valuePrepareFunction: (value) => {
-                    let raw = new Date(value);
-                    let formatted = this.datePipe.transform(raw, 'dd.MM.yyyy');
-                    return formatted;
-                }
-            },
-            end: {
-                title: 'End',
-                type: 'Date',
-                valuePrepareFunction: (value) => {
-                    let raw = new Date(value);
-                    let formatted = this.datePipe.transform(raw, 'dd.MM.yyyy');
-                    return formatted;
-                }
-            },
-            quota: {
-                title: 'Quota',
-                type: 'number'
-            }
-        });
+        this.setColumns(TourSchedule.getColumns(this.datePipe));
     }
     getList() {
-        if (this.productBaseId) {
-            this.tourService.getTourSchedules(this.productBaseId).subscribe(schedules => {
-                this.source.load(schedules);
-            });
-        }
-        else {
-            this.tourScheduleService.getList().subscribe(schedules => {
-                this.source.load(schedules);
-            });
+        if (this.tour) {
+            this.tourService.getTourSchedules(this.tour.id).subscribe(
+                data => this.source.load(data)
+            );
         }
     }
-    openModal(id: number) {
-        if (id) {
-            this.editModal.setId(id);
+    openModal(key: string) {
+        if (key) {
+            this.editModal.setTour(this.tour);
+            this.editModal.setKey(key);
             this.editModal.open();
         }
         else {
-            this.addModal.setproductBaseId(this.productBaseId);
+            this.addModal.setTour(this.tour);
             this.addModal.open();
         }
     }
     onCreate(event): void {
         this.openModal(null);
-
     }
     onEdit(event): void {
-        let tt: TourSchedule = event.data as TourSchedule;
-        this.openModal(tt.tourScheduleId);
+        let ts: TourSchedule = event.data as TourSchedule;
+        this.openModal(ts.id);
     }
     onRowSelect(event): void {
-        let tt: TourSchedule = event.data as TourSchedule;
-        this.onRowSelectionChanged.emit(tt);
+        let ts: TourSchedule = event.data as TourSchedule;
+        this.onRowSelectionChanged.emit(ts);
     }
 }

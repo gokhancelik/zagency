@@ -5,7 +5,7 @@ import {
     DynamicRadioGroupModel
 } from '@ng2-dynamic-forms/core';
 
-export const PHOTOLOCATION_FORM_MODEL: Array<DynamicFormControlModel> = [
+export const IMAGESIZE_FORM_MODEL: Array<DynamicFormControlModel> = [
 
     new DynamicInputModel({
         id: 'name',
@@ -26,5 +26,11 @@ export const PHOTOLOCATION_FORM_MODEL: Array<DynamicFormControlModel> = [
         placeholder: 'Width',
         inputType: 'number',
         required: true
-    })
+    }),
+     new DynamicInputModel({
+        id: 'type',
+        label: 'Type',
+        placeholder: 'Type',
+        required: true
+    }),
 ];

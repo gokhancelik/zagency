@@ -1,43 +1,31 @@
-<div class="widgets" *ngIf="model">
+<div class="widgets">
   <div class="row">
     <div class="col-sm-12">
       <div class="row">
         <div class="col-sm-12">
           <ba-card title="Tour Info" baCardClass="with-scroll">
-            <button type="button" class="btn btn-success" (click)="publish(model)" [ngClass]="{'btn-success': model.isTemp, 'btn-danger': !model.isTemp}">{{model.isTemp?'Publish':'Remove'}}</button>
-            <form (ngSubmit)="saveTour()" #tourForm="ngForm">
-              <div class="form-group">
-                <label for="name">Name</label>
-                <input type="text" name="name" [(ngModel)]="model.name" class="form-control" id="name" placeholder="Enter tour name">
-              </div>
-              <div class="form-group">
-                <ckeditor-component [(ckeditorContent)]="model.description" [title]="'General Information About Tour'"></ckeditor-component>
-              </div>
-              <div class="form-group">
-                <label for="productType">Tour Type</label>
-                <select name="productType" class="form-control" id="productType" [(ngModel)]="model.productTypeId">
-                                <option *ngFor="let productType of productTypes" [value]="productType.productTypeId">{{productType.name}}</option>
-                            </select>
-              </div>
-              <button type="submit" class="btn btn-default" *ngIf="tourForm.form.dirty" [disabled]="!tourForm.form.valid || submitted">Save Changes</button>
+            <form [formGroup]="formGroup" (ngSubmit)="save(formGroup)" *ngIf="dynamicFormModel">
+              <dynamic-form-bootstrap-control *ngFor="let controlModel of dynamicFormModel" [controlGroup]="formGroup" [model]="controlModel"
+                [hasErrorMessaging]="controlModel.hasErrorMessages"></dynamic-form-bootstrap-control>
+              <button class="btn btn-default" *ngIf="formGroup.dirty" [disabled]="!formGroup.valid || submitted">Save Changes</button>
             </form>
-            <pre>{{model|json}}</pre>
           </ba-card>
         </div>
       </div>
-      <div class="row">
+      <!--<div class="row">
         <div class="col-sm-12">
           <productPhoto-list [productBaseId]="model.productBaseId" *ngIf="model && model.productBaseId"></productPhoto-list>
         </div>
-      </div>
+      </div>-->
       <div class="row">
         <div class="col-sm-12 col-md-6">
-          <tourSchedule-list [productBaseId]="model.productBaseId" (onRowSelectionChanged)="onTsRowSelectionChanged($event)" *ngIf="model && model.productBaseId"></tourSchedule-list>
+          <tourSchedule-list [tour]="model" (onRowSelectionChanged)="onTsRowSelectionChanged($event)" *ngIf="model && model.id"></tourSchedule-list>
         </div>
-        <div class="col-sm-12 col-md-6">
+        <!--<div class="col-sm-12 col-md-6">
           <tourSchedulePrice-list [tourScheduleId]="selectedTourScheduleId" *ngIf="selectedTourScheduleId"></tourSchedulePrice-list>
-        </div>
+        </div>-->
       </div>
+      <!--
       <div class="row">
         <div class="col-sm-12">
           <tourScheduleSpec-list [tourScheduleId]="selectedTourScheduleId" *ngIf="selectedTourScheduleId"></tourScheduleSpec-list>
@@ -51,6 +39,30 @@
       <div class="row">
         <div class="col-sm-12">
           <tourProgram-list [productBaseId]="model.productBaseId" *ngIf="model && model.productBaseId"></tourProgram-list>
+        </div>
+      </div>-->
+      <div class="row">
+        <div class="col-sm-12">
+          <ba-card title="Tour Photo" baCardClass="with-scroll">
+            <div class="alert alert-info">
+              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+              <strong>Bilgi!</strong> Bu resimler uygulamanın çeşitli yerlerinde kullanılmak üzere kaydedilecek. Herbirinin
+              boyutları farklı olmakla birlikte buradaki en büyük boyutu referans alarak yükleme yapınız. Performans sebebiyle
+              sadece JPEG formatındaki resimler kabul edilmektedir.
+            </div>
+            <div class="file-upload">
+              <input type="file" accept="image/jpg,image/jpeg" (change)="mainImageChangeListener($event)">
+            </div>
+            <div class="row">
+              <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3" *ngFor="let cs of uploaderContainer; let i=index; "  [ngStyle]="{display:i===(uploaderContainer.length-1)?'block':'none'}">
+               
+                <span>Size: {{cs.imageSize.name}}</span>
+                <za-image-cropper #cropper [cropperSettings]="cs.cropperSettings" [data]="cs.data">
+                </za-image-cropper>
+              </div>
+            </div>
+            <button class="btn btn-default" (click)="uploadMainPhotos()">Upload</button>
+          </ba-card>
         </div>
       </div>
     </div>

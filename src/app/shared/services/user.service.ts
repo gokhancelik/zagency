@@ -11,8 +11,7 @@ export class UserService extends BaseFirebaseService<User> {
     constructor(private afAuth: AngularFireAuth,
         private _af: AngularFireDatabase, private companyService: CompanyService,
         private authService: AuthService, @Inject(FirebaseRef) fb) {
-        super(_af, 'users');
-        this.sdkDb = fb.database().ref();
+        super(_af, 'users', fb);
     }
     fromJson(obj) {
         return User.fromJson(obj);
@@ -32,15 +31,15 @@ export class UserService extends BaseFirebaseService<User> {
         return users$;
     }
     add(value: User): void {
-        this.authService.getUserInfo().subscribe(
+        this.authService.getUserInfo().take(1).subscribe(
             user => {
                 if (user[0]) {
                     value.company = user[0].company;
                     let newPostKey = this._af.list('users').push(null).key;
                     let updates = {};
                     updates['/users/' + newPostKey] = value;
-                    updates['/companies/' + user[0].company + '/' + newPostKey] = true;
-                    this.firebaseUpdate(updates);
+                    updates['/companies/' + user[0].company + '/users/' + newPostKey] = true;
+                    super.firebaseUpdate(updates);
                 }
             }
         );
@@ -63,24 +62,7 @@ export class UserService extends BaseFirebaseService<User> {
             }
         );
     }
-    firebaseUpdate(dataToSave) {
-        const subject = new Subject();
 
-        this.sdkDb.update(dataToSave)
-            .then(
-            val => {
-                subject.next(val);
-                subject.complete();
-
-            },
-            err => {
-                subject.error(err);
-                subject.complete();
-            }
-            );
-
-        return subject.asObservable();
-    }
 
     delete(key: string) {
         this.authService.getUserInfo().subscribe(

@@ -16,7 +16,7 @@ export abstract class EditComponent<T extends BaseModel> implements OnInit {
     protected model: T;
     dynamicFormModel: Array<DynamicFormControlModel>;
     @ViewChild('formModal') formModal: ModalDirective;
-    @Output() abstract onSaved: EventEmitter<any>;
+    @Output() onSaved: EventEmitter<any>;
     constructor(
         private modelType,
         private service: BaseFirebaseService<T>,
@@ -42,16 +42,17 @@ export abstract class EditComponent<T extends BaseModel> implements OnInit {
                 if (this.formGroup.controls[prop])
                     this.formGroup.controls[prop].setValue(this.model[prop]);
             });
-            this.formModal.show();
+            if (this.formModal) this.formModal.show();
         });
     }
     setKey(key: any): void {
         this.objectKey = key;
     }
     close(): void {
-        this.formModal.hide();
+        if (this.formModal)
+            this.formModal.hide();
     }
-    save(form: FormGroup) {
+    save(form: any) {
         if (form) {
             if (form.value) {
                 if (!form.valid) {

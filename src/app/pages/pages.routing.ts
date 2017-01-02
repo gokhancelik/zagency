@@ -62,8 +62,8 @@ const routes: Routes = [
         loadChildren: () => System.import('./currencyTypes/currencyType.module')
       },
       {
-        path: 'photoLocationTypes',
-        loadChildren: () => System.import('./photoLocationTypes/photoLocation.module')
+        path: 'imageSizes',
+        loadChildren: () => System.import('./imageSizes/imageSize.module')
       },
       {
         path: 'roles',

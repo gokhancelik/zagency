@@ -1,5 +1,0 @@
-export * from './photoLocation.add.component'
-export * from './photoLocation.edit.component'
-export * from './photoLocation.list.component'
-export * from './photoLocation.routing'
-export * from './photoLocation.component'

@@ -34,10 +34,10 @@ export class AddComponent<T extends BaseModel> implements OnInit {
             this.model = new this.modelType();
         if (this.formGroup)
             this.formGroup.patchValue(this.model);
-        this.formModal.show();
+        if (this.formModal) this.formModal.show();
     }
     close(): void {
-        this.formModal.hide();
+        if (this.formModal) this.formModal.hide();
     }
     save(form) {
         if (form) {
@@ -46,8 +46,8 @@ export class AddComponent<T extends BaseModel> implements OnInit {
                     return;
                 }
                 this.service.add(form.value);
-                this.onSaved.emit();
-                this.formModal.hide();
+                if (this.onSaved) this.onSaved.emit(this.model);
+                if (this.formModal) this.formModal.hide();
             }
         }
     }

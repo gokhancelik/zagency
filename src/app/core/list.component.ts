@@ -63,12 +63,12 @@ export class ListComponent<T extends IModel> implements OnInit {
     onSaved(event) {
     }
     onEdit(event): void {
-        this.openFormModal(event.data.$key);
+        this.openFormModal(event.data.id);
     }
     onDeleteConfirm(event): void {
         if (window.confirm('Are you sure you want to delete?')) {
             let tt: T = event.data as T;
-            this.service.delete(event.data.$key);
+            this.service.delete(event.data.id);
         }
     }
     onRowSelect(event): void {

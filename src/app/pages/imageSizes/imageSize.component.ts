@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-    moduleId: module.id,
-    selector: 'photoLocation-cmp',
+    selector: 'imageSize-cmp',
     template: '<router-outlet></router-outlet>'
 })
-export class PhotoLocationComponent implements OnInit {
+export class ImageSizeComponent implements OnInit {
     constructor() { }
 
     ngOnInit() { }

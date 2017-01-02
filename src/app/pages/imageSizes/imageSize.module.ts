@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import {
-    routing, PhotoLocationAddComponent,
-    PhotoLocationEditComponent, PhotoLocationComponent, PhotoLocationListComponent
+    routing, ImageSizeAddComponent,
+    ImageSizeEditComponent, ImageSizeComponent, ImageSizeListComponent
 } from './index';
 import { CarouselModule, ProgressbarModule, DatepickerModule } from 'ng2-bootstrap/ng2-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -24,8 +24,8 @@ import {
         CarouselModule, ReactiveFormsModule, DynamicFormsBootstrapUIModule,
         FileUploadModule, ProgressbarModule, DatepickerModule, DynamicFormsCoreModule,
         Ng2SmartTableModule, NgProgressModule, NgaModule],
-    exports: [PhotoLocationAddComponent, PhotoLocationEditComponent, PhotoLocationListComponent],
-    declarations: [PhotoLocationAddComponent, PhotoLocationEditComponent, PhotoLocationListComponent],
+    exports: [ImageSizeAddComponent, ImageSizeEditComponent, ImageSizeListComponent],
+    declarations: [ImageSizeAddComponent, ImageSizeEditComponent, ImageSizeListComponent],
     providers: [DynamicFormService, DynamicFormRelationService],
 })
-export default class PhotoLocationModule { }
+export default class ImageSizeModule { }
