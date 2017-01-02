@@ -1,25 +1,60 @@
-import { Injectable } from '@angular/core';
-import { Http, Response, Headers, RequestOptions } from '@angular/http';
-import { Observable } from 'rxjs/Observable';
-import { CompanySpec } from '../../shared/models';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
-import { BaseService } from '../../../app/core/index';
-
-/**
- * This class provides the NameList service with methods to read names and add names.
- */
+import { AuthService } from './../../security/auth.service';
+import { CompanySpec, Company } from '../models';
+import { CompanyService } from './';
+import { Injectable, Inject } from '@angular/core';
+import { Observable } from 'rxjs/Rx';
+import { AngularFireDatabase, FirebaseRef } from 'angularfire2';
+import { BaseFirebaseService } from './base.firebase.service';
 @Injectable()
-export class CompanySpecService extends BaseService<CompanySpec> {
-
-    API_URL: string = 'http://zagency.azurewebsites.net/api/v0.1/CompanySpecs';
-    /**
-     * Creates a new NameListService with the injected Http.
-     * @param {Http} http - The injected Http.
-     * @constructor
-     */
-    constructor(http: Http) {
-        super(http, 'http://zagency.azurewebsites.net/api/v0.1/CompanySpecs');
+export class CompanySpecService extends BaseFirebaseService<CompanySpec> {
+    constructor(private _af: AngularFireDatabase, private authService: AuthService,
+        @Inject(FirebaseRef) fb) {
+        super(_af, 'companySpecs', fb);
     }
+    fromJson(obj) {
+        return CompanySpec.fromJson(obj);
+    }
+    fromJsonList(array) {
+        return CompanySpec.fromJsonList(array);
+    }
+    update(key: string, value: CompanySpec): void {
+        let updData = {
+            description: value.description,
+            name: value.name,
+            company: value.company
+        };
+        this._af.object(this.getRoute() + '/' + key).update(updData);
+    }
+
+    add(value: CompanySpec) {
+        // this.authService.getUserInfo().take(1).subscribe(user => {
+        //     if (user[0]) {
+                // let newData = {
+                //     description: value.description,
+                //     day: value.day,
+                //     tour: value.tour,
+                //     company: user[0].company,
+                // };
+                let newPostKey = this._af.list(this.getRoute()).push(null).key;
+                let updates = {};
+                updates[this.getRoute() + '/' + newPostKey] = value;
+                updates['companies/' + value.company + '/specs/' + newPostKey] = true;
+                super.firebaseUpdate(updates);
+
+    }
+    delete(key: string): void {
+        this.getByKey(key).take(1).subscribe(
+            data => {
+                let updates = {};
+                updates[this.getRoute() + key] = null;
+                updates['/companies/' + data.company + '/specs/' + data.id] = null;
+                super.firebaseUpdate(updates);
+            }
+        );
+    }
+   
+   
 }
+
+
 
