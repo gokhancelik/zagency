@@ -36,4 +36,5 @@ export class TourScheduleAddComponent extends AddComponent<TourSchedule> {
             if (this.formModal) this.formModal.hide();
         }
     }
+    
 }

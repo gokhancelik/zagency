@@ -1,6 +1,5 @@
 export * from './tourSchedulePrice.add.component'
 export * from './tourSchedulePrice.edit.component'
 export * from './tourSchedulePrice.list.component'
-export * from './tourSchedulePrice.model'
 export * from './tourSchedulePrice.routing'
 export * from './tourSchedulePrice.component'

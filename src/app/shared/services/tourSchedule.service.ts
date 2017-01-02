@@ -56,9 +56,10 @@ export class TourScheduleService extends BaseFirebaseService<TourSchedule> {
         );
     }
     getTourSchedulePrices(key): Observable<TourSchedulePrice[]> {
+        // select * from tourscheduleprice where tourScheduleId = key
         const ts$ = this._af.list(`tourSchedulePrices/`,
-            { query: { orderByChild: 'tour', equalTo: key } })
-            .map(TourSchedule.fromJsonList);
+            { query: { orderByChild: 'tourSchedule', equalTo: key } })
+            .map(TourSchedulePrice.fromJsonList);
         return ts$;
     }
     // getTourSchedulePrices(tsId: number): Observable<TourSchedulePrice[]> {

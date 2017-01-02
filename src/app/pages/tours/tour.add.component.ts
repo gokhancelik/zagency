@@ -33,7 +33,7 @@ export class TourAddComponent extends AddComponent<Tour> {
                     data.forEach(r => {
                         // if (r.name !== 'superadmin') {
                         let s = new DynamicFormOption<any>(
-                            { value: r.$key, label: r.name, disabled: r.name === 'superadmin' }
+                            { value: r.$key, label: r.name }
                         );
                         select.options.push(s);
                         // }
