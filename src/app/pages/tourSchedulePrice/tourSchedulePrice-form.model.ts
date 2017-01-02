@@ -2,27 +2,67 @@ import {
     DynamicFormControlModel,
     DynamicCheckboxModel,
     DynamicInputModel,
-    DynamicRadioGroupModel
+    DynamicRadioGroupModel,
+    DynamicSelectModel
 } from '@ng2-dynamic-forms/core';
 
 export const TOURSCHEDULEPRICE_FORM_MODEL: Array<DynamicFormControlModel> = [
     new DynamicInputModel({
-        id: 'quota',
+        id: 'price',
         inputType: 'number',
-        label: 'Available Seats',
-        placeholder: 'Available Seats',
+        label: 'Price',
+        placeholder: 'Price',
         required: true
     }),
     new DynamicInputModel({
-        inputType: 'datetime',
-        id: 'start',
-        label: 'Start',
-        required: true
+        id: 'discount',
+        inputType: 'number',
+        label: 'Discount',
+        placeholder: 'Discount',
+    }),
+    new DynamicSelectModel(
+        {
+            id: 'currency',
+            label: 'Currency',
+            required: true,
+            errorMessages: {
+                required: '{{label}} is required.',
+            }
+        }
+    ),
+    new DynamicInputModel({
+        id: 'currencySymbol',
+        inputType: 'string',
+        label: 'currency Symbol',
+        readOnly: true
     }),
     new DynamicInputModel({
-        inputType: 'datetime',
-        id: 'end',
-        label: 'End',
-        required: true
-    })
+        id: 'currencyName',
+        inputType: 'string',
+        label: 'currency Name',
+        readOnly: true
+    }),
+    new DynamicSelectModel(
+        {
+            id: 'priceType',
+            label: 'Price Type',
+            required: true,
+            errorMessages: {
+                required: '{{label}} is required.',
+            }
+        }
+    ),
+    new DynamicInputModel({
+        id: 'priceTypeName',
+        inputType: 'string',
+        label: 'price Type Name',
+        readOnly: true
+    }),
+    // new DynamicInputModel({
+    //     id: 'tourSchedule',
+    //     inputType: 'string',
+    //     label: 'schedule',
+    //     readOnly: true,
+    //     disabled: true
+    // }),
 ];

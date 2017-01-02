@@ -25,7 +25,7 @@ import {
     encapsulation: ViewEncapsulation.None
 })
 export class TourEditComponent extends EditComponent<Tour> {
-    selectedTourScheduleId: number = 0;
+    selectedTourSchedule: TourSchedule;
     uploaderContainer: Array<any>;
     @ViewChildren('cropper') cropperChildren: QueryList<ZAImageCropperComponent>;
     constructor(
@@ -90,7 +90,7 @@ export class TourEditComponent extends EditComponent<Tour> {
     onTsRowSelectionChanged(data): void {
         let tt: TourSchedule = data as TourSchedule;
         if (tt)
-            this.selectedTourScheduleId = tt.id;
+            this.selectedTourSchedule = tt;
     }
     // publish(): void {
     //     this.tourService.publish(this.model, this.model.productBaseId).subscribe(data => {

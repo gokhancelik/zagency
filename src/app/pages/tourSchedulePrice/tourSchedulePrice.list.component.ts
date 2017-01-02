@@ -4,10 +4,11 @@ import {
 } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import {
-    TourSchedulePrice, TourSchedulePriceAddComponent,
+    TourSchedulePriceAddComponent,
     TourSchedulePriceEditComponent
 } from './index';
 import { TourScheduleService, TourSchedulePriceService } from '../../shared/services/index';
+import { TourSchedulePrice, TourSchedule } from '../../shared/models';
 import { LocalDataSource } from 'ng2-smart-table';
 import { ListComponent } from '../../core/index';
 
@@ -20,7 +21,7 @@ export class TourSchedulePriceListComponent
     implements OnChanges {
     @ViewChild('addModal') addModal: TourSchedulePriceAddComponent;
     @ViewChild('editModal') editModal: TourSchedulePriceEditComponent;
-    @Input() tourScheduleId: number = 0;
+    @Input() tourSchedule: TourSchedule;
     @Output() onRowSelectionChanged: EventEmitter<any> = new EventEmitter();
     loading: boolean = false;
     constructor(
@@ -29,54 +30,32 @@ export class TourSchedulePriceListComponent
         private tourSchedulePriceService: TourSchedulePriceService
     ) {
         super(tourSchedulePriceService);
-        this.setColumns({
-            price: {
-                title: 'Price',
-                type: 'number'
-            },
-            discount: {
-                title: 'Discount',
-                type: 'number'
-            },
-            priceTypeName: {
-                title: 'Price Type',
-                type: 'string'
-            },
-            currencyTypeName: {
-                title: 'Currency',
-                type: 'string'
-            },
-        });
+        this.setColumns(TourSchedulePrice.getColumns());
     }
     ngOnInit() {
-        this.getList();
+
     }
     ngOnChanges(changes) {
         this.getList();
     }
     getList() {
         this.loading = true;
-        if (this.tourScheduleId) {
-            this.tourScheduleService.getTourSchedulePrices(this.tourScheduleId)
+        let that = this;
+        if (this.tourSchedule) {
+            this.tourScheduleService.getTourSchedulePrices(this.tourSchedule.id)
                 .subscribe(schedulePrices => {
-                    this.source.load(schedulePrices);
-                    this.loading = false;
+                    that.source.load(schedulePrices);
+                    that.loading = false;
                 });
         }
-        else {
-            this.tourSchedulePriceService.getList().subscribe(schedules => {
-                this.source.load(schedules);
-                this.loading = false;
-            });
-        }
     }
-    openModal(id: number) {
-        if (id) {
-            this.editModal.setId(id);
+    openModal(data: TourSchedulePrice) {
+        if (data) {
+            this.editModal.setKey(data.id);
             this.editModal.open();
         }
         else {
-            this.addModal.setTourScheduleId(this.tourScheduleId);
+            this.addModal.setTourSchedule(this.tourSchedule);
             this.addModal.open();
         }
     }
@@ -86,6 +65,6 @@ export class TourSchedulePriceListComponent
     }
     onEdit(event): void {
         let tt: TourSchedulePrice = event.data as TourSchedulePrice;
-        this.openModal(tt.tourSchedulePriceId);
+        this.openModal(tt);
     }
 }

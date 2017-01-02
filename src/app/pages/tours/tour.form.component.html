@@ -21,9 +21,9 @@
         <div class="col-sm-12 col-md-6">
           <tourSchedule-list [tour]="model" (onRowSelectionChanged)="onTsRowSelectionChanged($event)" *ngIf="model && model.id"></tourSchedule-list>
         </div>
-        <!--<div class="col-sm-12 col-md-6">
-          <tourSchedulePrice-list [tourScheduleId]="selectedTourScheduleId" *ngIf="selectedTourScheduleId"></tourSchedulePrice-list>
-        </div>-->
+        <div class="col-sm-12 col-md-6">
+          <tourSchedulePrice-list [tourSchedule]="selectedTourSchedule" *ngIf="selectedTourSchedule"></tourSchedulePrice-list>
+        </div>
       </div>
       <!--
       <div class="row">
