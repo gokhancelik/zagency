@@ -12,7 +12,7 @@ import { TOURPROGRAM_FORM_MODEL } from './tourProgram-form.model';
 @Component({
     selector: 'tourProgram-edit',
     encapsulation: ViewEncapsulation.None,
-    templateUrl: 'tourProgram.form.component.html'
+    templateUrl: '../../core/form.component.html'
 
 })
 export class TourProgramEditComponent extends EditComponent<TourProgram> {
