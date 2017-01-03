@@ -21,8 +21,9 @@ export class CompanySpecAddComponent extends AddComponent<CompanySpec> {
     constructor(private _service: CompanySpecService, dynamicFormService: DynamicFormService) {
         super(CompanySpec, dynamicFormService, _service, COMPANYSPEC_FORM_MODEL);
     }
-    ngOnInit(){
-        this.open();
+    ngOnInit() {
+        if (this.company)
+            this.open();
     }
     open(): void {
         this.model = new CompanySpec();
