@@ -1,4 +1,5 @@
 import { Route, RouterModule } from '@angular/router';
+import {CanActivateCompanyEdit} from '../../security/guards/companyEdit.guard';
 
 import {
 	CompanyListComponent, CompanyComponent,
@@ -16,7 +17,8 @@ export const CompanyRoutes: Route[] = [
 			},
 			{
 				path: 'edit/:id',
-				component: CompanyEditComponent
+				component: CompanyEditComponent,
+				canActivate:[CanActivateCompanyEdit]
 			},
 			{
 				path: 'newCompany',
