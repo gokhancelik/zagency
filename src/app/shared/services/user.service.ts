@@ -45,22 +45,22 @@ export class UserService extends BaseFirebaseService<User> {
         );
     }
     update(key: string, value: User): void {
-        this.authService.getUserInfo().subscribe(
-            user => {
-                if (user[0]) {
-                    value.company = user.user.company;
-                    // let updates = {};
-                    // TODO: implement many to many
-                    // if (value.role) {
-                    //     updates['/roles/' + value.role + '/users/' + value.$key] = true;
-                    // }
+        // this.authService.getUserInfo().subscribe(
+        //     user => {
+        //         if (user.user) {
+        //             value.company = user.user.company;
+        //             // let updates = {};
+        //             // TODO: implement many to many
+        //             // if (value.role) {
+        //             //     updates['/roles/' + value.role + '/users/' + value.$key] = true;
+        //             // }
                     this._af.object(super.getRoute() + '/' + key).update(value);
 
                     // updates['/users/' + key] = value;
                     // this.firebaseUpdate(updates);
-                }
-            }
-        );
+        //         }
+        //     }
+        // );
     }
 
 

@@ -65,6 +65,7 @@ export abstract class EditComponent<T extends BaseModel> implements OnInit {
                 if (!form.valid) {
                     return;
                 }
+                console.log(form.value);
                 this.service.update(this.model.id, form.value);
             }
         }
