@@ -83,28 +83,6 @@ export const PAGES_MENU = [
         }
       },
       {
-        path: 'companySpecs',
-        data: {
-          menu: {
-            title: 'Company Specs',
-            icon: 'fa fa-info',
-            selected: false,
-            expanded: false,
-            order: 80
-          }
-        },
-        children: [
-          {
-            path: 'list',
-            data: {
-              menu: {
-                title: 'List',
-              }
-            }
-          }
-        ]
-      },
-      {
         path: 'tourScheduleSpecs',
         data: {
           menu: {

@@ -1,12 +1,10 @@
-import { Route, RouterModule } from '@angular/router';
-import {CanActivateCompanyEdit} from '../../security/guards/companyEdit.guard';
-
+import { Route, RouterModule, Routes } from '@angular/router';
+import { CanActivateCompanyEdit } from '../../security/guards/companyEdit.guard';
 import {
 	CompanyListComponent, CompanyComponent,
 	CompanyEditComponent, CompanyAddComponent
 } from './index';
-
-export const CompanyRoutes: Route[] = [
+export const COMPANY_ROUTES: Routes = [
 	{
 		path: '',
 		component: CompanyComponent,
@@ -18,14 +16,14 @@ export const CompanyRoutes: Route[] = [
 			{
 				path: 'edit/:id',
 				component: CompanyEditComponent,
-				canActivate:[CanActivateCompanyEdit]
+				canActivate: [CanActivateCompanyEdit]
 			},
 			{
 				path: 'newCompany',
-				component: CompanyAddComponent
+				component: CompanyAddComponent,
 			}
 
 		]
 	}
 ];
-export const routing = RouterModule.forChild(CompanyRoutes);
+export const routing = RouterModule.forChild(COMPANY_ROUTES);

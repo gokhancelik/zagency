@@ -10,7 +10,7 @@ export abstract class BaseFirebaseService<BaseModel> implements IService<BaseMod
         this._sdkDb = _fb ? _fb.database().ref() : null;
     }
     getAll(): Observable<BaseModel[]> {
-        return this.af.list(this._route, { query: { orderByChild: 'width' } })
+        return this.af.list(this._route)
             .map(this.fromJsonList);
     }
     public getRoute(): string {
