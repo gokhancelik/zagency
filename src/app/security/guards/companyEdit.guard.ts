@@ -11,7 +11,14 @@ export  class CanActivateCompanyEdit implements CanActivate {
       route: ActivatedRouteSnapshot,
       state: RouterStateSnapshot
     ): Observable<boolean>|Promise<boolean>|boolean {
-      console.log(route.params);
-      return true;
+       return this.authService.getUserInfo()
+            .map(authInfo => authInfo[0] && authInfo[0].company == route.params["id"])
+            .take(1)
+            .do(allowed => {
+                if (!allowed) {
+                    this.router.navigate(['/login']);
+                }
+            });
+
     }
   }

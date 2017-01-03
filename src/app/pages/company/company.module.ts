@@ -6,6 +6,7 @@ import {
     routing, CompanyListComponent, CompanyComponent,
     CompanyEditComponent, CompanyAddComponent
 } from './index';
+import {CanActivateCompanyEdit} from '../../security/guards/companyEdit.guard';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import * as moment from 'moment';
@@ -27,6 +28,6 @@ import {
     declarations: [CompanyListComponent, CompanyComponent,
         CompanyEditComponent, CompanyAddComponent
     ],
-    providers: [DynamicFormService, DynamicFormRelationService],
+    providers: [DynamicFormService, DynamicFormRelationService,CanActivateCompanyEdit],
 })
 export default class CompanyModule { }
