@@ -59,7 +59,7 @@
     "rxjs": "5.0.0-beta.12",
     "tether": "^1.2.4",
     "zone.js": "~0.7.1",
-    "@types/jasmine": "^2.2.34"// TO dev
+    "@types/jasmine": "^2.2.34"
   },
   "devDependencies": {
     "angular2-router-loader": "^0.3.4",
