@@ -52,9 +52,4 @@ export class CompanySpecService extends BaseFirebaseService<CompanySpec> {
             }
         );
     }
-   
-   
 }
-
-
-

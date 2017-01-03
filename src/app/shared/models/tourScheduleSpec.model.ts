@@ -1,35 +1,34 @@
 import { BaseModel } from './base.model';
+import { DatePipe } from '@angular/common';
+import { Injectable, Inject } from '@angular/core';
+
 export class TourScheduleSpec extends BaseModel {
     static fromJsonList(array): TourScheduleSpec[] {
         return array.map(TourScheduleSpec.fromJson);
     }
     static getColumns(): any {
         return {
-            id: {
-                title: 'id',
-                type: 'string'
-            },
             description: {
                 title: 'description',
                 type: 'string'
             },
-            specTypeId: {
-                title: 'specType',
+            specTypeName: {
+                title: 'specTypeName',
                 type: 'string'
             }
         };
     }
-    get id() {
-        return this.$key;
-    }
-    static fromJson({ $key, description, specTypeId}): TourScheduleSpec {
-        return new TourScheduleSpec($key, description, specTypeId);
+    static fromJson({ $key, description, specTypeName, tourSchedule}): TourScheduleSpec {
+        return new TourScheduleSpec(
+            $key, description, specTypeName,tourSchedule);
     }
     constructor(
-        public $key: string,
-        public description: string,
-        public specTypeId: string) {
+        id: string = null,
+        public description: string = null,
+        public specTypeName: string = null,
+        public tourSchedule: string = null
+    ) {
         super();
+        this.id = id;
     }
-
 }

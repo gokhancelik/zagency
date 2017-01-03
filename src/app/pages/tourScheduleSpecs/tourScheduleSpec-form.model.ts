@@ -2,6 +2,7 @@ import {
     DynamicFormControlModel,
     DynamicCheckboxModel,
     DynamicInputModel,
+    DynamicSelectModel,
     DynamicRadioGroupModel
 } from '@ng2-dynamic-forms/core';
 
@@ -14,10 +15,26 @@ export const TOURSCHEDULESPEC_FORM_MODEL: Array<DynamicFormControlModel> = [
         required: true
     }),
     new DynamicInputModel({
-        id: 'specTypeId',
-        label: 'Spec Type',
-        placeholder: 'Spec Type',
-        inputType: 'number',
+        id: 'name',
+        label: 'name',
+        placeholder: 'name',
+        inputType: 'string',
         required: true
     }),
+    new DynamicSelectModel(
+        {
+            id: 'spectype',
+            label: 'Spectype',
+            required: true,
+            errorMessages: {
+                required: '{{spectype}} is required.',
+            }
+        }
+    ),
+    new DynamicInputModel({
+        id: 'spectypeName',
+        inputType: 'string',
+        label: 'spec Type Name',
+        readOnly: true
+    })
 ];

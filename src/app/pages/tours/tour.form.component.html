@@ -24,21 +24,27 @@
         <div class="col-sm-12 col-md-6">
           <tourSchedulePrice-list [tourSchedule]="selectedTourSchedule" *ngIf="selectedTourSchedule"></tourSchedulePrice-list>
         </div>
+         
       </div>
-      <!--
       <div class="row">
         <div class="col-sm-12">
-          <tourScheduleSpec-list [tourScheduleId]="selectedTourScheduleId" *ngIf="selectedTourScheduleId"></tourScheduleSpec-list>
+          <tourScheduleSpec-list [tourSchedule]="selectedTourSchedule" *ngIf="selectedTourSchedule"></tourScheduleSpec-list>
         </div>
       </div>
-      <div class="row">
+      <!--<div class="row">
         <div class="col-sm-12">
-          <tourDestination-list [productBaseId]="model.productBaseId" *ngIf="model && model.productBaseId"></tourDestination-list>
+          
+          <tourScheduleSpec-list [tourScheduleId]="selectedTourScheduleId" *ngIf="selectedTourScheduleId"></tourScheduleSpec-list>
         </div>
       </div>-->
       <div class="row">
         <div class="col-sm-12">
-          <tourProgram-list [tour]="model" (onRowSelectionChanged)="onTsRowSelectionChanged($event)" *ngIf="model && model.id"></tourProgram-list>
+          <tourDestination-list [tour]="model" *ngIf="model && model.id"></tourDestination-list>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <tourProgram-list [tour]="model" *ngIf="model && model.id"></tourProgram-list>
         </div>
       </div>
       <div class="row">

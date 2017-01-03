@@ -12,10 +12,10 @@ export class TourSchedulePriceService extends BaseFirebaseService<TourSchedulePr
         super(_af, 'tourSchedulePrices', fb);
     }
     fromJson(obj) {
-        return Tour.fromJson(obj);
+        return TourSchedulePrice.fromJson(obj);
     }
     fromJsonList(array) {
-        return Tour.fromJsonList(array);
+        return TourSchedulePrice.fromJsonList(array);
     }
 
     add(value: TourSchedulePrice) {

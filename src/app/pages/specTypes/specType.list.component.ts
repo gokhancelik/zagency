@@ -1,8 +1,11 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
 import { SpecTypeAddComponent, SpecTypeEditComponent } from './index';
-import { SpecTypeService } from '../../shared/services/index';
-import { ListComponent } from '../../core/index';
 import { SpecType } from '../../shared/models';
+import { SpecTypeService } from '../../shared/services/index';
+import { LocalDataSource } from 'ng2-smart-table';
+import { NgProgressService } from 'ng2-progressbar';
+import { ListComponent } from '../../core/index';
+
 @Component({
     selector: 'specType-list',
     templateUrl: 'specType.list.component.html'
@@ -10,21 +13,9 @@ import { SpecType } from '../../shared/models';
 export class SpecTypeListComponent extends ListComponent<SpecType> {
     @ViewChild('addModal') addModal: SpecTypeAddComponent;
     @ViewChild('editModal') editModal: SpecTypeEditComponent;
-    constructor(service: SpecTypeService) {
+    @Output() onRowSelectionChanged: EventEmitter<any> = new EventEmitter();
+     constructor(service: SpecTypeService) {
         super(service);
-        this.setColumns({
-            name: {
-                title: 'Name',
-                type: 'string'
-            },
-            code: {
-                title: 'Code',
-                type: 'string'
-            },
-            group: {
-                title: 'Group',
-                type: 'string'
-            }
-        });
+        this.setColumns(SpecType.getColumns());
     }
 }
