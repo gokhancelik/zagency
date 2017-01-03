@@ -24,7 +24,7 @@ export class UserService extends BaseFirebaseService<User> {
             {
                 query: {
                     orderByChild: 'company',
-                    equalTo: user.company
+                    equalTo: user.user.company
                 }
             }))
             .map(this.fromJsonList);
@@ -48,7 +48,7 @@ export class UserService extends BaseFirebaseService<User> {
         this.authService.getUserInfo().subscribe(
             user => {
                 if (user[0]) {
-                    value.company = user[0].company;
+                    value.company = user.user.company;
                     // let updates = {};
                     // TODO: implement many to many
                     // if (value.role) {
@@ -69,7 +69,7 @@ export class UserService extends BaseFirebaseService<User> {
             user => {
                 if (user[0]) {
                     this._af.object('users' + '/' + key).remove();
-                    this.companyService.removeUser(user[0].company, key);
+                    this.companyService.removeUser(user.user.company, key);
                 }
             }
         );

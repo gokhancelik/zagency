@@ -46,22 +46,21 @@ export class AuthService {
     signUp(email, password) {
         return this.fromFirebaseAuthPromise(this.auth.createUser({ email, password }));
     }
-    getUserInfo(): Observable<CurrentUser[]> {
-        let user$ = this.auth.take(1)
-            .switchMap(value =>
-                this.fDb.list('users', {
-                    query: { orderByChild: 'email', equalTo: value.auth.email, limitToFirst: 1 }
-                })).map(CurrentUser.fromJsonList);
-        user$.subscribe(d => console.log(d));
-
-        user$.switchMap(user =>
-
-            this.fDb.list('roles', {
-                query: { orderByKey: true, equalTo: user[0] ? user[0].role : "", limitToFirst: 1 }
-            }).map(Role.fromJsonList)
-        ).subscribe(d => console.log(d));
-        return user$;
-
+    getUserInfo(): Observable<CurrentUser> {
+        let auth$ = this.auth.take(1);
+        let user$ = auth$.switchMap(value =>
+            this.fDb.list('users', {
+                query: { orderByChild: 'email', equalTo: value.auth.email, limitToFirst: 1 }
+            })).map(User.fromJsonList).flatMap(list => list).first();
+        let userWithRole$ =
+            user$.switchMap(user =>
+                this.fDb.list('roles', {
+                    query: { orderByKey: true, equalTo: user ? user.role : "", limitToFirst: 1 }
+                })
+                    .flatMap(list => list).first()
+                    .map((role) => ({ role, user }))
+            );
+        return userWithRole$.map(CurrentUser.fromJson);
     }
     /*
      *

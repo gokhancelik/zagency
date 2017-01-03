@@ -8,8 +8,9 @@ export class LoggedInGuard implements CanActivate {
     }
     canActivate(route: ActivatedRouteSnapshot,
         state: RouterStateSnapshot): Observable<boolean> {
+            this.authService.getUserInfo().subscribe(console.log);
         return this.authService.getUserInfo()
-            .map(authInfo => authInfo[0] && authInfo[0].company != null)
+            .map(authInfo => authInfo && authInfo.user.company != null)
             .take(1)
             .do(allowed => {
                 if (!allowed) {
