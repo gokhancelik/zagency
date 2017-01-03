@@ -30,7 +30,6 @@ export abstract class EditComponent<T extends BaseModel> implements OnInit {
         }
     }
     ngOnInit() {
-
     }
     open(): void {
         let that = this;

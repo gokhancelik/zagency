@@ -4,7 +4,7 @@ import { Injectable } from "@angular/core";
 import { AuthService } from "../auth.service";
 
 @Injectable()
-export class CanActivateUserEdit implements CanActivate {
+export class CanActivateUserEdit implements CanActivate   {
   constructor(private authService: AuthService, private router: Router) { }
 
   canActivate(
@@ -19,7 +19,8 @@ export class CanActivateUserEdit implements CanActivate {
       .do(allowed => {
         console.log(allowed)
         if (!allowed) {
-          this.router.navigate(['/login']);
+            // window.confirm('Yetkiniz Bulunmamaktadır...');
+           this.router.navigate(['/login']);
         }
       });
 

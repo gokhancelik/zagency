@@ -1,6 +1,9 @@
 <ba-card title="{{title}}" [loading]="loading" baCardClass="with-scroll">
+  <a [routerLink]="[{ outlets: { aside: ['playlist'] } }]">Contact</a>
+  <!--<a [routerLink]="[{ outlets: { edit: ['1'] } }]">Contact</a>-->
   <ng2-smart-table [settings]="settings" (create)="onCreate($event)" (edit)="onEdit($event)" [source]="source" (delete)="onDeleteConfirm($event)"
     (rowSelect)="onRowSelect($event)"></ng2-smart-table>
 </ba-card>
 <user-add #addModal (onSaved)="onSaved($event)"></user-add>
-<user-edit #editModal (onSaved)="onSaved($event)"></user-edit>
+<!--<user-edit #editModal (onSaved)="onSaved($event)"></user-edit>-->
+

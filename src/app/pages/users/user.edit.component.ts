@@ -10,19 +10,25 @@ import { FormGroup } from '@angular/forms';
 import { USER_FORM_MODEL } from './user-form.model';
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
 import { UserService } from '../../shared/services/';
+import { CanActivateUserEdit } from '../../security/guards/userEdit.guard';
 
 @Component({
     selector: 'user-edit',
     encapsulation: ViewEncapsulation.None,
     templateUrl: '../../core/form.component.html'
 })
+// @CanActivateUserEdit((next:any, previous:any)=> {
+//     console.log(next);console.log(previous);return true;
+// })
 export class UserEditComponent extends EditComponent<User> {
     @ViewChild('formModal') formModal: ModalDirective;
     @Output() onSaved: EventEmitter<any> = new EventEmitter();
     constructor(dynamicFormService: DynamicFormService, private _service: UserService) {
         super(User, _service, dynamicFormService, USER_FORM_MODEL);
     }
-    
+    ngOnInit() {
+        this.open();
+    }
     // save(form: FormGroup) {
     //     if (form) {
     //         if (form.value) {

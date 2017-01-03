@@ -33,12 +33,12 @@ export class UserService extends BaseFirebaseService<User> {
     add(value: User): void {
         this.authService.getUserInfo().subscribe(
             user => {
-                if (user[0]) {
-                    value.company = user[0].company;
+                if (user && user.user) {
+                    value.company = user.user.company;
                     let newPostKey = this._af.list('users').push(null).key;
                     let updates = {};
                     updates['/users/' + newPostKey] = value;
-                    updates['/companies/' + user[0].company + '/users/' + newPostKey] = true;
+                    updates['/companies/' + user.user.company + '/users/' + newPostKey] = true;
                     super.firebaseUpdate(updates);
                 }
             }

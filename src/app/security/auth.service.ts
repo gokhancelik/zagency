@@ -23,7 +23,12 @@ export class AuthService {
             }));
     }
     login(email, password): Observable<FirebaseAuthState> {
-        return this.fromFirebaseAuthPromise(this.auth.login({ email, password }));
+        return this.fromFirebaseAuthPromise(this.auth.login({ email, password }
+            ,
+            {
+                provider: AuthProviders.Password,
+                method: AuthMethods.Password,
+            }));
     }
     loginWthFacebook(): Observable<FirebaseAuthState> {
         return this.fromFirebaseAuthPromise(this.auth.login({
