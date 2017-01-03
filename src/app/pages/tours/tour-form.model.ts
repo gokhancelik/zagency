@@ -45,5 +45,10 @@ export const TOUR_FORM_MODEL: Array<DynamicFormControlModel> = [
                 required: '{{label}} is required.',
             }
         }
-    )
+    ),
+    new DynamicInputModel({
+
+        id: 'description',
+        label: 'Description'
+    })
 ];

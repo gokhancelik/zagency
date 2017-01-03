@@ -29,9 +29,9 @@ export class Tour extends BaseModel {
 
         };
     }
-    static fromJson({ $key, name, urlPath, imageUrl, tourCategory, company}): Tour {
+    static fromJson({ $key, name, urlPath, imageUrl, tourCategory, company, description}): Tour {
         return new Tour(
-            $key, name, urlPath, imageUrl, tourCategory, company);
+            $key, name, urlPath, imageUrl, tourCategory, company, description);
     }
     constructor(
         key: string,
@@ -39,7 +39,8 @@ export class Tour extends BaseModel {
         public urlPath: string,
         public imageUrl: string,
         public tourCategory: string,
-        public company: string
+        public company: string,
+        public description: string
     ) {
         super();
         this.id = key;

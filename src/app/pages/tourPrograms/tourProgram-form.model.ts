@@ -2,7 +2,8 @@ import {
     DynamicFormControlModel,
     DynamicCheckboxModel,
     DynamicInputModel,
-    DynamicRadioGroupModel
+    DynamicRadioGroupModel,
+    DynamicTextAreaModel
 } from '@ng2-dynamic-forms/core';
 
 export const TOURPROGRAM_FORM_MODEL: Array<DynamicFormControlModel> = [
@@ -13,7 +14,7 @@ export const TOURPROGRAM_FORM_MODEL: Array<DynamicFormControlModel> = [
         placeholder: 'Day',
         required: true
     }),
-    new DynamicInputModel({
+    new DynamicTextAreaModel({
 
         id: 'description',
         label: 'Description'
