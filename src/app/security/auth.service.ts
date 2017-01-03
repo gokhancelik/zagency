@@ -1,4 +1,3 @@
-import { Observable } from 'rxjs/Rx';
 import { Role } from './../shared/models/role.model';
 import { RoleService } from './../shared/services/role.service';
 import { CurrentUser } from './currentUser.model';

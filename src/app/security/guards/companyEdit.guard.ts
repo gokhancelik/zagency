@@ -11,12 +11,9 @@ export class CanActivateCompanyEdit implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean> | Promise<boolean> | boolean {
-    this.authService.getUserInfo().take(1).do(allowed => {
-      console.log(allowed)
-    });
+
     return this.authService.getUserInfo()
       .map(authInfo => authInfo[0] && authInfo[0].company == route.params["id"])
-      //.map(authInfo => authInfo)
       .take(1)
       .do(allowed => {
         console.log(allowed)
