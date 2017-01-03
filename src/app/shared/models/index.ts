@@ -8,6 +8,7 @@ export * from './tourSchedule.model';
 export * from './tourSchedulePrice.model';
 export * from './tourDestination.model';
 export * from './company.model';
+export * from './companyService.model';
 export * from './companySpec.model';
 export * from './tourScheduleSpec.model';
 export * from './productType.model';

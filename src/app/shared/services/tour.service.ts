@@ -1,5 +1,6 @@
+import { TourDestination } from './../models/tourDestination.model';
 import { AuthService } from './../../security/auth.service';
-import { Tour, TourSchedule,TourProgram } from '../models';
+import { Tour, TourSchedule, TourProgram } from '../models';
 import { CompanyService } from './';
 import { Injectable, Inject } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
@@ -56,11 +57,17 @@ export class TourService extends BaseFirebaseService<Tour> {
             .map(TourSchedule.fromJsonList);
         return ts$;
     }
-      getTourPrograms(key): Observable<TourProgram[]> {
+    getTourPrograms(key): Observable<TourProgram[]> {
         const tp$ = this._af.list(`tourPrograms/`,
             { query: { orderByChild: 'tour', equalTo: key } })
             .map(TourProgram.fromJsonList);
         return tp$;
+    }
+    getTourDestinations(key): Observable<TourDestination[]> {
+        const td$ = this._af.list(`tourDestinations/`,
+            { query: { orderByChild: 'tour', equalTo: key } })
+            .map(TourDestination.fromJsonList);
+        return td$;
     }
 }
 

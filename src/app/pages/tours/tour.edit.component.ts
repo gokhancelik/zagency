@@ -1,4 +1,4 @@
-import { UploaderContainerList } from './../tourImages/uploaderContainer';
+import { UploaderContainerList } from './../components/components/imageCropper/uploaderContainer';
 import { EditComponent } from './../../core/edit.component';
 import { CropperSettings } from 'ng2-img-cropper';
 import { TOUR_FORM_MODEL } from './tour-form.model';
@@ -6,7 +6,6 @@ import {
     Component, OnInit, Input, ViewEncapsulation,
     ViewChildren, QueryList
 } from '@angular/core';
-import { DatePipe } from '@angular/common';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Tour, TourSchedule } from '../../shared/models';
 import {
@@ -68,88 +67,6 @@ export class TourEditComponent extends EditComponent<Tour> {
         if (tt)
             this.selectedTourSchedule = tt;
     }
-    // prepareImgCropper() {
-    //     let _that = this;
-    //     this.imageSizeService.getAll().subscribe(data => {
-    //         _that.uploaderContainer = new Array<any>();
-    //         data.forEach(iSize => {
-    //             let cropperSettings1 = new CropperSettings();
-    //             cropperSettings1.width = iSize.width;
-    //             cropperSettings1.height = iSize.height;
-    //             cropperSettings1.canvasWidth = 400;
-    //             cropperSettings1.canvasHeight = 400;
-    //             cropperSettings1.fileType = 'jpeg';
-    //             cropperSettings1.allowedFilesRegex = /.(jpe?g)$/i;
-    //             cropperSettings1.preserveSize = true;
-    //             cropperSettings1.rounded = false;
-    //             cropperSettings1.cropperDrawSettings.strokeColor = 'rgba(255,255,255,1)';
-    //             cropperSettings1.cropperDrawSettings.strokeWidth = 2;
-    //             cropperSettings1.noFileInput = true;
-    //             _that.uploaderContainer.push({
-    //                 cropperSettings: cropperSettings1,
-    //                 data: {},
-    //                 imageSize: iSize
-    //             });
-    //         });
-    //     });
-    // }
-    // mainImageChangeListener($event) {
-    //     let image: any = new Image();
-    //     let file: File = $event.target.files[0];
-    //     let myReader: FileReader = new FileReader();
-    //     let that = this;
-    //     myReader.onloadend = function (loadEvent: any) {
-    //         image.src = loadEvent.target.result;
-    //         that.cropperChildren.forEach(uc => {
-    //             uc.setImage(image);
-    //         });
-    //     };
-    //     myReader.readAsDataURL(file);
-    // }
-    // allImagesUploaded: boolean;
-    // uploadMainPhotos() {
-    //     let that = this;
-    //     that.uploaderContainer.forEach(uc => {
-    //         let width = uc.imageSize.width;
-    //         let height = uc.imageSize.height;
-    //         let image = uc.data.image.split(',')[1];
-    //         let fullType = uc.data.image.replace(/^data:([^;]*).*/, '$1');
-    //         let byteString = window.atob(image);
-    //         let ab = new ArrayBuffer(byteString.length);
-    //         let ia = new Uint8Array(ab);
-    //         for (let i = 0; i < byteString.length; i++) {
-    //             ia[i] = byteString.charCodeAt(i);
-    //         }
-    //         let blob = new Blob([ab], { type: fullType });
-    //         let shortType = fullType.split('/')[1];
-    //         uc.fileName = `${that.model.urlPath}.${shortType}`;
-    //         let file = new File([blob], uc.fileName, { type: fullType });
-    //         that.storageService.upload(that.model.company,
-    //             that.model.id, width, height, file)
-    //             .on('state_changed', r => {
-    //                 uc.progress = (r.bytesTransferred / r.totalBytes) * 100;
-    //                 console.log(`${uc.progress} => ${uc.fileName} ${uc.imageSize.name}`);
-    //             }, e => {
-    //                 console.log(e);
-    //             }, () => {
-    //                 that.allImagesUploaded = true;
-    //                 if (that.uploaderContainer)
-    //                     that.uploaderContainer.forEach(
-    //                         uc => {
-    //                             if (!uc.progress || uc.progress < 100) {
-    //                                 that.allImagesUploaded = false;
-    //                             }
-    //                         }
-    //                     );
-    //                 if (that.allImagesUploaded) {
-    //                     that.formGroup.controls['imageUrl'].setValue(uc.fileName);
-    //                     that.save(that.formGroup);
-    //                     console.log("all completed");
-    //                 }
-    //             }
-    //             );
-    //     });
-    // }
     onMainUploadCompleted(data: UploaderContainerList) {
         this.formGroup.controls['imageUrl'].setValue(data.containers[0].fileName);
         this.save(this.formGroup);

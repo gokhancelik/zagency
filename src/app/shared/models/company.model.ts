@@ -40,24 +40,24 @@ export class Company extends BaseModel {
         };
     }
 
-    get id() {
-        return this.$key;
-    }
-    static fromJson({ $key, name, longName, webSiteUrl, phone1, phone2, fax, email }): Company {
+
+    static fromJson({ $key, name, longName, webSiteUrl, phone1, phone2, fax, email, specs }): Company {
         return new Company(
-            $key, name, longName, webSiteUrl, phone1, phone2, fax, email);
+            $key, name, longName, webSiteUrl, phone1, phone2, fax, email, specs);
     }
     constructor(
-        public $key: string,
+        id: string,
         public name: string,
         public phone1: string,
         public phone2: string,
         public fax: string,
         public email: string,
         public longName: string,
-        public webSiteUrl: string
+        public webSiteUrl: string,
+        public specs: string,
     ) {
         super();
+        this.id = id;
     }
 
 }

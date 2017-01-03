@@ -24,20 +24,22 @@ export class ImageSizeAddComponent extends AddComponent<ImageSize>  {
     }
     ngOnInit() {
         let that = this;
-        that.formGroup.controls['width'].valueChanges.subscribe(data => {
-            if (data) {
-                let d = <string>data;
-                that.formGroup.controls['name'].setValue(
-                    that.formGroup.controls['height'].value + 'x' + d);
-            }
-        });
-        that.formGroup.controls['height'].valueChanges.subscribe(data => {
-            if (data) {
-                let d = <string>data;
-                that.formGroup.controls['urlPath'].setValue(
-                    d + 'x' + that.formGroup.controls['width'].value);
-            }
-        });
+        if (that.formGroup.controls['imageWidth'])
+            that.formGroup.controls['imageWidth'].valueChanges.subscribe(data => {
+                if (data) {
+                    let d = <string>data;
+                    that.formGroup.controls['name'].setValue(
+                        that.formGroup.controls['imageHeight'].value + 'x' + d);
+                }
+            });
+        if (that.formGroup.controls['imageHeight'])
+            that.formGroup.controls['imageHeight'].valueChanges.subscribe(data => {
+                if (data) {
+                    let d = <string>data;
+                    that.formGroup.controls['name'].setValue(
+                        d + 'x' + that.formGroup.controls['imageWidth'].value);
+                }
+            });
         super.ngOnInit();
     }
 }

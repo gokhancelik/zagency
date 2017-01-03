@@ -14,11 +14,11 @@ export class ImageSize extends BaseModel {
                 type: 'string'
             },
             width: {
-                title: 'width',
+                title: 'image Width',
                 type: 'number'
             },
             height: {
-                title: 'height',
+                title: 'image Height',
                 type: 'number'
             },
             // ratio: {
@@ -26,7 +26,7 @@ export class ImageSize extends BaseModel {
             //     type: 'number'
             // },
             type: {
-                title: 'type',
+                title: 'location',
                 type: 'string'
             }
 

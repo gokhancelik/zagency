@@ -29,8 +29,8 @@ export const IMAGESIZE_FORM_MODEL: Array<DynamicFormControlModel> = [
     }),
      new DynamicInputModel({
         id: 'type',
-        label: 'Type',
-        placeholder: 'Type',
+        label: 'Location',
+        placeholder: 'Location',
         required: true
     }),
 ];

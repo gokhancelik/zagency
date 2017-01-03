@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-    selector: 'company-cmp',
+    moduleId: module.id,
+    selector: 'companyService-cmp',
     template: '<router-outlet></router-outlet>'
 })
-export class CompanyComponent implements OnInit {
+export class CompanyServiceComponent implements OnInit {
     constructor() { }
 
     ngOnInit() { }

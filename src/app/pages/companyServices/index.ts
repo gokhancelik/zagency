@@ -1,0 +1,5 @@
+export * from './companyService.add.component'
+export * from './companyService.edit.component'
+export * from './companyService.list.component'
+export * from './companyService.routing'
+export * from './companyService.component'

@@ -10,6 +10,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import * as moment from 'moment';
 import { DropdownModule, ModalModule } from 'ng2-bootstrap/ng2-bootstrap';
+import CompanySpecModule from '../companySpecs/companySpec.module';
+import CompanyServiceModule from '../companyServices/companyService.module';
 import {
     DynamicFormsCoreModule, DynamicFormService, DynamicFormRelationService
 } from '@ng2-dynamic-forms/core';
@@ -19,7 +21,7 @@ import {
 @NgModule({
     imports: [routing, RouterModule, CommonModule, FormsModule, DynamicFormsCoreModule,
         DynamicFormsBootstrapUIModule, FormsModule,
-        ReactiveFormsModule,
+        ReactiveFormsModule, CompanySpecModule,CompanyServiceModule,
         Ng2SmartTableModule, NgaModule, ModalModule, DropdownModule],
     exports: [],
     declarations: [CompanyListComponent, CompanyComponent,

@@ -17,14 +17,6 @@ export class CompanySpecService extends BaseFirebaseService<CompanySpec> {
     fromJsonList(array) {
         return CompanySpec.fromJsonList(array);
     }
-    update(key: string, value: CompanySpec): void {
-        let updData = {
-            description: value.description,
-            name: value.name,
-            company: value.company
-        };
-        this._af.object(this.getRoute() + '/' + key).update(updData);
-    }
 
     add(value: CompanySpec) {
         // this.authService.getUserInfo().take(1).subscribe(user => {
@@ -38,7 +30,7 @@ export class CompanySpecService extends BaseFirebaseService<CompanySpec> {
                 let newPostKey = this._af.list(this.getRoute()).push(null).key;
                 let updates = {};
                 updates[this.getRoute() + '/' + newPostKey] = value;
-                updates['companies/' + value.company + '/specs/' + newPostKey] = true;
+                updates['companies/' + value.company + '/specs'] = newPostKey;
                 super.firebaseUpdate(updates);
 
     }
@@ -47,7 +39,7 @@ export class CompanySpecService extends BaseFirebaseService<CompanySpec> {
             data => {
                 let updates = {};
                 updates[this.getRoute() + key] = null;
-                updates['/companies/' + data.company + '/specs/' + data.id] = null;
+                updates['/companies/' + data.company + '/specs'] = null;
                 super.firebaseUpdate(updates);
             }
         );

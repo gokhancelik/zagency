@@ -1,5 +1,4 @@
 import { BaseModel } from './base.model';
-import { DatePipe } from '@angular/common';
 import { Injectable, Inject } from '@angular/core';
 
 export class TourScheduleSpec extends BaseModel {

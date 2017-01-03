@@ -1,33 +1,32 @@
 
 import { BaseModel } from './base.model';
-import { DatePipe } from '@angular/common';
 import { Injectable, Inject } from '@angular/core';
 
 export class CompanySpec extends BaseModel {
     static fromJsonList(array): CompanySpec[] {
         return array.map(CompanySpec.fromJson);
     }
-    static getColumns(datePipe): any {
+    static getColumns(): any {
         return {
-            name: {
-                title: 'name',
+            aboutUs: {
+                title: 'about Us',
                 type: 'string'
             },
-            description: {
-                title: 'description',
+            whyUs: {
+                title: 'whyUs',
                 type: 'string'
             }
         };
     }
-    static fromJson({ $key, name,description, company}): CompanySpec {
+    static fromJson({ $key, aboutUs, whyUs, company}): CompanySpec {
         return new CompanySpec(
-            $key, name, description, company);
+            $key, aboutUs, whyUs, company);
     }
     constructor(
-        id: string=null,
-        public name: string=null,
-        public description: string=null,
-        public company: string=null,
+        id: string = null,
+        public aboutUs: string = null,
+        public whyUs: string = null,
+        public company: string = null
     ) {
         super();
         this.id = id;

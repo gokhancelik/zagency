@@ -1,6 +1,9 @@
 import { Route, RouterModule } from '@angular/router';
 
-import { CompanyListComponent, CompanyComponent } from './index';
+import {
+	CompanyListComponent, CompanyComponent,
+	CompanyEditComponent, CompanyAddComponent
+} from './index';
 
 export const CompanyRoutes: Route[] = [
 	{
@@ -10,6 +13,14 @@ export const CompanyRoutes: Route[] = [
 			{
 				path: 'list',
 				component: CompanyListComponent
+			},
+			{
+				path: 'edit/:id',
+				component: CompanyEditComponent
+			},
+			{
+				path: 'newCompany',
+				component: CompanyAddComponent
 			}
 
 		]

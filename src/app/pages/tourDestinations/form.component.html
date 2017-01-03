@@ -1,0 +1,45 @@
+<div bsModal #formModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button class="close" (click)="close()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">{{title}}</h4>
+      </div>
+      <div class="modal-body">
+        <input type="text" name="locationSearch" [(ngModel)]="locationSearchText" id="locationSearch" class="form-control" value=""
+          required="required" pattern="" title=""> - <button type="button" (click)="search(locationSearchText)" class="btn btn-default">Search Address</button>        -
+        <div class="row">
+          <div class="col-sm-6">
+            <ul class="list-group">
+              <li class="list-group-item" *ngFor="let l of locations">
+                <p>{{l.formatted_address}}</p>
+                <p>{{l.geometry.location.lat}}</p>
+                <p>{{l.geometry.location.lng}}</p>
+                <span class="btn btn-primary" (click)="addDestination(l)">Add</span> - </li>
+            </ul>
+          </div>
+          <div class="col-sm-6">
+            <ul class="list-group">
+              <li class="list-group-item" *ngFor="let d of destinations">
+                <p>{{d.name}}</p>
+                <p>{{d.latitude}}</p>
+                <p>{{d.longitude}}</p>
+                <span class="btn btn-danger" (click)="removeDestination(d)">Remove</span> - </li>
+            </ul>
+          </div>
+        </div>
+        <button (click)="saveAll()" class="btn btn-default" *ngIf="destinations.length" [disabled]="submitted">Save Changes</button>
+        <!--<form [formGroup]="formGroup" (ngSubmit)="save(formGroup)" *ngIf="dynamicFormModel">
+          <dynamic-form-bootstrap-control *ngFor="let controlModel of dynamicFormModel" [controlGroup]="formGroup" [model]="controlModel"
+            [hasErrorMessaging]="controlModel.hasErrorMessages"></dynamic-form-bootstrap-control>
+          <button class="btn btn-default" *ngIf="formGroup.dirty" [disabled]="!formGroup.valid || submitted">Save Changes</button>
+        </form>-->
+      </div>
+      <div class="modal-footer">
+        <!--<button class="btn btn-primary confirm-btn" (click)="close()">Save changes</button>-->
+      </div>
+    </div>
+  </div>
+</div>

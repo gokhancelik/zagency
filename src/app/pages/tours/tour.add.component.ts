@@ -2,7 +2,6 @@ import { CropperSettings } from 'ng2-img-cropper';
 import { TOUR_FORM_MODEL } from './tour-form.model';
 import { AddComponent } from './../../core/add.component';
 import { Component, OnInit, Input, ViewEncapsulation, ViewChild } from '@angular/core';
-import { DatePipe } from '@angular/common';
 import { Tour, TourSchedule } from '../../shared/models';
 import {
     TourCategoryService,

@@ -2,7 +2,6 @@ import {
     Component, OnInit, OnChanges, ViewChild, Input,
     Output, EventEmitter
 } from '@angular/core';
-import { DatePipe } from '@angular/common';
 import {
     TourSchedulePriceAddComponent,
     TourSchedulePriceEditComponent
@@ -25,7 +24,6 @@ export class TourSchedulePriceListComponent
     @Output() onRowSelectionChanged: EventEmitter<any> = new EventEmitter();
     loading: boolean = false;
     constructor(
-        private datePipe: DatePipe,
         private tourScheduleService: TourScheduleService,
         private tourSchedulePriceService: TourSchedulePriceService
     ) {

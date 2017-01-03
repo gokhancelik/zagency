@@ -1,31 +1,32 @@
+import { CompanyService } from './../../shared/services';
 import { Component, OnInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
-import {CompanySpecAddComponent, CompanySpecEditComponent } from './index';
-import { CompanySpec, Company } from '../../shared/models';
-import { CompanySpecService, CompanyService } from '../../shared/services/index';
+import { CompanyServiceAddComponent, CompanyServiceEditComponent } from './index';
+import { CompanyServiceModel, Company } from '../../shared/models';
+import { CompanyServiceService, TourService } from '../../shared/services/index';
 import { LocalDataSource } from 'ng2-smart-table';
 import { ListComponent } from '../../core/index';
 
 @Component({
-    selector: 'companySpec-list',
-    templateUrl: 'companySpec.list.component.html'
+    selector: 'companyService-list',
+    templateUrl: 'companyService.list.component.html'
 })
-export class CompanySpecListComponent extends ListComponent<CompanySpec> {
-    @ViewChild('addModal') addModal: CompanySpecAddComponent;
-    @ViewChild('editModal') editModal: CompanySpecEditComponent;
+export class CompanyServiceListComponent extends ListComponent<CompanyServiceModel> {
+    @ViewChild('addModal') addModal: CompanyServiceAddComponent;
+    @ViewChild('editModal') editModal: CompanyServiceEditComponent;
     @Input() company: Company;
     @Output() onRowSelectionChanged: EventEmitter<any> = new EventEmitter();
     source: LocalDataSource = new LocalDataSource();
-
+    title: string = 'Services';
     constructor(
-        private companySpecService: CompanySpecService,
+        private compServService: CompanyServiceService,
         private companyService: CompanyService
     ) {
-        super(companySpecService);
-        this.setColumns(CompanySpec.getColumns());
+        super(compServService);
+        this.setColumns(CompanyServiceModel.getColumns());
     }
     getList() {
         if (this.company) {
-            this.companyService.getCompanySpec(this.company.id).subscribe(
+            this.companyService.getServices(this.company.id).subscribe(
                 data => this.source.load(data)
             );
         }
@@ -45,11 +46,11 @@ export class CompanySpecListComponent extends ListComponent<CompanySpec> {
         this.openModal(null);
     }
     onEdit(event): void {
-        let ts: CompanySpec = event.data as CompanySpec;
+        let ts: CompanyServiceModel = event.data as CompanyServiceModel;
         this.openModal(ts.id);
     }
     onRowSelect(event): void {
-        let ts: CompanySpec = event.data as CompanySpec;
+        let ts: CompanyServiceModel = event.data as CompanyServiceModel;
         this.onRowSelectionChanged.emit(ts);
     }
 }

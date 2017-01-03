@@ -25,28 +25,6 @@ export const PAGES_MENU = [
         ]
       },
       {
-        path: 'products',
-        data: {
-          menu: {
-            title: 'Products',
-            icon: 'fa fa-cubes',
-            selected: false,
-            expanded: false,
-            order: 20
-          }
-        },
-        children: [
-          {
-            path: 'list',
-            data: {
-              menu: {
-                title: 'List',
-              }
-            }
-          }
-        ]
-      },
-      {
         path: 'tourCategories',
         data: {
           menu: {
@@ -57,28 +35,6 @@ export const PAGES_MENU = [
             order: 30
           }
         }
-      },
-      {
-        path: 'productTypeCategories',
-        data: {
-          menu: {
-            title: 'Prod. Type Catgs',
-            icon: 'fa fa-map-wrench',
-            selected: false,
-            expanded: false,
-            order: 40
-          }
-        },
-        children: [
-          {
-            path: 'list',
-            data: {
-              menu: {
-                title: 'List',
-              }
-            }
-          }
-        ]
       },
       {
         path: 'priceTypes',

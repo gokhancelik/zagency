@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule, DatePipe } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import {
     routing, TourListComponent,
@@ -34,6 +34,6 @@ import {
     exports: [],
     declarations: [TourListComponent,
         TourComponent, TourEditComponent, TourAddComponent],
-    providers: [DatePipe, DynamicFormService, DynamicFormRelationService],
+    providers: [ DynamicFormService, DynamicFormRelationService],
 })
 export default class TourModule { }

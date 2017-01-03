@@ -12,6 +12,7 @@ export * from './tourSchedulePrice.service';
 export * from './tourScheduleSpec.service';
 export * from './imageSize.service';
 export * from './company.service';
+export * from './companyService.service';
 export * from './user.service';
 export * from './role.service';
 export * from './companySpec.service';

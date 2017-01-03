@@ -23,7 +23,22 @@ export class ImageSizeEditComponent extends EditComponent<ImageSize> {
     }
     ngOnInit() {
         let that = this;
-       
+        if (that.formGroup.controls['width'])
+            that.formGroup.controls['width'].valueChanges.subscribe(data => {
+                if (data) {
+                    let d = <string>data;
+                    that.formGroup.controls['name'].setValue(
+                        that.formGroup.controls['height'].value + 'x' + d);
+                }
+            });
+        if (that.formGroup.controls['height'])
+            that.formGroup.controls['height'].valueChanges.subscribe(data => {
+                if (data) {
+                    let d = <string>data;
+                    that.formGroup.controls['name'].setValue(
+                        d + 'x' + that.formGroup.controls['width'].value);
+                }
+            });
         super.ngOnInit();
     }
 }

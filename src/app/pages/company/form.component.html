@@ -1,0 +1,28 @@
+<div class="widgets">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="row">
+        <div class="col-sm-12">
+          <ba-card title="{{title}}" baCardClass="with-scroll">
+            <form [formGroup]="formGroup" (ngSubmit)="save(formGroup)" *ngIf="dynamicFormModel">
+              <dynamic-form-bootstrap-control *ngFor="let controlModel of dynamicFormModel" [controlGroup]="formGroup" [model]="controlModel"
+                [hasErrorMessaging]="controlModel.hasErrorMessages"></dynamic-form-bootstrap-control>
+              <button class="btn btn-default" *ngIf="formGroup.dirty" [disabled]="!formGroup.valid || submitted">Save Changes</button>
+            </form>
+          </ba-card>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <companySpec-add [company]="model" *ngIf="model?.id && !model?.specs"></companySpec-add>
+          <companySpec-edit [company]="model" [key]="model?.specs" *ngIf="model?.id && model?.specs"></companySpec-edit>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <companyService-list [company]="model" *ngIf="model && model.id"></companyService-list>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

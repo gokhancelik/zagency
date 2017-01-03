@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit, ViewEncapsulation, ViewChild } from '@angular/core';
 import { CompanyService } from '../../shared/services/index';
 import { Company } from '../../shared/models';
@@ -15,44 +16,16 @@ export class CompanyListComponent extends ListComponent<Company> {
     @ViewChild('addModal') addModal: CompanyAddComponent;
     @ViewChild('editModal') editModal: CompanyEditComponent;
     title: string = 'Companies';
-    constructor(private _service: CompanyService) {
+    constructor(private _service: CompanyService, private router: Router) {
         super(_service);
-        this.setColumns({
-            id: {
-                title: 'id',
-                type: 'string'
-            },
-            name: {
-                title: 'name',
-                type: 'string'
-            },
-            longName: {
-                title: 'longName',
-                type: 'string'
-            },
-            phone1: {
-                title: 'phone1',
-                type: 'string'
-            },
-            phone2: {
-                title: 'phone2',
-                type: 'string'
-            },
-            fax: {
-                title: 'fax',
-                type: 'string'
-            },
-            webSiteUrl: {
-                title: 'webSiteUrl',
-                type: 'string'
-            },
-            email: {
-                title: 'email',
-                type: 'string'
-            }
-
-
-        });
+        this.setColumns(Company.getColumns());
+    }
+    onCreate(event): void {
+        this.router.navigate(['pages/companies/newCompany']);
+    }
+    onEdit(event): void {
+        let tt: Company = event.data as Company;
+        this.router.navigate(['pages/companies/edit/' + tt.id]);
     }
 }
 

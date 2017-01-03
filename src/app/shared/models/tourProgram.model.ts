@@ -1,13 +1,12 @@
 
 import { BaseModel } from './base.model';
-import { DatePipe } from '@angular/common';
 import { Injectable, Inject } from '@angular/core';
 
 export class TourProgram extends BaseModel {
     static fromJsonList(array): TourProgram[] {
         return array.map(TourProgram.fromJson);
     }
-    static getColumns(datePipe): any {
+    static getColumns(): any {
         return {
             description: {
                 title: 'description',

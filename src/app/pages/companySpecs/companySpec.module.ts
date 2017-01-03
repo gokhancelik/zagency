@@ -21,7 +21,7 @@ import {
         DynamicFormsBootstrapUIModule, FormsModule,
         ReactiveFormsModule,
         Ng2SmartTableModule, NgaModule, ModalModule, DropdownModule],
-    exports: [],
+    exports: [CompanySpecEditComponent, CompanySpecAddComponent],
     declarations: [CompanySpecListComponent, CompanySpecComponent,
         CompanySpecEditComponent, CompanySpecAddComponent
     ],

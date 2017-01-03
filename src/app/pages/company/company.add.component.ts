@@ -13,11 +13,12 @@ import { AngularFire, FirebaseListObservable } from 'angularfire2';
 @Component({
     selector: 'company-add',
     encapsulation: ViewEncapsulation.None,
-    templateUrl: '../../core/form.component.html'
+    templateUrl: 'form.component.html'
 
 })
 export class CompanyAddComponent extends AddComponent<Company>  {
     myDynamicFormModel: Array<DynamicFormControlModel> = COMPANY_FORM_MODEL;
+    title: string = "Company Info";
     @ViewChild('formModal') formModal: ModalDirective;
     @Output() onSaved: EventEmitter<any> = new EventEmitter();
     constructor(dynamicFormService: DynamicFormService,

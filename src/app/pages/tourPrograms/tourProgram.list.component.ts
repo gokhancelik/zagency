@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
-import { DatePipe } from '@angular/common';
 import { TourProgramAddComponent, TourProgramEditComponent } from './index';
 import { TourProgram, Tour } from '../../shared/models';
 import { TourProgramService, TourService } from '../../shared/services/index';
@@ -18,12 +17,11 @@ export class TourProgramListComponent extends ListComponent<TourProgram> {
     source: LocalDataSource = new LocalDataSource();
 
     constructor(
-        private datePipe: DatePipe,
         private touProgramService: TourProgramService,
         private tourService: TourService
     ) {
         super(touProgramService);
-        this.setColumns(TourProgram.getColumns(this.datePipe));
+        this.setColumns(TourProgram.getColumns());
     }
     getList() {
         if (this.tour) {

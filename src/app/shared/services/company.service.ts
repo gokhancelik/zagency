@@ -1,7 +1,8 @@
+import { CompanyServiceModel } from './../models/companyService.model';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 import { AngularFireDatabase } from 'angularfire2';
-import { Company, CompanySpec,Tour, User } from '../models';
+import { Company, CompanySpec, Tour, User } from '../models';
 import { BaseFirebaseService } from './base.firebase.service';
 import { UserService } from '../services';
 @Injectable()
@@ -31,10 +32,16 @@ export class CompanyService extends BaseFirebaseService<Company> {
                 query: { orderByChild: 'company', equalTo: company.$key }
             }));
     }
-    getCompanySpec(key:String):Observable<CompanySpec[]> {
+    getCompanySpec(key: String): Observable<CompanySpec[]> {
         const cs$ = this._af.list(`companySpecs/`,
             { query: { orderByChild: 'company', equalTo: key } })
             .map(CompanySpec.fromJsonList);
+        return cs$;
+    }
+    getServices(key: string): Observable<CompanyServiceModel[]> {
+        const cs$ = this._af.list(`companyServices/`,
+            { query: { orderByChild: 'company', equalTo: key } })
+            .map(CompanyServiceModel.fromJsonList);
         return cs$;
     }
 }

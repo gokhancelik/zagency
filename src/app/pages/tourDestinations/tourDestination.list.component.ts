@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
-import { DatePipe } from '@angular/common';
 import { TourDestinationAddComponent, TourDestinationEditComponent } from './index';
 import { TourDestination, Tour } from '../../shared/models';
 import { TourDestinationService, TourService } from '../../shared/services/index';
@@ -18,16 +17,15 @@ export class TourDestinationListComponent extends ListComponent<TourDestination>
     source: LocalDataSource = new LocalDataSource();
 
     constructor(
-        private datePipe: DatePipe,
         private tourDestinationService: TourDestinationService,
         private tourService: TourService
     ) {
         super(tourDestinationService);
-        this.setColumns(TourDestination.getColumns(this.datePipe));
+        this.setColumns(TourDestination.getColumns());
     }
     getList() {
         if (this.tour) {
-            this.tourService.getTourPrograms(this.tour.id).subscribe(
+            this.tourService.getTourDestinations(this.tour.id).subscribe(
                 data => this.source.load(data)
             );
         }
