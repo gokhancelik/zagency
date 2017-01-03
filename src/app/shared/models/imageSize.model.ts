@@ -4,6 +4,9 @@ export class ImageSize extends BaseModel {
         console.log(array);
         return array.map(ImageSize.fromJson);
     }
+    // get ratio(): number {
+    //     return this.height ? this.width / this.height : 0;
+    // }
     static getColumns(): any {
         return {
             name: {
@@ -18,6 +21,10 @@ export class ImageSize extends BaseModel {
                 title: 'height',
                 type: 'number'
             },
+            // ratio: {
+            //     title: 'ratio',
+            //     type: 'number'
+            // },
             type: {
                 title: 'type',
                 type: 'string'

@@ -12,19 +12,6 @@ export class ImageSizeListComponent extends ListComponent<ImageSize> {
     @ViewChild('editModal') editModal: ImageSizeEditComponent;
     constructor(service: ImageSizeService) {
         super(service);
-        this.setColumns({
-            name: {
-                title: 'Name',
-                type: 'string'
-            },
-            width: {
-                title: 'Width',
-                type: 'number'
-            },
-            height: {
-                title: 'Height',
-                type: 'number'
-            }
-        });
+        this.setColumns(ImageSize.getColumns());
     }
 }

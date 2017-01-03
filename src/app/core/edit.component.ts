@@ -16,7 +16,7 @@ export abstract class EditComponent<T extends BaseModel> implements OnInit {
     protected model: T;
     dynamicFormModel: Array<DynamicFormControlModel>;
     @ViewChild('formModal') formModal: ModalDirective;
-    @Output() onSaved: EventEmitter<any>;
+    @Output() onSaved: EventEmitter<any> = new EventEmitter<any>();
     constructor(
         private modelType,
         private service: BaseFirebaseService<T>,
@@ -33,15 +33,22 @@ export abstract class EditComponent<T extends BaseModel> implements OnInit {
 
     }
     open(): void {
-        this.service.getByKey(this.objectKey).subscribe(data => {
-            this.model = data;
+        let that = this;
+
+        this.service.getByKey(this.objectKey).take(1).subscribe(data => {
+            that.model = data;
             // if (this.formGroup) {
             //     this.formGroup.reset();
             // }
-            Object.keys(this.model).forEach(prop => {
-                if (this.formGroup.controls[prop])
-                    this.formGroup.controls[prop].setValue(this.model[prop]);
-            });
+            // Object.keys(that.model).forEach(prop => {
+            //     console.log(prop);
+            //     console.log(that.model[prop]);
+            //     console.log(that.formGroup.controls[prop]);
+            //     console.log(that.formGroup.controls[prop].setValue);
+            //     if (that.formGroup.controls[prop])
+            //         that.formGroup.controls[prop].setValue(that.model[prop]);
+            // });
+            that.formGroup.patchValue(that.model);
             if (this.formModal) this.formModal.show();
         });
     }

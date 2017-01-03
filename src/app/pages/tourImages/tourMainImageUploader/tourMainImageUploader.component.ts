@@ -1,9 +1,12 @@
+import { UploaderContainerList, UploaderContainer } from './../../components/components/imageCropper/uploaderContainer';
+import { ImageSize } from './../../../shared/models/imageSize.model';
 import { StorageService } from './../../../shared/services/storage.service';
 import { ZAImageCropperComponent } from './../../components/components/imageCropper/imageCropper.component';
+import { ResizeOptions, ImageResult } from './../../components/components/imageCropper/interfaces';
+import { createImage, resizeImage } from './../../components/components/imageCropper/utils';
 import { Tour } from './../../../shared/models';
 import { ImageSizeService } from './../../../shared/services';
 import { CropperSettings } from 'ng2-img-cropper';
-import { UploaderContainerList, UploaderContainer, UploaderStatus } from './../uploaderContainer';
 import {
     Component, OnInit, ViewEncapsulation,
     Input, ViewChildren, QueryList, EventEmitter, Output
@@ -12,116 +15,87 @@ import {
 @Component({
     encapsulation: ViewEncapsulation.None,
     selector: 'tour-main-image-uploader',
-    template: ` <ba-card title="Tour Photo" baCardClass="with-scroll">
-            <div class="alert alert-info">
-              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;
-              </button>
-              <strong>Bilgi!</strong> Bu resim uygulamanın çeşitli 
-              yerlerinde kullanılmak üzere kaydedilecek. 
-              Aşağıdaki boyutu referans alarak yükleme yapınız. Performans sebebiyle
-              sadece JPEG formatındaki resimler kabul edilmektedir.
-            </div>
-            <div class="file-upload">
-              <input type="file" accept="image/jpg,image/jpeg" 
-              (change)="imageChangeListener($event)">
-            </div>
-            <div class="row">
-            <pre>{{container|json}}</pre>
-              <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3" 
-              *ngFor="let cs of container?.containers; let i=index;">
-                <span>File: {{cs.fileName}} Size:{{cs.imageSize.name}} 
-                Upload Progress: {{cs.progress}} %</span>
-                <za-image-cropper #cropper [cropperSettings]="cs.cropperSetting" 
-                [ngStyle]="{display:i===(container?.containers.length-1)?'block':'none'}" 
-                [data]="cs.data">
-                </za-image-cropper>
-              </div>
-            </div>
-            <button class="btn btn-default" 
-            (click)="uploadMainPhotos()" 
-            [disabled]="!uploaderContainer?.status===4">
-            Upload</button>
-          </ba-card>`
+    templateUrl: 'tourMainImageUploader.component.html'
 })
 export class TourMainImageUploaderComponent implements OnInit {
+    @Output() imageSelected = new EventEmitter<ImageResult>();
     container: UploaderContainerList;
+    imageSizes: ImageSize[];
+    maxImageSize: ImageSize;
+    image: any;
+    tourMainImage: '';
+    allowedExtensions: 'image/jpeg';
     @Input() tour: Tour;
     @Output() onCompleted: EventEmitter<any> = new EventEmitter<any>();
-    @ViewChildren('cropper') cropperChildren: QueryList<ZAImageCropperComponent>;
+    @ViewChildren('zacropper') cropperChildren: QueryList<ZAImageCropperComponent>;
     constructor(private imageSizeService: ImageSizeService,
         private storageService: StorageService) { }
     ngOnInit() {
-        this.container = new UploaderContainerList();
-        this.prepareImgCropper();
+        let _that = this;
+        this.imageSizeService.getAll().take(1).subscribe(data => {
+            _that.imageSizes = data;
+        });
     }
     prepareImgCropper() {
         let _that = this;
-        this.imageSizeService.getAll().subscribe(data => {
-            data.forEach(iSize => {
-                let cropperSettings1 = new CropperSettings();
-                cropperSettings1.width = iSize.width;
-                cropperSettings1.height = iSize.height;
-                cropperSettings1.canvasWidth = 400;
-                cropperSettings1.canvasHeight = 400;
-                cropperSettings1.fileType = 'jpeg';
-                cropperSettings1.allowedFilesRegex = /.(jpe?g)$/i;
-                cropperSettings1.preserveSize = true;
-                cropperSettings1.rounded = false;
-                cropperSettings1.cropperDrawSettings.strokeColor = 'rgba(255,255,255,1)';
-                cropperSettings1.cropperDrawSettings.strokeWidth = 2;
-                cropperSettings1.noFileInput = true;
-                let container = new UploaderContainer();
-                container.cropperSetting = cropperSettings1;
-                container.data = {};
-                container.fileName = this.tour.urlPath;
-                container.imageSize = iSize;
-                _that.container.containers.push(container);
-            });
+        let i = 0;
+        this.imageSizes.forEach(iSize => {
+            i++;
+            let cropperSettings1 = new CropperSettings();
+            cropperSettings1.width = iSize.width;
+            cropperSettings1.height = iSize.height;
+            cropperSettings1.croppedWidth = iSize.width;
+            cropperSettings1.croppedHeight = iSize.height;
+            cropperSettings1.canvasWidth = 300;
+            cropperSettings1.canvasHeight = 300;
+            cropperSettings1.fileType = 'jpeg';
+            cropperSettings1.allowedFilesRegex = new RegExp(/.(jpe?g)$/i);
+            cropperSettings1.preserveSize = false;
+            cropperSettings1.rounded = false;
+            cropperSettings1.cropperDrawSettings.strokeColor = 'rgba(255,255,255,1)';
+            cropperSettings1.cropperDrawSettings.strokeWidth = 2;
+            cropperSettings1.noFileInput = true;
+            let container = new UploaderContainer(
+                cropperSettings1, {}, null,
+                _that.tour.urlPath, 0, iSize, _that.storageService
+            );
+            // container.cropperSetting = cropperSettings1;
+            // container.data = {};
+            // container.fileName = _that.tour.urlPath;
+            // container.imageSize = iSize;
+            _that.container.containers.push(container);
+            if (_that.imageSizes.length === i) {
+                _that.maxImageSize = iSize;
+            }
         });
+        console.log(this.container);
     }
     imageChangeListener($event) {
+        if (!$event.target.files.length)
+            return;
+        this.container = new UploaderContainerList();
+        this.prepareImgCropper();
         let image: any = new Image();
         let file: File = $event.target.files[0];
         let myReader: FileReader = new FileReader();
         let that = this;
         myReader.onloadend = function (loadEvent: any) {
             image.src = loadEvent.target.result;
-            that.cropperChildren.forEach(uc => {
-                uc.setImage(image);
-            });
+            // that.cropperChildren.forEach(uc => {
+            //     uc.setImage(image);
+            // });
+            that.image = image;
+            // that.container.containers.forEach(c => {
+            //     c.data = image;
+            // });
         };
         myReader.readAsDataURL(file);
+
     }
     uploadMainPhotos() {
         let that = this;
         that.container.containers.forEach(uc => {
-            let width = uc.imageSize.width;
-            let height = uc.imageSize.height;
-            let image = uc.data.image.split(',')[1];
-            let fullType = uc.data.image.replace(/^data:([^;]*).*/, '$1');
-            let byteString = window.atob(image);
-            let ab = new ArrayBuffer(byteString.length);
-            let ia = new Uint8Array(ab);
-            for (let i = 0; i < byteString.length; i++) {
-                ia[i] = byteString.charCodeAt(i);
-            }
-            let blob = new Blob([ab], { type: fullType });
-            let shortType = fullType.split('/')[1];
-            uc.fileName = `${uc.fileName}.${shortType}`;
-            let file = new File([blob], uc.fileName, { type: fullType });
-            that.storageService.upload(that.tour.company,
-                that.tour.id, width, height, file)
-                .on('state_changed', r => {
-                    uc.progress = (r.bytesTransferred / r.totalBytes) * 100;
-                    console.log(`${uc.progress} => ${uc.fileName} ${uc.imageSize.name}`);
-                }, e => {
-                    console.log(e);
-                }, () => {
-                    if (that.container.overallStatus === UploaderStatus.Completed) {
-                        this.onCompleted.emit(that.container);
-                    }
-                }
-                );
+            uc.upload(that.tour);
         });
     }
 }

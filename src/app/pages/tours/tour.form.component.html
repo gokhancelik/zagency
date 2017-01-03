@@ -63,7 +63,7 @@
             </div>
             <button class="btn btn-default" (click)="uploadMainPhotos()" [disabled]="!uploaderContainer?.length">Upload</button>
           </ba-card>-->
-          <tour-main-image-uploader [tour]="model" *ngIf="model && model.id" (onCompleted)="onMainUploadCompleted($event)"></tour-main-image-uploader>
+          <tour-main-image-uploader [tour]="model" *ngIf="model" (onCompleted)="onMainUploadCompleted($event)"></tour-main-image-uploader>
         </div>
       </div>
     </div>

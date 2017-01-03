@@ -22,20 +22,8 @@ export class ImageSizeEditComponent extends EditComponent<ImageSize> {
         super(ImageSize, service, dynamicFormService, IMAGESIZE_FORM_MODEL);
     }
     ngOnInit() {
-        this.formGroup.controls['width'].valueChanges.subscribe(data => {
-            if (data) {
-                let d = <string>data;
-                this.formGroup.controls['name'].setValue(
-                    this.formGroup.controls['height'].value + 'x' + d);
-            }
-        });
-        this.formGroup.controls['height'].valueChanges.subscribe(data => {
-            if (data) {
-                let d = <string>data;
-                this.formGroup.controls['name'].setValue(
-                    d + 'x' + this.formGroup.controls['width'].value);
-            }
-        });
+        let that = this;
+       
         super.ngOnInit();
     }
 }

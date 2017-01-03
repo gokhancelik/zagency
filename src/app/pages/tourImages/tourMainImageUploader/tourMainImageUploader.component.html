@@ -1,0 +1,60 @@
+<ba-card title="Tour Photo" baCardClass="with-scroll">
+  <div class="alert alert-info">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;
+              </button>
+    <strong>Bilgi!</strong> Bu resim uygulamanın çeşitli yerlerinde kullanılmak üzere kaydedilecek.
+    <strong>{{maxImageSize?.name}}</strong> boyutunu referans alarak yükleme yapınız. Performans sebebiyle sadece JPEG formatındaki
+    resimler kabul edilmektedir.
+  </div>
+  <div class="file-upload">
+    <input type="file" accept="image/jpg,image/jpeg" (change)="imageChangeListener($event)">
+    <!--<input type="file" image-upload
+        (imageSelected)="selected($event)"
+        [resizeOptions]="resizeOptions">-->
+  </div>
+  <div class="row" *ngFor="let item of container?.containers">
+    <div class="col-sm-9">
+      <za-image-cropper [uploader]="item" [data]="image">
+      </za-image-cropper>
+    </div>
+    <div class="col-sm-3">
+      <strong>{{ item?.fileName }} {{item?.imageSize.name}}</strong>
+      <progress class="progress" [value]="item.progress" max="100" aria-describedby="example-caption-1"></progress>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <img [src]="tourMainImage" *ngIf="tourMainImage" [width]="maxImageSize?.width" [height]="maxImageSize?.height" />
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-9" style="margin-bottom: 40px" *ngIf="container">
+      <h3>Upload queue</h3>
+      <p>Queue length: {{ container?.containers?.length }}</p>
+      <!--<table class="table">
+        <thead>
+          <tr>
+            <th width="50%">Name</th>
+            <th>Progress</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of container.containers">
+            <td><strong>{{ item?.fileName }} {{item?.imageSize.name}}</strong></td>
+            <td>
+              <progress class="progress" [value]="item.progress" max="100" aria-describedby="example-caption-1"></progress>
+            </td>
+          </tr>
+        </tbody>
+      </table>-->
+      <div>
+        <div>
+          Queue progress:
+          <progress class="progress" [value]="container.overallProgress" max="100" aria-describedby="example-caption-1"></progress>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button class="btn btn-default" (click)="uploadMainPhotos()" [disabled]="!container?.overallStatus===4">
+            Upload</button>
+</ba-card>

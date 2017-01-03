@@ -23,18 +23,19 @@ export class ImageSizeAddComponent extends AddComponent<ImageSize>  {
         super(ImageSize, dynamicFormService, _service, IMAGESIZE_FORM_MODEL);
     }
     ngOnInit() {
-        this.formGroup.controls['width'].valueChanges.subscribe(data => {
+        let that = this;
+        that.formGroup.controls['width'].valueChanges.subscribe(data => {
             if (data) {
                 let d = <string>data;
-                this.formGroup.controls['name'].setValue(
-                    this.formGroup.controls['height'].value + 'x' + d);
+                that.formGroup.controls['name'].setValue(
+                    that.formGroup.controls['height'].value + 'x' + d);
             }
         });
-        this.formGroup.controls['height'].valueChanges.subscribe(data => {
+        that.formGroup.controls['height'].valueChanges.subscribe(data => {
             if (data) {
                 let d = <string>data;
-                this.formGroup.controls['urlPath'].setValue(
-                    d + 'x' + this.formGroup.controls['width'].value);
+                that.formGroup.controls['urlPath'].setValue(
+                    d + 'x' + that.formGroup.controls['width'].value);
             }
         });
         super.ngOnInit();
