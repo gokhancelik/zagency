@@ -71,5 +71,4 @@ export class TourScheduleSpecAddComponent extends AddComponent<TourScheduleSpec>
     setTourSchedule(tourSchedule: TourSchedule): void {
         this.tourSchedule = tourSchedule;
     }
-   
 }

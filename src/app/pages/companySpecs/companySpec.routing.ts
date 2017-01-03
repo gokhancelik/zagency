@@ -6,13 +6,13 @@ export const CompanySpecRoutes: Route[] = [
 	{
 		path: '',
 		component: CompanySpecComponent,
-		children: [
-			{
-				path: 'list',
-				component: CompanySpecListComponent
-			}
+		// children: [
+		// 	{
+		// 		path: '',
+		// 		component: CompanySpecListComponent
+		// 	}
 			
-		]
+		// ]
 	}
 ];
 export const routing = RouterModule.forChild(CompanySpecRoutes);
