@@ -1,4 +1,7 @@
+import { UserEditComponent } from './user.edit.component';
+import { CanActivate } from '@angular/router';
 import { Route, RouterModule } from '@angular/router';
+import { CanActivateUserEdit } from '../../security/guards/userEdit.guard';
 
 import { UserListComponent, UserComponent } from './index';
 
@@ -9,7 +12,9 @@ export const UserRoutes: Route[] = [
 		children: [
 			{
 				path: '',
-				component: UserListComponent
+				component: UserListComponent,
+				canActivate: [CanActivateUserEdit]
+				
 			}
 			
 		]

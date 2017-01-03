@@ -7,6 +7,8 @@ import {
     routing, UserListComponent, UserComponent,
     UserEditComponent, UserAddComponent
 } from './index';
+import { CanActivateUserEdit } from '../../security/guards/userEdit.guard';
+
 import { FormsModule, ReactiveFormsModule, NG_VALIDATORS } from '@angular/forms';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import * as moment from 'moment';
@@ -27,7 +29,7 @@ import {
     declarations: [UserListComponent, UserComponent,
         UserEditComponent, UserAddComponent
     ],
-    providers: [DynamicFormService, DynamicFormRelationService,
+    providers: [DynamicFormService, CanActivateUserEdit,DynamicFormRelationService,
 
         {
             provide: NG_VALIDATORS,
