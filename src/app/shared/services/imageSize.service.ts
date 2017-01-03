@@ -7,9 +7,13 @@ import { Observable, Subject } from 'rxjs/Rx';
 export class ImageSizeService extends BaseFirebaseService<ImageSize> {
     sdkDb: any;
     constructor(private afAuth: AngularFireAuth,
-        private _af: AngularFireDatabase,@Inject(FirebaseRef) fb) {
+        private _af: AngularFireDatabase, @Inject(FirebaseRef) fb) {
         super(_af, 'imageSizes');
         this.sdkDb = fb.database().ref();
+    }
+    getAll(): Observable<ImageSize[]> {
+        return this._af.list(this.getRoute(), { query: { orderByChild: 'width' } })
+            .map(this.fromJsonList);
     }
     fromJson(obj) {
         return ImageSize.fromJson(obj);

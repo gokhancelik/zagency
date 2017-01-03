@@ -34,6 +34,15 @@ export class TourMainImageUploaderComponent implements OnInit {
         let _that = this;
         this.imageSizeService.getAll().take(1).subscribe(data => {
             _that.imageSizes = data;
+            _that.maxImageSize = _that.imageSizes[_that.imageSizes.length - 1];
+            _that.storageService.getDownloadUrl(
+                _that.tour.company,
+                _that.tour.id,
+                _that.maxImageSize.width,
+                _that.maxImageSize.height, _that.tour.imageUrl).then(d => {
+                    _that.tourMainImage = d;
+                });
+
         });
     }
     prepareImgCropper() {
@@ -64,9 +73,7 @@ export class TourMainImageUploaderComponent implements OnInit {
             // container.fileName = _that.tour.urlPath;
             // container.imageSize = iSize;
             _that.container.containers.push(container);
-            if (_that.imageSizes.length === i) {
-                _that.maxImageSize = iSize;
-            }
+
         });
         console.log(this.container);
     }

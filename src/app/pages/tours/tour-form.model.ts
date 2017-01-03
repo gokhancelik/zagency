@@ -4,6 +4,7 @@ import {
     DynamicInputModel,
     DynamicSelectModel,
     DynamicOptionControlModel,
+    DynamicTextAreaModel,
     DynamicRadioGroupModel
 } from '@ng2-dynamic-forms/core';
 
@@ -46,9 +47,10 @@ export const TOUR_FORM_MODEL: Array<DynamicFormControlModel> = [
             }
         }
     ),
-    new DynamicInputModel({
+    new DynamicTextAreaModel({
 
         id: 'description',
-        label: 'Description'
+        label: 'Description',
+        maxLength: 1500,
     })
 ];
