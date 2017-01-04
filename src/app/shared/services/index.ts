@@ -19,4 +19,5 @@ export * from './b2b.service';
 export * from './companySpec.service';
 export * from './storage.service';
 export * from './google.geoCoding.service';
+export * from './publishingTour.service';
 

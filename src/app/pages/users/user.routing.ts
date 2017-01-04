@@ -13,7 +13,6 @@ export const UserRoutes: Routes = [
 				path: '',
 				component: UserListComponent,
 				// canActivate: [CanActivateUserEdit]
-
 			},
 			{
 				path: 'edit/:id',
@@ -29,7 +28,6 @@ export const UserRoutes: Routes = [
 			}
 		],
 
-	},
-
+	}
 ];
 export const routing = RouterModule.forChild(UserRoutes);
