@@ -21,9 +21,9 @@ export class UserListComponent extends ListComponent<User> {
         super(_service);
         this.setColumns(User.getColumns());
     }
-    // onEdit(event): void {
-    //     let tt: User = event.data as User;
-    //     this.router.navigateByUrl('pages/users(anotherList:playlist)');
-    // }
+    onEdit(event): void {
+        let tt: User = event.data as User;
+        this.router.navigateByUrl('pages/users(anotherList:playlist)');
+    }
 }
 

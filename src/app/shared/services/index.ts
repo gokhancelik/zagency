@@ -15,6 +15,7 @@ export * from './company.service';
 export * from './companyService.service';
 export * from './user.service';
 export * from './role.service';
+export * from './b2b.service';
 export * from './companySpec.service';
 export * from './storage.service';
 export * from './google.geoCoding.service';

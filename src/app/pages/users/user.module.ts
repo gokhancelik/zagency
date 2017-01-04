@@ -38,4 +38,4 @@ import {
         }
     ],
 })
-export class UserModule { }
+export default class UserModule { }

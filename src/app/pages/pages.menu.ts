@@ -124,7 +124,7 @@ export const PAGES_MENU = [
             icon: 'fa fa-building',
             selected: false,
             expanded: false,
-            order: 110
+            order: 120
           }
         },
         children: [
@@ -139,6 +139,18 @@ export const PAGES_MENU = [
         ]
       },
       {
+        path: 'b2bs',
+        data: {
+          menu: {
+            title: 'B2B',
+            icon: 'fa fa-product',
+            selected: false,
+            expanded: false,
+            order: 130
+          }
+        }
+      },
+      {
         path: 'users',
         data: {
           menu: {
@@ -146,7 +158,7 @@ export const PAGES_MENU = [
             icon: 'fa fa-user',
             selected: false,
             expanded: false,
-            order: 110
+            order: 140
           }
         }
       },
@@ -158,7 +170,7 @@ export const PAGES_MENU = [
             icon: 'fa fa-users',
             selected: false,
             expanded: false,
-            order: 110
+            order: 150
           }
         }
       }

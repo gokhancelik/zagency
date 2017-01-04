@@ -1,0 +1,6 @@
+<ba-card title="Currency Types" baCardClass="with-scroll">
+    <ng2-smart-table [settings]="settings" (create)="onCreate($event)" (edit)="onEdit($event)"
+        [source]="source" (delete)="onDeleteConfirm($event)" (rowSelect)="onRowSelect($event)"></ng2-smart-table>
+</ba-card>
+<b2b-add #addModal (onSaved)="onSaved($event)"></b2b-add>
+<b2b-edit #editModal (onSaved)="onSaved($event)"></b2b-edit>

@@ -37,14 +37,18 @@ const routes: Routes = [
         path: 'companies',
         loadChildren: () => System.import('./company/company.module')
       },
-      // {
-      //   path: 'users',
-      ...UserRoutes,
-      //},
-      //loadChildren: () => System.import('./users/user.module')
+      // ...UserRoutes,
+      {
+        path: 'users',
+        loadChildren: () => System.import('./users/user.module')
+      },
       {
         path: 'priceTypes',
         loadChildren: () => System.import('./priceTypes/priceType.module')
+      },
+      {
+        path: 'b2bs',
+        loadChildren: () => System.import('./b2bs/b2b.module')
       },
       {
         path: 'specTypes',

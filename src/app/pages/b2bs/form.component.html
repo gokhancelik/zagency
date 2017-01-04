@@ -1,0 +1,33 @@
+<div bsModal #formModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button class="close" (click)="close()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">{{title}}</h4>
+      </div>
+      <div class="modal-body">
+        <input [(ngModel)]="asyncSelected" [typeahead]="companyDataSource" (typeaheadLoading)="changeTypeaheadLoading($event)" 
+        (typeaheadNoResults)="changeTypeaheadNoResults($event)"
+          (typeaheadOnSelect)="companyOnSelect($event)" [typeaheadOptionsLimit]="7" [typeaheadOptionField]="'name'" 
+          placeholder="Search Companies by name"
+          class="form-control">
+        <div *ngIf="typeaheadLoading===true">
+          <i class="glyphicon glyphicon-refresh ng-hide" style=""></i>
+        </div>
+        <div *ngIf="typeaheadNoResults===true" class="" style="">
+          <i class="glyphicon glyphicon-remove"></i> No Results Found
+        </div>
+        <form [formGroup]="formGroup" (ngSubmit)="save(formGroup)" *ngIf="dynamicFormModel">
+          <dynamic-form-bootstrap-control *ngFor="let controlModel of dynamicFormModel" [controlGroup]="formGroup" [model]="controlModel"
+            [hasErrorMessaging]="controlModel.hasErrorMessages"></dynamic-form-bootstrap-control>
+          <button class="btn btn-default" [disabled]="!formGroup.valid || submitted">Save Changes</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <!--<button class="btn btn-primary confirm-btn" (click)="close()">Save changes</button>-->
+      </div>
+    </div>
+  </div>
+</div>
