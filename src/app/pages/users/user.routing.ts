@@ -1,27 +1,24 @@
-import { UserEditComponent } from './user.edit.component';
 import { CanActivate, Routes } from '@angular/router';
 import { Route, RouterModule } from '@angular/router';
 import { CanActivateUserEdit } from '../../security/guards/userEdit.guard';
 
-import { UserListComponent, UserComponent } from './index';
+import { UserListComponent, UserComponent, UserEditComponent } from './index';
 
 export const UserRoutes: Routes = [
 	{
-		path: '',
+		path: 'users',
 		component: UserComponent,
 		children: [
 			{
 				path: '',
 				component: UserListComponent,
-				children: [
-					{
-						path: 'edit/:id',
-						outlet: 'editModal',
-						component: UserEditComponent
-						// canActivate: [CanActivateUserEdit]
+				// canActivate: [CanActivateUserEdit]
 
-					}
-				]
+			},
+			{
+				path: 'edit/:id',
+				outlet: 'editModal',
+				component: UserEditComponent
 				// canActivate: [CanActivateUserEdit]
 
 			}
@@ -31,9 +28,8 @@ export const UserRoutes: Routes = [
 	},
 	{
 		path: 'playlist',
-		outlet: 'aside',
-		component: UserEditComponent
+		outlet: 'anotherList',
+		component: UserListComponent
 	}
-
 ];
 export const routing = RouterModule.forChild(UserRoutes);

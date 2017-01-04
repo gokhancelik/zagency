@@ -25,17 +25,17 @@ import {
         DynamicFormsBootstrapUIModule, FormsModule,
         ReactiveFormsModule,
         Ng2SmartTableModule, NgaModule, ModalModule, DropdownModule],
-    exports: [],
+    exports: [UserListComponent],
     declarations: [UserListComponent, UserComponent,
         UserEditComponent, UserAddComponent
     ],
-    providers: [DynamicFormService, CanActivateUserEdit,DynamicFormRelationService,
+    providers: [DynamicFormService, CanActivateUserEdit, DynamicFormRelationService,
 
         {
             provide: NG_VALIDATORS,
             useValue: emailValidator,
             multi: true
         }
-        ],
+    ],
 })
-export default class UserModule { }
+export class UserModule { }

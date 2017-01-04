@@ -1,0 +1,25 @@
+{
+  "rules": {
+    ".read": "true",
+    ".write": "auth!=null",
+    "users":{
+     ".indexOn": "email" 
+  	},
+    "tourSchedules":{
+     ".indexOn": "tour" 
+  	},
+    "tourDestinations":{
+     ".indexOn": "tour" 
+  	},
+    "tourPrograms":{
+     ".indexOn": "tour" 
+  	},
+    "tourSchedulePrices":{
+     ".indexOn": "tourSchedule" 
+  	},
+    "tourScheduleSpecs":{
+     ".indexOn": "tourSchedule" 
+  	}
+  }
+ 
+}

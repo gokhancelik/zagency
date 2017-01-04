@@ -1,7 +1,7 @@
+import { UserRoutes } from './users/user.routing';
 import { Routes, RouterModule } from '@angular/router';
 import { Pages } from './pages.component';
 import { LoggedInGuard } from '../security/guards/loggedin.guard';
-
 // noinspection TypeScriptValidateTypes
 const routes: Routes = [
   {
@@ -37,10 +37,11 @@ const routes: Routes = [
         path: 'companies',
         loadChildren: () => System.import('./company/company.module')
       },
-      {
-        path: 'users',
-        loadChildren: () => System.import('./users/user.module')
-      },
+      // {
+      //   path: 'users',
+      ...UserRoutes,
+      //},
+      //loadChildren: () => System.import('./users/user.module')
       {
         path: 'priceTypes',
         loadChildren: () => System.import('./priceTypes/priceType.module')
