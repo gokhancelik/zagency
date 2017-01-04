@@ -13,30 +13,28 @@ export class B2B extends BaseModel {
                 title: 'publisher',
                 type: 'string'
             },
-            distrubutor: {
+            distributor: {
                 title: 'distributor',
                 type: 'string'
             },
-            distrubutor_name: {
+            distributor_name: {
                 title: 'distributor',
                 type: 'string'
             },
         };
-    }
-    get id() {
-        return this.$key;
     }
     static fromJson({ $key, publisher, publisher_name, distributor, distributor_name}): B2B {
         return new B2B(
             $key, publisher, publisher_name, distributor, distributor_name);
     }
     constructor(
-        public $key: string = null,
+        id: string = null,
         public publisher: string = null,
         public publisher_name: string = null,
         public distributor: string = null,
         public distributor_name: string = null
     ) {
         super();
+        this.id = id;
     }
 }
