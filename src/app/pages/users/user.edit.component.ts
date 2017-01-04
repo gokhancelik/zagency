@@ -27,7 +27,7 @@ export class UserEditComponent extends EditComponent<User> {
         super(User, _service, dynamicFormService, USER_FORM_MODEL);
     }
     ngOnInit() {
-        this.open();
+        // this.open();
     }
     // save(form: FormGroup) {
     //     if (form) {

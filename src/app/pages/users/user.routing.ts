@@ -14,22 +14,17 @@ export const UserRoutes: Routes = [
 				component: UserListComponent,
 				// canActivate: [CanActivateUserEdit]
 
-			},
-			{
-				path: 'edit/:id',
-				outlet: 'editModal',
-				component: UserEditComponent
-				// canActivate: [CanActivateUserEdit]
-
 			}
+			// {
+			// 	path: 'edit/:id',
+			// 	outlet: 'editModal',
+			// 	component: UserEditComponent
+			// 	// canActivate: [CanActivateUserEdit]
 
-		],
+			// }
 
-	},
-	{
-		path: 'playlist',
-		outlet: 'anotherList',
-		component: UserListComponent
+		]
+
 	}
 ];
 export const routing = RouterModule.forChild(UserRoutes);
