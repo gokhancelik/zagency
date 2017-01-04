@@ -73,6 +73,10 @@ const routes: Routes = [
       {
         path: 'roles',
         loadChildren: () => System.import('./roles/role.module')
+      },
+       {
+        path: 'publishingTours',
+        loadChildren: () => System.import('./publishingTours/publishingTour.module')
       }
     ]
   }

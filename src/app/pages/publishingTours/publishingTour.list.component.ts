@@ -7,8 +7,8 @@ import { LocalDataSource } from 'ng2-smart-table';
 import { ListComponent } from '../../core/index';
 
 @Component({
-    selector: 'tourSchedule-list',
-    templateUrl: 'tourSchedule.list.component.html'
+    selector: 'publishingTour-list',
+    templateUrl: 'publishingTour.list.component.html'
 })
 export class PublishingTourListComponent extends ListComponent<PublishingTour> {
     @ViewChild('addModal') addModal: PublishingTourAddComponent;
