@@ -7,6 +7,10 @@ export class TourSchedulePrice extends BaseModel {
     }
     static getColumns(): any {
         return {
+            tourName: {
+                title: 'tourName',
+                type: 'number'
+            },
             price: {
                 title: 'price',
                 type: 'number'
@@ -30,10 +34,10 @@ export class TourSchedulePrice extends BaseModel {
         };
     }
     static fromJson({ $key, price, discount, priceType, priceTypeName,
-        currency, currencyName, currencySymbol, tourSchedule}): TourSchedulePrice {
+        currency, currencyName, currencySymbol, tourSchedule,tourName,tourUrlPath}): TourSchedulePrice {
         return new TourSchedulePrice(
             $key, price, discount, priceType, priceTypeName,
-            currency, currencyName, currencySymbol, tourSchedule);
+            currency, currencyName, currencySymbol, tourSchedule,tourName,tourUrlPath);
     }
     constructor(
         id: string = null,
@@ -44,7 +48,10 @@ export class TourSchedulePrice extends BaseModel {
         public currency: string = null,
         public currencyName: string = null,
         public currencySymbol: string = null,
-        public tourSchedule: string = null
+        public tourSchedule: string = null,
+        public tourName:string=null,
+        public tourUrlPath:string=null,
+
     ) {
         super();
         this.id = id;

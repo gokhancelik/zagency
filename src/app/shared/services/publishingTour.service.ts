@@ -1,5 +1,5 @@
 import { AuthService } from './../../security/auth.service';
-import { PublishingTour, Tour, TourSchedulePrice,TourScheduleSpec } from '../models';
+import { PublishingTour, Tour, TourSchedulePrice, TourScheduleSpec } from '../models';
 import { CompanyService } from './';
 import { Injectable, Inject } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
@@ -26,33 +26,23 @@ export class PublishingTourService extends BaseFirebaseService<PublishingTour> {
         // };
         this._af.object(this.getRoute() + '/' + key).update(value);
     }
-    updateratio(key:string,value:number):void
-    {
-        this._af.object(this.getRoute() + '/' + key).update({ratio:value});
+    updateratio(key: string, value: number): void {
+        this._af.object(this.getRoute() + '/' + key).update({ ratio: value });
     }
-    updateractive(key:string,value:boolean):void
-    {
-        this._af.object(this.getRoute() + '/' + key).update({active:value});
+    updateractive(key: string, value: boolean): void {
+        this._af.object(this.getRoute() + '/' + key).update({ active: value });
     }
 
     add(value: PublishingTour) {
-        this.authService.getUserInfo().take(1).subscribe(user => {
-            if (user && user.user) {
-                let newData = {
-                   publisher_name : value.publisher_name,
-                   distributer_name : value.distributer_name,
-                   quota : value.quota,
-                   ratio : value.ratio,
-                active : value.active
-                };
+
                 let newPostKey = this._af.list(this.getRoute()).push(null).key;
                 let updates = {};
                 updates[this.getRoute() + '/' + newPostKey] = value;
                 updates['tourschedules/' + value.tourschedule + '/publishingtours/' + newPostKey] = true;
-                super.firebaseUpdate(updates);
-            }
-        });
-    }
+
+        }
+        
+    
     delete(key: string): void {
         this.getByKey(key).take(1).subscribe(
             data => {
@@ -63,6 +53,6 @@ export class PublishingTourService extends BaseFirebaseService<PublishingTour> {
             }
         );
     }
-   
+
 }
 

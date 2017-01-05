@@ -15,18 +15,20 @@ export class TourCategory extends BaseModel {
             },
         };
     }
-    get id() {
-        return this.$key;
-    }
+    // get id() {
+    //     return this.$key;
+    // }
     static fromJson({ $key, name, urlPath}): TourCategory {
         return new TourCategory(
             $key, name, urlPath);
     }
     constructor(
-        public $key: string,
-        public name: string,
-        public urlPath: string) {
+         key: string=null,
+        public name: string=null,
+        public urlPath: string=null
+        ) {
         super();
+        this.id = key;
     }
 
 }

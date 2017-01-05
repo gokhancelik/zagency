@@ -26,24 +26,31 @@ export class TourSchedule extends BaseModel {
                     return formatted;
                 }
             },
-            quota: {
+             tourName: {
+                title: 'tourName',
+                type: 'string'
+            },
+             quota: {
                 title: 'quota',
                 type: 'number'
             }
         };
     }
-    static fromJson({ $key, start, end, quota, tour}): TourSchedule {
+    static fromJson({ $key, start, end, quota, tour,tourName,tourUrlPath}): TourSchedule {
         return new TourSchedule(
-            $key, new Date(start), new Date(end), quota, tour);
+            $key, new Date(start), new Date(end), quota, tour,tourName,tourUrlPath);
     }
     constructor(
-        id: string = null,
+        key: string = null,
         public start: Date = new Date(),
         public end: Date = new Date(),
         public quota: number = 0,
         public tour: string = null,
+        public tourName:string =null,
+        public tourUrlPath:string=null
+
     ) {
         super();
-        this.id = id;
+        this.id = key;
     }
 }
