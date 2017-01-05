@@ -19,12 +19,16 @@ export class TourDestination extends BaseModel {
               longitude: {
                 title: 'longitude',
                 type: 'number'
+              },
+              tourName: {
+                title: 'tour Name',
+                type: 'string'
               }
         };
     }
-    static fromJson({ $key, name,latitude,longitude, tour}): TourDestination {
+    static fromJson({ $key, name,latitude,longitude, tour,tourName, tourUrlPath}): TourDestination {
         return new TourDestination(
-            $key, name, latitude, longitude,tour);
+            $key, name, latitude, longitude,tour,tourName, tourUrlPath);
     }
     constructor(
         id: string=null,
@@ -32,6 +36,8 @@ export class TourDestination extends BaseModel {
         public latitude: number=0,
         public longitude: number=0,
         public tour: string=null,
+        public tourName:string=null,
+        public tourUrlPath:string=null
     ) {
         super();
         this.id = id;

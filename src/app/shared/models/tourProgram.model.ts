@@ -15,18 +15,25 @@ export class TourProgram extends BaseModel {
             day: {
                 title: 'day',
                 type: 'string'
+            },
+            tourName: {
+                title: 'tour Name',
+                type: 'string'
             }
         };
     }
-    static fromJson({ $key, description, day, tour}): TourProgram {
+    static fromJson({ $key, description, day, tour, tourName, tourUrlPath}): TourProgram {
         return new TourProgram(
-            $key, description, day, tour);
+            $key, description, day, tour, tourName, tourUrlPath);
     }
     constructor(
         id: string = null,
         public description: string = null,
         public day: string = null,
         public tour: string = null,
+        public tourName: string = null,
+        public tourUrlPath: string = null,
+
     ) {
         super();
         this.id = id;
