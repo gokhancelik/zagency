@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import {
     routing, PublishingTourAddComponent,
-    PublishingTourEditComponent,PublishingTourListComponent
+    PublishingTourEditComponent, PublishingTourListComponent
 } from './index';
 import { CarouselModule, ProgressbarModule, DatepickerModule } from 'ng2-bootstrap/ng2-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -20,11 +20,12 @@ import {
 } from '@ng2-dynamic-forms/ui-bootstrap';
 @NgModule({
     imports: [
-        routing, RouterModule, ModalModule, CommonModule, FormsModule, CarouselModule,
-         DynamicFormsCoreModule, DynamicFormsBootstrapUIModule,Ng2SmartTableModule, NgaModule],
-    exports: [PublishingTourAddComponent,PublishingTourEditComponent,PublishingTourListComponent],
+        routing, RouterModule, ModalModule, CommonModule, FormsModule,
+        ReactiveFormsModule, CarouselModule,
+        DynamicFormsCoreModule, DynamicFormsBootstrapUIModule, Ng2SmartTableModule, NgaModule],
+    exports: [PublishingTourAddComponent, PublishingTourEditComponent, PublishingTourListComponent],
     declarations: [PublishingTourAddComponent,
-    PublishingTourEditComponent,PublishingTourListComponent],
+        PublishingTourEditComponent, PublishingTourListComponent],
     providers: [DynamicFormService, DynamicFormRelationService],
 })
 export default class PublishingTourModule { }

@@ -20,12 +20,11 @@ export class PublishingTourListComponent extends ListComponent<PublishingTour> {
     source: LocalDataSource = new LocalDataSource();
 
     constructor(
-        private datePipe: DatePipe,
         private tourScheduleService: TourScheduleService,
         private publishingTourService: PublishingTourService
     ) {
         super(publishingTourService);
-        this.setColumns(PublishingTour.getColumns(this.datePipe));
+        this.setColumns(PublishingTour.getColumns());
     }
     getList() {
         if (this.tourschedule) {

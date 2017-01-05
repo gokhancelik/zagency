@@ -12,7 +12,7 @@ import { PUBLISHINGTOUR_FORM_MODEL } from './publishingTour-form.model';
 @Component({
     selector: 'publishingTour-edit',
     encapsulation: ViewEncapsulation.None,
-    templateUrl: '../../core/form.component.html'
+       templateUrl: '../../core/form.component.html'
 
 })
 export class PublishingTourEditComponent extends EditComponent< PublishingTour> {

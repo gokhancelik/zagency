@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
 @Component({
     moduleId: module.id,
     selector: 'publishingTour-cmp',
-    templateUrl: 'PublishingTour.component.html'
+    templateUrl: 'publishingTour.component.html'
 })
 export class PublishingTourComponent implements OnInit {
     constructor() { }

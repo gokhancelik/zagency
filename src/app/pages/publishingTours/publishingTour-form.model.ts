@@ -21,13 +21,6 @@ export const PUBLISHINGTOUR_FORM_MODEL: Array<DynamicFormControlModel> = [
         required: true
     }),
       new DynamicInputModel({
-        id: 'distributer_name',
-        inputType: 'text',
-        label: 'Tour Distirubitor',
-        placeholder: 'Tour Distirubitor',
-        required: true
-    }),
-      new DynamicInputModel({
         id: 'ratio',
         inputType: 'number',
         label: 'ratio',
@@ -38,18 +31,6 @@ export const PUBLISHINGTOUR_FORM_MODEL: Array<DynamicFormControlModel> = [
         inputType: 'number',
         id: 'quota',
         label: 'quota',
-        required: true
-    }),
-    new DynamicInputModel({
-        inputType: 'boolean',
-        id: 'active',
-        label: 'active',
-        required: true
-    }),
-      new DynamicInputModel({
-        inputType: 'text',
-        id: 'create',
-        label: 'create',
         required: true
     })
 ];
