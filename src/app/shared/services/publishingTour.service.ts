@@ -7,9 +7,9 @@ import { AngularFireDatabase, FirebaseRef } from 'angularfire2';
 import { BaseFirebaseService } from './base.firebase.service';
 @Injectable()
 export class PublishingTourService extends BaseFirebaseService<PublishingTour> {
-    constructor(private _af: AngularFireDatabase, private authService: AuthService,
+    constructor(private _af: AngularFireDatabase, private _authService: AuthService,
         @Inject(FirebaseRef) fb) {
-        super(_af, 'publishingTours', fb);
+        super(_af, 'publishingTours', fb,_authService);
     }
     fromJson(obj) {
         return PublishingTour.fromJson(obj);

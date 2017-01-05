@@ -11,17 +11,16 @@ export class PriceType extends BaseModel {
             },
         };
     }
-    get id() {
-        return this.$key;
-    }
+ 
     static fromJson({ $key, name}): PriceType {
         return new PriceType(
             $key, name);
     }
     constructor(
-        public $key: string=null,
+        key: string=null,
         public name: string=null) {
         super();
+        this.id=key;
     }
 
 }

@@ -21,8 +21,12 @@ export class User extends BaseModel {
                 title: 'userName',
                 type: 'string'
             },
-            company: {
-                title: 'company',
+            companyName: {
+                title: 'company Name',
+                type: 'string'
+            },
+            roleName: {
+                title: 'role Name',
                 type: 'string'
             },
             phone: {
@@ -31,9 +35,9 @@ export class User extends BaseModel {
             }
         };
     }
-    static fromJson({ $key, name, phone, userName, email, company, role }): User {
+    static fromJson({ $key, name, phone, userName, email, company, companyName, role, roleName }): User {
         return new User(
-            $key, name, phone, userName, email, company, role);
+            $key, name, phone, userName, email, company, companyName, role, roleName);
     }
     constructor(
         id: string = null,
@@ -42,7 +46,9 @@ export class User extends BaseModel {
         public userName: string = null,
         public email: string = null,
         public company: string = null,
-        public role: string = null) {
+        public companyName: string = null,
+        public role: string = null,
+        public roleName: string = null) {
         super();
         this.id = id;
 

@@ -15,18 +15,17 @@ export class CurrencyType extends BaseModel {
             }
         };
     }
-    get id() {
-        return this.$key;
-    }
+   
     static fromJson({ $key, name, symbol}): CurrencyType {
         return new CurrencyType(
             $key, name, symbol);
     }
     constructor(
-        public $key: string=null,
+        key: string=null,
         public name: string=null,
         public symbol: string=null) {
         super();
+        this.id=key;
     }
 
 }
