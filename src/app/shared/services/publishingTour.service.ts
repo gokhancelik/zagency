@@ -26,17 +26,25 @@ export class PublishingTourService extends BaseFirebaseService<PublishingTour> {
         // };
         this._af.object(this.getRoute() + '/' + key).update(value);
     }
+    updateratio(key:string,value:number):void
+    {
+        this._af.object(this.getRoute() + '/' + key).update({ratio:value});
+    }
+    updateractive(key:string,value:boolean):void
+    {
+        this._af.object(this.getRoute() + '/' + key).update({active:value});
+    }
 
     add(value: PublishingTour) {
         this.authService.getUserInfo().take(1).subscribe(user => {
             if (user && user.user) {
-                // let newData = {
-                //     start: value.start.getTime(),
-                //     end: value.end.getTime(),
-                //     tour: value.tour,
-                //     quota: value.quota,
-                //     company: user[0].company,
-                // };
+                let newData = {
+                   publisher_name : value.publisher_name,
+                   distributer_name : value.distributer_name,
+                   quota : value.quota,
+                   ratio : value.ratio,
+                active : value.active
+                };
                 let newPostKey = this._af.list(this.getRoute()).push(null).key;
                 let updates = {};
                 updates[this.getRoute() + '/' + newPostKey] = value;
