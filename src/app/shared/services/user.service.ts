@@ -35,11 +35,8 @@ export class UserService extends BaseFirebaseService<User> {
             user => {
                 if (user && user.user) {
                     value.company = user.user.company;
-                    value.createdAt = new Date();
-                    value.modifiedAt = new Date();
-                    value.createdBy = user.user.email;
-                    value.modifiedBy = user.user.email;
-                    
+                    value = super.preparePreCreateByUser(value, user.user);
+
                     let newPostKey = this._af.list('users').push(null).key;
                     let updates = {};
                     updates['/users/' + newPostKey] = value;
@@ -49,32 +46,15 @@ export class UserService extends BaseFirebaseService<User> {
             }
         );
     }
-    update(key: string, value: User): void {
-        // this.authService.getUserInfo().subscribe(
-        //     user => {
-        //         if (user.user) {
-        //             value.company = user.user.company;
-        //             // let updates = {};
-        //             // TODO: implement many to many
-        //             // if (value.role) {
-        //             //     updates['/roles/' + value.role + '/users/' + value.$key] = true;
-        //             // }
-        this._af.object(super.getRoute() + '/' + key).update(value);
-
-        // updates['/users/' + key] = value;
-        // this.firebaseUpdate(updates);
-        //         }
-        //     }
-        // );
-    }
-
-
     delete(key: string) {
-        this.authService.getUserInfo().subscribe(
+        this._authService.getUserInfo().subscribe(
             user => {
-                if (user[0]) {
-                    this._af.object('users' + '/' + key).remove();
-                    this.companyService.removeUser(user.user.company, key);
+                if (user && user.user) {
+                    let deleted = super.preparePreDeleteByUser(user.user);
+                    let updates = {};
+                    updates['users/' + key] = deleted;
+                    updates['companies/' + user.user.company + '/users/' + key] = null;
+                    super.firebaseUpdate(updates);
                 }
             }
         );

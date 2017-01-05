@@ -2,9 +2,9 @@ import { TourSchedulePrice } from './tourSchedulePrice.model';
 import { BaseModel } from './base.model';
 import { Injectable, Inject } from '@angular/core';
 
-export class PublishingTour extends BaseModel {
-    static fromJsonList(array): PublishingTour[] {
-        return array.map(PublishingTour.fromJson);
+export class Order extends BaseModel {
+    static fromJsonList(array): Order[] {
+        return array.map(Order.fromJson);
     }
     static getColumns(): any {
         return {
@@ -95,8 +95,8 @@ export class PublishingTour extends BaseModel {
         customerPhone,
         customerEmail,
         customerAddress
-    }): PublishingTour {
-        return new PublishingTour($key,
+    }): Order {
+        return new Order($key,
             tourSchedule,
             new Date(tourScheduleStart),
             new Date(tourScheduleEnd),

@@ -1,8 +1,6 @@
 export * from './currencyType.model';
 export * from './priceType.model';
 export * from './tour.model';
-export * from './product.model';
-export * from './productPhoto.model';
 export * from './tourProgram.model';
 export * from './tourSchedule.model';
 export * from './tourSchedulePrice.model';
@@ -11,8 +9,6 @@ export * from './company.model';
 export * from './companyService.model';
 export * from './companySpec.model';
 export * from './tourScheduleSpec.model';
-export * from './productType.model';
-export * from './productTypeCategory.model';
 export * from './specType.model';
 export * from './imageSize.model';
 export * from './user.model';

@@ -138,39 +138,35 @@ export const PAGES_MENU = [
           }
         ]
       },
-       {
-        path: 'publishingTours',
-        data: {
-          menu: {
-            title: 'publishingTours',
-            icon: 'fa fa-building',
-            selected: false,
-            expanded: false,
-            order: 120
-          }
-        },
-        children: [
-          {
-            path: 'list',
-            data: {
-              menu: {
-                title: 'List',
-              }
-            }
-          }
-        ]
-      },
       {
-        path: 'b2bs',
+        path: 'b2b',
         data: {
           menu: {
             title: 'B2B',
-            icon: 'fa fa-product',
+            icon: 'fa fa-users',
             selected: false,
             expanded: false,
             order: 130
           }
-        }
+        },
+        children: [
+          {
+            path: 'publishingTours',
+            data: {
+              menu: {
+                title: 'Publishing Tours',
+              }
+            }
+          },
+          {
+            path: 'distrubutors',
+            data: {
+              menu: {
+                title: 'Distrubutors',
+              }
+            }
+          }
+        ]
       },
       {
         path: 'users',

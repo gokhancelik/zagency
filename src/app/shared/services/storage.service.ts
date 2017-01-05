@@ -14,20 +14,7 @@ export class StorageService {
         };
         let tourImagesRef = this.storageRef
             .child(`${companyKey}/${tourKey}/${width}x${height}/${fileName}`);
-        //const subject = new Subject();
         return tourImagesRef.put(file, metadata);
-        // .then(
-        // val => {
-        //     subject.next(val);
-        //     subject.complete();
-
-        // },
-        // err => {
-        //     subject.error(err);
-        //     subject.complete();
-        // }
-        // );
-        //return subject.asObservable();
     }
     getDownloadUrl(companyKey: string, tourKey: string, width: number,
         height: number, name: string) {

@@ -47,7 +47,7 @@ const routes: Routes = [
         loadChildren: () => System.import('./priceTypes/priceType.module')
       },
       {
-        path: 'b2bs',
+        path: 'b2b',
         loadChildren: () => System.import('./b2bs/b2b.module')
       },
       {
@@ -74,10 +74,6 @@ const routes: Routes = [
         path: 'roles',
         loadChildren: () => System.import('./roles/role.module')
       },
-       {
-        path: 'publishingTours',
-        loadChildren: () => System.import('./publishingTours/publishingTour.module')
-      }
     ]
   }
 ];

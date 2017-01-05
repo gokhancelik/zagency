@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/Rx';
 import { AngularFireDatabase, FirebaseRef } from 'angularfire2';
 import { BaseFirebaseService } from './base.firebase.service';
 @Injectable()
-export class B2BService extends BaseFirebaseService<Stakeholder> {
+export class StakeholderService extends BaseFirebaseService<Stakeholder> {
     constructor(private _af: AngularFireDatabase, private _authService: AuthService,
         @Inject(FirebaseRef) fb) {
         super(_af, 'stakeholders', fb, _authService);
@@ -24,6 +24,7 @@ export class B2BService extends BaseFirebaseService<Stakeholder> {
                 if (user && user.user) {
                     value.publisher = user.user.company;
                     value.publisherName = user.user.companyName;
+                    value = super.preparePreCreateByUser(value, user.user);
                     let newPostKey = that._af.list(that.getRoute()).push(null).key;
                     let updates = {};
                     updates['/stakeholders/' + newPostKey] = value;

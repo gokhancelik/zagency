@@ -9,8 +9,8 @@ export class SpecTypeService extends BaseFirebaseService<SpecType> {
     sdkDb: any;
     constructor(private afAuth: AngularFireAuth,
         private _af: AngularFireDatabase,
-        private authService: AuthService, @Inject(FirebaseRef) fb) {
-        super(_af, 'specTypes');
+        private _authService: AuthService, @Inject(FirebaseRef) fb) {
+        super(_af, 'specTypes', fb, _authService);
         this.sdkDb = fb.database().ref();
     }
     fromJson(obj) {
@@ -18,10 +18,5 @@ export class SpecTypeService extends BaseFirebaseService<SpecType> {
     }
     fromJsonList(array) {
         return SpecType.fromJsonList(array);
-    }
-    getAll(): Observable<SpecType[]> {
-        const priceTypes$ = this._af.list('specTypes')
-            .map(this.fromJsonList);
-        return priceTypes$;
     }
 }

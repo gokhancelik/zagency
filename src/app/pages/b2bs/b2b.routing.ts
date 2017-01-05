@@ -1,9 +1,7 @@
+import { PublishingTourListComponent } from './publishingTours/publishingTour.list.component';
+import { B2BComponent } from './b2b.component';
+import { DistributorListComponent } from './stakeholders/distributor.list.component';
 import { Routes, RouterModule } from '@angular/router';
-
-import {
-	B2BEditComponent, B2BComponent, B2BAddComponent
-	, B2BListComponent
-} from './index';
 
 const B2BRoutes: Routes = [
 	{
@@ -11,8 +9,12 @@ const B2BRoutes: Routes = [
 		component: B2BComponent,
 		children: [
 			{
-				path: '',
-				component: B2BListComponent
+				path: 'distrubutors',
+				component: DistributorListComponent
+			},
+			{
+				path: 'publishingTours',
+				component: PublishingTourListComponent
 			},
 		]
 	}

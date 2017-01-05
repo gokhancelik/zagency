@@ -10,8 +10,8 @@ export class RoleService extends BaseFirebaseService<Role> {
     sdkDb: any;
     constructor(private afAuth: AngularFireAuth,
         private _af: AngularFireDatabase, private companyService: CompanyService,
-        private authService: AuthService, @Inject(FirebaseRef) fb) {
-        super(_af, 'roles');
+        private _authService: AuthService, @Inject(FirebaseRef) fb) {
+        super(_af, 'roles', fb, _authService);
         this.sdkDb = fb.database().ref();
     }
     fromJson(obj) {
@@ -19,10 +19,5 @@ export class RoleService extends BaseFirebaseService<Role> {
     }
     fromJsonList(array) {
         return Role.fromJsonList(array);
-    }
-    getAll(): Observable<Role[]> {
-        const roles$ =  this._af.list('roles')
-            .map(this.fromJsonList);
-        return roles$;
     }
 }
