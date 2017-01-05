@@ -60,7 +60,7 @@ export class AuthService {
         let userWithRole$ =
             user$.switchMap(user =>
                 this.fDb.list('roles', {
-                    query: { orderByKey: true, equalTo: user ? user.role : "", limitToFirst: 1 }
+                    query: { orderByKey: true, equalTo: user ? user.role : '', limitToFirst: 1 }
                 })
                     .flatMap(list => list).first()
                     .map((role) => ({ role, user }))

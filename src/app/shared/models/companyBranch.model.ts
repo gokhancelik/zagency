@@ -26,9 +26,15 @@ export class CompanyBranch extends BaseModel {
             }
         };
     }
-    static fromJson({ $key, address, company, companyName, latitude, longitude}): CompanyBranch {
+    static fromJson({ $key, address, company, companyName, latitude, longitude
+        , createdAt, createdBy, modifiedAt, modifiedBy, isDeleted, deletedBy, deletedAt
+
+    }): CompanyBranch {
         return new CompanyBranch(
-            $key, address, company, companyName, latitude, longitude);
+            $key, address, company, companyName, latitude, longitude
+            , createdAt, createdBy, modifiedAt, modifiedBy, isDeleted, deletedBy, deletedAt
+
+        );
     }
     constructor(
         id: string = null,
@@ -37,8 +43,14 @@ export class CompanyBranch extends BaseModel {
         public companyName: string = null,
         public latitude: number = null,
         public longitude: number = null,
+        createdAt: Date = null,
+        createdBy: string = null,
+        modifiedAt: Date = null,
+        modifiedBy: string = null,
+        isDeleted: boolean = false,
+        deletedBy: string = null,
+        deletedAt: Date = null,
     ) {
-        super();
-        this.id = id;
+        super(id, createdAt, createdBy, modifiedAt, modifiedBy, isDeleted, deletedBy, deletedAt);
     }
 }

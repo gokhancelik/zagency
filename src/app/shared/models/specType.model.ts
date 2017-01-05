@@ -9,30 +9,37 @@ export class SpecType extends BaseModel {
                 title: 'name',
                 type: 'string'
             },
-             group: {
+            group: {
                 title: 'group',
                 type: 'string'
             },
-             code: {
+            code: {
                 title: 'code',
                 type: 'string'
             }
         };
     }
-    get id() {
-        return this.$key;
-    }
-    static fromJson({ $key, name,group,code}): SpecType {
+    static fromJson({ $key, name, group, code,
+        createdAt, createdBy, modifiedAt, modifiedBy, isDeleted, deletedBy, deletedAt
+    }): SpecType {
         return new SpecType(
-            $key, name,group,code);
+            $key, name, group, code,
+            createdAt, createdBy, modifiedAt, modifiedBy, isDeleted, deletedBy, deletedAt
+        );
     }
     constructor(
-        public $key: string=null,
-        public name: string=null,
-        public group: string=null,
-        public code: string=null) 
-        {
-        super();
+        id: string = null,
+        public name: string = null,
+        public group: string = null,
+        public code: string = null,
+        createdAt: Date = null,
+        createdBy: string = null,
+        modifiedAt: Date = null,
+        modifiedBy: string = null,
+        isDeleted: boolean = false,
+        deletedBy: string = null,
+        deletedAt: Date = null) {
+        super(id, createdAt, createdBy, modifiedAt, modifiedBy, isDeleted, deletedBy, deletedAt);
     }
 
 }

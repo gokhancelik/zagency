@@ -31,9 +31,13 @@ export class Customer extends BaseModel {
             }
         };
     }
-    static fromJson({ $key, name, phone, email, company, companyName, address }): Customer {
+    static fromJson({ $key, name, phone, email, company, companyName, address,
+        createdAt, createdBy, modifiedAt, modifiedBy, isDeleted, deletedBy, deletedAt
+    }): Customer {
         return new Customer(
-            $key, name, phone, email, company, companyName, address);
+            $key, name, phone, email, company, companyName, address,
+            createdAt, createdBy, modifiedAt, modifiedBy, isDeleted, deletedBy, deletedAt
+        );
     }
     constructor(
         id: string = null,
@@ -43,10 +47,15 @@ export class Customer extends BaseModel {
         public email: string = null,
         public company: string = null,
         public companyName: string = null,
-        public address: string = null) {
-        super();
-        this.id = id;
-
+        public address: string = null,
+        createdAt: Date = null,
+        createdBy: string = null,
+        modifiedAt: Date = null,
+        modifiedBy: string = null,
+        isDeleted: boolean = false,
+        deletedBy: string = null,
+        deletedAt: Date = null) {
+        super(id, createdAt, createdBy, modifiedAt, modifiedBy, isDeleted, deletedBy, deletedAt);
     }
 
 }

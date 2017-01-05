@@ -35,7 +35,7 @@ const APP_PROVIDERS = [
 const myFirebaseAuthConfig = {
   provider: AuthProviders.Google,
   method: AuthMethods.Redirect
-}
+};
 export const FIREBASE_CONFIG = {
   apiKey: 'AIzaSyByQM2VHGOKLJdCF5fM9FJLE4NZMatHQGQ',
   authDomain: 'zagency-9f4fe.firebaseapp.com',

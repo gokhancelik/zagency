@@ -3,7 +3,7 @@ import { B2BComponent } from './b2b.component';
 import { DistributorListComponent } from './stakeholders/distributor.list.component';
 import { Routes, RouterModule } from '@angular/router';
 
-const B2BRoutes: Routes = [
+const B2B_ROUTES: Routes = [
 	{
 		path: '',
 		component: B2BComponent,
@@ -19,5 +19,5 @@ const B2BRoutes: Routes = [
 		]
 	}
 ];
-export const routing = RouterModule.forChild(B2BRoutes);
+export const routing = RouterModule.forChild(B2B_ROUTES);
 

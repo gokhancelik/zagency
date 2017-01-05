@@ -1,5 +1,8 @@
 import { PublishingTourService } from './../../../shared/services/publishingTour.service';
-import { Component, OnInit, ViewChild, Input, Output, EventEmitter, ViewEncapsulation } from '@angular/core';
+import {
+    Component, OnInit, ViewChild,
+    ViewEncapsulation
+} from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { DynamicFormControlModel, DynamicFormService } from '@ng2-dynamic-forms/core';
 import { LocalDataSource } from 'ng2-smart-table';

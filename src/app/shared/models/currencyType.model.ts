@@ -15,17 +15,27 @@ export class CurrencyType extends BaseModel {
             }
         };
     }
-   
-    static fromJson({ $key, name, symbol}): CurrencyType {
+
+    static fromJson({ $key, name, symbol,
+        createdAt, createdBy, modifiedAt, modifiedBy, isDeleted, deletedBy, deletedAt
+    }): CurrencyType {
         return new CurrencyType(
-            $key, name, symbol);
+            $key, name, symbol,
+            createdAt, createdBy, modifiedAt, modifiedBy, isDeleted, deletedBy, deletedAt
+        );
     }
     constructor(
-        key: string=null,
-        public name: string=null,
-        public symbol: string=null) {
-        super();
-        this.id=key;
+        id: string = null,
+        public name: string = null,
+        public symbol: string = null,
+        createdAt: Date = null,
+        createdBy: string = null,
+        modifiedAt: Date = null,
+        modifiedBy: string = null,
+        isDeleted: boolean = false,
+        deletedBy: string = null,
+        deletedAt: Date = null) {
+        super(id, createdAt, createdBy, modifiedAt, modifiedBy, isDeleted, deletedBy, deletedAt);
     }
 
 }

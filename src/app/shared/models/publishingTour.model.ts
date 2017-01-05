@@ -51,7 +51,9 @@ export class PublishingTour extends BaseModel {
         percent,
         soldCount,
         active,
-        prices
+        prices,
+        createdAt, createdBy, modifiedAt, modifiedBy, isDeleted, deletedBy, deletedAt
+
     }): PublishingTour {
         return new PublishingTour($key,
             tourSchedule,
@@ -66,7 +68,9 @@ export class PublishingTour extends BaseModel {
             percent,
             soldCount,
             active,
-            TourSchedulePrice.fromJsonList(prices));
+            TourSchedulePrice.fromJsonList(prices),
+            createdAt, createdBy, modifiedAt, modifiedBy, isDeleted, deletedBy, deletedAt
+        );
     }
     constructor(
         id: string = null,
@@ -83,8 +87,14 @@ export class PublishingTour extends BaseModel {
         public soldCount: number = 0,
         public active: boolean = false,
         public prices: TourSchedulePrice[] = null,
+        createdAt: Date = null,
+        createdBy: string = null,
+        modifiedAt: Date = null,
+        modifiedBy: string = null,
+        isDeleted: boolean = false,
+        deletedBy: string = null,
+        deletedAt: Date = null
     ) {
-        super();
-        this.id = id;
+        super(id, createdAt, createdBy, modifiedAt, modifiedBy, isDeleted, deletedBy, deletedAt);
     }
 }

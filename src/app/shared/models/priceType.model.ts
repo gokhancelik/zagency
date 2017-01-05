@@ -11,16 +11,27 @@ export class PriceType extends BaseModel {
             },
         };
     }
- 
-    static fromJson({ $key, name}): PriceType {
+
+    static fromJson({ $key, name,
+        createdAt, createdBy, modifiedAt, modifiedBy, isDeleted, deletedBy, deletedAt
+    }): PriceType {
         return new PriceType(
-            $key, name);
+            $key, name,
+            createdAt, createdBy, modifiedAt, modifiedBy, isDeleted, deletedBy, deletedAt
+        );
     }
     constructor(
-        key: string=null,
-        public name: string=null) {
-        super();
-        this.id=key;
+        id: string = null,
+        public name: string = null,
+        createdAt: Date = null,
+        createdBy: string = null,
+        modifiedAt: Date = null,
+        modifiedBy: string = null,
+        isDeleted: boolean = false,
+        deletedBy: string = null,
+        deletedAt: Date = null) {
+        super(id, createdAt, createdBy, modifiedAt, modifiedBy, isDeleted, deletedBy, deletedAt);
+
     }
 
 }

@@ -94,7 +94,9 @@ export class Order extends BaseModel {
         customerName,
         customerPhone,
         customerEmail,
-        customerAddress
+        customerAddress,
+        createdAt, createdBy, modifiedAt, modifiedBy, isDeleted, deletedBy, deletedAt
+
     }): Order {
         return new Order($key,
             tourSchedule,
@@ -116,7 +118,9 @@ export class Order extends BaseModel {
             customerName,
             customerPhone,
             customerEmail,
-            customerAddress
+            customerAddress,
+            createdAt, createdBy, modifiedAt, modifiedBy, isDeleted, deletedBy, deletedAt
+
         );
     }
     constructor(
@@ -142,8 +146,15 @@ export class Order extends BaseModel {
         public customerPhone: string = null,
         public customerEmail: string = null,
         public customerAddress: string = null,
+        createdAt: Date = null,
+        createdBy: string = null,
+        modifiedAt: Date = null,
+        modifiedBy: string = null,
+        isDeleted: boolean = false,
+        deletedBy: string = null,
+        deletedAt: Date = null
     ) {
-        super();
-        this.id = id;
+        super(id, createdAt, createdBy, modifiedAt, modifiedBy, isDeleted, deletedBy, deletedAt);
+
     }
 }

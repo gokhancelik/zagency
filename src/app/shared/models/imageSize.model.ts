@@ -32,19 +32,30 @@ export class ImageSize extends BaseModel {
 
         };
     }
-    static fromJson({ $key, name, width, height, type}): ImageSize {
+    static fromJson({ $key, name, width, height, type,
+        createdAt, createdBy, modifiedAt, modifiedBy, isDeleted, deletedBy, deletedAt
+    }): ImageSize {
         return new ImageSize(
-            $key, name, width, height, type);
+            $key, name, width, height, type,
+            createdAt, createdBy, modifiedAt, modifiedBy, isDeleted, deletedBy, deletedAt
+        );
     }
     constructor(
-        key: string = null,
+        id: string = null,
         public name: string = null,
         public width: number = null,
         public height: number = null,
-        public type: string = null
+        public type: string = null,
+        createdAt: Date = null,
+        createdBy: string = null,
+        modifiedAt: Date = null,
+        modifiedBy: string = null,
+        isDeleted: boolean = false,
+        deletedBy: string = null,
+        deletedAt: Date = null
     ) {
-        super();
-        this.id = key;
+        super(id, createdAt, createdBy, modifiedAt, modifiedBy, isDeleted, deletedBy, deletedAt);
+
     }
 
 }

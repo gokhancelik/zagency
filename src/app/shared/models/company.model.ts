@@ -42,9 +42,13 @@ export class Company extends BaseModel {
 
 
     static fromJson({ $key, name, longName, webSiteUrl, phone1, phone2, fax, email,
-        longitude, latitude, specs, createdAt, createdBy, modifiedAt, modifiedBy, isDeleted, deletedBy, deletedAt }): Company {
+        longitude, latitude, specs,
+        createdAt, createdBy, modifiedAt, modifiedBy, isDeleted, deletedBy, deletedAt
+    }): Company {
         return new Company(
-            $key, name, longName, webSiteUrl, phone1, phone2, fax, email, longitude, latitude, specs);
+            $key, name, longName, webSiteUrl, phone1, phone2, fax, email, longitude, latitude, specs,
+            createdAt, createdBy, modifiedAt, modifiedBy, isDeleted, deletedBy, deletedAt
+        );
     }
     constructor(
         id: string = null,
@@ -58,9 +62,15 @@ export class Company extends BaseModel {
         public latitude: number = null,
         public longitude: number = null,
         public specs: string = null,
+        createdAt: Date = null,
+        createdBy: string = null,
+        modifiedAt: Date = null,
+        modifiedBy: string = null,
+        isDeleted: boolean = false,
+        deletedBy: string = null,
+        deletedAt: Date = null,
     ) {
-        super();
-        this.id = id;
+        super(id, createdAt, createdBy, modifiedAt, modifiedBy, isDeleted, deletedBy, deletedAt);
     }
 
 }
