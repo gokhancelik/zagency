@@ -40,7 +40,7 @@ export class Tour extends BaseModel {
         public imageUrl: string,
         public tourCategory: string,
         public company: string,
-        public description: string
+        public description: string,
     ) {
         super();
         this.id = key;
