@@ -1,3 +1,4 @@
+import { CurrentUser } from './../../security/currentUser.model';
 import { AuthService } from './../../security/auth.service';
 import { IService } from '../../core/IService.service';
 import { BaseModel } from '../models/base.model';
@@ -81,12 +82,11 @@ export abstract class BaseFirebaseService<T extends BaseModel> implements IServi
         return updatedObj;
     }
     preparePreModify(value: T): Observable<T> {
+        let that = this;
         return this.authService.getUserInfo().map(
             user => {
                 if (user && user.user) {
-                    value.modifiedAt = new Date();
-                    value.modifiedBy = user.user.email;
-                    return value;
+                    return that.preparePreModifyByUser(value, user.user);
                 }
                 else {
                     alert('Giriş yapmadan bu işlemi yapamazsınız');
@@ -96,31 +96,11 @@ export abstract class BaseFirebaseService<T extends BaseModel> implements IServi
         );
     }
     preparePreDelete(): Observable<any> {
+        let that = this;
         return this.authService.getUserInfo().map(
             user => {
                 if (user && user.user) {
-                    let value = {
-                        deletedAt: new Date(),
-                        deletedBy: user.user.email,
-                        isDelete: true
-                    }
-                    return value
-                }
-                else {
-                    alert('Giriş yapmadan bu işlemi yapamazsınız');
-                    throw 'Giriş yapmadan bu işlemi yapamazsınız';
-                }
-            }
-        );
-    }
-    preparePreCreate(value: T): Observable<T> {
-        return this.authService.getUserInfo().map(
-            user => {
-                if (user && user.user) {
-                    value.createdAt = new Date();
-                    value.modifiedAt = new Date();
-                    value.createdBy = user.user.email;
-                    value.modifiedBy = user.user.email;
+                    let value = that.preparePreDeleteByUser(user.user);
                     return value;
                 }
                 else {
@@ -129,6 +109,39 @@ export abstract class BaseFirebaseService<T extends BaseModel> implements IServi
                 }
             }
         );
+    }
+    preparePreDeleteByUser(user: User): any {
+        return {
+            deletedAt: new Date(),
+            deletedBy: user.email,
+            isDelete: true
+        }
+    }
+    preparePreCreate(value: T): Observable<T> {
+        let that = this;
+        return this.authService.getUserInfo().map(
+            user => {
+                if (user && user.user) {
+                    return that.preparePreCreateByUser(value, user.user);
+                }
+                else {
+                    alert('Giriş yapmadan bu işlemi yapamazsınız');
+                    throw 'Giriş yapmadan bu işlemi yapamazsınız';
+                }
+            }
+        );
+    }
+    preparePreModifyByUser(value: T, user: User): T {
+        value.modifiedAt = new Date();
+        value.modifiedBy = user.email;
+        return value;
+    }
+    preparePreCreateByUser(value: T, user: User): T {
+        value.createdAt = new Date();
+        value.modifiedAt = new Date();
+        value.createdBy = user.email;
+        value.modifiedBy = user.email;
+        return value;
     }
     abstract fromJsonList(array);
     abstract fromJson(obj: any);

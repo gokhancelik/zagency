@@ -1,7 +1,7 @@
 import { BaseModel } from './base.model';
-export class User extends BaseModel {
-    static fromJsonList(array): User[] {
-        return array.map(User.fromJson);
+export class Customer extends BaseModel {
+    static fromJsonList(array): Customer[] {
+        return array.map(Customer.fromJson);
     }
     static getColumns(): any {
         return {
@@ -31,8 +31,8 @@ export class User extends BaseModel {
             }
         };
     }
-    static fromJson({ $key, name, phone, email, company, companyName, address }): User {
-        return new User(
+    static fromJson({ $key, name, phone, email, company, companyName, address }): Customer {
+        return new Customer(
             $key, name, phone, email, company, companyName, address);
     }
     constructor(

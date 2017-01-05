@@ -13,10 +13,6 @@ export class ImageSizeService extends BaseFirebaseService<ImageSize> {
         super(_af, 'imageSizes', fb, _authService);
         this.sdkDb = fb.database().ref();
     }
-    // getAll(): Observable<ImageSize[]> {
-    //     return this._af.list(this.getRoute(), { query: { orderByChild: 'width' } })
-    //         .map(this.fromJsonList);
-    // }
     fromJson(obj) {
         return ImageSize.fromJson(obj);
     }

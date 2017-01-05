@@ -10,8 +10,8 @@ export class UserService extends BaseFirebaseService<User> {
     sdkDb: any;
     constructor(private afAuth: AngularFireAuth,
         private _af: AngularFireDatabase, private companyService: CompanyService,
-        private authService: AuthService, @Inject(FirebaseRef) fb) {
-        super(_af, 'users', fb);
+        private _authService: AuthService, @Inject(FirebaseRef) fb) {
+        super(_af, 'users', fb, _authService);
     }
     fromJson(obj) {
         return User.fromJson(obj);
@@ -20,7 +20,7 @@ export class UserService extends BaseFirebaseService<User> {
         return User.fromJsonList(array);
     }
     getAll(): Observable<User[]> {
-        const users$ = this.authService.getUserInfo().switchMap(user => this._af.list('users',
+        const users$ = this._authService.getUserInfo().switchMap(user => this._af.list('users',
             {
                 query: {
                     orderByChild: 'company',
@@ -31,10 +31,15 @@ export class UserService extends BaseFirebaseService<User> {
         return users$;
     }
     add(value: User): void {
-        this.authService.getUserInfo().subscribe(
+        this._authService.getUserInfo().subscribe(
             user => {
                 if (user && user.user) {
                     value.company = user.user.company;
+                    value.createdAt = new Date();
+                    value.modifiedAt = new Date();
+                    value.createdBy = user.user.email;
+                    value.modifiedBy = user.user.email;
+                    
                     let newPostKey = this._af.list('users').push(null).key;
                     let updates = {};
                     updates['/users/' + newPostKey] = value;
@@ -54,10 +59,10 @@ export class UserService extends BaseFirebaseService<User> {
         //             // if (value.role) {
         //             //     updates['/roles/' + value.role + '/users/' + value.$key] = true;
         //             // }
-                    this._af.object(super.getRoute() + '/' + key).update(value);
+        this._af.object(super.getRoute() + '/' + key).update(value);
 
-                    // updates['/users/' + key] = value;
-                    // this.firebaseUpdate(updates);
+        // updates['/users/' + key] = value;
+        // this.firebaseUpdate(updates);
         //         }
         //     }
         // );
