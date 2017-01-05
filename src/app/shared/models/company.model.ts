@@ -46,15 +46,15 @@ export class Company extends BaseModel {
             $key, name, longName, webSiteUrl, phone1, phone2, fax, email, specs);
     }
     constructor(
-        id: string,
-        public name: string,
-        public phone1: string,
-        public phone2: string,
-        public fax: string,
-        public email: string,
-        public longName: string,
-        public webSiteUrl: string,
-        public specs: string,
+        id: string = null,
+        public name: string = null,
+        public longName: string = null,
+        public webSiteUrl: string = null,
+        public phone1: string = null,
+        public phone2: string = null,
+        public fax: string = null,
+        public email: string = null,
+        public specs: string = null,
     ) {
         super();
         this.id = id;

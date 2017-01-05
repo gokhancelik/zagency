@@ -22,6 +22,7 @@ export class B2BService extends BaseFirebaseService<B2B> {
             user => {
                 if (user && user.user) {
                     value.publisher = user.user.company;
+                    value.publisher_name = user.user.company;//TODO name getir
                     let newPostKey = this._af.list('b2bs').push(null).key;
                     let updates = {};
                     updates['/b2bs/' + newPostKey] = value;
