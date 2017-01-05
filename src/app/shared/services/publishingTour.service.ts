@@ -9,46 +9,45 @@ import { BaseFirebaseService } from './base.firebase.service';
 export class PublishingTourService extends BaseFirebaseService<PublishingTour> {
     constructor(private _af: AngularFireDatabase, private _authService: AuthService,
         @Inject(FirebaseRef) fb) {
-        super(_af, 'publishingTours', fb,_authService);
+        super(_af, 'publishingTours', fb, _authService);
     }
-    fromJson(obj) {
+    public fromJson(obj) {
         return PublishingTour.fromJson(obj);
     }
-    fromJsonList(array) {
+    public fromJsonList(array) {
         return PublishingTour.fromJsonList(array);
     }
-    update(key: string, value: PublishingTour): void {
+    public update(key: string, value: PublishingTour): void {
+        super.preparePreModify(value);
+        let updatedObj = super.mapObjectToFirebaseObject(value);
         // let updData = {
         //     start: value.start.getTime(),
         //     end: value.end.getTime(),
         //     tour: value.tour,
         //     quota: value.quota,
         // };
-        this._af.object(this.getRoute() + '/' + key).update(value);
+        this._af.object(this.getRoute() + '/' + key).update(updatedObj);
     }
-    updateratio(key: string, value: number): void {
+    public updateRatio(key: string, value: number): void {
         this._af.object(this.getRoute() + '/' + key).update({ ratio: value });
     }
-    updateractive(key: string, value: boolean): void {
+    public updateActive(key: string, value: boolean): void {
         this._af.object(this.getRoute() + '/' + key).update({ active: value });
     }
+    public add(value: PublishingTour) {
 
-    add(value: PublishingTour) {
+        let newPostKey = this._af.list(this.getRoute()).push(null).key;
+        let updates = {};
+        updates[this.getRoute() + '/' + newPostKey] = value;
+        updates['tourSchedules/' + value.tourSchedule + '/publishingTours/' + newPostKey] = true;
 
-                let newPostKey = this._af.list(this.getRoute()).push(null).key;
-                let updates = {};
-                updates[this.getRoute() + '/' + newPostKey] = value;
-                updates['tourschedules/' + value.tourschedule + '/publishingtours/' + newPostKey] = true;
-
-        }
-        
-    
-    delete(key: string): void {
+    }
+    public delete(key: string): void {
         this.getByKey(key).take(1).subscribe(
             data => {
                 let updates = {};
                 updates[this.getRoute() + '/' + key] = null;
-                updates['/tourschedules/' + data.tourschedule + '/publishingtours/' + data.id] = null;
+                updates['tourSchedules/' + data.tourSchedule + '/publishingTours/' + data.id] = null;
                 super.firebaseUpdate(updates);
             }
         );

@@ -11,7 +11,7 @@ export abstract class BaseFirebaseService<T extends BaseModel> implements IServi
         this._sdkDb = _fb ? _fb.database().ref() : null;
     }
     getAll(): Observable<T[]> {
-        return this.af.list(this._route,{query:{orderByChild:'isDelete',equalTo:false}})
+        return this.af.list(this._route, { query: { orderByChild: 'isDelete', equalTo: false } })
             .map(this.fromJsonList);
     }
     public getRoute(): string {
@@ -25,49 +25,28 @@ export abstract class BaseFirebaseService<T extends BaseModel> implements IServi
             .map(this.fromJson);
     }
     add(value: T) {
-        this.authService.getUserInfo().subscribe(
-            user => {
-                if (user && user.user) {
-                    value.createdAt = new Date().getTime();
-                    value.modifiedAt = new Date().getTime();
-                    value.createdBy = user.user.email;
-                    value.modifiedBy = user.user.email;
-                    this.af.list(this._route).push(value);
-                }
+        let that = this;
+        this.preparePreCreate(value).subscribe(
+            d => {
+                let nd = that.mapObjectToFirebaseObject(d);
+                that.af.list(that._route).push(nd);
             }
         );
-
     }
     update(key: string, value: T) {
-        this.authService.getUserInfo().subscribe(
-            user => {
-                if (user && user.user) {
-                    value.modifiedAt = new Date().getTime();
-                    value.modifiedBy = user.user.email;
-                    this.af.object(this._route + '/' + key).update(value);
-                }
-            }
-        );
+        let that = this;
+        this.preparePreModify(value).subscribe(d => {
+            let nd = that.mapObjectToFirebaseObject(d);
+            that.af.object(this._route + '/' + key).update(d);
+        });
     }
     delete(key: string) {
 
-        this.authService.getUserInfo().subscribe(
-            user => {
-                if (user && user.user) {
-                    let value = {
-                        deletedAt: new Date().getTime(),
-                        deletedBy: user.user.email,
-                        isDelete: true
-                    }
-                    this.af.object(this._route + '/' + key).update(value);
-                    // this.af.object(this._route + '/' + key).remove();
-                }
+        this.preparePreDelete().subscribe(
+            value => {
+                this.af.object(this._route + '/' + key).update(value);
             }
         );
-
-
-
-
     }
     firebaseUpdate(dataToSave) {
         const subject = new Subject();
@@ -89,6 +68,67 @@ export abstract class BaseFirebaseService<T extends BaseModel> implements IServi
         else {
             alert('sdk eklenmeden firebaseUpdate methodu çalıştırılamaz.');
         }
+    }
+    mapObjectToFirebaseObject(value: T): any {
+        let updatedObj = {};
+        Object.keys(value).forEach(k => {
+            if (value[k] instanceof Date) {
+                updatedObj[k] = (value[k] as Date).getTime();
+            }
+            else
+                updatedObj[k] = value[k];
+        });
+        return updatedObj;
+    }
+    preparePreModify(value: T): Observable<T> {
+        return this.authService.getUserInfo().map(
+            user => {
+                if (user && user.user) {
+                    value.modifiedAt = new Date();
+                    value.modifiedBy = user.user.email;
+                    return value;
+                }
+                else {
+                    alert('Giriş yapmadan bu işlemi yapamazsınız');
+                    throw 'Giriş yapmadan bu işlemi yapamazsınız';
+                }
+            }
+        );
+    }
+    preparePreDelete(): Observable<any> {
+        return this.authService.getUserInfo().map(
+            user => {
+                if (user && user.user) {
+                    let value = {
+                        deletedAt: new Date(),
+                        deletedBy: user.user.email,
+                        isDelete: true
+                    }
+                    return value
+                }
+                else {
+                    alert('Giriş yapmadan bu işlemi yapamazsınız');
+                    throw 'Giriş yapmadan bu işlemi yapamazsınız';
+                }
+            }
+        );
+    }
+    preparePreCreate(value: T): Observable<T> {
+        return this.authService.getUserInfo().map(
+            user => {
+                if (user && user.user) {
+                    value.createdAt = new Date();
+                    value.modifiedAt = new Date();
+                    value.createdBy = user.user.email;
+                    value.modifiedBy = user.user.email;
+                    return value;
+                }
+                else {
+                    alert('Giriş yapmadan bu işlemi yapamazsınız');
+                    throw 'Giriş yapmadan bu işlemi yapamazsınız';
+                }
+            }
+        );
     }
     abstract fromJsonList(array);
     abstract fromJson(obj: any);

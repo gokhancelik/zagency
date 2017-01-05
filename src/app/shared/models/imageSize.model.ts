@@ -37,11 +37,11 @@ export class ImageSize extends BaseModel {
             $key, name, width, height, type);
     }
     constructor(
-        key: string,
-        public name: string,
-        public width: number,
-        public height: number,
-        public type: string
+        key: string = null,
+        public name: string = null,
+        public width: number = null,
+        public height: number = null,
+        public type: string = null
     ) {
         super();
         this.id = key;

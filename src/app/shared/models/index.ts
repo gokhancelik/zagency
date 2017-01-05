@@ -1,4 +1,3 @@
-import { PublishingTour } from './publishingTour.model';
 export * from './currencyType.model';
 export * from './priceType.model';
 export * from './tour.model';
@@ -19,4 +18,4 @@ export * from './imageSize.model';
 export * from './user.model';
 export * from './role.model';
 export * from './tourCategory.model';
-export * from './PublishingTour.model';
+export * from './publishingTour.model';

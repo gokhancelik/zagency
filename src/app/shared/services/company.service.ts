@@ -1,14 +1,16 @@
+import { AuthService } from './../../security/auth.service';
 import { CompanyServiceModel } from './../models/companyService.model';
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
-import { AngularFireDatabase } from 'angularfire2';
+import { AngularFireDatabase, FirebaseRef } from 'angularfire2';
 import { Company, CompanySpec, Tour, User } from '../models';
 import { BaseFirebaseService } from './base.firebase.service';
 import { UserService } from '../services';
 @Injectable()
 export class CompanyService extends BaseFirebaseService<Company> {
-    constructor(private _af: AngularFireDatabase) {
-        super(_af, 'companies');
+    constructor(private _af: AngularFireDatabase, private _authService: AuthService,
+        @Inject(FirebaseRef) fb) {
+        super(_af, 'companies', fb, _authService);
     }
     fromJson(obj) {
         return Company.fromJson(obj);
