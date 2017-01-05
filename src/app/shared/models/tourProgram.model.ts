@@ -22,9 +22,9 @@ export class TourProgram extends BaseModel {
             }
         };
     }
-    static fromJson({ $key, description, day, tour, tourName, tourUrlPath}): TourProgram {
+    static fromJson({ $key, description, day, tour, tourName, tourUrlPath, createdAt, createdBy, modifiedAt, modifiedBy, isDeleted, deletedBy, deletedAt}): TourProgram {
         return new TourProgram(
-            $key, description, day, tour, tourName, tourUrlPath);
+            $key, description, day, tour, tourName, tourUrlPath, createdAt, createdBy, modifiedAt, modifiedBy, isDeleted, deletedBy, deletedAt);
     }
     constructor(
         id: string = null,
@@ -33,9 +33,14 @@ export class TourProgram extends BaseModel {
         public tour: string = null,
         public tourName: string = null,
         public tourUrlPath: string = null,
-
+        createdAt: Date = null,
+        createdBy: string = null,
+        modifiedAt: Date = new Date(),
+        modifiedBy: string = null,
+        isDeleted: boolean = false,
+        deletedBy: string = null,
+        deletedAt: Date = null
     ) {
-        super();
-        this.id = id;
+        super(id, createdAt, createdBy, modifiedAt, modifiedBy, isDeleted, deletedBy, deletedAt);
     }
-}
+

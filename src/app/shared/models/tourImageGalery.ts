@@ -18,19 +18,23 @@ export class ImageGalery extends BaseModel {
               }
         };
     }
-    static fromJson({ $key, name,tour,tourName}): ImageGalery {
+    static fromJson({ $key, name,tour,tourName, createdAt, createdBy, modifiedAt, modifiedBy, isDeleted, deletedBy, deletedAt}): ImageGalery {
         return new ImageGalery(
-            $key, name,tour,tourName);
+            $key, name,tour,tourName, createdAt, createdBy, modifiedAt, modifiedBy, isDeleted, deletedBy, deletedAt);
     }
     constructor(
         key: string=null,
         public name: string=null,
         public tour: string=null,
         public tourName:string=null,
-
+         createdAt: Date = null,
+        createdBy: string = null,
+        modifiedAt: Date = new Date(),
+        modifiedBy: string = null,
+        isDeleted: boolean = false,
+        deletedBy: string = null,
+        deletedAt: Date = null
     ) {
-        super();
-        this.id = key;
-    }
+        super(key,createdAt,createdBy,modifiedAt,modifiedBy,isDeleted,deletedBy,deletedAt);
 }
 

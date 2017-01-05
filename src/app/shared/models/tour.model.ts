@@ -58,26 +58,35 @@ export class Tour extends BaseModel {
             }
         };
     }
-    static fromJson({ $key, name, urlPath, imageUrl, tourCategory,tourCategoryName, company,companyName,rank,review,lastReviewed, description}): Tour {
+    static fromJson({ $key, name, urlPath, imageUrl, tourCategory, tourCategoryName, company, companyName, rank, review, lastReviewed, description,
+         createdAt, createdBy, modifiedAt, modifiedBy, isDeleted, deletedBy, deletedAt}): Tour {
         return new Tour(
-            $key, name, urlPath, imageUrl, tourCategory, tourCategoryName,company,companyName,rank,review,new Date(lastReviewed), description);
+            $key, name, urlPath, imageUrl, tourCategory, tourCategoryName, company, companyName, rank, review, new Date(lastReviewed), description,
+             createdAt, createdBy, modifiedAt, modifiedBy, isDeleted, deletedBy, deletedAt);
     }
     constructor(
-        key: string=null,
-        public name: string=null,
-        public urlPath: string=null,
-        public imageUrl: string=null,
-        public tourCategory: string=null,
-        public tourCategoryName:string=null,
-        public company: string=null,
-        public companyName: string=null,
-        public rank:number=0,
-        public review:number=0,
-        public lastReviewed:Date=new Date(),
+        key: string = null,
+        public name: string = null,
+        public urlPath: string = null,
+        public imageUrl: string = null,
+        public tourCategory: string = null,
+        public tourCategoryName: string = null,
+        public company: string = null,
+        public companyName: string = null,
+        public rank: number = 0,
+        public review: number = 0,
+        public lastReviewed: Date = new Date(),
         public description: string,
+        createdAt: Date = null,
+        createdBy: string = null,
+        modifiedAt: Date = new Date(),
+        modifiedBy: string = null,
+        isDeleted: boolean = false,
+        deletedBy: string = null,
+        deletedAt: Date = null
     ) {
-        super();
-        this.id = key;
+        super(key,createdAt,createdBy,modifiedAt,modifiedBy,isDeleted,deletedBy,deletedAt);
+        
     }
 
 }
