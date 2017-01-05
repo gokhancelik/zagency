@@ -23,6 +23,8 @@ import { PagesModule } from './pages/pages.module';
 import { SharedModule } from './shared/shared.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AngularFireModule, AuthProviders, AuthMethods } from 'angularfire2';
+import { MomentModule } from 'angular2-moment';
+
 // Application wide providers
 const APP_PROVIDERS = [
   AppState,
@@ -66,6 +68,7 @@ type StoreType = {
     SharedModule.forRoot(),
     NgbModule.forRoot(),
     LoginModule,
+    MomentModule,
     AngularFireModule.initializeApp(FIREBASE_CONFIG, myFirebaseAuthConfig),
     routing
   ],
