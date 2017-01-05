@@ -13,13 +13,13 @@ export class TourCategoryService extends BaseFirebaseService<TourCategory> {
         super(_af, 'tourCategories',_authService,fb);
         this.sdkDb = fb.database().ref();
     }
-    fromJson(obj) {
+  public  fromJson(obj) {
         return TourCategory.fromJson(obj);
     }
-    fromJsonList(array) {
+   public fromJsonList(array) {
         return TourCategory.fromJsonList(array);
     }
-    getAll(): Observable<TourCategory[]> {
+  public  getAll(): Observable<TourCategory[]> {
         const priceTypes$ = this._af.list('tourCategories')
             .map(this.fromJsonList);
         return priceTypes$;

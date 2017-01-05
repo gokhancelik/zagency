@@ -11,10 +11,10 @@ export class TourScheduleSpecService extends BaseFirebaseService< TourScheduleSp
         @Inject(FirebaseRef) fb) {
         super(_af, 'tourSchedule', fb,_authService);
     }
-    fromJson(obj) {
+   public fromJson(obj) {
         return TourScheduleSpec.fromJson(obj);
     }
-    fromJsonList(array) {
+   public fromJsonList(array) {
         return TourScheduleSpec.fromJsonList(array);
     }
 

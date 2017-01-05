@@ -12,10 +12,10 @@ export class TourService extends BaseFirebaseService<Tour> {
         @Inject(FirebaseRef) fb) {
         super(_af, 'tours/', fb,_authService);
     }
-    fromJson(obj) {
+  public  fromJson(obj) {
         return Tour.fromJson(obj);
     }
-    fromJsonList(array) {
+   public fromJsonList(array) {
         return Tour.fromJsonList(array);
     }
    public add(value: Tour) {
@@ -52,20 +52,20 @@ export class TourService extends BaseFirebaseService<Tour> {
             }
         );
     }
-    getTourSchedules(key): Observable<TourSchedule[]> {
+  public  getTourSchedules(key): Observable<TourSchedule[]> {
         // select * from tourSChedule where tourId = key;
         const ts$ = this._af.list(`tourSchedules/`,
             { query: { orderByChild: 'tour', equalTo: key } })
             .map(TourSchedule.fromJsonList);
         return ts$;
     }
-    getTourPrograms(key): Observable<TourProgram[]> {
+ public   getTourPrograms(key): Observable<TourProgram[]> {
         const tp$ = this._af.list(`tourPrograms/`,
             { query: { orderByChild: 'tour', equalTo: key } })
             .map(TourProgram.fromJsonList);
         return tp$;
     }
-    getTourDestinations(key): Observable<TourDestination[]> {
+  public  getTourDestinations(key): Observable<TourDestination[]> {
         const td$ = this._af.list(`tourDestinations/`,
             { query: { orderByChild: 'tour', equalTo: key } })
             .map(TourDestination.fromJsonList);

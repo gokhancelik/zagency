@@ -47,14 +47,14 @@ export class TourScheduleService extends BaseFirebaseService<TourSchedule> {
     }
 
     
-    getTourSchedulePrices(key): Observable<TourSchedulePrice[]> {
+  public  getTourSchedulePrices(key): Observable<TourSchedulePrice[]> {
         // select * from tourscheduleprice where tourScheduleId = key
         const ts$ = this._af.list(`tourSchedulePrices/`,
             { query: { orderByChild: 'tourSchedule', equalTo: key } })
             .map(TourSchedulePrice.fromJsonList);
         return ts$;
     }
-    getTourScheduleSpecs(key): Observable<TourScheduleSpec[]> {
+    public getTourScheduleSpecs(key): Observable<TourScheduleSpec[]> {
         // select * from tourschedulespecwhere tourScheduleId = key
         const tss$ = this._af.list(`tourScheduleSpecs/`,
             { query: { orderByChild: 'tourSchedule', equalTo: key } })
@@ -63,14 +63,14 @@ export class TourScheduleService extends BaseFirebaseService<TourSchedule> {
     }
 
 
-    getPublishingTours(key): Observable<PublishingTour[]> {
+    public getPublishingTours(key): Observable<PublishingTour[]> {
         // select * from tourscheduleprice where tourScheduleId = key
         const ts$ = this._af.list(`publishingTours/`,
             { query: { orderByChild: 'tourSchedule', equalTo: key } })
             .map(PublishingTour.fromJsonList);
         return ts$;
     }
-    getOrders(key): Observable<Order[]> {
+   public getOrders(key): Observable<Order[]> {
         // select * from tourscheduleprice where tourScheduleId = key
         const ts$ = this._af.list(`orders/`,
             { query: { orderByChild: 'tourSchedule', equalTo: key } })

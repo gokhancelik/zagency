@@ -13,13 +13,13 @@ export class UserService extends BaseFirebaseService<User> {
         private _authService: AuthService, @Inject(FirebaseRef) fb) {
         super(_af, 'users', fb, _authService);
     }
-    fromJson(obj) {
+  public  fromJson(obj) {
         return User.fromJson(obj);
     }
-    fromJsonList(array) {
+ public   fromJsonList(array) {
         return User.fromJsonList(array);
     }
-    getAll(): Observable<User[]> {
+   public getAll(): Observable<User[]> {
         const users$ = this._authService.getUserInfo().switchMap(user => this._af.list('users',
             {
                 query: {
@@ -30,7 +30,7 @@ export class UserService extends BaseFirebaseService<User> {
             .map(this.fromJsonList);
         return users$;
     }
-    add(value: User): void {
+ public   add(value: User): void {
         this._authService.getUserInfo().subscribe(
             user => {
                 if (user && user.user) {
@@ -46,7 +46,7 @@ export class UserService extends BaseFirebaseService<User> {
             }
         );
     }
-    delete(key: string) {
+   public delete(key: string) {
         this._authService.getUserInfo().subscribe(
             user => {
                 if (user && user.user) {
@@ -59,7 +59,7 @@ export class UserService extends BaseFirebaseService<User> {
             }
         );
     }
-    getUserByEmail(email: string): Observable<User[]> {
+ public   getUserByEmail(email: string): Observable<User[]> {
         return this._af.list('users', { query: { orderByChild: 'email', equalTo: email } })
             .map(this.fromJsonList);
     }
