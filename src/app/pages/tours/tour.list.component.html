@@ -1,4 +1,24 @@
-<ba-card title="{{title}}" [loading]="loading" baCardClass="with-scroll">
+<!--<ba-card title="{{title}}" [loading]="loading" baCardClass="with-scroll">
   <ng2-smart-table [settings]="settings" (create)="onCreate($event)" (edit)="onEdit($event)" [source]="source" (delete)="onDeleteConfirm($event)"
     (rowSelect)="onRowSelect($event)"></ng2-smart-table>
-</ba-card>
+</ba-card>-->
+<div class="row" *ngIf="source">
+  <div class="col-xs-12 col-md-6 col-lg-3" *ngFor="let tour of source | async">
+    <div class="card">
+      <div class="card-block">
+        <h6 class="card-subtitle text-muted">{{tour.company}}</h6>
+        <h4 class="card-title">{{tour.name}}</h4>
+      </div>
+      <div class="card-block">
+        <p class="card-text">{{tour.description}}</p>
+        <a href="#" class="card-link">Publish</a>
+        <a href="#" class="card-link">Edit</a>
+        <p class="card-text"><small class="text-muted">Created {{tour.createdAt|amTimeAgo}}</small></p>
+        <pre>{{tour|json}}</pre>
+      </div>
+      <div class="card-footer text-muted">
+        2 days ago
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs/Rx';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { TourService } from '../../shared/services/tour.service';
@@ -9,16 +10,14 @@ import { ListComponent } from '../../core/index';
     selector: 'tour-list',
     templateUrl: 'tour.list.component.html'
 })
-export class TourListComponent extends ListComponent<Tour> {
+export class TourListComponent implements OnInit {
     title: string = 'Tours';
-
+    source: Observable<Tour[]>;
     constructor(private tourService: TourService, private router: Router) {
-        super(tourService);
-        this.setColumns(Tour.getColumns());
+        this.source = tourService.getAll();
     }
-    // ngOnInit() {
-    //     this.getList();
-    // }
+    ngOnInit() {
+    }
     // getList() {
     //     this.loading = true;
     //     this.tourService.getAll().subscribe(
