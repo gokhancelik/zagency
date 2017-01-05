@@ -5,7 +5,7 @@ import { RouterModule } from '@angular/router';
 import {
     TourCategoryService, TourService, ProductPhotoService, TourScheduleService,
     CompanyService, TourSchedulePriceService, PriceTypeService, CurrencyTypeService,
-    TourProgramService, TourDestinationService, GoogleGeoCodingService, CompanyServiceService,
+    TourProgramService, TourDestinationService, GoogleGeoCodingService, CompanyServiceService,PublishingTourService,
     CompanySpecService, TourScheduleSpecService, SpecTypeService, ImageSizeService,
     ProductService, UserService, RoleService, StorageService, B2BService
 } from './services/index';
@@ -23,7 +23,7 @@ export class SharedModule {
             providers: [TourCategoryService, TourService, ProductPhotoService, ImageSizeService,
                 TourScheduleService, CompanyService, TourSchedulePriceService, SpecTypeService,
                 PriceTypeService, CurrencyTypeService, CompanySpecService, TourScheduleSpecService,
-                TourProgramService, TourDestinationService, GoogleGeoCodingService, CompanyServiceService,
+                TourProgramService, TourDestinationService, GoogleGeoCodingService, CompanyServiceService,PublishingTourService,
                 ProductService, UserService, RoleService, StorageService, B2BService]
         };
     }

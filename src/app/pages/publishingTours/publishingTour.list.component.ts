@@ -1,12 +1,14 @@
-import { Component, OnInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, Output, EventEmitter,ViewEncapsulation } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { PublishingTourAddComponent, PublishingTourEditComponent } from './index';
 import { TourSchedule, PublishingTour } from '../../shared/models';
 import { TourScheduleService, PublishingTourService } from '../../shared/services/index';
+import { DynamicFormControlModel, DynamicFormService } from '@ng2-dynamic-forms/core';
 import { LocalDataSource } from 'ng2-smart-table';
 import { ListComponent } from '../../core/index';
 
 @Component({
+    encapsulation: ViewEncapsulation.None,
     selector: 'publishingTour-list',
     templateUrl: 'publishingTour.list.component.html'
 })

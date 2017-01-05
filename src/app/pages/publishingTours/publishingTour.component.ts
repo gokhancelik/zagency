@@ -2,6 +2,7 @@ import { PublishingTour } from './../../shared/models/publishingTour.model';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
+    moduleId: module.id,
     selector: 'publishingTour-cmp',
     templateUrl: 'PublishingTour.component.html'
 })
