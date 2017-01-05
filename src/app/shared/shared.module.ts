@@ -1,3 +1,4 @@
+import { StakeholderService } from './services/stakeholder.service';
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -23,7 +24,8 @@ export class SharedModule {
             providers: [TourCategoryService, TourService, ImageSizeService,
                 TourScheduleService, CompanyService, TourSchedulePriceService, SpecTypeService,
                 PriceTypeService, CurrencyTypeService, CompanySpecService, TourScheduleSpecService,
-                TourProgramService, TourDestinationService, GoogleGeoCodingService, CompanyServiceService, PublishingTourService,
+                TourProgramService, TourDestinationService, GoogleGeoCodingService,
+                CompanyServiceService, PublishingTourService, StakeholderService,
                 UserService, RoleService, StorageService]
         };
     }

@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 
 @Component({
-    moduleId: module.id,
+    encapsulation: ViewEncapsulation.None,
     selector: 'b2b-cmp',
     template: '<router-outlet></router-outlet>'
 })
