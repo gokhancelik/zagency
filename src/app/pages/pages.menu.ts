@@ -159,10 +159,10 @@ export const PAGES_MENU = [
             }
           },
           {
-            path: 'distrubutors',
+            path: 'distributors',
             data: {
               menu: {
-                title: 'Distrubutors',
+                title: 'Distributors',
               }
             }
           }

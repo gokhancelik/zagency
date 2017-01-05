@@ -9,7 +9,7 @@ const B2BRoutes: Routes = [
 		component: B2BComponent,
 		children: [
 			{
-				path: 'distrubutors',
+				path: 'distributors',
 				component: DistributorListComponent
 			},
 			{
