@@ -9,8 +9,8 @@ export class TourCategoryService extends BaseFirebaseService<TourCategory> {
     sdkDb: any;
     constructor(private afAuth: AngularFireAuth,
         private _af: AngularFireDatabase,
-        private authService: AuthService, @Inject(FirebaseRef) fb) {
-        super(_af, 'tourCategories');
+         _authService: AuthService, @Inject(FirebaseRef) fb) {
+        super(_af, 'tourCategories',_authService,fb);
         this.sdkDb = fb.database().ref();
     }
     fromJson(obj) {

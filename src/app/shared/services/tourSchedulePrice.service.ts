@@ -7,37 +7,16 @@ import { AngularFireDatabase, FirebaseRef } from 'angularfire2';
 import { BaseFirebaseService } from './base.firebase.service';
 @Injectable()
 export class TourSchedulePriceService extends BaseFirebaseService<TourSchedulePrice> {
-    constructor(private _af: AngularFireDatabase, private authService: AuthService,
+    constructor(private _af: AngularFireDatabase, private _authService: AuthService,
         @Inject(FirebaseRef) fb) {
-        super(_af, 'tourSchedulePrices', fb);
+        super(_af, 'tourSchedulePrices', fb,_authService);
     }
-    fromJson(obj) {
+   public fromJson(obj) {
         return TourSchedulePrice.fromJson(obj);
     }
-    fromJsonList(array) {
+  public  fromJsonList(array) {
         return TourSchedulePrice.fromJsonList(array);
     }
 
-    add(value: TourSchedulePrice) {
-        this.authService.getUserInfo().take(1).subscribe(user => {
-            if (user[0]) {
-                let newPostKey = this._af.list(this.getRoute()).push(null).key;
-                let updates = {};
-                updates[this.getRoute() + '/' + newPostKey] = value;
-                updates['tourSchedules/' + value.tourSchedule + '/prices/' + newPostKey] = true;
-                super.firebaseUpdate(updates);
-            }
-        });
-    }
-    delete(key: string): void {
-        this.getByKey(key).take(1).subscribe(
-            data => {
-                let updates = {};
-                updates[this.getRoute() + '/' + key] = null;
-                updates['/tourSchedules/' + data.tourSchedule + '/prices/' + data.id] = null;
-                super.firebaseUpdate(updates);
-            }
-        );
-    }
 }
 

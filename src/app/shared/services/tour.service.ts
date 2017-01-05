@@ -8,9 +8,9 @@ import { AngularFireDatabase, FirebaseRef } from 'angularfire2';
 import { BaseFirebaseService } from './base.firebase.service';
 @Injectable()
 export class TourService extends BaseFirebaseService<Tour> {
-    constructor(private _af: AngularFireDatabase, private authService: AuthService,
+    constructor(private _af: AngularFireDatabase,private _authService: AuthService,
         @Inject(FirebaseRef) fb) {
-        super(_af, 'tours', fb);
+        super(_af, 'tours/', fb,_authService);
     }
     fromJson(obj) {
         return Tour.fromJson(obj);
@@ -18,12 +18,13 @@ export class TourService extends BaseFirebaseService<Tour> {
     fromJsonList(array) {
         return Tour.fromJsonList(array);
     }
-    add(value: Tour) {
-        this.authService.getUserInfo().take(1).subscribe(user => {
-            if (user[0]) {
-                value.company = user[0].company;
+   public add(value: Tour) {
+        this._authService.getUserInfo().take(1).subscribe(user => {
+            if (user && user.user) {
+                value.company = user.user.company;
                 let newPostKey = this._af.list(this.getRoute()).push(null).key;
                 let updates = {};
+                value=super.preparePreCreateByUser(value,user.user);
                 updates[this.getRoute() + '/' + newPostKey] = value;
                 value.id = newPostKey;
                 updates['/companies/' + value.company + '/tours/' + newPostKey] = true;
@@ -32,11 +33,12 @@ export class TourService extends BaseFirebaseService<Tour> {
             }
         });
     }
-    delete(key: string) {
+   public delete(key: string) {
         this.getByKey(key).take(1).subscribe(
             data => {
                 let updates = {};
-                updates[this.getRoute() + '/' + key] = null;
+                let value=super.preparePreDelete();
+                updates[this.getRoute() + '/' + key] = value;
                 updates['/companies/' + data.company + '/tours/' + data.id] = null;
                 updates['/tourCategories/' + data.tourCategory + '/tours/' + data.id] = null;
                 this.getTourSchedules(key).take(1).subscribe(
