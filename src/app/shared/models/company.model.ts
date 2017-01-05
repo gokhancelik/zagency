@@ -41,9 +41,9 @@ export class Company extends BaseModel {
     }
 
 
-    static fromJson({ $key, name, longName, webSiteUrl, phone1, phone2, fax, email, specs }): Company {
+    static fromJson({ $key, name, longName, webSiteUrl, phone1, phone2, fax, email, longitude, latitude, specs }): Company {
         return new Company(
-            $key, name, longName, webSiteUrl, phone1, phone2, fax, email, specs);
+            $key, name, longName, webSiteUrl, phone1, phone2, fax, email, longitude, latitude, specs);
     }
     constructor(
         id: string = null,
@@ -54,6 +54,8 @@ export class Company extends BaseModel {
         public phone2: string = null,
         public fax: string = null,
         public email: string = null,
+        public latitude: number = null,
+        public longitude: number = null,
         public specs: string = null,
     ) {
         super();

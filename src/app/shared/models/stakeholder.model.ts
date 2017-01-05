@@ -1,7 +1,7 @@
 import { BaseModel } from './base.model';
-export class B2B extends BaseModel {
-    static fromJsonList(array): B2B[] {
-        return array.map(B2B.fromJson);
+export class Stakeholder extends BaseModel {
+    static fromJsonList(array): Stakeholder[] {
+        return array.map(Stakeholder.fromJson);
     }
     static getColumns(): any {
         return {
@@ -9,7 +9,7 @@ export class B2B extends BaseModel {
                 title: 'publisher',
                 type: 'string'
             },
-            publisher_name: {
+            publisherName: {
                 title: 'publisher',
                 type: 'string'
             },
@@ -17,22 +17,22 @@ export class B2B extends BaseModel {
                 title: 'distributor',
                 type: 'string'
             },
-            distributor_name: {
+            distributorName: {
                 title: 'distributor',
                 type: 'string'
             },
         };
     }
-    static fromJson({ $key, publisher, publisher_name, distributor, distributor_name}): B2B {
-        return new B2B(
-            $key, publisher, publisher_name, distributor, distributor_name);
+    static fromJson({ $key, publisher, publisherName, distributor, distributorName}): Stakeholder {
+        return new Stakeholder(
+            $key, publisher, publisherName, distributor, distributorName);
     }
     constructor(
         id: string = null,
         public publisher: string = null,
-        public publisher_name: string = null,
+        public publisherName: string = null,
         public distributor: string = null,
-        public distributor_name: string = null
+        public distributorName: string = null
     ) {
         super();
         this.id = id;

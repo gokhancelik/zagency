@@ -8,6 +8,10 @@ export class CompanyBranch extends BaseModel {
     }
     static getColumns(): any {
         return {
+            companyName: {
+                title: 'companyName',
+                type: 'string'
+            },
             address: {
                 title: 'address',
                 type: 'string'
@@ -22,13 +26,15 @@ export class CompanyBranch extends BaseModel {
             }
         };
     }
-    static fromJson({ $key, address, latitude, longitude}): CompanyBranch {
+    static fromJson({ $key, address, company, companyName, latitude, longitude}): CompanyBranch {
         return new CompanyBranch(
-            $key, address, latitude, longitude);
+            $key, address, company, companyName, latitude, longitude);
     }
     constructor(
         id: string = null,
         public address: string = null,
+        public company: string = null,
+        public companyName: string = null,
         public latitude: number = null,
         public longitude: number = null,
     ) {

@@ -1,3 +1,4 @@
+import { TourSchedulePrice } from './tourSchedulePrice.model';
 import { BaseModel } from './base.model';
 import { Injectable, Inject } from '@angular/core';
 
@@ -7,51 +8,81 @@ export class PublishingTour extends BaseModel {
     }
     static getColumns(): any {
         return {
-              publisher_name: {
-                title: 'publisher_name',
+            tourScheduleStart: {
+                title: 'tour Schedule Start',
                 type: 'string'
             },
-             distributer_name: {
-                title: 'distributer_name',
+            tourScheduleEnd: {
+                title: 'tour Schedule End',
                 type: 'string'
             },
-            ratio: {
-                title: 'ratio',
-                type: 'number'
+            tourName: {
+                title: 'tour Name',
+                type: 'string'
+            },
+            publisherName: {
+                title: 'Publisher',
+                type: 'string'
+            },
+            distributorName: {
+                title: 'distributor',
+                type: 'string'
             },
             quota: {
                 title: 'quota',
                 type: 'number'
             },
-              active: {
+            active: {
                 title: 'active',
                 type: 'boolean'
             }
-            // ,
-            // create: {
-            //     title: 'create',
-            //     type: 'Date',
-            //     valuePrepareFunction: (value) => {
-            //         let raw = new Date(value);
-            //         let formatted = datePipe.transform(raw, 'dd.MM.yyyy');
-            //         return formatted;
-            //     }
-            // }
         };
     }
-    static fromJson({ $key, publisher_name, distributer_name, ratio, quota,active,create,tourschedule}): PublishingTour {
-        return new PublishingTour(
-            $key, publisher_name,distributer_name,ratio,quota,active,create, tourschedule);
+    static fromJson({ $key,
+        tourSchedule,
+        tourScheduleStart,
+        tourScheduleEnd,
+        tourName,
+        publisher,
+        publisherName,
+        distributor,
+        distributorName,
+        quota,
+        percent,
+        soldCount,
+        active,
+        prices
+    }): PublishingTour {
+        return new PublishingTour($key,
+            tourSchedule,
+            new Date(tourScheduleStart),
+            new Date(tourScheduleEnd),
+            tourName,
+            publisher,
+            publisherName,
+            distributor,
+            distributorName,
+            quota,
+            percent,
+            soldCount,
+            active,
+            TourSchedulePrice.fromJsonList(prices));
     }
     constructor(
-        id: string=null,
-        public publisher_name:string=null,
-        public distributer_name:string=null,
-        public create: Date=new Date(),
-        public quota: number=0,
-        public ratio: number=0,
-        public active:boolean=false,
-        public tourschedule: string=null,
+        id: string = null,
+        public tourSchedule: string = null,
+        public tourScheduleStart: Date = new Date(),
+        public tourScheduleEnd: Date = new Date(),
+        public tourName: string = null,
+        public publisher: string = null,
+        public publisherName: string = null,
+        public distributor: string = null,
+        public distributorName: string = null,
+        public quota: number = 0,
+        public percent: number = 0,
+        public soldCount: number = 0,
+        public active: boolean = false,
+        public prices: TourSchedulePrice[] = null,
     ) {
         super();
         this.id = id;
