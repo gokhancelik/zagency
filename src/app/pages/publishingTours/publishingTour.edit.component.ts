@@ -8,11 +8,11 @@ import { TourSchedule, PublishingTour } from '../../shared/models';
 import { PublishingTourService } from '../../shared/services/index';
 import { EditComponent } from '../../core/index';
 import { DynamicFormControlModel, DynamicFormService } from '@ng2-dynamic-forms/core';
-import { TOURSCHEDULE_FORM_MODEL } from './tourSchedule-form.model';
+import { PUBLISHINGTOUR_FORM_MODEL } from './publishingTour-form.model';
 @Component({
     selector: 'publishingTour-edit',
     encapsulation: ViewEncapsulation.None,
-    templateUrl: 'publishingTour.form.component.html'
+    templateUrl: '../../core/form.component.html'
 
 })
 export class PublishingTourEditComponent extends EditComponent< PublishingTour> {
@@ -20,7 +20,7 @@ export class PublishingTourEditComponent extends EditComponent< PublishingTour> 
     @Output() onSaved: EventEmitter<any> = new EventEmitter();
     tourschedule: TourSchedule;
     constructor(private _service: PublishingTourService, dynamicFormService: DynamicFormService) {
-        super(PublishingTour, _service, dynamicFormService, TOURSCHEDULE_FORM_MODEL);
+        super(PublishingTour, _service, dynamicFormService, PUBLISHINGTOUR_FORM_MODEL);
     }
     setTourSchedule(tourschedule: TourSchedule): void {
         this.tourschedule = tourschedule;

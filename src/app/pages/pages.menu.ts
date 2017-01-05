@@ -138,6 +138,28 @@ export const PAGES_MENU = [
           }
         ]
       },
+       {
+        path: 'publishingTours',
+        data: {
+          menu: {
+            title: 'publishingTours',
+            icon: 'fa fa-building',
+            selected: false,
+            expanded: false,
+            order: 120
+          }
+        },
+        children: [
+          {
+            path: 'list',
+            data: {
+              menu: {
+                title: 'List',
+              }
+            }
+          }
+        ]
+      },
       {
         path: 'b2bs',
         data: {

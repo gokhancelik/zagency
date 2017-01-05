@@ -11,7 +11,7 @@ import { PUBLISHINGTOUR_FORM_MODEL } from './publishingTour-form.model';
 @Component({
     selector: 'publishingTour-add',
     encapsulation: ViewEncapsulation.None,
-    templateUrl: 'publishingTour.form.component.html'
+    templateUrl: '../../core/form.component.html'
 })
 export class PublishingTourAddComponent extends AddComponent<PublishingTour> {
     @ViewChild('formModal') formModal: ModalDirective;

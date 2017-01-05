@@ -1,9 +1,10 @@
+import { PublishingTour } from './../../shared/models/publishingTour.model';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
     moduleId: module.id,
-    selector: 'selector',
-    templateUrl: '<router-outlet></router-outlet>'
+    selector: 'publishingTour-cmp',
+    templateUrl: 'PublishingTour.component.html'
 })
 export class PublishingTourComponent implements OnInit {
     constructor() { }

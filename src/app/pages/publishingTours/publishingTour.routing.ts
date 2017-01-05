@@ -1,6 +1,6 @@
 import { Routes, RouterModule } from '@angular/router';
 
-import { PublishingTourAddComponent,PublishingTourComponent} from './index';
+import { PublishingTourComponent,PublishingTourListComponent} from './index';
 
 const PublishingTourRoutes: Routes = [
 	{
@@ -8,8 +8,8 @@ const PublishingTourRoutes: Routes = [
 		component: PublishingTourComponent,
 		children: [
 			 {
-				path: 'list',
-			 	component: PublishingTourComponent
+				path: '',
+			 	component: PublishingTourListComponent
 			 }
 			// {
 			// 	path: 'edit/:id',
