@@ -1,3 +1,4 @@
+import { User } from './../models/user.model';
 import { CurrentUser } from './../../security/currentUser.model';
 import { AuthService } from './../../security/auth.service';
 import { IService } from '../../core/IService.service';
