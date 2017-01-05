@@ -11,17 +11,16 @@ export class Role extends BaseModel {
             },
         };
     }
- 
+
     static fromJson({ $key, name}): Role {
         return new Role(
             $key, name);
     }
     constructor(
-        key: string=null,
-        public name: string=null) 
-        {
+        key: string = null,
+        public name: string = null) {
         super();
-        this.id=key;
+        this.id = key;
     }
 
 }

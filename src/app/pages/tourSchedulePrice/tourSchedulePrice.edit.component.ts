@@ -34,7 +34,7 @@ export class TourSchedulePriceEditComponent extends EditComponent<TourSchedulePr
                     data.forEach(r => {
                         // if (r.name !== 'superadmin') {
                         let s = new DynamicFormOption<any>(
-                            { value: r.$key, label: r.name }
+                            { value: r.id, label: r.name }
                         );
                         select.options.push(s);
                         // }
@@ -46,7 +46,7 @@ export class TourSchedulePriceEditComponent extends EditComponent<TourSchedulePr
                 this.priceTypeService.getAll().take(1).subscribe(data => {
                     data.forEach(r => {
                         let s = new DynamicFormOption<any>(
-                            { value: r.$key, label: r.name }
+                            { value: r.id, label: r.name }
                         );
                         select.options.push(s);
                     });

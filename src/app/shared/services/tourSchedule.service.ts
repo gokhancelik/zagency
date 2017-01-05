@@ -1,3 +1,4 @@
+import { Order } from './../models/order.model';
 import { AuthService } from './../../security/auth.service';
 import { TourSchedule, Tour, TourSchedulePrice, TourScheduleSpec, PublishingTour } from '../models';
 import { CompanyService } from './';
@@ -11,7 +12,7 @@ export class TourScheduleService extends BaseFirebaseService<TourSchedule> {
         @Inject(FirebaseRef) fb) {
         super(_af, 'tourSchedules', fb, _authService);
     }
-   public fromJson(obj) {
+    public fromJson(obj) {
         return TourSchedule.fromJson(obj);
     }
     public fromJsonList(array) {
@@ -46,8 +47,8 @@ export class TourScheduleService extends BaseFirebaseService<TourSchedule> {
         });
     }
 
-    
-  public  getTourSchedulePrices(key): Observable<TourSchedulePrice[]> {
+
+    public getTourSchedulePrices(key): Observable<TourSchedulePrice[]> {
         // select * from tourscheduleprice where tourScheduleId = key
         const ts$ = this._af.list(`tourSchedulePrices/`,
             { query: { orderByChild: 'tourSchedule', equalTo: key } })
@@ -70,11 +71,11 @@ export class TourScheduleService extends BaseFirebaseService<TourSchedule> {
             .map(PublishingTour.fromJsonList);
         return ts$;
     }
-   public getOrders(key): Observable<Order[]> {
+    public getOrders(key): Observable<Order[]> {
         // select * from tourscheduleprice where tourScheduleId = key
         const ts$ = this._af.list(`orders/`,
             { query: { orderByChild: 'tourSchedule', equalTo: key } })
-            .map(PublishingTour.fromJsonList);
+            .map(Order.fromJsonList);
         return ts$;
     }
 

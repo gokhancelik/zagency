@@ -35,7 +35,7 @@ export class UserAddComponent extends AddComponent<User>  {
                     data.forEach(r => {
                         // if (r.name !== 'superadmin') {
                         let s = new DynamicFormOption<any>(
-                            { value: r.$key, label: r.name, disabled: r.name === 'superadmin' }
+                            { value: r.id, label: r.name, disabled: r.name === 'superadmin' }
                         );
                         select.options.push(s);
                         // }
