@@ -18,17 +18,23 @@ export class TourCategory extends BaseModel {
     // get id() {
     //     return this.$key;
     // }
-    static fromJson({ $key, name, urlPath}): TourCategory {
+    static fromJson({ $key, name, urlPath, createdAt, createdBy, modifiedAt, modifiedBy, isDeleted, deletedBy, deletedAt}): TourCategory {
         return new TourCategory(
-            $key, name, urlPath);
+            $key, name, urlPath, createdAt, createdBy, modifiedAt, modifiedBy, isDeleted, deletedBy, deletedAt);
     }
     constructor(
-         key: string=null,
-        public name: string=null,
-        public urlPath: string=null
-        ) {
-        super();
-        this.id = key;
+        key: string = null,
+        public name: string = null,
+        public urlPath: string = null,
+        createdAt: Date = null,
+        createdBy: string = null,
+        modifiedAt: Date = new Date(),
+        modifiedBy: string = null,
+        isDeleted: boolean = false,
+        deletedBy: string = null,
+        deletedAt: Date = null
+    ) {
+        super(key, createdAt, createdBy, modifiedAt, modifiedBy, isDeleted, deletedBy, deletedAt);
     }
 
 }
