@@ -41,7 +41,8 @@ export class Company extends BaseModel {
     }
 
 
-    static fromJson({ $key, name, longName, webSiteUrl, phone1, phone2, fax, email, longitude, latitude, specs }): Company {
+    static fromJson({ $key, name, longName, webSiteUrl, phone1, phone2, fax, email,
+        longitude, latitude, specs, createdAt, createdBy, modifiedAt, modifiedBy, isDeleted, deletedBy, deletedAt }): Company {
         return new Company(
             $key, name, longName, webSiteUrl, phone1, phone2, fax, email, longitude, latitude, specs);
     }
