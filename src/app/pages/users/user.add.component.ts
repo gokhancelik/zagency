@@ -5,8 +5,8 @@ import {
 import { USER_FORM_MODEL } from './user-form.model';
 import { ModalDirective } from 'ng2-bootstrap';
 import { AddComponent } from '../../core/add.component';
-import { User, Role } from '../../shared/models/';
-import { UserService, RoleService } from '../../shared/services/';
+import { User, Role, Company } from '../../shared/models/';
+import { UserService, RoleService, CompanyService } from '../../shared/services/';
 import {
     DynamicFormControlModel, DynamicFormService,
     DynamicFormOption, DynamicFormOptionConfig, DynamicSelectModel
@@ -25,7 +25,8 @@ export class UserAddComponent extends AddComponent<User>  {
     _af: AngularFire;
     @ViewChild('formModal') formModal: ModalDirective;
     @Output() onSaved: EventEmitter<any> = new EventEmitter();
-    constructor(dynamicFormService: DynamicFormService, private _service: UserService,
+    companies: Company[];
+    constructor(dynamicFormService: DynamicFormService, private _service: UserService, private _companyService: CompanyService,
         private _roleService: RoleService) {
         super(User, dynamicFormService, _service, USER_FORM_MODEL);
         USER_FORM_MODEL.forEach(value => {
@@ -43,6 +44,38 @@ export class UserAddComponent extends AddComponent<User>  {
                 });
 
             }
+            if (value.id == 'company') {
+                let that = this;
+                let select = value as DynamicSelectModel<any>;
+                _companyService.getByRole().take(1).subscribe(data => {
+                    that.companies = data;
+                    data.forEach(r => {
+                        // if (r.name !== 'superadmin') {
+                        let s = new DynamicFormOption<any>(
+                            { value: r.id, label: r.name }
+                        );
+                        select.options.push(s);
+                        // }
+                    });
+
+
+                })
+
+            }
         });
+    }
+    ngOnInit() {
+        // let that = this;
+        // this.formGroup.valueChanges.subscribe(data => {
+        //     console.log(data);
+        //     // that.companies.forEach(
+        //     //     c => {
+        //     //         if (c.id === data) {
+        //     //             that.model.companyName = c.name;
+        //     //         }
+        //     //     }
+        //     // )
+        // });
+        // super.ngOnInit();
     }
 }

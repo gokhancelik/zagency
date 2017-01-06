@@ -9,8 +9,8 @@ export class User extends BaseModel {
                 title: 'name',
                 type: 'string'
             },
-            role: {
-                title: 'role',
+             roleName: {
+                title: 'role Name',
                 type: 'string'
             },
             email: {
@@ -23,10 +23,6 @@ export class User extends BaseModel {
             },
             companyName: {
                 title: 'company Name',
-                type: 'string'
-            },
-            roleName: {
-                title: 'role Name',
                 type: 'string'
             },
             phone: {

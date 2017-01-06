@@ -67,5 +67,15 @@ export const USER_FORM_MODEL: Array<DynamicFormControlModel> = [
                 required: '{{label}} is required.',
             }
         }
+    ),
+     new DynamicSelectModel(
+        {
+            id: 'company',
+            label: 'Company',
+            required: true,
+            errorMessages: {
+                required: '{{label}} is required.',
+            }
+        }
     )
 ];

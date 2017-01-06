@@ -30,7 +30,7 @@ export class TourCategoryAddComponent extends AddComponent<TourCategory>  {
     }
     ngOnInit() {
         this.formGroup.controls['name'].valueChanges.subscribe(data => {
-            console.log('Form changes', data);
+            
             if (data) {
                 let d = <string>data;
                 this.formGroup.controls['urlPath'].setValue(d.toLowerCase()

@@ -117,7 +117,7 @@ export const PAGES_MENU = [
         }
       },
       {
-        path: 'companies\list',
+        path: 'companies',
         data: {
           menu: {
             title: 'Companies',
