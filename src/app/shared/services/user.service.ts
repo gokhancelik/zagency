@@ -1,3 +1,4 @@
+import { ControlValueAccessor } from '@angular/forms';
 import { Injectable, Inject } from '@angular/core';
 import { AngularFireDatabase, AngularFireAuth, FirebaseRef } from 'angularfire2';
 import { User } from '../models';
@@ -13,13 +14,13 @@ export class UserService extends BaseFirebaseService<User> {
         private _authService: AuthService, @Inject(FirebaseRef) fb) {
         super(_af, 'users', fb, _authService);
     }
-  public  fromJson(obj) {
+    public fromJson(obj) {
         return User.fromJson(obj);
     }
- public   fromJsonList(array) {
+    public fromJsonList(array) {
         return User.fromJsonList(array);
     }
-   public getAll(): Observable<User[]> {
+    public getAll(): Observable<User[]> {
         const users$ = this._authService.getUserInfo().switchMap(user => this._af.list('users',
             {
                 query: {
@@ -30,23 +31,29 @@ export class UserService extends BaseFirebaseService<User> {
             .map(this.fromJsonList);
         return users$;
     }
- public   add(value: User): void {
-        this._authService.getUserInfo().subscribe(
+    public add(value: User): void {
+        let that = this;
+      
+        that._authService.getUserInfo().subscribe(
             user => {
                 if (user && user.user) {
                     value.company = user.user.company;
                     value = super.preparePreCreateByUser(value, user.user);
-
-                    let newPostKey = this._af.list('users').push(null).key;
-                    let updates = {};
-                    updates['/users/' + newPostKey] = value;
-                    updates['/companies/' + user.user.company + '/users/' + newPostKey] = true;
-                    super.firebaseUpdate(updates);
+                    that._af.object('companies/' + value.company ).take(1).subscribe(d => {
+                        value.companyName = d.name;
+                        let newPostKey = that._af.list('users').push(null).key;
+                        let updates = {};
+                        updates['/users/' + newPostKey] = value;
+                        updates['/companies/' + user.user.company + '/users/' + newPostKey] = true;
+                        super.firebaseUpdate(updates);
+                    });
                 }
-            }
+            },
+            error=>{console.log(error)},
+            ()=>console.log("Success")
         );
     }
-   public delete(key: string) {
+    public delete(key: string) {
         this._authService.getUserInfo().subscribe(
             user => {
                 if (user && user.user) {
@@ -59,7 +66,7 @@ export class UserService extends BaseFirebaseService<User> {
             }
         );
     }
- public   getUserByEmail(email: string): Observable<User[]> {
+    public getUserByEmail(email: string): Observable<User[]> {
         return this._af.list('users', { query: { orderByChild: 'email', equalTo: email } })
             .map(this.fromJsonList);
     }

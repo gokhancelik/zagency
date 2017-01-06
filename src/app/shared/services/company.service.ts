@@ -46,4 +46,27 @@ export class CompanyService extends BaseFirebaseService<Company> {
             .map(CompanyServiceModel.fromJsonList);
         return cs$;
     }
+    getByRole(): Observable<Company[]> {
+        let that=this;
+
+        return that._authService.getUserInfo().map(user=>{
+        return {
+            isAdmin:(user && user.user.roleName === 'superadmin'),
+            company:user.user.company
+        }
+        })
+        .last()
+        .flatMap(function(data)
+             {
+                if (data.isAdmin) {
+                 return that._af.list(that.getRoute(), { query: { orderByChild: 'isDeleted', equalTo: false } })
+                        .map(that.fromJsonList);
+                }
+                else
+                {
+                  return  that._af.list(that.getRoute(), { query: { orderByKey:true, equalTo:data.company } })
+                        .map(that.fromJsonList);
+                }
+            });
+    }
 }

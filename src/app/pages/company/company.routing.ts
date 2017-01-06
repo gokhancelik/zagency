@@ -10,7 +10,7 @@ export const COMPANY_ROUTES: Routes = [
 		component: CompanyComponent,
 		children: [
 			{
-				path: 'list',
+				path: '',
 				component: CompanyListComponent
 			},
 			{
