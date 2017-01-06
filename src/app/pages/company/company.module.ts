@@ -1,3 +1,4 @@
+import { MomentModule } from 'angular2-moment';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
@@ -21,7 +22,7 @@ import {
 } from '@ng2-dynamic-forms/ui-bootstrap';
 @NgModule({
     imports: [routing, RouterModule, CommonModule, FormsModule, DynamicFormsCoreModule,
-        DynamicFormsBootstrapUIModule, FormsModule,
+        DynamicFormsBootstrapUIModule, FormsModule,MomentModule,
         ReactiveFormsModule, CompanySpecModule,CompanyServiceModule,
         Ng2SmartTableModule, NgaModule, ModalModule, DropdownModule],
     exports: [],

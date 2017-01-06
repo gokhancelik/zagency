@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs/Rx';
 import { Router } from '@angular/router';
 import { Component, OnInit, ViewEncapsulation, ViewChild } from '@angular/core';
 import { CompanyService } from '../../shared/services/index';
@@ -12,13 +13,16 @@ import { AngularFire, FirebaseListObservable } from 'angularfire2';
     selector: 'company-list',
     templateUrl: 'company.list.component.html'
 })
-export class CompanyListComponent extends ListComponent<Company> {
+export class CompanyListComponent implements OnInit {
     @ViewChild('addModal') addModal: CompanyAddComponent;
     @ViewChild('editModal') editModal: CompanyEditComponent;
     title: string = 'Companies';
+    source: Observable<Company[]>;
     constructor(private _service: CompanyService, private router: Router) {
-        super(_service);
-        this.setColumns(Company.getColumns());
+        this.source = _service.getAll();
+    }
+    ngOnInit() {
+
     }
     onCreate(event): void {
         this.router.navigate(['pages/companies/newCompany']);

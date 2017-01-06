@@ -19,11 +19,17 @@ export class CompanySpecService extends BaseFirebaseService<CompanySpec> {
     }
 
     add(value: CompanySpec) {
-        let newPostKey = this._af.list(this.getRoute()).push(null).key;
-        let updates = {};
-        updates[this.getRoute() + '/' + newPostKey] = value;
-        updates['companies/' + value.company + '/specs'] = newPostKey;
-        super.firebaseUpdate(updates);
+        this._authService.getUserInfo().subscribe(
+            user => {
+                if (user && user.user) {
+                    let newPostKey = this._af.list(this.getRoute()).push(null).key;
+                    let updates = {};
+                    value = super.preparePreModifyByUser(value, user.user);
+                    updates[this.getRoute() + '/' + newPostKey] = value;
+                    updates['companies/' + value.company + '/specs'] = newPostKey;
+                    super.firebaseUpdate(updates);
+                }
+            });
     }
     delete(key: string) {
         this._authService.getUserInfo().subscribe(

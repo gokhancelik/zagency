@@ -72,15 +72,15 @@ export abstract class BaseFirebaseService<T extends BaseModel> implements IServi
         }
     }
     mapObjectToFirebaseObject(value: T): any {
-        let updatedObj = {};
-        Object.keys(value).forEach(k => {
-            if (value[k] instanceof Date) {
-                updatedObj[k] = (value[k] as Date).getTime();
-            }
-            else
-                updatedObj[k] = value[k];
-        });
-        return updatedObj;
+        // let updatedObj = {};
+        // Object.keys(value).forEach(k => {
+        //     if (value[k] instanceof Date) {
+        //         updatedObj[k] = (value[k] as Date).getTime();
+        //     }
+        //     else
+        //         updatedObj[k] = value[k];
+        // });
+        return value;
     }
     preparePreModify(value: T): Observable<T> {
         let that = this;
