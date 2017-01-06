@@ -2,13 +2,13 @@ const helpers = require('./helpers');
 const path = require('path');
 const webpackMerge = require('webpack-merge'); // used to merge webpack configs
 const commonConfig = require('./webpack.common.js'); // the settings that are common to prod and dev
-
 /**
  * Webpack Plugins
  */
 const DefinePlugin = require('webpack/lib/DefinePlugin');
 const NamedModulesPlugin = require('webpack/lib/NamedModulesPlugin');
 const LoaderOptionsPlugin = require('webpack/lib/LoaderOptionsPlugin');
+const WriteFilePlugin = require('write-file-webpack-plugin')
 
 /**
  * Webpack Constants
@@ -17,7 +17,9 @@ const ENV = process.env.ENV = process.env.NODE_ENV = 'development';
 const HOST = process.env.HOST || 'localhost';
 const PORT = process.env.PORT || 5555;
 const HMR = helpers.hasProcessFlag('hot');
-const METADATA = webpackMerge(commonConfig({env: ENV}).metadata, {
+const METADATA = webpackMerge(commonConfig({
+  env: ENV
+}).metadata, {
   host: HOST,
   port: PORT,
   ENV: ENV,
@@ -30,7 +32,9 @@ const METADATA = webpackMerge(commonConfig({env: ENV}).metadata, {
  * See: http://webpack.github.io/docs/configuration.html#cli
  */
 module.exports = function (options) {
-  return webpackMerge(commonConfig({env: ENV}), {
+  return webpackMerge(commonConfig({
+    env: ENV
+  }), {
 
     /**
      * Developer tool to enhance debugging
@@ -38,7 +42,7 @@ module.exports = function (options) {
      * See: http://webpack.github.io/docs/configuration.html#devtool
      * See: https://github.com/webpack/docs/wiki/build-performance#sourcemaps
      */
-    devtool: 'cheap-module-source-map',
+    devtool: 'source-map',
 
     /**
      * Options affecting the output of the compilation.
@@ -102,6 +106,7 @@ module.exports = function (options) {
           'HMR': METADATA.HMR,
         }
       }),
+      new WriteFilePlugin(),
 
       /**
        * Plugin: NamedModulesPlugin (experimental)

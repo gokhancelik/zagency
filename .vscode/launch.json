@@ -14,14 +14,15 @@
       "sourceMaps": true,
       "webRoot": "${workspaceRoot}"
     },
-    {
-      "name": "Attach to Chrome, with sourcemaps",
+     {
+      "name": "Launch Chrome",
       "type": "chrome",
-      "request": "attach",
-      "url": "http://localhost:3000/*",
-      "port": 9222,
+      "request": "launch",
+      "url": "http://localhost:5555/#/",
       "sourceMaps": true,
-      "webRoot": "${workspaceRoot}"
+      "diagnosticLogging": true,
+      "webRoot": "${workspaceRoot}",
+      "userDataDir": "${workspaceRoot}/.vscode/chrome"
     }
   ]
 }
