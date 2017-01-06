@@ -117,7 +117,7 @@ export const PAGES_MENU = [
         }
       },
       {
-        path: 'companies',
+        path: 'companies\list',
         data: {
           menu: {
             title: 'Companies',
@@ -126,18 +126,8 @@ export const PAGES_MENU = [
             expanded: false,
             order: 120
           }
+        }
         },
-        children: [
-          {
-            path: 'list',
-            data: {
-              menu: {
-                title: 'List',
-              }
-            }
-          }
-        ]
-      },
       {
         path: 'b2b',
         data: {

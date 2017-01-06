@@ -10,7 +10,7 @@ export const UserRoutes: Routes = [
 		component: UserComponent,
 		children: [
 			{
-				path: 'list',
+				path: '',
 				component: UserListComponent,
 				// canActivate: [CanActivateUserEdit]
 			},
@@ -20,12 +20,8 @@ export const UserRoutes: Routes = [
 				component: UserEditComponent
 				// canActivate: [CanActivateUserEdit]
 
-			},
-			{
-				path: 'playlist',
-				outlet: 'anotherList',
-				component: UserListComponent
 			}
+			
 		],
 
 	}
