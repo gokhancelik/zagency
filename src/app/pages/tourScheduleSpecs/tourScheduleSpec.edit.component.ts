@@ -34,7 +34,7 @@ export class TourScheduleSpecEditComponent extends EditComponent<TourScheduleSpe
                     data.forEach(r => {
                         // if (r.name !== 'superadmin') {
                         let s = new DynamicFormOption<any>(
-                            { value: r.$key, label: r.name }
+                            { value: r.id, label: r.name }
                         );
                         select.options.push(s);
                         // }
