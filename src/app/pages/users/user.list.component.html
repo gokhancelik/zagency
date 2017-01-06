@@ -6,5 +6,9 @@
 <user-edit #editModal (onSaved)="onSaved($event)"></user-edit>
 <!--<router-outlet name="anotherList"></router-outlet>-->
 <!--<router-outlet name="anotherList"></router-outlet>-->
-<router-outlet name="anotherList"></router-outlet>
-
+<!--<router-outlet name="anotherList"></router-outlet>-->
+<ul>
+  <li *ngFor="let user of userList | async">
+    {{user.name}} {{(user.companyObj |async)?.name}}
+  </li>
+</ul>

@@ -21,25 +21,37 @@ export class UserService extends BaseFirebaseService<User> {
         return User.fromJsonList(array);
     }
     public getAll(): Observable<User[]> {
-        const users$ = this._authService.getUserInfo().switchMap(user => this._af.list('users',
-            {
-                query: {
-                    orderByChild: 'company',
-                    equalTo: user.user.company
-                }
-            }))
-            .map(this.fromJsonList);
+        // const users$ = this._authService.getUserInfo().switchMap(user => this._af.list('users',
+        //     {
+        //         query: {
+        //             orderByChild: 'company',
+        //             equalTo: user.user.company
+        //         }
+        //     }))
+        //     .map(this.fromJsonList);
+        let users$ = this._af.list(this.getRoute()).map(
+            users => {
+                return users.map(u => {
+                    u.companyObj = this.companyService.getByKey(u.company);
+                    return u;
+                });
+            }
+        );
+        users$.subscribe(u => {
+            u[0].companyObj.subscribe(comp => console.log(comp));
+            console.log(u)
+        });
         return users$;
     }
     public add(value: User): void {
         let that = this;
-      
+
         that._authService.getUserInfo().subscribe(
             user => {
                 if (user && user.user) {
                     value.company = user.user.company;
                     value = super.preparePreCreateByUser(value, user.user);
-                    that._af.object('companies/' + value.company ).take(1).subscribe(d => {
+                    that._af.object('companies/' + value.company).take(1).subscribe(d => {
                         value.companyName = d.name;
                         let newPostKey = that._af.list('users').push(null).key;
                         let updates = {};
@@ -49,8 +61,8 @@ export class UserService extends BaseFirebaseService<User> {
                     });
                 }
             },
-            error=>{console.log(error)},
-            ()=>console.log("Success")
+            error => { console.log(error) },
+            () => console.log("Success")
         );
     }
     public delete(key: string) {
