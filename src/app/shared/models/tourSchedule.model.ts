@@ -58,4 +58,5 @@ export class TourSchedule extends BaseModel {
     ) {
         super(key, createdAt, createdBy, modifiedAt, modifiedBy, isDeleted, deletedBy, deletedAt);
     }
+}
 

@@ -6,11 +6,11 @@ import { UserListComponent, UserComponent, UserEditComponent } from './index';
 
 export const UserRoutes: Routes = [
 	{
-		path: 'users',
+		path: '',
 		component: UserComponent,
 		children: [
 			{
-				path: '',
+				path: 'list',
 				component: UserListComponent,
 				// canActivate: [CanActivateUserEdit]
 			},

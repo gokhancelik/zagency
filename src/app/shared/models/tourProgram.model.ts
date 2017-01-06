@@ -43,4 +43,5 @@ export class TourProgram extends BaseModel {
     ) {
         super(id, createdAt, createdBy, modifiedAt, modifiedBy, isDeleted, deletedBy, deletedAt);
     }
+}
 

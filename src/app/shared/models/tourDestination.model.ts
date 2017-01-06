@@ -48,4 +48,5 @@ export class TourDestination extends BaseModel {
     ) {
         super(id, createdAt, createdBy, modifiedAt, modifiedBy, isDeleted, deletedBy, deletedAt);
     }
+}
 
