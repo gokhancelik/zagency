@@ -6,20 +6,26 @@
 <div class="row" *ngIf="source">
   <div class="col-xs-12 col-md-6 col-lg-3" *ngFor="let item of source | async">
     <div class="card">
+      <img class="card-img-top" [src]="item.logoPath" *ngIf="item.logoPath" alt="Company Image">
       <div class="card-block">
-        <h6 class="card-subtitle text-muted">{{item.longName}}</h6>
         <h4 class="card-title">{{item.name}}</h4>
+        <h6 class="card-subtitle text-muted">{{item.webSiteUrl}}</h6>
+        <p class="card-text">{{item.address}}</p>
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item"><i class="fa fa-at" aria-hidden="true"></i> {{item.email}}</li>
+        <li class="list-group-item"><i class="fa fa-phone" aria-hidden="true"></i> {{item.phone1}}</li>
+        <li class="list-group-item"><i class="fa fa-phone" aria-hidden="true"></i> {{item.phone2}}</li>
+      </ul>
+      <div class="card-block">
+        <p class="card-text"><small class="text-muted">Created {{item.createdAt|amTimeAgo}}</small></p>
       </div>
       <div class="card-block">
-        <!--<p class="card-text">{{tour.description}}</p>-->
-        <a href="#" class="card-link">Publish</a>
-        <a routerLink="{{'/pages/companies/edit/' + item.id}}"  class="card-link">Edit</a>
-        <p class="card-text"><small class="text-muted">Created {{item.createdAt|amTimeAgo}}</small></p>
-        <pre>{{item|json}}</pre>
+        <a href="#" class="card-link">Card link</a>
+        <a routerLink="{{'/pages/companies/edit/' + item.id}}" class="card-link">Edit</a>
       </div>
-      <div class="card-footer text-muted">
-        2 days ago
-      </div>
+      <pre>{{item|json}} </pre>
     </div>
+   
   </div>
 </div>

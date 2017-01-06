@@ -41,12 +41,12 @@ export class Company extends BaseModel {
     }
 
 
-    static fromJson({ $key, name, longName, webSiteUrl, phone1, phone2, fax, email,
+    static fromJson({ $key, name, longName, webSiteUrl, phone1, phone2, fax, email, logoPath,
         longitude, latitude, specs,
         createdAt, createdBy, modifiedAt, modifiedBy, isDeleted, deletedBy, deletedAt
     }): Company {
         return new Company(
-            $key, name, longName, webSiteUrl, phone1, phone2, fax, email, longitude, latitude, specs,
+            $key, name, longName, webSiteUrl, phone1, phone2, fax, email, longitude, latitude, specs, logoPath,
             createdAt, createdBy, modifiedAt, modifiedBy, isDeleted, deletedBy, deletedAt
         );
     }
@@ -62,6 +62,7 @@ export class Company extends BaseModel {
         public latitude: number = null,
         public longitude: number = null,
         public specs: string = null,
+        public logoPath: string = null,
         createdAt: Date = null,
         createdBy: string = null,
         modifiedAt: Date = null,
