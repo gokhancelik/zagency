@@ -13,7 +13,7 @@ export abstract class BaseFirebaseService<T extends BaseModel> implements IServi
         this._sdkDb = _fb ? _fb.database().ref() : null;
     }
     getAll(): Observable<T[]> {
-        return this.af.list(this._route, { query: { orderByChild: 'isDelete', equalTo: false } })
+        return this.af.list(this._route, { query: { orderByChild: 'isDeleted', equalTo: false } })
             .map(this.fromJsonList);
     }
     public getRoute(): string {

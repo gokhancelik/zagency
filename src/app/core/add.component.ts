@@ -40,17 +40,21 @@ export class AddComponent<T extends BaseModel> implements OnInit {
         if (this.formModal) this.formModal.hide();
     }
     save(form) {
+        let that = this;
         if (form) {
             if (form.value) {
                 if (!form.valid) {
                     return;
                 }
+                if (!that.model) {
+                    that.model = new that.modelType();
+                }
                 Object.keys(form.value).forEach(fv => {
-                    this.model[fv] = form.value[fv];
+                    that.model[fv] = form.value[fv];
                 });
-                this.service.add(this.model);
-                if (this.onSaved) this.onSaved.emit(this.model);
-                if (this.formModal) this.formModal.hide();
+                that.service.add(that.model);
+                if (that.onSaved) that.onSaved.emit(that.model);
+                if (that.formModal) that.formModal.hide();
             }
         }
     }
