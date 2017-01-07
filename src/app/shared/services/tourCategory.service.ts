@@ -20,8 +20,8 @@ export class TourCategoryService extends BaseFirebaseService<TourCategory> {
         return TourCategory.fromJsonList(array);
     }
   public  getAll(): Observable<TourCategory[]> {
-        const priceTypes$ = this._af.list('tourCategories')
+        const tourCategories$ = this._af.list('tourCategories')
             .map(this.fromJsonList);
-        return priceTypes$;
+        return tourCategories$;
     }
 }
