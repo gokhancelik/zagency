@@ -12,7 +12,7 @@ import { Observable, Subject } from 'rxjs/Rx';
 export class UserService extends BaseFirebaseService<User> {
     sdkDb: any;
     constructor(private afAuth: AngularFireAuth,
-        private _af: AngularFireDatabase, private companyService: CompanyService, private roleService: RoleService,private auth: FirebaseAuth,
+        private _af: AngularFireDatabase, private companyService: CompanyService, private roleService: RoleService, private auth: FirebaseAuth,
         private _authService: AuthService, @Inject(FirebaseRef) fb) {
         super(_af, 'users', fb, _authService);
     }
@@ -67,18 +67,15 @@ export class UserService extends BaseFirebaseService<User> {
                 if (user && user.user) {
                     value.company = user.user.company;
                     value = super.preparePreCreateByUser(value, user.user);
-                    that._af.object('companies/' + value.company).take(1).subscribe(d => {
-                        value.companyName = d.name;
-                        let newPostKey = that._af.list('users').push(null).key;
-                        let updates = {};
-                        updates['/users/' + newPostKey] = value;
-                        updates['/companies/' + user.user.company + '/users/' + newPostKey] = true;
-                        super.firebaseUpdate(updates);
-                    });
+                    let newPostKey = that._af.list('users').push(null).key;
+                    let updates = {};
+                    updates['/users/' + newPostKey] = value;
+                    updates['/companies/' + user.user.company + '/users/' + newPostKey] = true;
+                    super.firebaseUpdate(updates);
                 }
             },
-            error => { console.log(error) },
-            () => console.log("Success")
+            error => { console.log(error); },
+            () => console.log('Success')
         );
     }
     public delete(key: string) {
