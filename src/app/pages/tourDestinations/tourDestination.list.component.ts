@@ -25,7 +25,7 @@ export class TourDestinationListComponent extends ListComponent<TourDestination>
     }
     getList() {
         if (this.tour) {
-            this.tourService.getTourDestinations(this.tour.id).subscribe(
+          this.tourService.getTourDestinations(this.tour.id).subscribe(
                 data => this.source.load(data)
             );
         }
