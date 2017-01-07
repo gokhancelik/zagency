@@ -12,10 +12,6 @@ export class TourProgramService extends BaseFirebaseService<TourProgram> {
         @Inject(FirebaseRef) fb) {
         super(_af, 'tourPrograms', fb, _authService);
     }
-        public mapRelationalObject(obj: TourProgram) {
-        obj.tourObj = this.tourService.getByKey(obj.tour);
-        return obj;
-    }
     public fromJson(obj) {
         return TourProgram.fromJson(obj);
     }
@@ -35,6 +31,10 @@ export class TourProgramService extends BaseFirebaseService<TourProgram> {
             .map(this.fromJson)
             .map(t => { return that.mapRelationalObject(t); });
         return tourProgram$;
+    }
+     public mapRelationalObject(obj: TourProgram) {
+        obj.tourObj = this.tourService.getByKey(obj.tour);
+        return obj;
     }
   
 }
