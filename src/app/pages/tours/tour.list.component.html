@@ -10,11 +10,11 @@
     <div class="card">
       <div class="card-block">
         <h4 class="card-title">{{item.name}}</h4>
-        <!--<h6 class="card-subtitle text-muted">{{(item.companyObj|async)?name}}</h6>-->
-        <h6 class="card-text">{{item.description}}</h6>
+        <h6 class="card-subtitle text-muted">{{(item.companyObj | async)?.name}}</h6>
       </div>
-      <div class="card-block">
-      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item" *ngFor="let ts of item.tourSchedulesObjLst | async">{{ts.start}}</li>
+      </ul>
       <div class="card-block">
         <a href="javascript:void(0)" (click)="onDeleteConfirm({data:item})" class="card-link">Delete</a>
         <a href="javascript:void(0)" (click)="onEdit({data:item})" class="card-link">Edit</a>
@@ -22,4 +22,3 @@
     </div>
   </div>
 </div>
-

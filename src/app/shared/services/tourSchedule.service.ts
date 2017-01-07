@@ -8,7 +8,8 @@ import { AngularFireDatabase, FirebaseRef } from 'angularfire2';
 import { BaseFirebaseService } from './base.firebase.service';
 @Injectable()
 export class TourScheduleService extends BaseFirebaseService<TourSchedule> {
-    constructor(private _af: AngularFireDatabase, private _authService: AuthService,
+    constructor(private _af: AngularFireDatabase,
+        private _authService: AuthService,
         @Inject(FirebaseRef) fb) {
         super(_af, 'tourSchedules', fb, _authService);
     }

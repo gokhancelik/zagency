@@ -133,6 +133,12 @@ export class TourService extends BaseFirebaseService<Tour> {
             .map(TourProgram.fromJsonList);
         return tp$;
     }
+    public getTourSchedules(key): Observable<TourProgram[]> {
+        const tp$ = this._af.list(`tourSchedule/`,
+            { query: { orderByChild: 'tour', equalTo: key } })
+            .map(TourProgram.fromJsonList);
+        return tp$;
+    }
     public getTourDestinations(key): Observable<TourDestination[]> {
         const td$ = this._af.list(`tourDestinations/`,
             { query: { orderByChild: 'tour', equalTo: key } })
