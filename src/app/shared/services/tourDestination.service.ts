@@ -47,7 +47,7 @@ export class TourDestinationService extends BaseFirebaseService<TourDestination>
             .map(t => { return that.mapRelationalObject(t); });
         return tourDestination$;
     }
-<<<<<<< HEAD
+
         public getTours(key): Observable<Tour[]> {
         const tp$ = this._af.list(`tours/`,
             { query: { orderByChild: 'tourDestination', equalTo: key } })
@@ -55,8 +55,6 @@ export class TourDestinationService extends BaseFirebaseService<TourDestination>
         return tp$;
     }
 
-=======
->>>>>>> 761d67352d985ff6bbc1c57fc700165c5e2f40ac
     public add(value: TourDestination) {
         this._authService.getUserInfo().take(1).subscribe(user => {
             if (user && user.user) {
