@@ -121,10 +121,9 @@ export class TourService extends BaseFirebaseService<Tour> {
         );
     }
 
-    public getTourPrograms(key): Observable<TourProgram[]> {
+    public getTourPrograms(key): FirebaseListObservable<TourProgram[]> {
         const tp$ = this._af.list(`tourPrograms/`,
             { query: { orderByChild: 'tour', equalTo: key } })
-            .map(TourProgram.fromJsonList);
         return tp$;
     }
     public getTourSchedules(key): FirebaseListObservable<TourSchedule[]> {
@@ -133,10 +132,9 @@ export class TourService extends BaseFirebaseService<Tour> {
             //.map(TourSchedule.fromJsonList);
         return tp$;
     }
-    public getTourDestinations(key): Observable<TourDestination[]> {
+    public getTourDestinations(key): FirebaseListObservable<TourDestination[]> {
         const td$ = this._af.list(`tourDestinations/`,
             { query: { orderByChild: 'tour', equalTo: key } })
-            .map(TourDestination.fromJsonList);
         return td$;
     }
 }
