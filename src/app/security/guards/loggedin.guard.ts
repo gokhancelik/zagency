@@ -11,8 +11,7 @@ export class LoggedInGuard implements CanActivate {
             this.authService.getUserInfo().subscribe(console.log);
         return this.authService.getUserInfo()
             .map(authInfo => authInfo && (
-                authInfo.user.company != null
-            || authInfo.user.roleObj.map(r=>r.name=='superadmin'))
+            authInfo.user.company != null))
             .take(1)
             .do(allowed => {
                 if (!allowed) {
