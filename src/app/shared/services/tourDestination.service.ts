@@ -11,13 +11,19 @@ export class TourDestinationService extends BaseFirebaseService<TourDestination>
         @Inject(FirebaseRef) fb) {
         super(_af, 'tourDestinations', fb, _authService);
     }
-   public fromJson(obj) {
+    public fromJson(obj) {
         return TourDestination.fromJson(obj);
     }
-  public  fromJsonList(array) {
+    public fromJsonList(array) {
         return TourDestination.fromJsonList(array);
     }
-
+    public getByTourKey(tourKey): Observable<TourDestination[]> {
+        // select * from TourDestination where tourId = key;
+        const ts$ = this._af.list(this.getRoute(),
+            { query: { orderByChild: 'tour', equalTo: tourKey } })
+            .map(TourDestination.fromJsonList);
+        return ts$;
+    }
     public add(value: TourDestination) {
         this._authService.getUserInfo().take(1).subscribe(user => {
             if (user && user.user) {
@@ -32,5 +38,5 @@ export class TourDestinationService extends BaseFirebaseService<TourDestination>
         });
     }
 
-    }
+}
 

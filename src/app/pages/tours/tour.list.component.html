@@ -2,7 +2,7 @@
   <ng2-smart-table [settings]="settings" (create)="onCreate($event)" (edit)="onEdit($event)" [source]="source" (delete)="onDeleteConfirm($event)"
     (rowSelect)="onRowSelect($event)"></ng2-smart-table>
 </ba-card>-->
-<button type="button" class="btn btn-default" (click)="onCreate(event)">
+<button type="button" class="btn btn-primary" (click)="onCreate(event)">
   New
 </button>
 <div class="row" *ngIf="source">

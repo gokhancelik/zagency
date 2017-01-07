@@ -11,12 +11,18 @@ export class TourProgramService extends BaseFirebaseService<TourProgram> {
         @Inject(FirebaseRef) fb) {
         super(_af, 'tourPrograms', fb, _authService);
     }
-  public  fromJson(obj) {
+    public fromJson(obj) {
         return TourProgram.fromJson(obj);
     }
-  public  fromJsonList(array) {
+    public fromJsonList(array) {
         return TourProgram.fromJsonList(array);
     }
-
+    public getByTourKey(tourKey): Observable<TourProgram[]> {
+        // select * from tourSChedule where tourId = key;
+        const ts$ = this._af.list(this.getRoute(),
+            { query: { orderByChild: 'tour', equalTo: tourKey } })
+            .map(TourProgram.fromJsonList);
+        return ts$;
     }
+}
 

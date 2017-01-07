@@ -78,6 +78,12 @@ export class TourScheduleService extends BaseFirebaseService<TourSchedule> {
             .map(Order.fromJsonList);
         return ts$;
     }
-
+    public getByTourKey(tourKey): Observable<TourSchedule[]> {
+        // select * from tourSChedule where tourId = key;
+        const ts$ = this._af.list(this.getRoute(),
+            { query: { orderByChild: 'tour', equalTo: tourKey } })
+            .map(TourSchedule.fromJsonList);
+        return ts$;
+    }
 }
 
