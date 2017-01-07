@@ -31,6 +31,16 @@ export class TourDestinationService extends BaseFirebaseService<TourDestination>
             .map(TourDestination.fromJsonList);
         return ts$;
     }
+    public getAll(): Observable<TourDestination[]> {
+        let that = this;
+        const tourDestinationInTour$ =  this._af.list(this.getRoute())
+            .map(tourdestinations => {
+                return tourdestinations.map(t => { return that.mapRelationalObject(t); });
+            });
+
+        return tourDestinationInTour$;
+    }
+
     public add(value: TourDestination) {
         this._authService.getUserInfo().take(1).subscribe(user => {
             if (user && user.user) {
