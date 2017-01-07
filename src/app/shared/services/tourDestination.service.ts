@@ -9,12 +9,12 @@ import { BaseFirebaseService } from './base.firebase.service';
 @Injectable()
 export class TourDestinationService extends BaseFirebaseService<TourDestination> {
     constructor(private _af: AngularFireDatabase,
-     private _authService: AuthService,
+        private _authService: AuthService,
         @Inject(FirebaseRef) fb,
-        private tourService:TourService) {
+        private tourService: TourService) {
         super(_af, 'tourDestinations', fb, _authService);
     }
-      public mapRelationalObject(obj: TourDestination) {
+    public mapRelationalObject(obj: TourDestination) {
         obj.tourObj = this.tourService.getByKey(obj.tour);
         return obj;
     }
