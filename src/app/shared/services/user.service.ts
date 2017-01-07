@@ -1,3 +1,5 @@
+import { FirebaseAuth } from 'angularfire2/index';
+import { RoleService } from './role.service';
 import { ControlValueAccessor } from '@angular/forms';
 import { Injectable, Inject } from '@angular/core';
 import { AngularFireDatabase, AngularFireAuth, FirebaseRef } from 'angularfire2';
@@ -10,7 +12,7 @@ import { Observable, Subject } from 'rxjs/Rx';
 export class UserService extends BaseFirebaseService<User> {
     sdkDb: any;
     constructor(private afAuth: AngularFireAuth,
-        private _af: AngularFireDatabase, private companyService: CompanyService,
+        private _af: AngularFireDatabase, private companyService: CompanyService, private roleService: RoleService,private auth: FirebaseAuth,
         private _authService: AuthService, @Inject(FirebaseRef) fb) {
         super(_af, 'users', fb, _authService);
     }
@@ -29,19 +31,33 @@ export class UserService extends BaseFirebaseService<User> {
         //         }
         //     }))
         //     .map(this.fromJsonList);
-        let users$ = this._af.list(this.getRoute()).map(
-            users => {
+        // let users$ = this._af.list(this.getRoute()).map(
+        //     users => {
+        //         return users.map(u => {
+        //             u.companyObj = this.companyService.getByKey(u.company);
+        //             return u;
+        //         });
+        //     }
+        // );
+        const usersInCompany$ = this._authService.getUserInfo().switchMap(
+            currentUser =>
+                this._af.list(this.getRoute(),
+                    {
+                        query: {
+                            orderByChild: 'company',
+                            equalTo: currentUser.user.company
+                        }
+                    }))
+            .map(users => {
                 return users.map(u => {
                     u.companyObj = this.companyService.getByKey(u.company);
+                    u.roleObj = this.roleService.getByKey(u.role);
+                    u.userObj = this.auth.take(1);
                     return u;
                 });
-            }
-        );
-        users$.subscribe(u => {
-            u[0].companyObj.subscribe(comp => console.log(comp));
-            console.log(u)
-        });
-        return users$;
+            })
+            .map(this.fromJsonList);
+        return usersInCompany$;
     }
     public add(value: User): void {
         let that = this;

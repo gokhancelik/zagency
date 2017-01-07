@@ -1,3 +1,6 @@
+import { Role } from './role.model';
+import { Company } from './company.model';
+import { Observable } from 'rxjs/Observable';
 import { BaseModel } from './base.model';
 export class User extends BaseModel {
     static fromJsonList(array): User[] {
@@ -9,7 +12,7 @@ export class User extends BaseModel {
                 title: 'name',
                 type: 'string'
             },
-             roleName: {
+            roleName: {
                 title: 'role Name',
                 type: 'string'
             },
@@ -31,9 +34,9 @@ export class User extends BaseModel {
             }
         };
     }
-    static fromJson({ $key, name, phone, userName, email, company, companyName, role, roleName }): User {
+    static fromJson({ $key, name, phone, userName, email, company, role, companyObj, roleObj, userObj }): User {
         return new User(
-            $key, name, phone, userName, email, company, companyName, role, roleName);
+            $key, name, phone, userName, email, company, role, companyObj, roleObj, userObj);
     }
     constructor(
         id: string = null,
@@ -42,9 +45,10 @@ export class User extends BaseModel {
         public userName: string = null,
         public email: string = null,
         public company: string = null,
-        public companyName: string = null,
         public role: string = null,
-        public roleName: string = null) {
+        public companyObj: Observable<Company> = null,
+        public roleObj: Observable<Role> = null,
+        public userObj: Observable<any> = null) {
         super();
         this.id = id;
 

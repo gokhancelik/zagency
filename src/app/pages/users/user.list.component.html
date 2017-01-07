@@ -1,14 +1,32 @@
-<ba-card title="{{title}}" [loading]="loading" baCardClass="with-scroll">
+<!--<ba-card title="{{title}}" [loading]="loading" baCardClass="with-scroll">
   <ng2-smart-table [settings]="settings" (create)="onCreate($event)" (edit)="onEdit($event)" [source]="source" (delete)="onDeleteConfirm($event)"
     (rowSelect)="onRowSelect($event)"></ng2-smart-table>
-</ba-card>
+</ba-card>-->
 <user-add #addModal (onSaved)="onSaved($event)"></user-add>
 <user-edit #editModal (onSaved)="onSaved($event)"></user-edit>
 <!--<router-outlet name="anotherList"></router-outlet>-->
 <!--<router-outlet name="anotherList"></router-outlet>-->
 <!--<router-outlet name="anotherList"></router-outlet>-->
-<ul>
-  <li *ngFor="let user of userList | async">
-    {{user.name}} {{(user.companyObj |async)?.name}}
-  </li>
-</ul>
+<button type="button" class="btn btn-default" (click)="onCreate(event)">
+  New
+</button>
+<div class="row" *ngIf="userList">
+  <div class="col-xs-12 col-md-6 col-lg-3" *ngFor="let item of userList | async">
+    <div class="card">
+      <div class="card-block">
+        <h4 class="card-title">{{item.name}}</h4>
+        <h6 class="card-subtitle text-muted">{{item.email}}</h6>
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item"><i class="fa fa-at" aria-hidden="true"></i> {{(item.companyObj |async)?.name}}</li>
+        <li class="list-group-item"><i class="fa fa-phone" aria-hidden="true"></i> {{(item.roleObj |async)?.name}}</li>
+      </ul>
+      <div class="card-block">
+      </div>
+      <div class="card-block">
+        <a (click)="onDeleteConfirm({data:item})" class="card-link">Delete</a>
+        <a (click)="onEdit({data:item})" class="card-link">Edit</a>
+      </div>
+    </div>
+  </div>
+</div>
