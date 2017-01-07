@@ -1,3 +1,4 @@
+import { FirebaseListObservable } from 'angularfire2';
 import { TourProgram } from './tourProgram.model';
 import { ImageGalery } from './tourImageGalery';
 import { Company } from './company.model';
@@ -110,7 +111,7 @@ export class Tour extends BaseModel {
         public imageUrl: string = null,
         public tourCategory: string = null,
         public tourCategoryObj: Observable<TourCategory> = null,
-        public tourScheduleObjList: Observable<TourSchedule[]> = null,
+        public tourScheduleObjList: FirebaseListObservable<TourSchedule[]> = null,
         public tourDestinationObjList: Observable<TourDestination[]> = null,
         public tourProgramObjList: Observable<TourProgram[]> = null,
         public imageGaleryObjList: Observable<ImageGalery[]> = null,

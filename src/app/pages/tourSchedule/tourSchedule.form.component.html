@@ -10,13 +10,43 @@
       <div class="modal-body">
         <form (ngSubmit)="save(model)" #form="ngForm">
           <div class="form-group">
+            <label for="startDate">Start</label>
+            <div class="input-group">
+              <input class="form-control" (ngModelChange)="startDateChanged($event)" [minDate]="sMinDate" [maxDate]="eDate" placeholder="yyyy-mm-dd"
+                name="startDate" [(ngModel)]="sDate" ngbDatepicker #startDate="ngbDatepicker" required/>
+              <div class="input-group-addon" (click)="startDate.toggle()">
+                <i class="fa fa-calender" style="width: 1.2rem; height: 1rem; cursor: pointer;"></i>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="input-group">
+              <ngb-timepicker [(ngModel)]="sTime" (ngModelChange)="startTimeChanged($event)" [seconds]="false" name="sTime"></ngb-timepicker>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="endDate">End</label>
+            <div class="input-group">
+              <input class="form-control" (ngModelChange)="endDateChanged($event)" [minDate]="sDate" placeholder="yyyy-mm-dd" name="endDate"
+                [(ngModel)]="eDate" ngbDatepicker #endDate="ngbDatepicker" required/>
+              <div class="input-group-addon" (click)="endDate.toggle()">
+                <i class="fa fa-calender" style="width: 1.2rem; height: 1rem; cursor: pointer;"></i>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="input-group">
+              <ngb-timepicker [(ngModel)]="eTime" (ngModelChange)="endTimeChanged($event)" [seconds]="false" name="endTime"></ngb-timepicker>
+            </div>
+          </div>
+          <!--<div class="form-group">
             <label for="start">Start</label>
             <datepicker [(ngModel)]="model.start" name="start" [showWeeks]="false"></datepicker>
           </div>
           <div class="form-group">
             <label for="end">End</label>
             <datepicker [(ngModel)]="model.end" name="end" [minDate]="model.start" [showWeeks]="false"></datepicker>
-          </div>
+          </div>-->
           <div class="form-group">
             <label for="quota">Available Seats</label>
             <input type="number" name="quota" [(ngModel)]="model.quota" class="form-control" id="quota" placeholder="Enter tour Available Seats">

@@ -35,13 +35,14 @@ export class TourMainImageUploaderComponent implements OnInit {
         this.imageSizeService.getAll().take(1).subscribe(data => {
             _that.imageSizes = data;
             _that.maxImageSize = _that.imageSizes[_that.imageSizes.length - 1];
-            _that.storageService.getDownloadUrl(
-                _that.tour.company,
-                _that.tour.id,
-                _that.maxImageSize.width,
-                _that.maxImageSize.height, _that.tour.imageUrl).then(d => {
-                    _that.tourMainImage = d;
-                });
+            if (_that.maxImageSize)
+                _that.storageService.getDownloadUrl(
+                    _that.tour.company,
+                    _that.tour.id,
+                    _that.maxImageSize.width,
+                    _that.maxImageSize.height, _that.tour.imageUrl).then(d => {
+                        _that.tourMainImage = d;
+                    });
 
         });
     }
