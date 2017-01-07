@@ -23,6 +23,7 @@ export class TourScheduleSpecListComponent
     @Input() tourSchedule: TourSchedule;
     @Output() onRowSelectionChanged: EventEmitter<any> = new EventEmitter();
     loading: boolean = false;
+    title='Tour Schedule Specifications';
     constructor(
         private tourScheduleService: TourScheduleService,
         private tourScheduleSpecService: TourScheduleSpecService

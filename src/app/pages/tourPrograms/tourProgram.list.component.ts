@@ -15,7 +15,7 @@ export class TourProgramListComponent extends ListComponent<TourProgram> {
     @Input() tour: Tour;
     @Output() onRowSelectionChanged: EventEmitter<any> = new EventEmitter();
     source: LocalDataSource = new LocalDataSource();
-
+    title: 'Tour Programs';
     constructor(
         private touProgramService: TourProgramService,
         private tourService: TourService

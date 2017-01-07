@@ -13,6 +13,7 @@ export class TourDestinationListComponent extends ListComponent<TourDestination>
     @ViewChild('addModal') addModal: TourDestinationAddComponent;
     @ViewChild('editModal') editModal: TourDestinationEditComponent;
     @Input() tour: Tour;
+    title: 'Tour Destinations';
     @Output() onRowSelectionChanged: EventEmitter<any> = new EventEmitter();
     source: LocalDataSource = new LocalDataSource();
 
@@ -25,7 +26,7 @@ export class TourDestinationListComponent extends ListComponent<TourDestination>
     }
     getList() {
         if (this.tour) {
-          this.tourService.getTourDestinations(this.tour.id).subscribe(
+            this.tour.tourDestinationObjList.subscribe(
                 data => this.source.load(data)
             );
         }

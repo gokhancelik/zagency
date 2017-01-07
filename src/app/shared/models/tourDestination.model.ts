@@ -22,10 +22,6 @@ export class TourDestination extends BaseModel {
             longitude: {
                 title: 'longitude',
                 type: 'number'
-            },
-            tourName: {
-                title: 'tour Name',
-                type: 'string'
             }
         };
     }

@@ -1,4 +1,4 @@
-<ba-card title="Tour Schedule Prices" baCardClass="with-scroll" [loading]='loading'>
+<ba-card title="{{title}}" baCardClass="with-scroll" [loading]='loading'>
   <ng2-smart-table [settings]="settings" (create)="onCreate($event)" (edit)="onEdit($event)" [source]="source" (delete)="onDeleteConfirm($event)"
     (rowSelect)="onRowSelect($event)"></ng2-smart-table>
 </ba-card>
