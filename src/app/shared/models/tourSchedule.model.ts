@@ -38,7 +38,7 @@ export class TourSchedule extends BaseModel {
             }
         };
     }
-    static fromJson({ $key, start, end, quota, tour, tourObj,, createdAt, createdBy, modifiedAt, modifiedBy, isDeleted, deletedBy, deletedAt}): TourSchedule {
+    static fromJson({ $key, start, end, quota, tour, tourObj, createdAt, createdBy, modifiedAt, modifiedBy, isDeleted, deletedBy, deletedAt}): TourSchedule {
         return new TourSchedule(
             $key, new Date(start), new Date(end), quota, tour, tourObj, createdAt, createdBy, modifiedAt, modifiedBy, isDeleted, deletedBy, deletedAt);
     }

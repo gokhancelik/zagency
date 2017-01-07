@@ -1,3 +1,4 @@
+import { User } from './user.model';
 import { Observable } from 'rxjs/Rx';
 import { BaseModel } from './base.model';
 export class Company extends BaseModel {
