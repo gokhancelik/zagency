@@ -1,3 +1,6 @@
+import { Tour } from './tour.model';
+import { TourSchedule } from './tourSchedule.model';
+import { Observable } from 'rxjs/Rx';
 import { TourSchedulePrice } from './tourSchedulePrice.model';
 import { BaseModel } from './base.model';
 import { Injectable, Inject } from '@angular/core';
@@ -40,9 +43,8 @@ export class PublishingTour extends BaseModel {
     }
     static fromJson({ $key,
         tourSchedule,
-        tourScheduleStart,
-        tourScheduleEnd,
-        tourName,
+        tourScheduleObj,
+        tourObj,
         publisher,
         publisherName,
         distributor,
@@ -57,9 +59,8 @@ export class PublishingTour extends BaseModel {
     }): PublishingTour {
         return new PublishingTour($key,
             tourSchedule,
-            new Date(tourScheduleStart),
-            new Date(tourScheduleEnd),
-            tourName,
+            tourScheduleObj,
+            tourObj,
             publisher,
             publisherName,
             distributor,
@@ -68,16 +69,15 @@ export class PublishingTour extends BaseModel {
             percent,
             soldCount,
             active,
-            TourSchedulePrice.fromJsonList(prices),
+            prices,
             createdAt, createdBy, modifiedAt, modifiedBy, isDeleted, deletedBy, deletedAt
         );
     }
     constructor(
         id: string = null,
         public tourSchedule: string = null,
-        public tourScheduleStart: Date = new Date(),
-        public tourScheduleEnd: Date = new Date(),
-        public tourName: string = null,
+        public tourScheduleObj: Observable<TourSchedule> = null,
+        public tourObj: Observable<Tour> = null,
         public publisher: string = null,
         public publisherName: string = null,
         public distributor: string = null,

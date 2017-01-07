@@ -1,3 +1,5 @@
+import { Company } from './company.model';
+import { Observable } from 'rxjs/Observable';
 import { BaseModel } from './base.model';
 export class Customer extends BaseModel {
     static fromJsonList(array): Customer[] {
@@ -31,11 +33,11 @@ export class Customer extends BaseModel {
             }
         };
     }
-    static fromJson({ $key, name, phone, email, company, companyName, address,
+    static fromJson({ $key, name, phone, email, company, companyObj, address,
         createdAt, createdBy, modifiedAt, modifiedBy, isDeleted, deletedBy, deletedAt
     }): Customer {
         return new Customer(
-            $key, name, phone, email, company, companyName, address,
+            $key, name, phone, email, company, companyObj, address,
             createdAt, createdBy, modifiedAt, modifiedBy, isDeleted, deletedBy, deletedAt
         );
     }
@@ -46,7 +48,7 @@ export class Customer extends BaseModel {
         public userName: string = null,
         public email: string = null,
         public company: string = null,
-        public companyName: string = null,
+        public companyObj: Observable<Company> = null,
         public address: string = null,
         createdAt: Date = null,
         createdBy: string = null,

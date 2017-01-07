@@ -1,3 +1,5 @@
+import { Company } from './company.model';
+import { Observable } from 'rxjs/Observable';
 
 import { BaseModel } from './base.model';
 import { Injectable, Inject } from '@angular/core';
@@ -26,12 +28,12 @@ export class CompanyBranch extends BaseModel {
             }
         };
     }
-    static fromJson({ $key, address, company, companyName, latitude, longitude
+    static fromJson({ $key, address, company, companyObj, latitude, longitude
         , createdAt, createdBy, modifiedAt, modifiedBy, isDeleted, deletedBy, deletedAt
 
     }): CompanyBranch {
         return new CompanyBranch(
-            $key, address, company, companyName, latitude, longitude
+            $key, address, company, companyObj, latitude, longitude
             , createdAt, createdBy, modifiedAt, modifiedBy, isDeleted, deletedBy, deletedAt
 
         );
@@ -40,7 +42,7 @@ export class CompanyBranch extends BaseModel {
         id: string = null,
         public address: string = null,
         public company: string = null,
-        public companyName: string = null,
+        public companyObj: Observable<Company> = null,
         public latitude: number = null,
         public longitude: number = null,
         createdAt: Date = null,

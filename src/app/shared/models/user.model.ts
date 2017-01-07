@@ -1,3 +1,5 @@
+import { Injectable } from '@angular/core';
+import { CompanyService } from './../services/company.service';
 import { Role } from './role.model';
 import { Company } from './company.model';
 import { Observable } from 'rxjs/Observable';
@@ -48,7 +50,8 @@ export class User extends BaseModel {
         public role: string = null,
         public companyObj: Observable<Company> = null,
         public roleObj: Observable<Role> = null,
-        public userObj: Observable<any> = null) {
+        public userObj: Observable<any> = null,
+        ) {
         super();
         this.id = id;
 

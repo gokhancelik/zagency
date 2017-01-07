@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs/Rx';
 import { BaseModel } from './base.model';
 export class Company extends BaseModel {
     static fromJsonList(array): Company[] {
@@ -43,11 +44,11 @@ export class Company extends BaseModel {
 
     static fromJson({ $key, name, longName, webSiteUrl, phone1, phone2, fax, email, logoPath,
         longitude, latitude, specs,
-        createdAt, createdBy, modifiedAt, modifiedBy, isDeleted, deletedBy, deletedAt
+        createdAt, createdBy, modifiedAt, modifiedBy, isDeleted, deletedBy, deletedAt, usersObjList
     }): Company {
         return new Company(
             $key, name, longName, webSiteUrl, phone1, phone2, fax, email, longitude, latitude, specs, logoPath,
-            createdAt, createdBy, modifiedAt, modifiedBy, isDeleted, deletedBy, deletedAt
+            createdAt, createdBy, modifiedAt, modifiedBy, isDeleted, deletedBy, deletedAt, usersObjList
         );
     }
     constructor(
@@ -70,6 +71,7 @@ export class Company extends BaseModel {
         isDeleted: boolean = false,
         deletedBy: string = null,
         deletedAt: Date = null,
+        usersObjList: Observable<User> = null,
     ) {
         super(id, createdAt, createdBy, modifiedAt, modifiedBy, isDeleted, deletedBy, deletedAt);
     }

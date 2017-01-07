@@ -47,24 +47,22 @@ export class CompanyService extends BaseFirebaseService<Company> {
         return cs$;
     }
     getByRole(): Observable<Company[]> {
-        let that=this;
+        let that = this;
 
-        return that._authService.getUserInfo().map(user=>{
-        return {
-            isAdmin:(user && user.user.roleName === 'superadmin'),
-            company:user.user.company
-        }
+        return that._authService.getUserInfo().map(user => {
+            return {
+                isAdmin: (user && user.user.roleObj.map(r => r.name === 'superadmin')),
+                company: user.user.company
+            }
         })
-        .last()
-        .flatMap(function(data)
-             {
+            .last()
+            .flatMap(function (data) {
                 if (data.isAdmin) {
-                 return that._af.list(that.getRoute(), { query: { orderByChild: 'isDeleted', equalTo: false } })
+                    return that._af.list(that.getRoute(), { query: { orderByChild: 'isDeleted', equalTo: false } })
                         .map(that.fromJsonList);
                 }
-                else
-                {
-                  return  that._af.list(that.getRoute(), { query: { orderByKey:true, equalTo:data.company } })
+                else {
+                    return that._af.list(that.getRoute(), { query: { orderByKey: true, equalTo: data.company } })
                         .map(that.fromJsonList);
                 }
             });

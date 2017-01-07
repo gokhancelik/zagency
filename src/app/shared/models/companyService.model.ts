@@ -1,3 +1,5 @@
+import { Company } from './company.model';
+import { Observable } from 'rxjs/Observable';
 import { BaseModel } from './base.model';
 import { Injectable, Inject } from '@angular/core';
 
@@ -17,12 +19,12 @@ export class CompanyServiceModel extends BaseModel {
             }
         };
     }
-    static fromJson({ $key, name, description, company,
+    static fromJson({ $key, name, description, company, companyObj,
         createdAt, createdBy, modifiedAt, modifiedBy, isDeleted, deletedBy, deletedAt
 
     }): CompanyServiceModel {
         return new CompanyServiceModel(
-            $key, name, description, company,
+            $key, name, description, company, companyObj,
             createdAt, createdBy, modifiedAt, modifiedBy, isDeleted, deletedBy, deletedAt
         );
     }
@@ -31,6 +33,7 @@ export class CompanyServiceModel extends BaseModel {
         public name: string = null,
         public description: string = null,
         public company: string = null,
+        public companyObj: Observable<Company> = null,
         createdAt: Date = null,
         createdBy: string = null,
         modifiedAt: Date = null,
