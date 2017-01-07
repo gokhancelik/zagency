@@ -18,11 +18,13 @@ import {
 import {
     DynamicFormsBootstrapUIModule
 } from '@ng2-dynamic-forms/ui-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 @NgModule({
     imports: [
         routing, RouterModule, ModalModule, CommonModule, FormsModule, CarouselModule,
         FileUploadModule, DynamicFormsCoreModule, DynamicFormsBootstrapUIModule,
-        ProgressbarModule, DatepickerModule, Ng2SmartTableModule, NgaModule],
+        ProgressbarModule, DatepickerModule, Ng2SmartTableModule, NgaModule, NgbModule],
     exports: [TourScheduleAddComponent, TourScheduleEditComponent, TourScheduleListComponent],
     declarations: [TourScheduleAddComponent, TourScheduleEditComponent, TourScheduleListComponent],
     providers: [DynamicFormService, DynamicFormRelationService],

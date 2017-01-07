@@ -9,11 +9,10 @@ import { BaseFirebaseService } from './base.firebase.service';
 @Injectable()
 export class TourDestinationService extends BaseFirebaseService<TourDestination> {
     constructor(private _af: AngularFireDatabase,
-        private _authService: AuthService,
+        private _authService: AuthService, private tourService: TourService,
         @Inject(FirebaseRef) fb) {
         super(_af, 'tourDestinations', fb, _authService);
     }
-
     public mapRelationalObject(obj: TourDestination) {
         obj.tourObj = this.getTours(obj.tour);
         return obj;
@@ -41,13 +40,14 @@ export class TourDestinationService extends BaseFirebaseService<TourDestination>
 
         return tourDestinationInTour$;
     }
-       public getByKey(key): Observable<TourDestination> {
+    public getByKey(key): Observable<TourDestination> {
         let that = this;
         const tourDestination$ = this._af.object(this.getRoute() + '/' + key)
             .map(this.fromJson)
             .map(t => { return that.mapRelationalObject(t); });
         return tourDestination$;
     }
+<<<<<<< HEAD
         public getTours(key): Observable<Tour[]> {
         const tp$ = this._af.list(`tours/`,
             { query: { orderByChild: 'tourDestination', equalTo: key } })
@@ -55,6 +55,8 @@ export class TourDestinationService extends BaseFirebaseService<TourDestination>
         return tp$;
     }
 
+=======
+>>>>>>> 761d67352d985ff6bbc1c57fc700165c5e2f40ac
     public add(value: TourDestination) {
         this._authService.getUserInfo().take(1).subscribe(user => {
             if (user && user.user) {

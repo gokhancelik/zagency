@@ -1,6 +1,3 @@
-import { TourDestinationService } from './tourDestination.service';
-import { TourScheduleService } from './tourSchedule.service';
-import { TourProgramService } from './tourProgram.service';
 import { TourCategoryService } from './tourCategory.service';
 import { CompanyService } from './company.service';
 import { TourDestination } from './../models/tourDestination.model';
@@ -8,7 +5,7 @@ import { AuthService } from './../../security/auth.service';
 import { Tour, TourSchedule, TourProgram } from '../models';
 import { Injectable, Inject } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
-import { AngularFireDatabase, FirebaseRef } from 'angularfire2';
+import { AngularFireDatabase, FirebaseRef, FirebaseListObservable } from 'angularfire2';
 import { BaseFirebaseService } from './base.firebase.service';
 @Injectable()
 export class TourService extends BaseFirebaseService<Tour> {
@@ -16,9 +13,6 @@ export class TourService extends BaseFirebaseService<Tour> {
         private _authService: AuthService,
         private companyService: CompanyService,
         private tourCategoryService: TourCategoryService,
-        private tourProgramService: TourProgramService,
-        private tourScheduleService: TourScheduleService,
-        private tourDestinationService: TourDestinationService,
         @Inject(FirebaseRef) fb) {
         super(_af, 'tours/', fb, _authService);
     }
@@ -29,9 +23,9 @@ export class TourService extends BaseFirebaseService<Tour> {
     public mapRelationalObject(obj: Tour) {
         obj.companyObj = this.companyService.getByKey(obj.company);
         obj.tourCategoryObj = this.tourCategoryService.getByKey(obj.tourCategory);
-        obj.tourProgramObjList = this.tourProgramService.getByTourKey(obj.id);
-        obj.tourScheduleObjList = this.tourScheduleService.getByTourKey(obj.id);
-        obj.tourDestinationObjList = this.tourDestinationService.getByTourKey(obj.id);
+        obj.tourProgramObjList = this.getTourPrograms(obj.id);
+        obj.tourScheduleObjList = this.getTourSchedules(obj.id);
+        obj.tourDestinationObjList = this.getTourDestinations(obj.id);
         return obj;
     }
     public fromJsonList(array) {
@@ -99,7 +93,7 @@ export class TourService extends BaseFirebaseService<Tour> {
                 updates[this.getRoute() + '/' + key] = value;
                 updates['/companies/' + data.company + '/tours/' + data.id] = null;
                 updates['/tourCategories/' + data.tourCategory + '/tours/' + data.id] = null;
-                this.tourScheduleService.getByTourKey(key).take(1).subscribe(
+                this.getTourSchedules(key).take(1).subscribe(
                     tss => {
                         tss.forEach(ts => {
                             updates['/tourSchedules/' + ts.id] = null;
@@ -107,7 +101,7 @@ export class TourService extends BaseFirebaseService<Tour> {
                         super.firebaseUpdate(updates);
                     }
                 );
-                this.tourProgramService.getByTourKey(key).take(1).subscribe(
+                this.getTourPrograms(key).take(1).subscribe(
                     tss => {
                         tss.forEach(ts => {
                             updates['/tourPrograms/' + ts.id] = null;
@@ -115,7 +109,7 @@ export class TourService extends BaseFirebaseService<Tour> {
                         super.firebaseUpdate(updates);
                     }
                 );
-                this.tourDestinationService.getByTourKey(key).take(1).subscribe(
+                this.getTourDestinations(key).take(1).subscribe(
                     tss => {
                         tss.forEach(ts => {
                             updates['/tourDestinations/' + ts.id] = null;
@@ -133,10 +127,10 @@ export class TourService extends BaseFirebaseService<Tour> {
             .map(TourProgram.fromJsonList);
         return tp$;
     }
-    public getTourSchedules(key): Observable<TourProgram[]> {
-        const tp$ = this._af.list(`tourSchedule/`,
-            { query: { orderByChild: 'tour', equalTo: key } })
-            .map(TourProgram.fromJsonList);
+    public getTourSchedules(key): FirebaseListObservable<TourSchedule[]> {
+        const tp$ = this._af.list(`tourSchedules/`,
+            { query: { orderByChild: 'tour', equalTo: key } });
+            //.map(TourSchedule.fromJsonList);
         return tp$;
     }
     public getTourDestinations(key): Observable<TourDestination[]> {

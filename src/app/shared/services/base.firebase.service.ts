@@ -31,6 +31,7 @@ export abstract class BaseFirebaseService<T extends BaseModel> implements IServi
         this.preparePreCreate(value).subscribe(
             d => {
                 let nd = that.mapObjectToFirebaseObject(d);
+
                 that.af.list(that._route).push(nd);
             }
         );
@@ -72,15 +73,15 @@ export abstract class BaseFirebaseService<T extends BaseModel> implements IServi
         }
     }
     mapObjectToFirebaseObject(value: T): any {
-        // let updatedObj = {};
-        // Object.keys(value).forEach(k => {
-        //     if (value[k] instanceof Date) {
-        //         updatedObj[k] = (value[k] as Date).getTime();
-        //     }
-        //     else
-        //         updatedObj[k] = value[k];
-        // });
-        return value;
+        let updatedObj = {};
+        Object.keys(value).forEach(k => {
+            if (value[k] instanceof Date) {
+                updatedObj[k] = (value[k] as Date).getTime();
+            }
+            else
+                updatedObj[k] = value[k];
+        });
+        return updatedObj;
     }
     preparePreModify(value: T): Observable<T> {
         let that = this;
