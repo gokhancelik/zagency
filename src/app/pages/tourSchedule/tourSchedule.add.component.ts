@@ -44,14 +44,15 @@ export class TourScheduleAddComponent extends AddComponent<TourSchedule> {
     }
     save(model: TourSchedule) {
         if (model) {
-            this._service.add(model);
-            if (this.onSaved) this.onSaved.emit();
-            if (this.formModal) this.formModal.hide();
-            //     .subscribe(d => {
-            //         this.tour.tourScheduleObjList.push(d);
-
-            //     }
-            // }
+            if( !this.tour){
+                alert('Tur olmadan schedule eklenemez.');
+                return;
+            }
+            this._service.preparePreCreate(this.model).subscribe(d => {
+                this.tour.tourScheduleObjList.push(d);
+                if (this.onSaved) this.onSaved.emit();
+                if (this.formModal) this.formModal.hide();
+            });
         }
     }
     startTimeChanged(event: NgbTimeStruct) {
