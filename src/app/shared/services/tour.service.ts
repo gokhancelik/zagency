@@ -37,6 +37,27 @@ export class TourService extends BaseFirebaseService<Tour> {
     public fromJsonList(array) {
         return Tour.fromJsonList(array);
     }
+    public getByKey(key): Observable<Tour> {
+        const tour$ = this._af.object(this.getRoute() + '/' + key)
+            .map(this.fromJson)
+            .map(this.mapRelationalObject);
+        return tour$;
+    }
+    // public getByTourCategoryKey(tourCategoryKey: string): Observable<Tour[]> {
+    //     const toursInCompany$ = this._authService.getUserInfo().switchMap(
+    //         currentUser =>
+    //             this._af.list(this.getRoute(),
+    //                 {
+    //                     query: {
+    //                         orderByChild: 'company',
+    //                         equalTo: currentUser.user.company
+    //                     }
+    //                 })).map(this.fromJsonList)
+    //         .map(tours => {
+    //             return tours.map(this.mapRelationalObject);
+    //         });
+    //     return toursInCompany$;
+    // }
     public getAll(): Observable<Tour[]> {
         const toursInCompany$ = this._authService.getUserInfo().switchMap(
             currentUser =>
