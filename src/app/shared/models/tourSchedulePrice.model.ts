@@ -1,3 +1,8 @@
+import { CurrencyType } from './currencyType.model';
+import { PriceType } from './priceType.model';
+import { TourSchedule } from './tourSchedule.model';
+import { Tour } from './tour.model';
+import { Observable } from 'rxjs/Observable';
 import { BaseModel } from './base.model';
 import { Injectable, Inject } from '@angular/core';
 
@@ -33,24 +38,24 @@ export class TourSchedulePrice extends BaseModel {
             }
         };
     }
-    static fromJson({ $key, price, discount, priceType, priceTypeName,
-        currency, currencyName, currencySymbol, tourSchedule,tourName,tourUrlPath}): TourSchedulePrice {
+    static fromJson({ $key, price, discount, priceType, priceTypeObj,
+        currency, currencyTypeObj, tourSchedule, tourScheduleObj, tour, tourObj}): TourSchedulePrice {
         return new TourSchedulePrice(
-            $key, price, discount, priceType, priceTypeName,
-            currency, currencyName, currencySymbol, tourSchedule,tourName,tourUrlPath);
+            $key, price, discount, priceType, priceTypeObj,
+        currency, currencyTypeObj, tourSchedule, tourScheduleObj, tour, tourObj);
     }
     constructor(
         id: string = null,
         public price: number = 0,
         public discount: number = 0,
         public priceType: string = null,
-        public priceTypeName: string = null,
+        public priceTypeObj: Observable<PriceType> = null,
         public currency: string = null,
-        public currencyName: string = null,
-        public currencySymbol: string = null,
+        public currencyTypeObj: Observable<CurrencyType> = null,
         public tourSchedule: string = null,
-        public tourName:string=null,
-        public tourUrlPath:string=null,
+        public tourScheduleObj: Observable<TourSchedule> = null,
+        public tour: string = null,
+        public tourObj: Observable<Tour> = null,
 
     ) {
         super();

@@ -1,5 +1,13 @@
+import { TourProgram } from './tourProgram.model';
+import { ImageGalery } from './tourImageGalery';
+import { Company } from './company.model';
+import { TourDestination } from './tourDestination.model';
+import { TourSchedule } from './tourSchedule.model';
+import { TourCategory } from './tourCategory.model';
 import { BaseModel } from './base.model';
 import { DatePipe } from '@angular/common';
+import { Observable } from 'rxjs/Observable';
+
 export class Tour extends BaseModel {
     static fromJsonList(array): Tour[] {
         console.log(array);
@@ -58,10 +66,12 @@ export class Tour extends BaseModel {
             }
         };
     }
-    static fromJson({ $key, name, urlPath, imageUrl, tourCategory, tourCategoryName, company, companyName, rank, review, lastReviewed, description,
+    static fromJson({ $key, name, urlPath, imageUrl, tourCategory, tourCategoryObj,tourSchedule,tourScheduleObjList, tourDestination,tourDestinationObjList,tourProgram, tourProgramObjList,imageGalery,imageGaleryObjList,companyObj,
+         rank, review, lastReviewed, description,
          createdAt, createdBy, modifiedAt, modifiedBy, isDeleted, deletedBy, deletedAt}): Tour {
         return new Tour(
-            $key, name, urlPath, imageUrl, tourCategory, tourCategoryName, company, companyName, rank, review, new Date(lastReviewed), description,
+            $key, name, urlPath, imageUrl,tourCategory, tourCategoryObj,tourSchedule,tourScheduleObjList, tourDestination,tourDestinationObjList,
+            tourProgram, tourProgramObjList,imageGalery,imageGaleryObjList,companyObj, rank, review, new Date(lastReviewed), description,
              createdAt, createdBy, modifiedAt, modifiedBy, isDeleted, deletedBy, deletedAt);
     }
     constructor(
@@ -70,9 +80,17 @@ export class Tour extends BaseModel {
         public urlPath: string = null,
         public imageUrl: string = null,
         public tourCategory: string = null,
-        public tourCategoryName: string = null,
+        public tourCategoryObj:Observable<TourCategory> = null,
+        public tourSchedule:string=null,
+        public tourScheduleObjList:Observable<TourSchedule[]> = null,
+        public tourDestination:string=null,
+        public tourDestinationObjList:Observable<TourDestination[]> = null,
+         public tourProgram:string=null,
+        public tourProgramObjList:Observable<TourProgram[]> = null,
+        public imageGalery:string=null,
+        public imageGaleryObjList:Observable<ImageGalery[]> = null,
         public company: string = null,
-        public companyName: string = null,
+        public companyObj:Observable<Company> = null,
         public rank: number = 0,
         public review: number = 0,
         public lastReviewed: Date = new Date(),

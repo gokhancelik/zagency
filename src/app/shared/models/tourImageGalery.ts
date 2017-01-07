@@ -1,4 +1,4 @@
-
+import { Observable } from 'rxjs/Observable';
 import { BaseModel } from './base.model';
 import { Injectable, Inject } from '@angular/core';
 
@@ -12,22 +12,22 @@ export class ImageGalery extends BaseModel {
                 title: 'name',
                 type: 'string'
             },
-              tourName: {
+            tourName: {
                 title: 'tour Name',
                 type: 'string'
-              }
+            }
         };
     }
-    static fromJson({ $key, name,tour,tourName, createdAt, createdBy, modifiedAt, modifiedBy, isDeleted, deletedBy, deletedAt}): ImageGalery {
+    static fromJson({ $key, name, tour, tourObj, createdAt, createdBy, modifiedAt, modifiedBy, isDeleted, deletedBy, deletedAt}): ImageGalery {
         return new ImageGalery(
-            $key, name,tour,tourName, createdAt, createdBy, modifiedAt, modifiedBy, isDeleted, deletedBy, deletedAt);
+            $key, name, tour, tourObj, createdAt, createdBy, modifiedAt, modifiedBy, isDeleted, deletedBy, deletedAt);
     }
     constructor(
-        key: string=null,
-        public name: string=null,
-        public tour: string=null,
-        public tourName:string=null,
-         createdAt: Date = null,
+        key: string = null,
+        public name: string = null,
+        public tour: string = null,
+        public tourObj: Observable<Tour> = null,
+        createdAt: Date = null,
         createdBy: string = null,
         modifiedAt: Date = new Date(),
         modifiedBy: string = null,
@@ -35,6 +35,6 @@ export class ImageGalery extends BaseModel {
         deletedBy: string = null,
         deletedAt: Date = null
     ) {
-        super(key,createdAt,createdBy,modifiedAt,modifiedBy,isDeleted,deletedBy,deletedAt);
-}
+        super(key, createdAt, createdBy, modifiedAt, modifiedBy, isDeleted, deletedBy, deletedAt);
+    }
 

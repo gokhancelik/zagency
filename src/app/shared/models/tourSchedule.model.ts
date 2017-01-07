@@ -1,3 +1,5 @@
+import { Tour } from './tour.model';
+import { Observable } from 'rxjs/Observable';
 import { BaseModel } from './base.model';
 import { DatePipe } from '@angular/common';
 import { Injectable, Inject } from '@angular/core';
@@ -36,9 +38,9 @@ export class TourSchedule extends BaseModel {
             }
         };
     }
-    static fromJson({ $key, start, end, quota, tour, tourName, tourUrlPath, createdAt, createdBy, modifiedAt, modifiedBy, isDeleted, deletedBy, deletedAt}): TourSchedule {
+    static fromJson({ $key, start, end, quota, tour, tourObj,, createdAt, createdBy, modifiedAt, modifiedBy, isDeleted, deletedBy, deletedAt}): TourSchedule {
         return new TourSchedule(
-            $key, new Date(start), new Date(end), quota, tour, tourName, tourUrlPath, createdAt, createdBy, modifiedAt, modifiedBy, isDeleted, deletedBy, deletedAt);
+            $key, new Date(start), new Date(end), quota, tour, tourObj, createdAt, createdBy, modifiedAt, modifiedBy, isDeleted, deletedBy, deletedAt);
     }
     constructor(
         key: string = null,
@@ -46,8 +48,7 @@ export class TourSchedule extends BaseModel {
         public end: Date = new Date(),
         public quota: number = 0,
         public tour: string = null,
-        public tourName: string = null,
-        public tourUrlPath: string = null,
+        public tourObj: Observable<Tour> = null,
         createdAt: Date = null,
         createdBy: string = null,
         modifiedAt: Date = new Date(),

@@ -1,3 +1,5 @@
+import { Tour } from './tour.model';
+import { Observable } from 'rxjs/Observable';
 
 import { BaseModel } from './base.model';
 import { Injectable, Inject } from '@angular/core';
@@ -22,16 +24,16 @@ export class TourProgram extends BaseModel {
             }
         };
     }
-    static fromJson({ $key, description, day, tour, tourName, tourUrlPath, createdAt, createdBy, modifiedAt, modifiedBy, isDeleted, deletedBy, deletedAt}): TourProgram {
+    static fromJson({ $key, description, day, tour, tourObj, tourUrlPath, createdAt, createdBy, modifiedAt, modifiedBy, isDeleted, deletedBy, deletedAt}): TourProgram {
         return new TourProgram(
-            $key, description, day, tour, tourName, tourUrlPath, createdAt, createdBy, modifiedAt, modifiedBy, isDeleted, deletedBy, deletedAt);
+            $key, description, day, tour, tourObj, tourUrlPath, createdAt, createdBy, modifiedAt, modifiedBy, isDeleted, deletedBy, deletedAt);
     }
     constructor(
         id: string = null,
         public description: string = null,
         public day: string = null,
-        public tour: string = null,
-        public tourName: string = null,
+       public tour: string = null,
+        public tourObj: Observable<Tour> = null,
         public tourUrlPath: string = null,
         createdAt: Date = null,
         createdBy: string = null,

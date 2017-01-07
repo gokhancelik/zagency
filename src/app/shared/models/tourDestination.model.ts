@@ -1,6 +1,9 @@
+import { Tour } from './tour.model';
 
 import { BaseModel } from './base.model';
 import { Injectable, Inject } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
+
 
 export class TourDestination extends BaseModel {
     static fromJsonList(array): TourDestination[] {
@@ -26,9 +29,9 @@ export class TourDestination extends BaseModel {
             }
         };
     }
-    static fromJson({ $key, name, latitude, longitude, tour, tourName, tourUrlPath, createdAt, createdBy, modifiedAt, modifiedBy, isDeleted, deletedBy, deletedAt}): TourDestination {
+    static fromJson({ $key, name, latitude, longitude, tour, tourObj, createdAt, createdBy, modifiedAt, modifiedBy, isDeleted, deletedBy, deletedAt}): TourDestination {
         return new TourDestination(
-            $key, name, latitude, longitude, tour, tourName, tourUrlPath, createdAt, createdBy, modifiedAt, modifiedBy, isDeleted, deletedBy, deletedAt);
+            $key, name, latitude, longitude, tour, tourObj, createdAt, createdBy, modifiedAt, modifiedBy, isDeleted, deletedBy, deletedAt);
     }
     constructor(
         id: string = null,
@@ -36,8 +39,7 @@ export class TourDestination extends BaseModel {
         public latitude: number = 0,
         public longitude: number = 0,
         public tour: string = null,
-        public tourName: string = null,
-        public tourUrlPath: string = null,
+        public tourObj: Observable<Tour> = null,
         createdAt: Date = null,
         createdBy: string = null,
         modifiedAt: Date = new Date(),
