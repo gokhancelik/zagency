@@ -15,7 +15,7 @@ export class TourDestinationService extends BaseFirebaseService<TourDestination>
     }
 
     public mapRelationalObject(obj: TourDestination) {
-        obj.tourObj = this.tourService.getByKey(obj.tour);
+        obj.tourObj = this.getTours(obj.tour);
         return obj;
     }
     public fromJson(obj) {
@@ -51,7 +51,7 @@ export class TourDestinationService extends BaseFirebaseService<TourDestination>
         public getTours(key): Observable<Tour[]> {
         const tp$ = this._af.list(`tours/`,
             { query: { orderByChild: 'tourDestination', equalTo: key } })
-            .map(TourDestination.fromJsonList);
+            .map(Tour.fromJsonList);
         return tp$;
     }
 
