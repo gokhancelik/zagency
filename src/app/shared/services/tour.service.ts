@@ -93,7 +93,7 @@ export class TourService extends BaseFirebaseService<Tour> {
                 updates[this.getRoute() + '/' + key] = value;
                 updates['/companies/' + data.company + '/tours/' + data.id] = null;
                 updates['/tourCategories/' + data.tourCategory + '/tours/' + data.id] = null;
-                this.tourScheduleService.getByTourKey(key).take(1).subscribe(
+                this.getTourSchedules(key).take(1).subscribe(
                     tss => {
                         tss.forEach(ts => {
                             updates['/tourSchedules/' + ts.id] = null;
@@ -101,7 +101,7 @@ export class TourService extends BaseFirebaseService<Tour> {
                         super.firebaseUpdate(updates);
                     }
                 );
-                this.tourProgramService.getByTourKey(key).take(1).subscribe(
+                this.getTourPrograms(key).take(1).subscribe(
                     tss => {
                         tss.forEach(ts => {
                             updates['/tourPrograms/' + ts.id] = null;
@@ -109,7 +109,7 @@ export class TourService extends BaseFirebaseService<Tour> {
                         super.firebaseUpdate(updates);
                     }
                 );
-                this.tourDestinationService.getByTourKey(key).take(1).subscribe(
+                this.getTourDestinations(key).take(1).subscribe(
                     tss => {
                         tss.forEach(ts => {
                             updates['/tourDestinations/' + ts.id] = null;
