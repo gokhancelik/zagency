@@ -84,7 +84,7 @@ export class UserService extends BaseFirebaseService<User> {
                 if (user && user.user) {
                     let deleted = super.preparePreDeleteByUser(user.user);
                     let updates = {};
-                    updates['users/' + key] = deleted;
+                    updates['users/' + key] = null;
                     updates['companies/' + user.user.company + '/users/' + key] = null;
                     super.firebaseUpdate(updates);
                 }

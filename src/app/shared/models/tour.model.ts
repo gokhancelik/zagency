@@ -66,15 +66,42 @@ export class Tour extends BaseModel {
             }
         };
     }
-    static fromJson({ $key, name, urlPath, imageUrl, tourCategory, tourCategoryObj,tourSchedule,tourScheduleObjList, tourDestination,tourDestinationObjList,tourProgram,
-        tourProgramObjList,imageGalery,imageGaleryObjList,companyObj,
-         rank, review, lastReviewed, description,
-         createdAt, createdBy, modifiedAt, modifiedBy, isDeleted, deletedBy, deletedAt}): Tour {
+    static fromJson({
+        $key,
+        name,
+        urlPath,
+        imageUrl,
+        tourCategory,
+        tourCategoryObj,
+        tourScheduleObjList,
+        tourDestinationObjList,
+        tourProgramObjList,
+        imageGaleryObjList,
+        company,
+        companyObj,
+        rank,
+        review,
+        lastReviewed,
+        description,
+        createdAt, createdBy, modifiedAt, modifiedBy, isDeleted, deletedBy, deletedAt}): Tour {
         return new Tour(
-            $key, name, urlPath, imageUrl,tourCategory, tourCategoryObj,tourSchedule,tourScheduleObjList, tourDestination,tourDestinationObjList,
-            tourProgram, tourProgramObjList,imageGalery,imageGaleryObjList,companyObj, rank, review, 
-            lastReviewed, description,
-             createdAt, createdBy, modifiedAt, modifiedBy, isDeleted, deletedBy, deletedAt);
+            $key,
+            name,
+            urlPath,
+            imageUrl,
+            tourCategory,
+            tourCategoryObj,
+            tourScheduleObjList,
+            tourDestinationObjList,
+            tourProgramObjList,
+            imageGaleryObjList,
+            company,
+            companyObj,
+            rank,
+            review,
+            new Date(lastReviewed),
+            description,
+            createdAt, createdBy, modifiedAt, modifiedBy, isDeleted, deletedBy, deletedAt);
     }
     constructor(
         key: string = null,
@@ -82,17 +109,13 @@ export class Tour extends BaseModel {
         public urlPath: string = null,
         public imageUrl: string = null,
         public tourCategory: string = null,
-        public tourCategoryObj:Observable<TourCategory> = null,
-        public tourSchedule:string=null,
-        public tourScheduleObjList:Observable<TourSchedule[]> = null,
-        public tourDestination:string=null,
-        public tourDestinationObjList:Observable<TourDestination[]> = null,
-         public tourProgram:string=null,
-        public tourProgramObjList:Observable<TourProgram[]> = null,
-        public imageGalery:string=null,
-        public imageGaleryObjList:Observable<ImageGalery[]> = null,
+        public tourCategoryObj: Observable<TourCategory> = null,
+        public tourScheduleObjList: Observable<TourSchedule[]> = null,
+        public tourDestinationObjList: Observable<TourDestination[]> = null,
+        public tourProgramObjList: Observable<TourProgram[]> = null,
+        public imageGaleryObjList: Observable<ImageGalery[]> = null,
         public company: string = null,
-        public companyObj:Observable<Company> = null,
+        public companyObj: Observable<Company> = null,
         public rank: number = 0,
         public review: number = 0,
         public lastReviewed: Date = new Date(),
@@ -105,8 +128,8 @@ export class Tour extends BaseModel {
         deletedBy: string = null,
         deletedAt: Date = null
     ) {
-        super(key,createdAt,createdBy,modifiedAt,modifiedBy,isDeleted,deletedBy,deletedAt);
-        
+        super(key, createdAt, createdBy, modifiedAt, modifiedBy, isDeleted, deletedBy, deletedAt);
+
     }
 
 }
