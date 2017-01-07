@@ -9,17 +9,17 @@ export class TourCategoryService extends BaseFirebaseService<TourCategory> {
     sdkDb: any;
     constructor(private afAuth: AngularFireAuth,
         private _af: AngularFireDatabase,
-         _authService: AuthService, @Inject(FirebaseRef) fb) {
-        super(_af, 'tourCategories',_authService,fb);
+        _authService: AuthService, @Inject(FirebaseRef) fb) {
+        super(_af, 'tourCategories', fb, _authService);
         this.sdkDb = fb.database().ref();
     }
-  public  fromJson(obj) {
+    public fromJson(obj) {
         return TourCategory.fromJson(obj);
     }
-   public fromJsonList(array) {
+    public fromJsonList(array) {
         return TourCategory.fromJsonList(array);
     }
-  public  getAll(): Observable<TourCategory[]> {
+    public getAll(): Observable<TourCategory[]> {
         const priceTypes$ = this._af.list('tourCategories')
             .map(this.fromJsonList);
         return priceTypes$;

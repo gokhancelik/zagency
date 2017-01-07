@@ -59,6 +59,7 @@ export class TourService extends BaseFirebaseService<Tour> {
     //     return toursInCompany$;
     // }
     public getAll(): Observable<Tour[]> {
+        let that = this;
         const toursInCompany$ = this._authService.getUserInfo().switchMap(
             currentUser =>
                 this._af.list(this.getRoute(),
@@ -67,9 +68,9 @@ export class TourService extends BaseFirebaseService<Tour> {
                             orderByChild: 'company',
                             equalTo: currentUser.user.company
                         }
-                    })).map(this.fromJsonList)
+                    })).map(that.fromJsonList)
             .map(tours => {
-                return tours.map(this.mapRelationalObject);
+                return tours.map(t => { return that.mapRelationalObject(t); });
             });
 
         return toursInCompany$;
