@@ -71,7 +71,8 @@ export class Tour extends BaseModel {
          createdAt, createdBy, modifiedAt, modifiedBy, isDeleted, deletedBy, deletedAt}): Tour {
         return new Tour(
             $key, name, urlPath, imageUrl,tourCategory, tourCategoryObj,tourSchedule,tourScheduleObjList, tourDestination,tourDestinationObjList,
-            tourProgram, tourProgramObjList,imageGalery,imageGaleryObjList,companyObj, rank, review, new Date(lastReviewed), description,
+            tourProgram, tourProgramObjList,imageGalery,imageGaleryObjList,companyObj, rank, review, 
+            new Date(lastReviewed), description,
              createdAt, createdBy, modifiedAt, modifiedBy, isDeleted, deletedBy, deletedAt);
     }
     constructor(
