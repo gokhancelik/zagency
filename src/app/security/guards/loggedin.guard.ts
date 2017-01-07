@@ -10,7 +10,9 @@ export class LoggedInGuard implements CanActivate {
         state: RouterStateSnapshot): Observable<boolean> {
             this.authService.getUserInfo().subscribe(console.log);
         return this.authService.getUserInfo()
-            .map(authInfo => authInfo && (authInfo.user.company != null|| authInfo.user.roleName=='superadmin'))
+            .map(authInfo => authInfo && (
+                authInfo.user.company != null
+            || authInfo.user.roleObj.map(r=>r.name=='superadmin'))
             .take(1)
             .do(allowed => {
                 if (!allowed) {

@@ -1,3 +1,4 @@
+import { Tour } from './tour.model';
 import { Observable } from 'rxjs/Observable';
 import { BaseModel } from './base.model';
 import { Injectable, Inject } from '@angular/core';
@@ -37,4 +38,5 @@ export class ImageGalery extends BaseModel {
     ) {
         super(key, createdAt, createdBy, modifiedAt, modifiedBy, isDeleted, deletedBy, deletedAt);
     }
+}
 
