@@ -38,9 +38,10 @@ export class TourService extends BaseFirebaseService<Tour> {
         return Tour.fromJsonList(array);
     }
     public getByKey(key): Observable<Tour> {
+        let that = this;
         const tour$ = this._af.object(this.getRoute() + '/' + key)
             .map(this.fromJson)
-            .map(this.mapRelationalObject);
+            .map(t => { return that.mapRelationalObject(t); });
         return tour$;
     }
     // public getByTourCategoryKey(tourCategoryKey: string): Observable<Tour[]> {
