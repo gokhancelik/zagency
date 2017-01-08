@@ -14,12 +14,17 @@
   <div class="col-xs-12 col-md-6 col-lg-3" *ngFor="let item of publishingTourList | async">
     <div class="card">
       <div class="card-block">
-        <h4 class="card-title">{{<item class="quota"></item>}}</h4>
-        <h6 class="card-subtitle text-muted">{{item.quota}}</h6>
+        <h4 class="card-title">{{(item.tourObj |async)?.name}}</h4>
+        <h6 class="card-subtitle text-muted">{{(item.publisherObj |async)?.name}}</h6>
       </div>
       <ul class="list-group list-group-flush">
-        <li class="list-group-item"><i class="fa fa-building" aria-hidden="true"></i> {{(item.publisherObj |async)?.name}}</li>
-        <!--<li class="list-group-item"><i class="fa fa-user-secret" aria-hidden="true"></i> {{(item.tourScheduleObj |async)?.end}}</li>-->
+        <li class="list-group-item"><i class="fa fa-building" aria-hidden="true"></i> {{item.quota}}</li>
+        <li class="list-group-item"><i class="fa fa-building" aria-hidden="true"></i> {{item.percent}}</li>
+      </ul>
+       <ul class="list-group list-group-flush">
+        <li class="list-group-item" *ngFor="let p of item.priceObjList|async">
+            {{p.price}}
+        </li>
       </ul>
       <div class="card-block">
       </div>
