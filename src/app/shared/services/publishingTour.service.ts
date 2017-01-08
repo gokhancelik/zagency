@@ -1,3 +1,5 @@
+import { TourService } from './tour.service';
+import { TourScheduleService } from './tourSchedule.service';
 import { AuthService } from './../../security/auth.service';
 import { PublishingTour, Tour, TourSchedulePrice, TourScheduleSpec } from '../models';
 import { CompanyService } from './';
@@ -8,8 +10,17 @@ import { BaseFirebaseService } from './base.firebase.service';
 @Injectable()
 export class PublishingTourService extends BaseFirebaseService<PublishingTour> {
     constructor(private _af: AngularFireDatabase, private _authService: AuthService,
+        private companyService: CompanyService, private tourScheduleService: TourScheduleService,
+        private tourService: TourService,
         @Inject(FirebaseRef) fb) {
         super(_af, 'publishingTours', fb, _authService);
+    }
+    public mapRelationalObject(obj: PublishingTour) {
+        obj.distributorObj = this.companyService.getByKey(obj.distributor);
+        obj.publisherObj = this.companyService.getByKey(obj.publisher);
+        obj.tourScheduleObj = this.tourScheduleService.getByKey(obj.tourSchedule);
+        obj.tourObj = this.tourService.getByKey(obj.tour);
+        return obj;
     }
     public fromJson(obj) {
         return PublishingTour.fromJson(obj);
