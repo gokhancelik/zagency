@@ -13,9 +13,9 @@ export class TourDestinationListComponent extends ListComponent<TourDestination>
     @ViewChild('addModal') addModal: TourDestinationAddComponent;
     @ViewChild('editModal') editModal: TourDestinationEditComponent;
     @Input() tour: Tour;
-    title: 'Tour Destinations';
     @Output() onRowSelectionChanged: EventEmitter<any> = new EventEmitter();
     source: LocalDataSource = new LocalDataSource();
+    title: 'Tour Destinations';
 
     constructor(
         private tourDestinationService: TourDestinationService,

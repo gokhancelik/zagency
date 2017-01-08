@@ -1,3 +1,5 @@
+import { TourSchedulePrice } from './tourSchedulePrice.model';
+import { FirebaseListObservable } from 'angularfire2';
 import { Tour } from './tour.model';
 import { Observable } from 'rxjs/Observable';
 import { BaseModel } from './base.model';
@@ -38,9 +40,13 @@ export class TourSchedule extends BaseModel {
             }
         };
     }
-    static fromJson({ $key, start, end, quota, tour, tourObj, createdAt, createdBy, modifiedAt, modifiedBy, isDeleted, deletedBy, deletedAt}): TourSchedule {
+    static fromJson({ $key, start, end, quota, tour, tourObj, priceObjList,
+        createdAt, createdBy, modifiedAt, modifiedBy,
+        isDeleted, deletedBy, deletedAt}): TourSchedule {
         return new TourSchedule(
-            $key, new Date(start), new Date(end), quota, tour, tourObj, createdAt, createdBy, modifiedAt, modifiedBy, isDeleted, deletedBy, deletedAt);
+            $key, new Date(start), new Date(end), quota, tour, tourObj, priceObjList,
+            createdAt, createdBy, modifiedAt, modifiedBy,
+            isDeleted, deletedBy, deletedAt);
     }
     constructor(
         key: string = null,
@@ -49,6 +55,7 @@ export class TourSchedule extends BaseModel {
         public quota: number = 0,
         public tour: string = null,
         public tourObj: Observable<Tour> = null,
+        public priceObjList: FirebaseListObservable<TourSchedulePrice[]> = null,
         createdAt: Date = null,
         createdBy: string = null,
         modifiedAt: Date = new Date(),

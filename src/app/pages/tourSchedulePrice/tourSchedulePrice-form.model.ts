@@ -30,18 +30,6 @@ export const TOURSCHEDULEPRICE_FORM_MODEL: Array<DynamicFormControlModel> = [
             }
         }
     ),
-    new DynamicInputModel({
-        id: 'currencySymbol',
-        inputType: 'string',
-        label: 'currency Symbol',
-        readOnly: true
-    }),
-    new DynamicInputModel({
-        id: 'currencyName',
-        inputType: 'string',
-        label: 'currency Name',
-        readOnly: true
-    }),
     new DynamicSelectModel(
         {
             id: 'priceType',
@@ -52,17 +40,4 @@ export const TOURSCHEDULEPRICE_FORM_MODEL: Array<DynamicFormControlModel> = [
             }
         }
     ),
-    new DynamicInputModel({
-        id: 'priceTypeName',
-        inputType: 'string',
-        label: 'price Type Name',
-        readOnly: true
-    }),
-    // new DynamicInputModel({
-    //     id: 'tourSchedule',
-    //     inputType: 'string',
-    //     label: 'schedule',
-    //     readOnly: true,
-    //     disabled: true
-    // }),
 ];
