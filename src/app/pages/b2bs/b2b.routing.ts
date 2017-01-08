@@ -14,7 +14,7 @@ const B2B_ROUTES: Routes = [
 			},
 			{
 				path: 'publishingTours',
-				component: PublishingTourListComponent
+				component: PublishingTourListComponent,
 			},
 		]
 	}

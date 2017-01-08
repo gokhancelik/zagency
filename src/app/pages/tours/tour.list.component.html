@@ -2,6 +2,8 @@
   <ng2-smart-table [settings]="settings" (create)="onCreate($event)" (edit)="onEdit($event)" [source]="source" (delete)="onDeleteConfirm($event)"
     (rowSelect)="onRowSelect($event)"></ng2-smart-table>
 </ba-card>-->
+<publishingTour-add #publishModal (onSaved)="onSaved($event)"></publishingTour-add>
+
 <button type="button" class="btn btn-primary" (click)="onCreate(event)">
   New
 </button>
@@ -13,7 +15,9 @@
         <h6 class="card-subtitle text-muted">{{(item.companyObj | async)?.name}}</h6>
       </div>
       <ul class="list-group list-group-flush">
-        <li class="list-group-item" *ngFor="let ts of item.tourScheduleObjList | async">{{ts.start}}</li>
+        <li class="list-group-item" *ngFor="let ts of item.tourScheduleObjList | async">{{ts.start}}
+        <a href="javascript:void(0)" (click)="onPublish({data:ts})" class="card-link">Publish</a>        
+        </li>
       </ul>
       <div class="card-block">
         <a href="javascript:void(0)" (click)="onDeleteConfirm({data:item})" class="card-link">Delete</a>

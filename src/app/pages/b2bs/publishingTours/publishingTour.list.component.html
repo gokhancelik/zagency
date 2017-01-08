@@ -1,0 +1,32 @@
+<!--<ba-card title="{{title}}" [loading]="loading" baCardClass="with-scroll">
+  <ng2-smart-table [settings]="settings" (create)="onCreate($event)" (edit)="onEdit($event)" [source]="source" (delete)="onDeleteConfirm($event)"
+    (rowSelect)="onRowSelect($event)"></ng2-smart-table>
+</ba-card>-->
+<publishingTour-add #addModal (onSaved)="onSaved($event)"></publishingTour-add>
+<!--<publishingTour-edit #editModal (onSaved)="onSaved($event)"></publishingTour-edit>-->
+<!--<router-outlet name="anotherList"></router-outlet>-->
+<!--<router-outlet name="anotherList"></router-outlet>-->
+<!--<router-outlet name="anotherList"></router-outlet>-->
+<!--<button type="button" class="btn btn-default" (click)="onCreate(event)">
+  New
+</button>-->
+<div class="row" *ngIf="publishingTourList">
+  <div class="col-xs-12 col-md-6 col-lg-3" *ngFor="let item of publishingTourList | async">
+    <div class="card">
+      <div class="card-block">
+        <h4 class="card-title">{{item.publisherName}}</h4>
+        <h6 class="card-subtitle text-muted">{{item.publisherName}}</h6>
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item"><i class="fa fa-building" aria-hidden="true"></i> {{(item.tourScheduleObj |async)?.start}}</li>
+        <li class="list-group-item"><i class="fa fa-user-secret" aria-hidden="true"></i> {{(item.tourScheduleObj |async)?.end}}</li>
+      </ul>
+      <div class="card-block">
+      </div>
+      <div class="card-block">
+        <a href="javascript:void(0)" (click)="onDeleteConfirm({data:item})" class="card-link">Delete</a>
+        <a href="javascript:void(0)" (click)="onEdit({data:item})" class="card-link">Edit</a>
+      </div>
+    </div>
+  </div>
+</div>

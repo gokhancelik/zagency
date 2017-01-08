@@ -1,5 +1,7 @@
 import { B2BComponent } from './b2b.component';
 import { PublishingTourListComponent } from './publishingTours/publishingTour.list.component';
+import { PublishingTourAddComponent } from './publishingTours/publishingTour.add.component';
+import { PublishingTourComponent } from './publishingTours/publishingTour.component';
 import { DistributorListComponent } from './stakeholders/distributor.list.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -26,8 +28,8 @@ import {
         CarouselModule, ReactiveFormsModule, DynamicFormsBootstrapUIModule,
         FileUploadModule, ProgressbarModule, DatepickerModule, DynamicFormsCoreModule,
         Ng2SmartTableModule, NgProgressModule, NgaModule],
-    exports: [DistributorListComponent, PublishingTourListComponent],
-    declarations: [B2BComponent, DistributorListComponent, PublishingTourListComponent],
+    exports: [ PublishingTourListComponent,PublishingTourAddComponent,PublishingTourComponent],
+    declarations: [B2BComponent, DistributorListComponent, PublishingTourListComponent,PublishingTourAddComponent,PublishingTourComponent],
     providers: [DynamicFormService, DynamicFormRelationService],
 })
 export default class B2BModule { }

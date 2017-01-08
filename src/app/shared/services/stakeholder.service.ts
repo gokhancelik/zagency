@@ -1,3 +1,5 @@
+import { Company } from './../models/company.model';
+import { Observable } from 'rxjs/Observable';
 import { Stakeholder } from './../models/stakeholder.model';
 import { AuthService } from './../../security/auth.service';
 import { Injectable, Inject } from '@angular/core';
@@ -24,6 +26,7 @@ export class StakeholderService extends BaseFirebaseService<Stakeholder> {
                 if (user && user.user) {
                     value.publisher = user.user.company;
                     value.publisherName = user.user.companyName;
+
                     value = super.preparePreCreateByUser(value, user.user);
                     let newPostKey = that._af.list(that.getRoute()).push(null).key;
                     let updates = {};
@@ -33,5 +36,17 @@ export class StakeholderService extends BaseFirebaseService<Stakeholder> {
                 }
             }
         );
+    }
+    getDistibutors(key: string): Observable<Stakeholder[]> {
+        let q$ = this._af.list('stakeholders',
+            { query: { orderByChild: 'publisher', equalTo: key } })
+            .map(this.fromJsonList)
+            // .map(ds => {
+            //     return ds.map(d => {
+            //         let dc = this._af.object('companies/' + d.distributor);
+            //         return dc;
+            //     })
+            // }).map(Company.fromJsonList);
+        return q$;
     }
 }

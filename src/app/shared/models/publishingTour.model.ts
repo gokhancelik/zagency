@@ -1,3 +1,4 @@
+import { Company } from './company.model';
 import { Tour } from './tour.model';
 import { TourSchedule } from './tourSchedule.model';
 import { Observable } from 'rxjs/Rx';
@@ -46,14 +47,14 @@ export class PublishingTour extends BaseModel {
         tourScheduleObj,
         tourObj,
         publisher,
-        publisherName,
+        publisherObj,
         distributor,
-        distributorName,
+        distributorObj,
         quota,
         percent,
         soldCount,
         active,
-        prices,
+        priceObjList,
         createdAt, createdBy, modifiedAt, modifiedBy, isDeleted, deletedBy, deletedAt
 
     }): PublishingTour {
@@ -62,14 +63,14 @@ export class PublishingTour extends BaseModel {
             tourScheduleObj,
             tourObj,
             publisher,
-            publisherName,
+            publisherObj,
             distributor,
-            distributorName,
+            distributorObj,
             quota,
             percent,
             soldCount,
             active,
-            prices,
+            priceObjList,
             createdAt, createdBy, modifiedAt, modifiedBy, isDeleted, deletedBy, deletedAt
         );
     }
@@ -79,14 +80,14 @@ export class PublishingTour extends BaseModel {
         public tourScheduleObj: Observable<TourSchedule> = null,
         public tourObj: Observable<Tour> = null,
         public publisher: string = null,
-        public publisherName: string = null,
+        public publisherObj: Observable<Company> = null,
         public distributor: string = null,
-        public distributorName: string = null,
+        public distributorObj: Observable<Company> = null,
         public quota: number = 0,
         public percent: number = 0,
         public soldCount: number = 0,
         public active: boolean = false,
-        public prices: TourSchedulePrice[] = null,
+        public priceObjList: Observable<TourSchedulePrice[]> = null,
         createdAt: Date = null,
         createdBy: string = null,
         modifiedAt: Date = null,
