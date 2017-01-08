@@ -23,7 +23,7 @@
       </ul>
        <ul class="list-group list-group-flush">
         <li class="list-group-item" *ngFor="let p of item.priceObjList|async">
-            {{p.price}}
+            {{p.price}}{{(p.price.currencyObj|async)?.name}}
         </li>
       </ul>
       <div class="card-block">
