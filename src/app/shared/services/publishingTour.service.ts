@@ -16,6 +16,13 @@ export class PublishingTourService extends BaseFirebaseService<PublishingTour> {
         @Inject(FirebaseRef) fb) {
         super(_af, 'publishingTours', fb, _authService);
     }
+    getAll(): Observable<PublishingTour[]> {
+        let that = this;
+        return this._af.list(this.getRoute(), { query: { orderByChild: 'isDeleted', equalTo: false } })
+            .map(this.fromJsonList).map(ptours => {
+                return ptours.map(t => { return that.mapRelationalObject(t); });
+            });
+    }
     public mapRelationalObject(obj: PublishingTour) {
         obj.distributorObj = this.companyService.getByKey(obj.distributor);
         obj.publisherObj = this.companyService.getByKey(obj.publisher);
