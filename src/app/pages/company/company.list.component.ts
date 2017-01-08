@@ -22,7 +22,6 @@ export class CompanyListComponent implements OnInit {
         this.source = _service.getAll();
     }
     ngOnInit() {
-
     }
     onCreate(event): void {
         this.router.navigate(['pages/companies/newCompany']);

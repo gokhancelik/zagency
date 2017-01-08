@@ -2,24 +2,36 @@
   "rules": {
     ".read": "true",
     ".write": "auth!=null",
-    "users":{
-     ".indexOn": "email" 
-  	},
-    "tourSchedules":{
-     ".indexOn": "tour" 
-  	},
-    "tourDestinations":{
-     ".indexOn": "tour" 
-  	},
-    "tourPrograms":{
-     ".indexOn": "tour" 
-  	},
-    "tourSchedulePrices":{
-     ".indexOn": "tourSchedule" 
-  	},
-    "tourScheduleSpecs":{
-     ".indexOn": "tourSchedule" 
-  	}
+    "users": {
+      ".indexOn": "email"
+    },
+    "imageSizes ": {
+      ".indexOn": "isDeleted"
+    },
+    "currencyTypes ": {
+      ".indexOn": "isDeleted"
+    },
+    "priceTypes ": {
+      ".indexOn": "isDeleted"
+    },
+    "specTypes ": {
+      ".indexOn": "isDeleted"
+    },
+    "tourSchedules": {
+      ".indexOn": ["tour", "isDeleted"]
+    },
+    "tourDestinations": {
+      ".indexOn": ["tour", "isDeleted"]
+    },
+    "tourPrograms": {
+      ".indexOn": ["tour", "isDeleted"]
+    },
+    "tourSchedulePrices": {
+      ".indexOn": ["tourSchedule", "isDeleted"]
+    },
+    "tourScheduleSpecs": {
+      ".indexOn": ["tourSchedule", "isDeleted"]
+    }
   }
- 
+
 }

@@ -30,16 +30,15 @@ export abstract class BaseFirebaseService<T extends BaseModel> implements IServi
         let that = this;
         this.preparePreCreate(value).subscribe(
             d => {
-                let nd = that.mapObjectToFirebaseObject(d);
 
-                that.af.list(that._route).push(nd);
+                that.af.list(that._route).push(d);
             }
         );
     }
     update(key: string, value: T) {
         let that = this;
         this.preparePreModify(value).subscribe(d => {
-            let nd = that.mapObjectToFirebaseObject(d);
+
             that.af.object(this._route + '/' + key).update(d);
         });
     }
@@ -114,7 +113,7 @@ export abstract class BaseFirebaseService<T extends BaseModel> implements IServi
     }
     preparePreDeleteByUser(user: User): any {
         return {
-            deletedAt: new Date(),
+            deletedAt: new Date().getTime(),
             deletedBy: user.email,
             isDelete: true
         }
@@ -133,17 +132,19 @@ export abstract class BaseFirebaseService<T extends BaseModel> implements IServi
             }
         );
     }
-    preparePreModifyByUser(value: T, user: User): T {
+    preparePreModifyByUser(value: T, user: User): any {
         value.modifiedAt = new Date();
         value.modifiedBy = user.email;
-        return value;
+        let nd = this.mapObjectToFirebaseObject(value);
+        return nd;
     }
-    preparePreCreateByUser(value: T, user: User): T {
+    preparePreCreateByUser(value: T, user: User): any {
         value.createdAt = new Date();
         value.modifiedAt = new Date();
         value.createdBy = user.email;
         value.modifiedBy = user.email;
-        return value;
+        let nd = this.mapObjectToFirebaseObject(value);
+        return nd;
     }
     abstract fromJsonList(array);
     abstract fromJson(obj: any);

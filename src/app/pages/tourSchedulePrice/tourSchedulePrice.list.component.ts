@@ -41,7 +41,8 @@ export class TourSchedulePriceListComponent
         this.loading = true;
         let that = this;
         if (this.tourSchedule) {
-            this.tourScheduleService.getTourSchedulePrices(this.tourSchedule.id)
+            
+            this.tourSchedule.priceObjList//(this.tourSchedule.id)
                 .subscribe(schedulePrices => {
                     that.source.load(schedulePrices);
                     that.loading = false;

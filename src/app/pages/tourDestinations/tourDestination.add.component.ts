@@ -52,8 +52,10 @@ export class TourDestinationAddComponent extends AddComponent<TourDestination> {
     }
     saveAll() {
         let j = 0;
+        let that = this;
         this.destinations.forEach(d => {
-            this._service.add(d);
+            this._service.preparePreCreate(d).subscribe(
+                data => that.tour.tourDestinationObjList.push(data));
         });
     }
 }

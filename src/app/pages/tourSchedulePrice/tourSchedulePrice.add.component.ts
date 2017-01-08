@@ -63,36 +63,39 @@ export class TourSchedulePriceAddComponent extends AddComponent<TourSchedulePric
         super.open();
     }
     ngOnInit() {
-        this.formGroup.controls['currency'].valueChanges.subscribe(data => {
-            if (data) {
-                let d = <string>data;
-                this.currencyTypeService.getByKey(data).take(1).subscribe(ct => {
-                    this.formGroup.controls['currencyName'].setValue(ct.name);
-                    this.formGroup.controls['currencySymbol'].setValue(ct.symbol);
-                });
-            }
-        });
-        this.formGroup.controls['priceType'].valueChanges.subscribe(data => {
-            if (data) {
-                let d = <string>data;
-                this.priceTypeService.getByKey(data).take(1).subscribe(ct => {
-                    this.formGroup.controls['priceTypeName'].setValue(ct.name);
-                });
-            }
-        });
+        // this.formGroup.controls['currency'].valueChanges.subscribe(data => {
+        //     if (data) {
+        //         let d = <string>data;
+        //         this.currencyTypeService.getByKey(data).take(1).subscribe(ct => {
+        //             this.formGroup.controls['currencyName'].setValue(ct.name);
+        //             this.formGroup.controls['currencySymbol'].setValue(ct.symbol);
+        //         });
+        //     }
+        // });
+        // this.formGroup.controls['priceType'].valueChanges.subscribe(data => {
+        //     if (data) {
+        //         let d = <string>data;
+        //         this.priceTypeService.getByKey(data).take(1).subscribe(ct => {
+        //             this.formGroup.controls['priceTypeName'].setValue(ct.name);
+        //         });
+        //     }
+        // });
         super.ngOnInit();
     }
     setTourSchedule(tourSchedule: TourSchedule): void {
         this.tourSchedule = tourSchedule;
     }
-    // save(form: FormGroup) {
-    //     if (form) {
-    //         Object.keys(form.value).forEach(fv => {
-    //             this.model[fv] = form.value[fv]
-    //         });
-    //         this._service.add(this.model);
-    //         if (this.onSaved) this.onSaved.emit();
-    //         if (this.formModal) this.formModal.hide();
-    //     }
-    // }
+    save(form: FormGroup) {
+        if (form) {
+            Object.keys(form.value).forEach(fv => {
+                this.model[fv] = form.value[fv]
+            });
+            this._service.preparePreCreate(this.model).subscribe(d => {
+                this.tourSchedule.priceObjList.push(d);
+            })
+            // this._service.add(this.model);
+            if (this.onSaved) this.onSaved.emit();
+            if (this.formModal) this.formModal.hide();
+        }
+    }
 }

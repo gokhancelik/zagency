@@ -2,7 +2,7 @@ import { TourCategoryService } from './tourCategory.service';
 import { CompanyService } from './company.service';
 import { TourDestination } from './../models/tourDestination.model';
 import { AuthService } from './../../security/auth.service';
-import { Tour, TourSchedule, TourProgram } from '../models';
+import { Tour, TourSchedule, TourProgram, TourSchedulePrice } from '../models';
 import { Injectable, Inject } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 import { AngularFireDatabase, FirebaseRef, FirebaseListObservable } from 'angularfire2';
@@ -128,9 +128,17 @@ export class TourService extends BaseFirebaseService<Tour> {
     }
     public getTourSchedules(key): FirebaseListObservable<TourSchedule[]> {
         const tp$ = this._af.list(`tourSchedules/`,
-            { query: { orderByChild: 'tour', equalTo: key } });
+            { query: { orderByChild: 'tour', equalTo: key } })
             //.map(TourSchedule.fromJsonList);
-        return tp$;
+            .map(tss => {
+                tss.map(ts => {
+                    ts.priceObjList = this._af.list(`tourSchedulePrices/`,
+                        { query: { orderByChild: 'tourSchedule', equalTo: ts.id } }).map(TourSchedulePrice.fromJsonList);
+                    return ts;
+                })
+                return tss;
+            }).map(TourSchedule.fromJsonList);;
+        return tp$ as FirebaseListObservable<TourSchedule[]>;
     }
     public getTourDestinations(key): FirebaseListObservable<TourDestination[]> {
         const td$ = this._af.list(`tourDestinations/`,

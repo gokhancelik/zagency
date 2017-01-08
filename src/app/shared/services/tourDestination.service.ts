@@ -47,20 +47,5 @@ export class TourDestinationService extends BaseFirebaseService<TourDestination>
             .map(t => { return that.mapRelationalObject(t); });
         return tourDestination$;
     }
-
-    public add(value: TourDestination) {
-        this._authService.getUserInfo().take(1).subscribe(user => {
-            if (user && user.user) {
-                value = super.preparePreCreateByUser(value, user.user);
-                let newPostKey = this._af.list(this.getRoute()).push(null).key;
-                let updates = {};
-                updates[this.getRoute() + '/' + newPostKey] = value;
-                updates['tours/' + value.tour + '/destinations/' + newPostKey] = true;
-                super.firebaseUpdate(updates);
-
-            }
-        });
-    }
-
 }
 

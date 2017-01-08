@@ -1,9 +1,9 @@
 <!--<ba-card title="{{title}}" [loading]="loading" baCardClass="with-scroll">
   <ng2-smart-table [settings]="settings" (create)="onCreate($event)" (edit)="onEdit($event)" [source]="source" (delete)="onDeleteConfirm($event)"
     (rowSelect)="onRowSelect($event)"></ng2-smart-table>
-</ba-card>
--->
-<div class="row" *ngIf="source">
+</ba-card>-->
+<button type="button" class="btn btn-primary" (click)="onCreate($event)"></button>
+<div class="row">
   <div class="col-xs-12 col-md-6 col-lg-3" *ngFor="let item of source | async">
     <div class="card">
       <img class="card-img-top" [src]="item.logoPath" *ngIf="item.logoPath" alt="Company Image">
@@ -26,6 +26,5 @@
       </div>
       <pre>{{item|json}} </pre>
     </div>
-   
   </div>
 </div>
