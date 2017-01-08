@@ -18,8 +18,8 @@
         <h6 class="card-subtitle text-muted">{{(item.publisherObj |async)?.name}}</h6>
       </div>
       <ul class="list-group list-group-flush">
-        <li class="list-group-item"><i class="fa fa-building" aria-hidden="true"></i> {{item.quota}}</li>
-        <li class="list-group-item"><i class="fa fa-building" aria-hidden="true"></i> {{item.percent}}</li>
+        <li class="list-group-item"><i class="fa fa-user" aria-hidden="true"></i> Quota: {{item.quota}}</li>
+        <li class="list-group-item"><i class="fa fa-percent" aria-hidden="true"></i> Percent: {{item.percent}}</li>
       </ul>
        <ul class="list-group list-group-flush">
         <li class="list-group-item" *ngFor="let p of item.priceObjList|async">
