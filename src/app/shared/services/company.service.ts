@@ -46,6 +46,18 @@ export class CompanyService extends BaseFirebaseService<Company> {
             .map(CompanyServiceModel.fromJsonList);
         return cs$;
     }
+    //Daha sonra gökhana sorulacak
+    getAll(): Observable<Company[]> {
+        if (this._authService.getUserInfo().map(user => user.role.name == 'superadmin')) {
+            return this._af.list('companies', { query: { orderByChild: 'isDeleted', equalTo: false } })
+                .map(this.fromJsonList);
+        }
+        if(this._authService.getUserInfo().map(user => user.role.name == 'companyadmin'))
+        {
+            return this._authService.getUserInfo().map(user=>user.user.companyObj).map(this.fromJsonList);
+        }
+
+    }
     getByRole(): Observable<Company[]> {
         let that = this;
 
@@ -58,7 +70,8 @@ export class CompanyService extends BaseFirebaseService<Company> {
             .last()
             .flatMap(function (data) {
                 if (data.isAdmin) {
-                    return that._af.list(that.getRoute(), { query: { orderByChild: 'isDeleted', equalTo: false } })
+                    return that._af.list(that.getRoute(),
+                        { query: { orderByChild: 'isDeleted', equalTo: false } })
                         .map(that.fromJsonList);
                 }
                 else {
@@ -67,4 +80,5 @@ export class CompanyService extends BaseFirebaseService<Company> {
                 }
             });
     }
+
 }

@@ -1,3 +1,4 @@
+import { CompanyAddComponent } from './../company/company.add.component';
 import {
     Component, OnInit, ViewEncapsulation,
     ViewChild, Output, EventEmitter
@@ -47,7 +48,7 @@ export class UserAddComponent extends AddComponent<User>  {
             if (value.id === 'company') {
                 let that = this;
                 let select = value as DynamicSelectModel<any>;
-                _companyService.getByRole().take(1).subscribe(data => {
+                _companyService.getAll().take(1).subscribe(data => {
                     that.companies = data;
                     data.forEach(r => {
                         // if (r.name !== 'superadmin') {
@@ -55,7 +56,7 @@ export class UserAddComponent extends AddComponent<User>  {
                             { value: r.id, label: r.name }
                         );
                         select.options.push(s);
-                        // }
+                        //  }
                     });
 
 
