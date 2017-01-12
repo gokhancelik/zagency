@@ -26,7 +26,7 @@ export class UserListComponent extends ListComponent<User> {
     }
     // onEdit(event): void {
     //     let tt: User = event.data as User;
-    //     this.router.navigateByUrl('pages/users(anotherList:playlist)');
+    //     this.router.navigateByUrl('admin/users(anotherList:playlist)');
     // }
 }
 

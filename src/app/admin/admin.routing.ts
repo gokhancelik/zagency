@@ -1,6 +1,6 @@
 import { UserRoutes } from './users/user.routing';
 import { Routes, RouterModule } from '@angular/router';
-import { Pages } from './pages.component';
+import { Admin } from './admin.component';
 import { LoggedInGuard } from '../security/guards/loggedin.guard';
 // noinspection TypeScriptValidateTypes
 const routes: Routes = [
@@ -16,8 +16,8 @@ const routes: Routes = [
 
   {
     canActivate: [LoggedInGuard],
-    path: 'pages',
-    component: Pages,
+    path: 'admin',
+    component: Admin,
     children: [
       { path: '', redirectTo: 'tours', pathMatch: 'full' },
       { path: 'dashboard', loadChildren: () => System.import('./dashboard/dashboard.module') },

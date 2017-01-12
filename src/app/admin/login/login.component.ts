@@ -57,6 +57,6 @@ export class Login {
     });
   }
   loginSuccess(d: FirebaseAuthState, that: Login) {
-    that.router.navigate(['pages/users/']);
+    that.router.navigate(['admin/users/']);
   }
 }

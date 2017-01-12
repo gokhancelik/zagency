@@ -1,5 +1,5 @@
-import { PAGES_MENU } from './pages/pages.menu';
+import { ADMIN_MENU } from './admin/admin.menu';
 
 export const MENU = [
-  ...PAGES_MENU
+  ...ADMIN_MENU
 ];

@@ -1,4 +1,4 @@
-import { IconsService } from './../pages/ui/components/icons/icons.service';
+import { IconsService } from './../admin/ui/components/icons/icons.service';
 import {
     Component, OnInit, ViewChild, Input, Output,
     EventEmitter, ViewEncapsulation,

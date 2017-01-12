@@ -57,8 +57,8 @@ export class PublishingTourAddComponent extends AddComponent<PublishingTour>  {
                 });
                 that.model.publisher = that.publisher.id;
                 that.model.active = true;
-                that.model.tourSchedule = that.tourSchedule.$key;//TODO: map et
-                that.model.tour=that.tourSchedule.tour;
+                that.model.tourSchedule = that.tourSchedule.id;//TODO: map et
+                that.model.tour = that.tourSchedule.tour;
                 that._service.add(that.model);
                 //if (that.onSaved) that.onSaved.emit(d);
                 if (that.formModal) that.formModal.hide();

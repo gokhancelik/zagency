@@ -62,7 +62,7 @@ export class CompanyService extends BaseFirebaseService<Company> {
 
         return that._authService.getUserInfo().map(user => {
             return {
-                isAdmin: (user && user.user.roleObj.map(r => r.name === 'superadmin')),
+                isAdmin: (user && user.role.name === 'superadmin'),
                 company: user.user.company
             }
         })

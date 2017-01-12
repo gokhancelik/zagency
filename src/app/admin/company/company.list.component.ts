@@ -24,11 +24,11 @@ export class CompanyListComponent implements OnInit {
     ngOnInit() {
     }
     onCreate(event): void {
-        this.router.navigate(['pages/companies/newCompany']);
+        this.router.navigate(['admin/companies/newCompany']);
     }
     onEdit(event): void {
         let tt: Company = event.data as Company;
-        this.router.navigate(['pages/companies/edit/' + tt.id]);
+        this.router.navigate(['admin/companies/edit/' + tt.id]);
     }
 }
 

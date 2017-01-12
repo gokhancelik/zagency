@@ -1,3 +1,4 @@
+import { AdminModule } from './admin/admin.module';
 import { NgModule, ApplicationRef } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -6,7 +7,7 @@ import { RouterModule } from '@angular/router';
 import { removeNgStyles, createNewHosts, createInputTransfer } from '@angularclass/hmr';
 import { LoggedInGuard } from './security/guards/loggedin.guard';
 import { AuthService } from './security/auth.service';
-import LoginModule from './pages/login/login.module';
+import LoginModule from './admin/login/login.module';
 
 /*
  * Platform and Environment providers/directives/pipes
@@ -19,7 +20,6 @@ import { App } from './app.component';
 import { AppState, InternalStateType } from './app.service';
 import { GlobalState } from './global.state';
 import { NgaModule } from './theme/nga.module';
-import { PagesModule } from './pages/pages.module';
 import { SharedModule } from './shared/shared.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AngularFireModule, AuthProviders, AuthMethods } from 'angularfire2';
@@ -64,7 +64,7 @@ type StoreType = {
     FormsModule,
     ReactiveFormsModule,
     NgaModule.forRoot(),
-    PagesModule,
+    AdminModule,
     SharedModule.forRoot(),
     NgbModule.forRoot(),
     LoginModule,

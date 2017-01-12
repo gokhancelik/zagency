@@ -1,5 +1,4 @@
 import { Company } from './../models/company.model';
-import { Observable } from 'rxjs/Observable';
 import { Stakeholder } from './../models/stakeholder.model';
 import { AuthService } from './../../security/auth.service';
 import { Injectable, Inject } from '@angular/core';
@@ -25,8 +24,6 @@ export class StakeholderService extends BaseFirebaseService<Stakeholder> {
             user => {
                 if (user && user.user) {
                     value.publisher = user.user.company;
-                    value.publisherName = user.user.companyName;
-
                     value = super.preparePreCreateByUser(value, user.user);
                     let newPostKey = that._af.list(that.getRoute()).push(null).key;
                     let updates = {};

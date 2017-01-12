@@ -27,7 +27,7 @@ import {Component, ViewEncapsulation} from '@angular/core';
     <ba-back-top position="200"></ba-back-top>
     `
 })
-export class Pages {
+export class Admin {
 
   constructor() {
   }

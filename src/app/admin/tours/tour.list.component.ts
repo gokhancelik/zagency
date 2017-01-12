@@ -58,10 +58,10 @@ export class TourListComponent implements OnInit {
         });
     }
     onCreate(event): void {
-        this.router.navigate(['pages/tours/newTour']);
+        this.router.navigate(['admin/tours/newTour']);
     }
     onEdit(event): void {
         let tt: Tour = event.data as Tour;
-        this.router.navigate(['pages/tours/edit/' + tt.id]);
+        this.router.navigate(['admin/tours/edit/' + tt.id]);
     }
 }

@@ -1,6 +1,6 @@
-export const PAGES_MENU = [
+export const ADMIN_MENU = [
   {
-    path: 'pages',
+    path: 'admin',
     children: [
       {
         path: 'tours',
