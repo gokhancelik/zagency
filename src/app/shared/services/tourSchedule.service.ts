@@ -19,36 +19,6 @@ export class TourScheduleService extends BaseFirebaseService<TourSchedule> {
     public fromJsonList(array) {
         return TourSchedule.fromJsonList(array);
     }
-    public update(key: string, value: TourSchedule): void {
-        this._authService.getUserInfo().take(1).subscribe(user => {
-            if (user && user.user) {
-                let updates = {};
-                value = super.preparePreModifyByUser(value, user.user);
-                this.getPublishingTours(value.id).take(1).subscribe(
-                    tss => {
-                        tss.forEach(ts => {
-                            updates['/publishingTours/' + ts.id + '/tourSchedule/tourScheduleStart'] = value.start;
-                            updates['/publishingTours/' + ts.id + '/tourSchedule/tourScheduleEnd'] = value.end;
-
-                        });
-                    }
-                );
-                this.getOrders(value.id).take(1).subscribe(
-                    ord => {
-                        ord.forEach(or => {
-                            updates['/orders/' + or.id + '/tourSchedule/tourScheduleStart'] = value.start;
-                            updates['/orders/' + or.id + '/tourSchedule/tourScheduleEnd'] = value.end;
-
-                        });
-                    }
-                );
-                super.firebaseUpdate(updates);
-
-            }
-        });
-    }
-
-
     public getTourSchedulePrices(key): Observable<TourSchedulePrice[]> {
         // select * from tourscheduleprice where tourScheduleId = key
         const ts$ = this._af.list(`tourSchedulePrices/`,

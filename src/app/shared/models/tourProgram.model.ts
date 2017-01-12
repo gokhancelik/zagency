@@ -17,10 +17,6 @@ export class TourProgram extends BaseModel {
             day: {
                 title: 'day',
                 type: 'string'
-            },
-            tourName: {
-                title: 'tour Name',
-                type: 'string'
             }
         };
     }

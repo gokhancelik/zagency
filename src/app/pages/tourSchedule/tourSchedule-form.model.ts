@@ -24,5 +24,11 @@ export const TOURSCHEDULE_FORM_MODEL: Array<DynamicFormControlModel> = [
         id: 'end',
         label: 'End',
         required: true
-    })
+    }),
+    new DynamicInputModel({
+        inputType: 'text',
+        id: 'departure',
+        label: 'Departure',
+        required: true
+    }),
 ];
