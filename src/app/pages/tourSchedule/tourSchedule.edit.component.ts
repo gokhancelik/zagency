@@ -32,19 +32,45 @@ export class TourScheduleEditComponent extends EditComponent<TourSchedule> {
     setTour(tour: Tour): void {
         this.tour = tour;
     }
-    save(model: any) {
-        if (model) {
-            this._service.update(this.model.id, model);
+    save() {
+        if (this.model) {
+            this._service.update(this.model.id, this.model);
         }
         this.close();
     }
     open(): void {
         this.today = new Date();
-        this.sMinDate = { day: this.today.getDate(), month: this.today.getMonth() + 1, year: this.today.getFullYear() }
-        this.eDate = { day: this.model.end.getDate(), month: this.model.end.getMonth() + 1, year: this.model.end.getFullYear() };
-        this.sDate = { day: this.model.start.getDate(), month: this.model.start.getMonth() + 1, year: this.model.start.getFullYear() };
-        this.eTime = { hour: this.model.end.getHours(), minute: this.model.end.getMinutes(), second: 0 };
-        this.sTime = { hour: this.model.start.getHours(), minute: this.model.start.getMinutes(), second: 0 };
+        this._service.getByKey(this.objectKey).take(1).subscribe(
+            data => {
+                this.model = data;
+                this.sMinDate = {
+                    day: this.today.getDate(),
+                    month: this.today.getMonth() + 1,
+                    year: this.today.getFullYear()
+                };
+                this.eDate = {
+                    day: this.model.end.getDate(),
+                    month: this.model.end.getMonth() + 1,
+                    year: this.model.end.getFullYear()
+                };
+                this.sDate = {
+                    day: this.model.start.getDate(),
+                    month: this.model.start.getMonth() + 1,
+                    year: this.model.start.getFullYear()
+                };
+                this.eTime = {
+                    hour: this.model.end.getHours(),
+                    minute: this.model.end.getMinutes(),
+                    second: 0
+                };
+                this.sTime = {
+                    hour: this.model.start.getHours(),
+                    minute: this.model.start.getMinutes(),
+                    second: 0
+                };
+            }
+        )
+
         this.formModal.show();
         super.open();
     }

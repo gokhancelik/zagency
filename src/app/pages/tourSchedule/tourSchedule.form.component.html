@@ -8,7 +8,7 @@
         <h4 class="modal-title">{{title}}</h4>
       </div>
       <div class="modal-body">
-        <form (ngSubmit)="save(model)" #form="ngForm">
+        <form (ngSubmit)="save()" #form="ngForm">
           <div class="form-group">
             <label for="startDate">Start</label>
             <div class="input-group">
@@ -50,6 +50,10 @@
           <div class="form-group">
             <label for="quota">Available Seats</label>
             <input type="number" name="quota" [(ngModel)]="model.quota" class="form-control" id="quota" placeholder="Enter tour Available Seats">
+          </div>
+          <div class="form-group">
+            <label for="departure">Departure</label>
+            <input type="text" name="departure" [(ngModel)]="model.departure" class="form-control" id="departure" placeholder="Enter departure">
           </div>
           <button type="submit" class="btn btn-default" *ngIf="form.form.dirty" [disabled]="!form.form.valid || submitted">Save Changes</button>
         </form>

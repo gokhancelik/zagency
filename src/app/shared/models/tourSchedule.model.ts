@@ -30,21 +30,21 @@ export class TourSchedule extends BaseModel {
                     return formatted;
                 }
             },
-            tourName: {
-                title: 'tourName',
-                type: 'string'
-            },
             quota: {
                 title: 'quota',
                 type: 'number'
+            },
+            departure: {
+                title: 'departure',
+                type: 'string'
             }
         };
     }
-    static fromJson({ $key, start, end, quota, tour, tourObj, priceObjList,
+    static fromJson({ $key, start, end, departure, quota, tour, tourObj, priceObjList,
         createdAt, createdBy, modifiedAt, modifiedBy,
         isDeleted, deletedBy, deletedAt}): TourSchedule {
         return new TourSchedule(
-            $key, new Date(start), new Date(end), quota, tour, tourObj, priceObjList,
+            $key, new Date(start), new Date(end), quota, departure, tour, tourObj, priceObjList,
             createdAt, createdBy, modifiedAt, modifiedBy,
             isDeleted, deletedBy, deletedAt);
     }
@@ -53,6 +53,7 @@ export class TourSchedule extends BaseModel {
         public start: Date = new Date(),
         public end: Date = new Date(),
         public quota: number = 0,
+        public departure: string = null,
         public tour: string = null,
         public tourObj: Observable<Tour> = null,
         public priceObjList: FirebaseListObservable<TourSchedulePrice[]> = null,
