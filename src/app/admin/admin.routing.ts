@@ -1,78 +1,90 @@
 import { UserRoutes } from './users/user.routing';
 import { Routes, RouterModule } from '@angular/router';
 import { Admin } from './admin.component';
+import { AdminRootComponent } from './admin.root.component';
 import { LoggedInGuard } from '../security/guards/loggedin.guard';
 // noinspection TypeScriptValidateTypes
 const routes: Routes = [
-  {
-    path: 'login',
-    loadChildren: () => System.import('./login/login.module')
-  },
 
   {
-    path: 'register',
-    loadChildren: () => System.import('./register/register.module')
-  },
-
-  {
-    canActivate: [LoggedInGuard],
     path: 'admin',
-    component: Admin,
+    component: AdminRootComponent,
     children: [
-      { path: '', redirectTo: 'tours', pathMatch: 'full' },
-      { path: 'dashboard', loadChildren: () => System.import('./dashboard/dashboard.module') },
-      { path: 'editors', loadChildren: () => System.import('./editors/editors.module') },
-      { path: 'forms', loadChildren: () => System.import('./forms/forms.module') },
-      { path: 'tables', loadChildren: () => System.import('./tables/tables.module') },
-      { path: 'maps', loadChildren: () => System.import('./maps/maps.module') },
       {
-        path: 'tours',
-        loadChildren: () => System.import('./tours/tour.module')
+        path: 'login',
+        loadChildren: () => System.import('./login/login.module')
+      },
+
+      {
+        path: 'register',
+        loadChildren: () => System.import('./register/register.module')
       },
       {
-        path: 'tourCategories',
-        loadChildren: () => System.import('./tourCategories/tourCategory.module')
-      },
-      {
-        path: 'companies',
-        loadChildren: () => System.import('./company/company.module')
-      },
-      // ...UserRoutes,
-      {
-        path: 'users',
-        loadChildren: () => System.import('./users/user.module')
-      },
-      {
-        path: 'priceTypes',
-        loadChildren: () => System.import('./priceTypes/priceType.module')
-      },
-      {
-        path: 'b2b',
-        loadChildren: () => System.import('./b2bs/b2b.module')
-      },
-      {
-        path: 'specTypes',
-        loadChildren: () => System.import('./specTypes/specType.module')
-      },
-      {
-        path: 'companySpecs',
-        loadChildren: () => System.import('./companySpecs/companySpec.module')
-      },
-      {
-        path: 'tourScheduleSpecs',
-        loadChildren: () => System.import('./tourScheduleSpecs/tourScheduleSpec.module')
-      },
-      {
-        path: 'currencyTypes',
-        loadChildren: () => System.import('./currencyTypes/currencyType.module')
-      },
-      {
-        path: 'imageSizes',
-        loadChildren: () => System.import('./imageSizes/imageSize.module')
-      },
-      {
-        path: 'roles',
-        loadChildren: () => System.import('./roles/role.module')
+        path: '',
+        component: Admin,
+        children: [
+          {
+            canActivate: [LoggedInGuard],
+            path: 'tours',
+            loadChildren: () => System.import('./tours/tour.module')
+          },
+          {
+            canActivate: [LoggedInGuard],
+            path: 'tourCategories',
+            loadChildren: () => System.import('./tourCategories/tourCategory.module')
+          },
+          {
+            canActivate: [LoggedInGuard],
+            path: 'companies',
+            loadChildren: () => System.import('./company/company.module')
+          },
+          // ...UserRoutes,
+          {
+            canActivate: [LoggedInGuard],
+            path: 'users',
+            loadChildren: () => System.import('./users/user.module')
+          },
+          {
+            canActivate: [LoggedInGuard],
+            path: 'priceTypes',
+            loadChildren: () => System.import('./priceTypes/priceType.module')
+          },
+          {
+            canActivate: [LoggedInGuard],
+            path: 'b2b',
+            loadChildren: () => System.import('./b2bs/b2b.module')
+          },
+          {
+            canActivate: [LoggedInGuard],
+            path: 'specTypes',
+            loadChildren: () => System.import('./specTypes/specType.module')
+          },
+          {
+            canActivate: [LoggedInGuard],
+            path: 'companySpecs',
+            loadChildren: () => System.import('./companySpecs/companySpec.module')
+          },
+          {
+            canActivate: [LoggedInGuard],
+            path: 'tourScheduleSpecs',
+            loadChildren: () => System.import('./tourScheduleSpecs/tourScheduleSpec.module')
+          },
+          {
+            canActivate: [LoggedInGuard],
+            path: 'currencyTypes',
+            loadChildren: () => System.import('./currencyTypes/currencyType.module')
+          },
+          {
+            canActivate: [LoggedInGuard],
+            path: 'imageSizes',
+            loadChildren: () => System.import('./imageSizes/imageSize.module')
+          },
+          {
+            canActivate: [LoggedInGuard],
+            path: 'roles',
+            loadChildren: () => System.import('./roles/role.module')
+          }
+        ]
       },
     ]
   }

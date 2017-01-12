@@ -1,3 +1,4 @@
+import { ClientModule } from './client/client.module';
 import { AdminModule } from './admin/admin.module';
 import { NgModule, ApplicationRef } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -65,6 +66,7 @@ type StoreType = {
     ReactiveFormsModule,
     NgaModule.forRoot(),
     AdminModule,
+    ClientModule,
     SharedModule.forRoot(),
     NgbModule.forRoot(),
     LoginModule,

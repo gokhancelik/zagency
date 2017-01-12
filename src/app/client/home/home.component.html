@@ -1,0 +1,254 @@
+<section id="content" class="image-bg1">
+  <div class="container">
+    <div class="row">
+      <div id="main" class="col-sm-8 col-md-9">
+        <div class="search-box-wrapper style1">
+          <div class="search-box">
+            <ul class="search-tabs clearfix">
+              <li><a href="#hotels-tab" data-toggle="tab"><i class="soap-icon-hotel"></i>HOTELS</a></li>
+              <li class="active"><a href="#tours-tab" data-toggle="tab"><i class="soap-icon-beach"></i>TOURS</a></li>
+              <li><a href="#cars-tab" data-toggle="tab"><i class="soap-icon-car"></i>CARS</a></li>
+            </ul>
+            <div class="visible-mobile">
+              <ul id="mobile-search-tabs" class="search-tabs clearfix">
+                <li><a href="#hotels-tab">HOTELS</a></li>
+                <li class="active"><a href="#tours-tab">TOURS</a></li>
+                <li><a href="#tours">CARS</a></li>
+              </ul>
+            </div>
+            <div class="search-tab-content">
+              <div class="tab-pane fade" id="hotels-tab">
+                <form #form="ngForm">
+                  <div class="title-container">
+                    <h2 class="search-title">Search and Book Hotels</h2>
+                    <p>We're bringing you a new level of comfort.</p>
+                    <i class="soap-icon-hotel"></i>
+                  </div>
+                  <div class="search-content">
+                    <h5 class="title">Where</h5>
+                    <label>Your Destination</label>
+                    <input type="text" class="input-text full-width" placeholder="enter a destination or hotel name" />
+                    <hr>
+                    <h5 class="title">When</h5>
+                    <div class="row">
+                      <div class="col-xs-6">
+                        <label>Check In</label>
+                        <div class="datepicker-wrap">
+                          <input type="text" class="input-text full-width" placeholder="mm/dd/yy" />
+                        </div>
+                      </div>
+                      <div class="col-xs-6">
+                        <label>Check Out</label>
+                        <div class="datepicker-wrap">
+                          <input type="text" class="input-text full-width" placeholder="mm/dd/yy" />
+                        </div>
+                      </div>
+                    </div>
+                    <hr>
+                    <h5 class="title">Who</h5>
+                    <div class="row">
+                      <div class="col-xs-4">
+                        <label>ROOMS</label>
+                        <div class="selector">
+                          <select class="full-width">
+                                                                <option value="1">01</option>
+                                                                <option value="2">02</option>
+                                                                <option value="3">03</option>
+                                                                <option value="4">04</option>
+                                                            </select>
+                        </div>
+                      </div>
+                      <div class="col-xs-4">
+                        <label>ADULTS</label>
+                        <div class="selector">
+                          <select class="full-width">
+                                                                <option value="1">01</option>
+                                                                <option value="2">02</option>
+                                                                <option value="3">03</option>
+                                                                <option value="4">04</option>
+                                                            </select>
+                        </div>
+                      </div>
+                      <div class="col-xs-4">
+                        <label>KIDS</label>
+                        <div class="selector">
+                          <select class="full-width">
+                                                                <option value="1">01</option>
+                                                                <option value="2">02</option>
+                                                                <option value="3">03</option>
+                                                                <option value="4">04</option>
+                                                            </select>
+                        </div>
+                      </div>
+                    </div>
+                    <hr>
+                    <button type="submit" class="full-width uppercase">Proceed To Result</button>
+                  </div>
+                </form>
+              </div>
+              <div class="tab-pane fade active in" id="tours-tab">
+                <form action="flight-list-view.html" method="post">
+                  <div class="title-container">
+                    <h2 class="search-title">Search and Book Tours</h2>
+                    <p>We're bringing you a new level of comfort.</p>
+                    <i class="soap-icon-carryon"></i>
+                  </div>
+                  <div class="search-content">
+                    <h5 class="title">Nereye</h5>
+                    <div class="row">
+                      <template #rt let-r="result" let-t="term">
+                        {{ r.name }}
+                      </template>
+                      <div class="col-xs-6">
+                        <label>Kalkış</label>
+                        <input type="text" class="form-control" name="departure" [resultTemplate]="rt" [(ngModel)]="tourSearchModel.departure" [ngbTypeahead]="searchDestination"
+                        />
+                      </div>
+                      <div class="col-xs-6">
+                        <label>Hedef</label>
+                        <input type="text" class="form-control" name="target" [resultTemplate]="rt" [(ngModel)]="tourSearchModel.target" [ngbTypeahead]="searchDestination"
+                        />
+                      </div>
+                    </div>
+                    <hr>
+                    <h5 class="title">Ne Zaman</h5>
+                    <label>Başlangıç</label>
+                    <div class="row">
+                      <div class="col-xs-12 col-md-12">
+                        <div class="input-group">
+                          <input class="form-control" placeholder="yyyy-aa-gg" (focus)="startDp.open()" name="startDp" [(ngModel)]="tourSearchModel.start"
+                            ngbDatepicker #startDp="ngbDatepicker">
+                            <div class="input-group-addon" (click)="startDp.toggle()">
+                              <i class="soap-icon-calendar"></i>
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+                    <label>Bitiş</label>
+                    <div class="row">
+                      <div class="col-xs-12 col-md-12">
+                        <div class="input-group">
+                          <input class="form-control" placeholder="yyyy-aa-gg" name="endDp" [minDate]="tourSearchModel.start" (focus)="endDp.open()"
+                            [(ngModel)]="tourSearchModel.end" ngbDatepicker #endDp="ngbDatepicker">
+                            <div class="input-group-addon" (click)="endDp.toggle()">
+                              <i class="soap-icon-calendar"></i>
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!--<hr>
+                      <h5 class="title">Who</h5>
+                      <div class="row">
+                        <div class="col-xs-4 col-md-3">
+                          <label>Yetişkin</label>
+                          <select name="adult" id="inputAdult" [(ngModel)]="tourSearchModel.adult" class="form-control" required>
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                                                                <option value="2">2</option>
+                                                                <option value="3">3</option>
+                                                                <option value="4">4</option>
+                          </select>
+                        </div>
+                        <div class="col-xs-4 col-md-3">
+                          <label>Çocuk</label>
+                          <select name="child" id="inputChild" [(ngModel)]="tourSearchModel.child" class="form-control" required>
+                          <option value="0">0</option>
+                            <option value="1">1</option>
+                                                                <option value="2">2</option>
+                                                                <option value="3">3</option>
+                                                                <option value="4">4</option>
+                          </select>
+                        </div>
+                        <div class="col-xs-4 col-md-3">
+                          <label>Bebek</label>
+                          <select name="baby" id="inputBaby" [(ngModel)]="tourSearchModel.baby" class="form-control" required>
+                             <option value="0">0</option>
+                            <option value="1">1</option>
+                                                                <option value="2">2</option>
+                                                                <option value="3">3</option>
+                                                                <option value="4">4</option>
+                          </select>
+                        </div>
+                      </div>-->
+                    <hr>
+                    <div class="row">
+                      <button type="button" class="btn btn-success" (click)="searchTour(event)">
+                      ARA
+                    </button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <div class="tab-pane fade coming-soon-page style2 body-blank" id="cars-tab">
+                <div class="text-center white-color block" style="font-size: 2.5em; font-weight: bold; line-height: 1em; text-shadow: 1px 6px 6px rgba(0, 0, 0, 0.3);">We’ll be <i>live</i> soon!</div>
+                <div class="col-lg-10 no-float no-padding center-block">
+                  <ul class="clock block clearfix">
+                    <li>
+                      <span class="remaining-days">00</span>
+                      <label>Days</label>
+                    </li>
+                    <li class="sep">:</li>
+                    <li>
+                      <span class="remaining-hours">00</span>
+                      <label>hours</label>
+                    </li>
+                    <li class="sep">:</li>
+                    <li>
+                      <span class="remaining-minutes">00</span>
+                      <label>minutes</label>
+                    </li>
+                    <li class="sep">:</li>
+                    <li>
+                      <span class="remaining-seconds">00</span>
+                      <label>seconds</label>
+                    </li>
+                  </ul>
+                </div>
+                <div class="col-sm-10 col-md-8 col-lg-6 no-float no-padding center-block">
+                  <form class="block">
+                    <div class="with-icon email-notify input-large full-width">
+                      <input type="text" class="input-text full-width input-large" placeholder="enter your email">
+                      <span class="notified-text">get notified<small>|</small></span>
+                      <button class="icon"><i class="soap-icon-check"></i></button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="sidebar col-sm-4 col-md-3">
+        <div class="travelo-box contact-box">
+          <h4>Need Travelo Help?</h4>
+          <p>We would be more than happy to help you. Our team advisor are 24/7 at your service to help you.</p>
+          <address class="contact-details">
+            <span class="contact-phone"><i class="soap-icon-phone"></i> 1-800-123-HELLO</span>
+            <br>
+            <a class="contact-email" href="#">help@travelo.com</a>
+          </address>
+        </div>
+        <div class="travelo-box book-with-us-box">
+          <h4>Why Book with us?</h4>
+          <ul>
+            <li>
+              <i class="soap-icon-hotel-1 circle"></i>
+              <h5 class="title"><a href="#">135,00+ Hotels</a></h5>
+              <p>Nunc cursus libero pur congue arut nimspnty.</p>
+            </li>
+            <li>
+              <i class="soap-icon-savings circle"></i>
+              <h5 class="title"><a href="#">Low Rates &amp; Savings</a></h5>
+              <p>Nunc cursus libero pur congue arut nimspnty.</p>
+            </li>
+            <li>
+              <i class="soap-icon-support circle"></i>
+              <h5 class="title"><a href="#">Excellent Support</a></h5>
+              <p>Nunc cursus libero pur congue arut nimspnty.</p>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

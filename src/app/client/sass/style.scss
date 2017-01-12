@@ -135,11 +135,11 @@
 /* font */
 @font-face {
   font-family: 'NexaBlack';
-  src: url('../fonts/NexaBlack.eot?') format('eot'), 
-       url('../fonts/NexaBlack.otf')  format('opentype'),
-       url('../fonts/NexaBlack.woff') format('woff'), 
-       url('../fonts/NexaBlack.ttf')  format('truetype'),
-       url('../fonts/NexaBlack.svg#NexaBlack') format('svg');
+  src: url('app/client/fonts/NexaBlack.eot?') format('eot'), 
+       url('app/client/fonts/NexaBlack.otf')  format('opentype'),
+       url('app/client/fonts/NexaBlack.woff') format('woff'), 
+       url('app/client/fonts/NexaBlack.ttf')  format('truetype'),
+       url('app/client/fonts/NexaBlack.svg#NexaBlack') format('svg');
 }
 
 /* 1.2. Layout ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
@@ -503,7 +503,7 @@ blockquote {
 /* 2.2.8. Hover effect */
 .hover-effect {
   display: block; position: relative; background: none; overflow: hidden; /*z-index: 0;*/
-  &:after { content: ''; position: absolute; left: 0; top: 0; width: 100%; height: 100%; visibility: hidden; @include transition(all, 0.4s, ease-out); @include transform(rotateY(180deg) scale(0.5,0.5)); background: url(../assets/icon/hover-effect.png) no-repeat center; @include opacity(0); background-color: rgba(red($skin-active-color), green($skin-active-color), blue($skin-active-color), 0.6); }
+  &:after { content: ''; position: absolute; left: 0; top: 0; width: 100%; height: 100%; visibility: hidden; @include transition(all, 0.4s, ease-out); @include transform(rotateY(180deg) scale(0.5,0.5)); background: url(../images/icon/hover-effect.png) no-repeat center; @include opacity(0); background-color: rgba(red($skin-active-color), green($skin-active-color), blue($skin-active-color), 0.6); }
   img { display: block; position: relative; @include transition(all, 0.4s, ease-out); -webkit-backface-visibility: hidden; }
   &:hover {
     &:after { visibility: visible; @include transform(rotateY(0deg) scale(1,1)); @include opacity(1); }
@@ -4395,7 +4395,7 @@ button.ui-button::-moz-focus-inner { border: 0; padding: 0; }
 }
 
 /* 9.1.6. Homepage 9 */
-#content.image-bg1 { background: url('http://placehold.it/2080x1362') no-repeat center center; min-height: 880px; }
+#content.image-bg1 { background: url('app/client/images/homepage9_bg.jpg') no-repeat center center; min-height: 880px; }
 
 /* 9.2. Pages ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 .investor-list {
@@ -4843,7 +4843,7 @@ button.ui-button::-moz-focus-inner { border: 0; padding: 0; }
     &:before { content: ""; }
   }
   .has-discount:before, .discount {
-    display: block; position: absolute; left: -4px; top: -4px; width: 100px; height: 102px; color: #fff; background: url(../assets/icon/discount.png) no-repeat;
+    display: block; position: absolute; left: -4px; top: -4px; width: 100px; height: 102px; color: #fff; background: url(../images/icon/discount.png) no-repeat;
   }
   .discount {
     z-index: 1; line-height: 80px; text-transform: uppercase; font-weight: bold; font-size: 0.9167em; letter-spacing: 0.04em; text-indent: -3px;
@@ -4967,3 +4967,18 @@ button.ui-button::-moz-focus-inner { border: 0; padding: 0; }
 
 /* revolution slider fix */
 .tp-simpleresponsive .slotholder, .tp-simpleresponsive .slotholder img { /*-webkit-backface-visibility: visible !important;-webkit-transform:none !important;*/ }
+
+input.input-text, textarea, .selector select + .custom-select {
+  -moz-transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+  -o-transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+  -webkit-transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+  -ms-transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+  transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+  border: 1px solid transparent;
+  cursor: text;
+}
+input.input-text:focus, textarea:focus, .selector select:focus + .custom-select {
+  outline: none;
+  border: 1px solid $skin-active-color;
+  box-shadow: 0 0 8px rgba(red($skin-active-color), green($skin-active-color), blue($skin-active-color), 0.6);
+}

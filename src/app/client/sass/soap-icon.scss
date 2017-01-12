@@ -8,11 +8,11 @@
 /* Icons */
 @font-face {
   font-family: 'soap-icons';
-  src: url('../fonts/soap-icons.eot?26664784');
-  src: url('../fonts/soap-icons.eot?26664784#iefix') format('embedded-opentype'),
-       url('../fonts/soap-icons.woff?26664784') format('woff'),
-       url('../fonts/soap-icons.ttf?26664784') format('truetype'),
-       url('../fonts/soap-icons.svg?26664784#soap-icons') format('svg');
+  src: url('app/client/fonts/soap-icons.eot?26664784');
+  src: url('app/client/fonts/soap-icons.eot?26664784#iefix') format('embedded-opentype'),
+       url('app/client/fonts/soap-icons.woff?26664784') format('woff'),
+       url('app/client/fonts/soap-icons.ttf?26664784') format('truetype'),
+       url('app/client/fonts/soap-icons.svg?26664784#soap-icons') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -22,7 +22,7 @@
 @media screen and (-webkit-min-device-pixel-ratio:0) {
   @font-face {
     font-family: 'soap-icons';
-    src: url('../font/soap-icons.svg?26664784#soap-icons') format('svg');
+    src: url('app/client/font/soap-icons.svg?26664784#soap-icons') format('svg');
   }
 }
 */
