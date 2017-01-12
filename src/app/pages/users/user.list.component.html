@@ -7,9 +7,11 @@
 <!--<router-outlet name="anotherList"></router-outlet>-->
 <!--<router-outlet name="anotherList"></router-outlet>-->
 <!--<router-outlet name="anotherList"></router-outlet>-->
-<button type="button" class="btn btn-default" (click)="onCreate(event)">
+<button type="button" class="btn btn-primary" (click)="onCreate(event)">
   New
 </button>
+
+
 <div class="row" *ngIf="userList">
   <div class="col-xs-12 col-md-6 col-lg-3" *ngFor="let item of userList | async">
     <div class="card">
@@ -20,6 +22,8 @@
       <ul class="list-group list-group-flush">
         <li class="list-group-item"><i class="fa fa-building" aria-hidden="true"></i> {{(item.companyObj |async)?.name}}</li>
         <li class="list-group-item"><i class="fa fa-user-secret" aria-hidden="true"></i> {{(item.roleObj |async)?.name}}</li>
+        <li class="list-group-item"><i class="fa fa-phone" aria-hidden="true"></i> {{item.phone}}</li>
+        
       </ul>
       <div class="card-block">
       </div>

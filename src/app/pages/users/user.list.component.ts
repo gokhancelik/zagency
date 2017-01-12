@@ -1,10 +1,10 @@
+import { ListComponent } from './../../core/list.component';
 import { Observable } from 'rxjs/Rx';
 import { Router } from '@angular/router';
 import { Component, OnInit, ViewEncapsulation, ViewChild } from '@angular/core';
 import { User } from '../../shared/models';
 import { UserService, CompanyService } from '../../shared/services';
 import { LocalDataSource } from 'ng2-smart-table';
-import { ListComponent } from '../../core/index';
 import { UserEditComponent, UserAddComponent } from './index';
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
 

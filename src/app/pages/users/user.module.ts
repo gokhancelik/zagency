@@ -37,5 +37,6 @@ import {
             multi: true
         }
     ],
+    
 })
 export default class UserModule { }

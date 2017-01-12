@@ -52,9 +52,8 @@ export class CompanyService extends BaseFirebaseService<Company> {
             return this._af.list('companies', { query: { orderByChild: 'isDeleted', equalTo: false } })
                 .map(this.fromJsonList);
         }
-        if(this._authService.getUserInfo().map(user => user.role.name == 'companyadmin'))
-        {
-            return this._authService.getUserInfo().map(user=>user.user.companyObj).map(this.fromJsonList);
+        if (this._authService.getUserInfo().map(user => user.role.name == 'companyadmin')) {
+            return this._authService.getUserInfo().map(user => user.user.companyObj).map(this.fromJsonList);
         }
 
     }

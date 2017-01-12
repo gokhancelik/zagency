@@ -22,6 +22,7 @@ export class PublishingTourListComponent extends ListComponent<PublishingTour> {
         super(_service);
         this.publishingTourList = _service.getAll();
     }
-    
+
 }
+    
 

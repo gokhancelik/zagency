@@ -48,7 +48,7 @@ export class UserAddComponent extends AddComponent<User>  {
             if (value.id === 'company') {
                 let that = this;
                 let select = value as DynamicSelectModel<any>;
-                _companyService.getAll().take(1).subscribe(data => {
+                _companyService.getByRole().take(1).subscribe(data => {
                     that.companies = data;
                     data.forEach(r => {
                         // if (r.name !== 'superadmin') {
