@@ -18,14 +18,15 @@ export class TourCategory extends BaseModel {
     // get id() {
     //     return this.$key;
     // }
-    static fromJson({ $key, name, urlPath, createdAt, createdBy, modifiedAt, modifiedBy, isDeleted, deletedBy, deletedAt}): TourCategory {
+    static fromJson({ $key, name, urlPath,imageUrl, createdAt, createdBy, modifiedAt, modifiedBy, isDeleted, deletedBy, deletedAt}): TourCategory {
         return new TourCategory(
-            $key, name, urlPath, createdAt, createdBy, modifiedAt, modifiedBy, isDeleted, deletedBy, deletedAt);
+            $key, name, urlPath,imageUrl, createdAt, createdBy, modifiedAt, modifiedBy, isDeleted, deletedBy, deletedAt);
     }
     constructor(
         key: string = null,
         public name: string = null,
         public urlPath: string = null,
+        public imageUrl:string=null,
         createdAt: Date = null,
         createdBy: string = null,
         modifiedAt: Date = new Date(),
