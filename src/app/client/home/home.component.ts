@@ -8,9 +8,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
   selector: 'home',
   encapsulation: ViewEncapsulation.None,
   templateUrl: './home.component.html',
-  styles: [require('normalize.css'),
-  require('../sass/style.scss'),
-  require('../sass/responsive.scss')]
+  
 
 })
 export class HomeComponent implements OnInit {
